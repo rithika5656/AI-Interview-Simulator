@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 AI Interview Simulator</h1>
+            <p>Practice interviews with real-time AI feedback</p>
+        </header>
+
+        <main>
+            <!-- Setup Screen -->
+            <div id="setupScreen" class="screen active">
+                <div class="setup-form">
+                    <h2>Start Your Interview</h2>
+                    <div class="form-group">
+                        <label for="jobRole">Select Job Role:</label>
+                        <select id="jobRole">
+                            <option value="Software Engineer">Software Engineer</option>
+                            <option value="Data Scientist">Data Scientist</option>
+                            <option value="Product Manager">Product Manager</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="interviewName">Your Name:</label>
+                        <input type="text" id="interviewName" placeholder="Enter your name">
+                    </div>
+                    <button onclick="startInterview()" class="btn btn-primary">Start Interview</button>
+                </div>
+            </div>
+
+            <!-- Interview Screen -->
+            <div id="interviewScreen" class="screen">
+                <div class="interview-layout">
+                    <div class="video-section">
+                        <video id="videoElement" autoplay muted playsinline></video>
+                        <div class="controls">
+                            <button id="recordBtn" onclick="toggleRecording()" class="btn btn-record">🎤 Start Recording</button>
+                            <button id="stopBtn" onclick="stopRecording()" class="btn btn-stop" disabled>⏹ Stop Recording</button>
+                        </div>
+                    </div>
+
+                    <div class="question-section">
+                        <div class="question-display">
+                            <h3>Question <span id="questionNumber">1</span> of 5</h3>
+                            <p id="questionText"></p>
+                        </div>
+
+                        <div class="transcription-box">
+                            <h4>Live Transcription:</h4>
+                            <div id="transcriptionText" class="transcription"></div>
+                        </div>
+
+                        <div class="real-time-feedback">
+                            <h4>Real-time Analysis:</h4>
+                            <div class="feedback-item">
+                                <span>Confidence:</span>
+                                <span id="confidenceScore">--</span>
+                            </div>
+                            <div class="feedback-item">
+                                <span>Filler Words:</span>
+                                <span id="fillerCount">0</span>
+                            </div>
+                            <div class="feedback-item">
+                                <span>Sentiment:</span>
+                                <span id="sentimentType">--</span>
+                            </div>
+                        </div>
+
+                        <button id="submitBtn" onclick="submitResponse()" class="btn btn-primary" disabled>Submit Response</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="screen">
+                <div class="results-container">
+                    <h2>Interview Feedback Report</h2>
+                    
+                    <div class="scores-section">
+                        <div class="score-card">
+                            <h3>Overall Score</h3>
+                            <div class="score-value" id="overallScore">--</div>
+                        </div>
+                        <div class="score-card">
+                            <h3>Communication</h3>
+                            <div class="score-value" id="communicationScore">--</div>
+                        </div>
+                        <div class="score-card">
+                            <h3>Technical</h3>
+                            <div class="score-value" id="technicalScore">--</div>
+                        </div>
+                    </div>
+
+                    <div class="feedback-section">
+                        <div class="feedback-box">
+                            <h3>Strengths</h3>
+                            <ul id="strengthsList"></ul>
+                        </div>
+                        <div class="feedback-box">
+                            <h3>Areas for Improvement</h3>
+                            <ul id="improvementsList"></ul>
+                        </div>
+                    </div>
+
+                    <div class="recommendations-section">
+                        <h3>Recommendations</h3>
+                        <ul id="recommendationsList"></ul>
+                    </div>
+
+                    <div class="details-section">
+                        <h3>Response Details</h3>
+                        <div id="responseDetails"></div>
+                    </div>
+
+                    <button onclick="startNewInterview()" class="btn btn-primary">Start New Interview</button>
+                    <button onclick="downloadReport()" class="btn btn-secondary">📥 Download Report</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>AI Interview Simulator © 2025 | Powered by OpenAI & Real-time Analytics</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

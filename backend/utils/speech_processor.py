@@ -26,9 +26,11 @@ def process_audio(audio_file):
         Transcribed text
     """
     try:
-        # Read bytes from file-like or path
+        # Read bytes from file-like, raw bytes, or path
         if hasattr(audio_file, 'read'):
             audio_bytes = audio_file.read()
+        elif isinstance(audio_file, (bytes, bytearray)):
+            audio_bytes = bytes(audio_file)
         else:
             with open(audio_file, 'rb') as f:
                 audio_bytes = f.read()

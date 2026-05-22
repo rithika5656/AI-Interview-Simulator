@@ -74,10 +74,30 @@ async function startWebcam() {
         const videoElement = document.getElementById('videoElement');
         videoElement.srcObject = stream;
 
-        // Setup media recorder
-        mediaRecorder = new MediaRecorder(stream);
+        // Use an audio-only recorder for live transcription (avoid sending video chunks)
+        const audioStream = new MediaStream(stream.getAudioTracks());
+        mediaRecorder = new MediaRecorder(audioStream, { mimeType: 'audio/webm' });
+
         mediaRecorder.ondataavailable = (event) => {
+            if (!event.data || event.data.size === 0) return;
             audioChunks.push(event.data);
+
+            // Send chunk to server as base64 for live transcription
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const dataUrl = reader.result; // data:audio/webm;base64,...
+                    const base64 = dataUrl.split(',')[1];
+                    socket.emit('audio_chunk', {
+                        interview_id: currentInterviewId,
+                        audio_chunk: base64,
+                        final: false
+                    });
+                } catch (e) {
+                    console.error('Failed to send audio chunk', e);
+                }
+            };
+            reader.readAsDataURL(event.data);
         };
     } catch (error) {
         console.error('Error accessing webcam:', error);
@@ -94,6 +114,9 @@ function toggleRecording() {
         document.getElementById('recordBtn').disabled = true;
         document.getElementById('stopBtn').disabled = false;
         document.getElementById('submitBtn').disabled = true;
+        document.body.classList.add('is-recording');
+        const indicator = document.getElementById('recordingIndicator');
+        if (indicator) indicator.style.display = 'inline-block';
     }
 }
 
@@ -103,6 +126,28 @@ function stopRecording() {
     document.getElementById('recordBtn').disabled = false;
     document.getElementById('stopBtn').disabled = true;
     document.getElementById('submitBtn').disabled = false;
+    document.body.classList.remove('is-recording');
+    const indicator = document.getElementById('recordingIndicator');
+    if (indicator) indicator.style.display = 'none';
+    // Send final chunk to server for a final transcription pass
+    if (audioChunks.length > 0) {
+        const finalBlob = new Blob(audioChunks, { type: 'audio/webm' });
+        const reader = new FileReader();
+        reader.onload = () => {
+            try {
+                const dataUrl = reader.result;
+                const base64 = dataUrl.split(',')[1];
+                socket.emit('audio_chunk', {
+                    interview_id: currentInterviewId,
+                    audio_chunk: base64,
+                    final: true
+                });
+            } catch (e) {
+                console.error('Failed to send final audio chunk', e);
+            }
+        };
+        reader.readAsDataURL(finalBlob);
+    }
 }
 
 // Submit response
@@ -124,14 +169,26 @@ async function submitResponse() {
             body: formData
         });
 
+        if (!response.ok) {
+            let errText = 'Error processing response. Please try again.';
+            try {
+                const errJson = await response.json();
+                errText = errJson.error || errText;
+            } catch (e) {}
+            alert(errText);
+            document.getElementById('submitBtn').disabled = false;
+            return;
+        }
+
         const data = await response.json();
 
         // Update transcription
-        document.getElementById('transcriptionText').textContent = data.immediate_feedback.text || 'Processing...';
+        const transText = data.immediate_feedback?.text || data.immediate_feedback?.transcript || 'Processing...';
+        document.getElementById('transcriptionText').textContent = transText;
 
         // Update feedback
         document.getElementById('confidenceScore').textContent = 
-            (data.immediate_feedback.sentiment?.confidence * 100).toFixed(0) + '%';
+            ((data.immediate_feedback.sentiment?.confidence ?? 0) * 100).toFixed(0) + '%';
         document.getElementById('fillerCount').textContent = 
             data.immediate_feedback.filler_words?.length || 0;
         document.getElementById('sentimentType').textContent = 

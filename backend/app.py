@@ -25,6 +25,7 @@ if not hasattr(pkgutil, 'get_loader'):
     pkgutil.get_loader = _get_loader
 
 from flask import Flask, request, jsonify
+import time
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, join_room
 import os
@@ -58,7 +59,10 @@ def start_interview():
         'job_role': job_role,
         'responses': [],
         'analysis': [],
-        'started_at': None
+        'started_at': None,
+        # live_buffer: accumulate bytes for live transcription
+        'live_buffer': bytearray(),
+        'last_transcribe': 0
     }
     
     # Generate initial question
@@ -173,14 +177,54 @@ def handle_audio_chunk(data):
     """Handle real-time audio chunks for live transcription"""
     interview_id = data.get('interview_id')
     audio_chunk = data.get('audio_chunk')
-    
+    final = data.get('final', False)
+    # audio_chunk is expected as a base64 string from the frontend
     if interview_id and audio_chunk:
-        # Process audio chunk
-        text = process_audio(audio_chunk)
-        emit('transcription_update', {
-            'text': text,
-            'interview_id': interview_id
-        }, broadcast=False)
+        try:
+            import base64
+            # If we receive a data URL or plain base64, normalize it
+            if isinstance(audio_chunk, str) and audio_chunk.startswith('data:'):
+                audio_chunk = audio_chunk.split(',')[1]
+
+            if isinstance(audio_chunk, str):
+                audio_bytes = base64.b64decode(audio_chunk)
+            else:
+                audio_bytes = audio_chunk
+            # Append to session buffer
+            session = interview_sessions.get(interview_id)
+            if session is None:
+                # create a lightweight session if missing
+                interview_sessions[interview_id] = {
+                    'job_role': '', 'responses': [], 'analysis': [],
+                    'started_at': None, 'live_buffer': bytearray(), 'last_transcribe': 0
+                }
+                session = interview_sessions[interview_id]
+
+            buf = session.setdefault('live_buffer', bytearray())
+            buf.extend(audio_bytes)
+
+            now = time.time()
+            last = session.get('last_transcribe', 0)
+
+            # Transcribe when final chunk received or every ~2 seconds
+            if final or (now - last) >= 2.0:
+                try:
+                    text = process_audio(bytes(buf))
+                except Exception as e:
+                    print(f"Live transcription error for {interview_id}: {e}")
+                    text = ''
+
+                emit('transcription_update', {
+                    'text': text,
+                    'interview_id': interview_id,
+                    'final': bool(final)
+                }, broadcast=False)
+
+                session['last_transcribe'] = now
+                # Clear buffer after transcribing final or periodically (keep small)
+                session['live_buffer'] = bytearray()
+        except Exception as e:
+            print(f"Error handling audio_chunk: {e}")
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=5000)

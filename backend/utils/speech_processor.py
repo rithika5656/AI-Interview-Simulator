@@ -36,6 +36,12 @@ def process_audio(audio_file):
                 audio_bytes = f.read()
 
         audio_stream = io.BytesIO(audio_bytes)
+        # Some transcription APIs expect a file-like object with a "name" attribute
+        if not hasattr(audio_stream, 'name'):
+            try:
+                audio_stream.name = 'audio.webm'
+            except Exception:
+                pass
 
         if _use_modern_client:
             resp = _client.audio.transcriptions.create(

@@ -47,7 +47,8 @@ async function startInterview() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 interview_id: currentInterviewId,
-                job_role: jobRole
+                job_role: jobRole,
+                interview_name: interviewName
             })
         });
 

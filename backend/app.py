@@ -3,6 +3,27 @@ AI Interview Simulator Backend
 Real-time speech analysis and AI-powered interview questions
 """
 
+# Python 3.12+ removed `pkgutil.get_loader`, but Flask (and Werkzeug) expect it.
+# Add a small compatibility shim before importing Flask so imports work on
+# newer Python versions.
+import pkgutil
+import importlib.util
+if not hasattr(pkgutil, 'get_loader'):
+    def _get_loader(name):
+        # Some callers may pass '__main__' or other names that don't have
+        # an import spec when running a script directly. Handle these cases
+        # gracefully by returning None instead of raising.
+        try:
+            if name == '__main__':
+                return None
+            spec = importlib.util.find_spec(name)
+            if spec is None:
+                return None
+            return getattr(spec, 'loader', None)
+        except Exception:
+            return None
+    pkgutil.get_loader = _get_loader
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, join_room
@@ -52,17 +73,30 @@ def start_interview():
 @app.route('/api/submit-response', methods=['POST'])
 def submit_response():
     """Process user response and generate feedback"""
-    data = request.json
-    interview_id = data.get('interview_id')
-    audio_file = request.files.get('audio')
-    user_text = data.get('text', '')
-    
-    if not interview_id or interview_id not in interview_sessions:
-        return jsonify({"error": "Invalid interview ID"}), 400
+    try:
+        # Support both JSON and multipart/form-data (FormData from frontend)
+        if request.content_type and request.content_type.startswith('multipart/form-data'):
+            interview_id = request.form.get('interview_id')
+            user_text = request.form.get('text', '')
+        else:
+            data = request.get_json(silent=True) or {}
+            interview_id = data.get('interview_id')
+            user_text = data.get('text', '')
+
+        audio_file = request.files.get('audio') if request.files else None
+
+        if not interview_id or interview_id not in interview_sessions:
+            return jsonify({"error": "Invalid interview ID"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Invalid request format: {e}"}), 400
     
     # Process audio if provided
     if audio_file:
-        user_text = process_audio(audio_file)
+        try:
+            user_text = process_audio(audio_file)
+        except Exception as e:
+            print(f"Error processing audio in submit_response: {e}")
+            return jsonify({"error": "Error processing audio"}), 500
     
     # Analyze sentiment
     sentiment = analyze_sentiment(user_text)
@@ -99,6 +133,7 @@ def submit_response():
     return jsonify({
         "interview_id": interview_id,
         "immediate_feedback": {
+            "text": user_text,
             "sentiment": sentiment,
             "filler_words": analysis.get('filler_words', []),
             "relevance_score": analysis.get('relevance_score', 0)

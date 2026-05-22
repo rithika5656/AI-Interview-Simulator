@@ -4,9 +4,18 @@ Converts audio to text using OpenAI Whisper or Google Speech-to-Text
 """
 
 import os
-from openai import OpenAI
+import io
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Support both the older `openai` (0.x) and newer SDKs that expose `OpenAI`
+try:
+    from openai import OpenAI
+    _client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    _use_modern_client = True
+except Exception:
+    import openai
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    _client = openai
+    _use_modern_client = False
 
 def process_audio(audio_file):
     """
@@ -17,20 +26,27 @@ def process_audio(audio_file):
         Transcribed text
     """
     try:
-        # If it's a file from request.files
+        # Read bytes from file-like or path
         if hasattr(audio_file, 'read'):
-            audio_data = audio_file.read()
+            audio_bytes = audio_file.read()
         else:
             with open(audio_file, 'rb') as f:
-                audio_data = f.read()
-        
-        # Use OpenAI Whisper API
-        transcript = client.audio.transcriptions.create(
-            model="whisper-1",
-            file=audio_data
-        )
-        
-        return transcript.text
+                audio_bytes = f.read()
+
+        audio_stream = io.BytesIO(audio_bytes)
+
+        if _use_modern_client:
+            resp = _client.audio.transcriptions.create(
+                model="whisper-1",
+                file=audio_stream
+            )
+            return getattr(resp, 'text', resp.get('text', ''))
+        else:
+            # older openai package
+            resp = _client.Audio.transcribe("whisper-1", audio_stream)
+            if hasattr(resp, 'text'):
+                return resp.text
+            return resp.get('text', '')
     except Exception as e:
         print(f"Error processing audio: {e}")
         return "Error: Could not process audio"

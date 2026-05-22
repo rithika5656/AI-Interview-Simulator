@@ -4,9 +4,28 @@ Uses GPT-3.5/4 for intelligent follow-ups and content analysis
 """
 
 import os
-from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Support both the older `openai` (0.x) and newer SDKs that expose `OpenAI`
+try:
+    from openai import OpenAI
+    _client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    _use_modern_client = True
+except Exception:
+    import openai
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    _client = openai
+    _use_modern_client = False
+
+def _extract_chat_content(resp):
+    try:
+        # modern client returns objects with attributes
+        return resp.choices[0].message.content
+    except Exception:
+        # older client returns dict-like
+        try:
+            return resp['choices'][0]['message']['content']
+        except Exception:
+            return str(resp)
 
 INTERVIEW_PROMPTS = {
     'Software Engineer': [
@@ -61,14 +80,22 @@ Keep it concise and professional."""
 The question should help assess technical skills, problem-solving ability, and communication.
 Keep it concise and professional."""
         
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=150,
-            temperature=0.7
-        )
-        
-        return response.choices[0].message.content
+        if _use_modern_client:
+            response = _client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=150,
+                temperature=0.7
+            )
+        else:
+            response = _client.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=150,
+                temperature=0.7
+            )
+
+        return _extract_chat_content(response)
     except Exception as e:
         print(f"Error generating question: {e}")
         return "Tell me about your professional background."
@@ -97,15 +124,23 @@ Provide analysis in JSON format with:
 
 Return only valid JSON."""
         
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=300,
-            temperature=0.5
-        )
-        
+        if _use_modern_client:
+            response = _client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=300,
+                temperature=0.5
+            )
+        else:
+            response = _client.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=300,
+                temperature=0.5
+            )
+
         import json
-        analysis_text = response.choices[0].message.content
+        analysis_text = _extract_chat_content(response)
         
         # Parse JSON response
         try:

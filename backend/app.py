@@ -45,7 +45,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../frontend", static_url_path="/")
 origins_env = os.getenv("FRONTEND_ORIGINS", "*")
 frontend_origins = [o.strip() for o in origins_env.split(",") if o.strip()] if origins_env != "*" else "*"
 CORS(
@@ -272,6 +272,23 @@ def handle_audio_chunk(data):
                 session['live_buffer'] = bytearray()
         except Exception as e:
             print(f"Error handling audio_chunk: {e}")
+
+@app.route('/')
+def serve_index():
+    return app.send_static_file('index.html')
+
+@app.route('/config.js')
+def serve_config():
+    # Dynamically generate config.js so it points to the same origin (/api)
+    config_js = "window.HireVisionConfig = { apiBaseUrl: '/api', socketUrl: '' };"
+    return config_js, 200, {'Content-Type': 'application/javascript'}
+
+# Fallback route for frontend client-side routing if any
+@app.route('/<path:path>')
+def serve_static_fallback(path):
+    if os.path.exists(os.path.join(app.static_folder, path)):
+        return app.send_static_file(path)
+    return app.send_static_file('index.html')
 
 if __name__ == '__main__':
     host = os.getenv('HOST', '0.0.0.0')

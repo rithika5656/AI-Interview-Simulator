@@ -1,18 +1,23 @@
 (() => {
     // Try to use VERCEL_URL or REACT_APP_API_URL or similar environment variables if available
     // For Vercel frontend, use NEXT_PUBLIC_ or REACT_APP_ variables
+    const defaultHost = window.location.hostname || 'localhost';
+    const defaultProtocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+    const defaultBaseUrl = `${defaultProtocol}//${defaultHost}:5000/api`;
+    const defaultSocketUrl = `${defaultProtocol}//${defaultHost}:5000`;
+    
     const apiBaseUrl = window.__HIREVISION_API_BASE__
         || localStorage.getItem('hirevisionApiBaseUrl')
         || (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_URL)
         || (typeof process !== 'undefined' && process.env?.REACT_APP_API_URL)
         // Fallback - user must replace this with their deployed backend URL
-        || 'https://hirevision-backend.onrender.com/api';
+        || defaultBaseUrl;
 
     const socketUrl = window.__HIREVISION_SOCKET_URL__
         || localStorage.getItem('hirevisionSocketUrl')
         || (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_SOCKET_URL)
         || (typeof process !== 'undefined' && process.env?.REACT_APP_SOCKET_URL)
-        || 'https://hirevision-backend.onrender.com';
+        || defaultSocketUrl;
 
     async function request(path, options = {}) {
         const url = `${apiBaseUrl}${path}`;

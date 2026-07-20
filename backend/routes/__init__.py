@@ -1,0 +1,1 @@
+"""Blueprints for HireVision routes."""

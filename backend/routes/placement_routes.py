@@ -19,7 +19,7 @@ from services.placement_service import (
 )
 import uuid
 import json
-from database.sqlite_store import save_record, ensure_demo_user
+from database.sqlite_store import save_record
 from datetime import datetime
 
 placement_bp = Blueprint("placement", __name__, url_prefix="/api")

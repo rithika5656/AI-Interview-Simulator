@@ -246,4 +246,4 @@ def handle_audio_chunk(data):
 if __name__ == '__main__':
     host = os.getenv('HOST', '0.0.0.0')
     port = int(os.getenv('PORT', '5000'))
-    socketio.run(app, debug=True, host=host, port=port, allow_unsafe_werkzeug=True)
+    socketio.run(app, debug=True, host=host, port=port)

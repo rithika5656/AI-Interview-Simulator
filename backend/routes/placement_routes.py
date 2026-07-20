@@ -17,9 +17,24 @@ from services.placement_service import (
     grade_mcq_submission,
     gd_session_feedback,
 )
+import uuid
+import json
+from database.sqlite_store import save_record, ensure_demo_user
+from datetime import datetime
 
 placement_bp = Blueprint("placement", __name__, url_prefix="/api")
 
+
+def _now():
+    return datetime.utcnow().isoformat(timespec="seconds") + "Z"
+
+
+TEST_TABLE_MAP = {
+    "aptitude": "aptitude_tests",
+    "logical": "logical_tests",
+    "verbal": "verbal_tests",
+    "technical-mcq": "technical_tests",
+}
 
 @placement_bp.route("/modules", methods=["GET"])
 def list_modules():
@@ -86,20 +101,51 @@ def submit_module(module_key: str):
     payload = request.get_json(silent=True) or {}
     questions = payload.get("questions", [])
     answers = payload.get("answers", [])
+    topic = payload.get("topic", "General")
+    difficulty = payload.get("difficulty", "medium")
+    user_id = payload.get("user_id", "demo_student")
     result = grade_mcq_submission(questions, answers)
+    
+    table_name = TEST_TABLE_MAP.get(module_key)
+    if table_name:
+        save_record(table_name, {
+            "id": str(uuid.uuid4()),
+            "user_id": user_id,
+            "topic": topic,
+            "difficulty": difficulty,
+            "questions_json": json.dumps(questions),
+            "score": result.get("score"),
+            "correct_count": result.get("correct_count"),
+            "total_count": result.get("total_count"),
+            "created_at": _now(),
+        })
+        
     return jsonify({"module": module_key, **result})
 
 
 @placement_bp.route("/coding/review", methods=["POST"])
 def coding_review():
     payload = request.get_json(silent=True) or {}
-    return jsonify(
-        analyze_coding_submission(
-            payload.get("language", "Python"),
-            payload.get("code", ""),
-            payload.get("problem_statement", ""),
-        )
+    result = analyze_coding_submission(
+        payload.get("language", "Python"),
+        payload.get("code", ""),
+        payload.get("problem_statement", ""),
     )
+    
+    user_id = payload.get("user_id", "demo_student")
+    save_record("coding_tests", {
+        "id": str(uuid.uuid4()),
+        "user_id": user_id,
+        "language": result.get("language"),
+        "code": payload.get("code", ""),
+        "hidden_tests_json": json.dumps(result.get("hidden_tests", [])),
+        "score": result.get("score"),
+        "complexity_analysis": result.get("complexity_analysis"),
+        "ai_review": result.get("ai_review"),
+        "created_at": _now(),
+    })
+
+    return jsonify(result)
 
 
 @placement_bp.route("/gd/simulate", methods=["POST"])

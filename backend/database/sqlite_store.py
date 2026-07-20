@@ -270,21 +270,20 @@ def seed_demo_data() -> None:
         connection.commit()
 
 
-def upsert_user(user_id: str, name: str, email: str | None = None, role: str = "student", is_admin: bool = False) -> None:
+def upsert_user(user_id: str, name: str, email: str | None = None, role: str = "student") -> None:
     timestamp = _now()
     with get_connection() as connection:
         connection.execute(
             """
-            INSERT INTO users (id, name, email, role, is_admin, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO users (id, name, email, role, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?)
             ON CONFLICT(id) DO UPDATE SET
                 name=excluded.name,
                 email=COALESCE(excluded.email, users.email),
                 role=excluded.role,
-                is_admin=excluded.is_admin,
                 updated_at=excluded.updated_at
             """,
-            (user_id, name, email, role, int(is_admin), timestamp, timestamp),
+            (user_id, name, email, role, timestamp, timestamp),
         )
         connection.commit()
 

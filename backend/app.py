@@ -46,10 +46,7 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 app = Flask(__name__)
-frontend_origins = os.getenv(
-    "FRONTEND_ORIGINS",
-    "http://127.0.0.1:8000,http://localhost:8000,http://127.0.0.1:5173,http://localhost:5173",
-).split(",")
+frontend_origins = os.getenv("FRONTEND_ORIGINS", "*")
 CORS(
     app,
     resources={r"/api/*": {"origins": frontend_origins}, r"/health": {"origins": frontend_origins}},

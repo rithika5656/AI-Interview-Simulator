@@ -1,254 +1,217 @@
-# AI Interview Simulator
+# HireVision - AI-based Placement Preparation System
 
-Practice interviews with AI interviewer featuring real-time speech analysis and response evaluation.
+A comprehensive AI-powered platform for placement preparation, including resume analysis, aptitude tests, coding challenges, group discussion practice, and AI interviews.
 
 ## 🎯 Features
 
-- **Real-time Speech Recognition**: Transcribe audio using OpenAI Whisper
-- **AI-Powered Questions**: Generate contextual follow-up questions with GPT-3.5/4
-- **Sentiment Analysis**: Analyze emotional tone and confidence levels
-- **Filler Word Detection**: Identify "um", "uh", "like" and similar filler words
-- **Content Relevance Analysis**: Evaluate how well responses match job requirements
-- **Real-time Video**: WebRTC-based video capture
-- **Live Feedback**: Instant feedback during responses
-- **Comprehensive Reports**: Detailed feedback report with scores and recommendations
+### Core Modules
+- **Dashboard** - Placement readiness score, performance charts, recent activity, goals, AI coach snapshot
+- **Resume Analyzer** - PDF upload, text extraction, ATS score, missing skills, grammar suggestions
+- **Aptitude** - Question generation, timed tests, instant evaluation, score saving
+- **Logical Reasoning** - Reasoning questions, explanations, progress tracking
+- **Verbal Ability** - Vocabulary, grammar, reading comprehension, evaluation
+- **Technical MCQ** - Topic-based questions (Java, Python, DBMS, OS, etc.), difficulty levels, scoring
+- **Coding Assessment** - Code editor, test case evaluation, complexity analysis
+- **Group Discussion** - AI topic generation, communication scoring, feedback
+- **HR Interview** - AI interviewer, voice input, feedback, weakness analysis
+- **Technical Interview** - Adaptive technical questions, AI evaluation
+- **Company Wise Preparation** - Company-specific questions (TCS, Infosys, Wipro, Amazon, Google, Microsoft, etc.)
+- **Analytics** - Performance charts, strong/weak areas, progress over time
+- **AI Career Coach** - Resume advice, skill roadmap, learning recommendations
+- **Student Profile** - User info, scores, progress, history
 
-## 🛠 Tech Stack
+### Technical Features
+- Student-only mode (no Admin features)
+- Dark theme support
+- Fully functional backend APIs
+- SQLite database for persistence
+- CORS configuration for deployment
+- Real-time interview support via Socket.io
+
+## 🛠️ Tech Stack
 
 ### Backend
 - **Framework**: Flask with Flask-SocketIO
-- **Speech**: OpenAI Whisper API
-- **NLP**: OpenAI GPT-3.5/4
-- **Analysis**: TextBlob for sentiment analysis
-- **Real-time**: Socket.io for live updates
+- **Database**: SQLite
+- **AI/ML**: OpenAI (optional), TextBlob, NLTK
+- **Deployment**: Render / Railway
+- **Other**: Flask-CORS, python-dotenv, PyPDF2, python-docx
 
 ### Frontend
-- **HTML5/CSS3**: Responsive design
-- **JavaScript**: Vanilla JS with Socket.io client
-- **WebRTC**: Video capture and streaming
-- **MediaRecorder API**: Audio recording
+- **UI**: HTML5, CSS3 (custom dark theme)
+- **JavaScript**: Vanilla JS
+- **Charts**: Chart.js
+- **Real-time**: Socket.io client
+- **Deployment**: Vercel
 
 ## 📋 Project Structure
-
 ```
-AI Interview Simulator/
+AI-Interview-Simulator/
 ├── backend/
-│   ├── app.py                 # Main Flask application
-│   ├── requirements.txt       # Python dependencies
-│   ├── .env.example           # Environment variables template
-│   └── utils/
-│       ├── speech_processor.py    # Audio to text conversion
-│       ├── nlp_engine.py          # Question generation & analysis
-│       ├── sentiment_analyzer.py  # Sentiment & confidence analysis
-│       └── feedback_generator.py  # Report generation
+│   ├── app.py                       # Main Flask application
+│   ├── requirements.txt             # Python dependencies
+│   ├── render.yaml                  # Render deployment config
+│   ├── .env.example                 # Environment variables template
+│   ├── ai/                          # AI-related logic
+│   │   └── hirevision_ai.py
+│   ├── database/                    # SQLite database
+│   │   └── sqlite_store.py
+│   ├── routes/                      # API routes
+│   │   └── placement_routes.py
+│   ├── services/                    # Business logic
+│   │   └── placement_service.py
+│   └── utils/                       # Utility modules
+│       ├── speech_processor.py
+│       ├── nlp_engine.py
+│       ├── sentiment_analyzer.py
+│       └── feedback_generator.py
 ├── frontend/
-│   ├── index.html             # Main UI
-│   ├── styles.css             # Styling
-│   └── app.js                 # Client-side logic
-├── README.md
-└── .gitignore
+│   ├── index.html                   # Main UI
+│   ├── styles.css                   # Styling
+│   ├── app.js                       # Client-side logic
+│   └── apiClient.js                 # API client
+├── scripts/
+│   └── test_submit.py
+├── package.json
+├── vercel.json
+└── README.md
 ```
 
-## 🚀 Getting Started
+## 🚀 Deployment Guide
+
+### 1. Deploy Backend on Render
+
+1. **Fork/Clone this repository**
+2. **Create a new Web Service** on [Render](https://render.com/)
+3. **Configure the service**:
+   - **Runtime**: Python 3
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn --worker-class eventlet -w 1 app:app`
+   - **Root Directory**: `backend`
+4. **Add Environment Variables** (optional):
+   - `FRONTEND_ORIGINS`: Set to your Vercel frontend URL (e.g., `https://hirevision.vercel.app`)
+   - `OPENAI_API_KEY` (optional): Your OpenAI API key for enhanced AI features
+5. **Deploy the service**
+6. **Copy the deployed backend URL** (e.g., `https://hirevision-backend.onrender.com`)
+
+### 2. Configure Frontend for Deployed Backend
+
+Update the fallback URL in `frontend/apiClient.js` (lines 8-9) to your deployed backend:
+```javascript
+// Frontend: frontend/apiClient.js
+// ...
+|| 'https://your-deployed-backend.onrender.com/api'; // Replace this!
+// ...
+|| 'https://your-deployed-backend.onrender.com';     // And this!
+```
+
+### 3. Deploy Frontend on Vercel
+
+1. **Connect your repository** to Vercel
+2. **Configure the project**:
+   - **Root Directory**: `frontend`
+   - **Framework Preset**: Other (or Vite if you prefer)
+3. **Add Environment Variables** (optional):
+   - `NEXT_PUBLIC_API_URL` or `REACT_APP_API_URL`: Your deployed backend URL + `/api`
+4. **Deploy!**
+
+### 4. Verify Deployment
+
+1. **Test the backend health check**: Visit `https://your-deployed-backend.onrender.com/health`
+2. **Open your deployed Vercel frontend**
+3. **Try all modules** (Dashboard, Resume, Aptitude, etc.)!
+
+## 🖥️ Local Development
 
 ### Prerequisites
-- Python 3.8+
-- Node.js (optional, for frontend development)
-- OpenAI API key
-- Modern web browser with WebRTC support
+- Python 3.8 or higher
+- Node.js (optional, for frontend dev server)
 
-### Backend Setup
+### Backend Setup (Local)
 
-1. **Clone the repository**
+1. **Navigate to backend directory**:
 ```bash
-git clone https://github.com/rithika5656/AI-Interview-Simulator.git
-cd AI-Interview-Simulator/backend
+cd backend
 ```
 
-2. **Create virtual environment**
+2. **Create a virtual environment**:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Activate:
+# Windows: venv\Scripts\activate
+# macOS/Linux: source venv/bin/activate
 ```
 
-3. **Install dependencies**
+3. **Install dependencies**:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Setup environment variables**
+4. **Copy environment variables template**:
 ```bash
 cp .env.example .env
-# Edit .env and add your OpenAI API key
+# Edit .env to add any optional variables (like OPENAI_API_KEY)
 ```
 
-5. **Run the backend**
+5. **Run the backend**:
 ```bash
 python app.py
 ```
 
-The backend will start at `http://localhost:5000`
+Backend is now running at `http://localhost:5000`
 
-### Frontend Setup
+### Frontend Setup (Local)
 
-1. **Navigate to frontend directory**
+1. **Navigate to frontend directory**:
 ```bash
 cd ../frontend
 ```
 
-2. **Start a local server** (required for WebRTC functionality)
+2. **Start a simple HTTP server**:
 ```bash
-# Using Python 3
+# Python:
 python -m http.server 8000
-
-# Or using Node.js/npm
+# Or Node.js:
 npx http-server
 ```
 
-3. **Access the application**
-Open `http://localhost:8000` in your browser
+3. **Open in browser**: Visit `http://localhost:8000`
 
-## 📖 Usage
+## 🔑 Environment Variables (Backend)
 
-1. **Select Job Role**: Choose from Software Engineer, Data Scientist, or Product Manager
-2. **Enter Your Name**: Provide your name for the interview session
-3. **Start Interview**: Click "Start Interview" to begin
-4. **Allow Permissions**: Grant camera and microphone access
-5. **Record Responses**: Click "Start Recording" and answer the question
-6. **Submit Response**: Click "Submit Response" to get feedback and next question
-7. **Complete 5 Questions**: Answer all 5 questions to generate final report
-8. **Review Feedback**: Analyze your performance scores, strengths, and recommendations
-9. **Download Report**: Export your interview report as JSON
+Create a `.env` file in `/backend`:
 
-## 🔑 Environment Variables
+```env
+# Optional: OpenAI API key for enhanced AI features
+OPENAI_API_KEY=your_openai_api_key_here
 
-Create a `.env` file in the backend directory:
+# Optional: Google Cloud project ID (for speech-to-text)
+GOOGLE_CLOUD_PROJECT_ID=your_project_id_here
 
-```
-OPENAI_API_KEY=your_api_key_here
-GOOGLE_CLOUD_PROJECT_ID=your_project_id
-FLASK_ENV=development
+# Optional: Frontend URL(s) for CORS (defaults to *)
+FRONTEND_ORIGINS=https://your-vercel-frontend.vercel.app
+
+# Optional: Host and port (defaults to 0.0.0.0 and 5000)
+HOST=0.0.0.0
 PORT=5000
 ```
 
-## 📊 Feedback Metrics
+## 📊 API Endpoints
 
-### Scores (0-100)
-- **Overall Score**: Combined communication and technical performance
-- **Communication Score**: Based on clarity, confidence, and professionalism
-- **Technical Score**: Based on relevance, depth, and quality of answers
-
-### Real-time Analysis
-- **Confidence Level**: Assessed from sentiment, response length, and speaking patterns
-- **Filler Words**: Detected instances of "um", "uh", "like", etc.
-- **Sentiment**: Positive, neutral, or negative tone detection
-
-### Report Includes
-- Detailed scores with visual cards
-- Key strengths demonstrated
-- Areas for improvement
-- Actionable recommendations
-- Individual response analysis
-- Communication and technical feedback
-
-## 🔌 API Endpoints
-
-### `POST /api/start-interview`
-Initialize a new interview session
-
-**Request:**
-```json
-{
-  "interview_id": "interview_123",
-  "job_role": "Software Engineer"
-}
-```
-
-### `POST /api/submit-response`
-Process user response and provide feedback
-
-**Request:**
-```json
-{
-  "interview_id": "interview_123",
-  "text": "user response text",
-  "audio": <audio_file>
-}
-```
-
-### `POST /api/end-interview`
-Generate final report
-
-**Request:**
-```json
-{
-  "interview_id": "interview_123"
-}
-```
-
-### WebSocket Events
-- `connect`: Establish connection
-- `audio_chunk`: Send audio for real-time processing
-- `transcription_update`: Receive live transcription
-
-## 🎓 Example Interview Questions
-
-### Software Engineer
-- Tell me about your most challenging project and how you overcame the obstacles
-- Describe your experience with system design
-- How do you approach code reviews?
-
-### Data Scientist
-- Describe a machine learning project from start to finish
-- How do you handle feature engineering?
-- Tell me about a time your model performed poorly
-
-### Product Manager
-- Walk me through your product development process
-- Tell me about a product you've built
-- How do you handle conflicting stakeholder priorities?
-
-## 🐛 Troubleshooting
-
-**Issue**: "Permission denied" for camera/microphone
-- **Solution**: Check browser permissions and try in HTTPS or localhost
-
-**Issue**: Audio processing errors
-- **Solution**: Ensure OpenAI API key is valid and has quota remaining
-
-**Issue**: Questions not generating
-- **Solution**: Check API connection and model availability
-
-**Issue**: CORS errors
-- **Solution**: Ensure backend is running and CORS is properly configured
+Check out the backend routes in `/backend/routes/placement_routes.py` and `/backend/app.py` for the full list of API endpoints.
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+1. Fork this repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙋 Support
-
-For issues, questions, or suggestions, please open an GitHub issue or contact the maintainers.
-
-## 🎉 Future Enhancements
-
-- [ ] Multiple language support
-- [ ] Custom job role creation
-- [ ] Interview history and tracking
-- [ ] Comparison with industry benchmarks
-- [ ] Advanced video analytics (eye contact, posture)
-- [ ] Integration with LinkedIn
-- [ ] Mobile app (React Native)
-- [ ] Interview templates and preparation guides
+MIT License - see LICENSE file for details.
 
 ---
 
-**Created with ❤️ for interview preparation**
+**Created with ❤️ for placement preparation**

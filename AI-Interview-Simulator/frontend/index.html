@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireVision - AI Placement Preparation System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="theme-dark">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand-block">
+                <div class="brand-mark">HV</div>
+                <div>
+                    <h1>HireVision</h1>
+                    <p>Placement prep system</p>
+                </div>
+            </div>
+
+            <button id="themeToggle" class="theme-toggle">Toggle Theme</button>
+
+            <nav class="sidebar-nav">
+                <button data-view="dashboardView" class="nav-item active">Dashboard</button>
+                <button data-view="resumeView" data-role="student" class="nav-item">Resume Analyzer</button>
+                <button data-view="aptitudeView" data-role="student" class="nav-item">Aptitude</button>
+                <button data-view="logicalView" data-role="student" class="nav-item">Logical Reasoning</button>
+                <button data-view="verbalView" data-role="student" class="nav-item">Verbal Ability</button>
+                <button data-view="technicalMcqView" data-role="student" class="nav-item">Technical MCQ</button>
+                <button data-view="codingView" data-role="student" class="nav-item">Coding Assessment</button>
+                <button data-view="gdView" data-role="student" class="nav-item">Group Discussion</button>
+                <button data-view="legacyInterviewView" data-role="student" class="nav-item">HR Interview</button>
+                <button data-view="technicalInterviewView" data-role="student" class="nav-item">Technical Interview</button>
+                <button data-view="companyView" data-role="student" class="nav-item">Company Wise</button>
+                <button data-view="analyticsView" class="nav-item">Analytics</button>
+                <button data-view="coachView" class="nav-item">AI Career Coach</button>
+                <button data-view="adminView" data-role="admin" class="nav-item">Admin Panel</button>
+                <button data-view="profileView" class="nav-item">Profile</button>
+            </nav>
+        </aside>
+
+        <main class="main-panel">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">AI-Powered Placement Preparation and Assessment System</p>
+                    <h2>Prepare. Practice. Perform.</h2>
+                </div>
+                <div class="topbar-actions">
+                    <div class="profile-switcher" aria-label="Profile mode switcher">
+                        <button id="studentModeBtn" data-profile-mode="student" class="profile-chip active" type="button">Student Profile</button>
+                        <button id="adminModeBtn" data-profile-mode="admin" class="profile-chip" type="button">Admin Profile</button>
+                    </div>
+                    <span class="status-pill">Live AI modules</span>
+                    <button id="startLegacyInterviewBtn" class="primary-button">Start HR Interview</button>
+                </div>
+            </header>
+
+            <div id="systemAlert" class="system-alert" hidden></div>
+
+            <section id="dashboardView" class="view active">
+                <div class="grid grid-2">
+                    <section class="hero-card">
+                        <h3>Placement Readiness Dashboard</h3>
+                        <div id="dashboardMetrics" class="metric-grid"></div>
+                    </section>
+                    <section class="hero-card chart-stack">
+                        <canvas id="readinessChart"></canvas>
+                        <canvas id="accuracyChart"></canvas>
+                    </section>
+                </div>
+
+                <div class="grid grid-3">
+                    <section class="panel-card">
+                        <h3>Daily Goals</h3>
+                        <ul id="dailyGoals" class="bullet-list"></ul>
+                    </section>
+                    <section class="panel-card">
+                        <h3>Recent Activities</h3>
+                        <div id="recentActivities" class="stack-list"></div>
+                    </section>
+                    <section class="panel-card">
+                        <h3>Upcoming Mock Tests</h3>
+                        <div id="upcomingTests" class="stack-list"></div>
+                    </section>
+                </div>
+
+                <section class="panel-card">
+                    <h3>AI Coach Snapshot</h3>
+                    <div id="dashboardCoach" class="coach-grid"></div>
+                </section>
+            </section>
+
+            <section id="resumeView" data-role="student" class="view">
+                <div class="grid grid-2">
+                    <section class="panel-card">
+                        <h3>Resume Analyzer</h3>
+                        <form id="resumeForm" class="stack-form">
+                            <input type="text" id="resumeName" placeholder="Student name" value="Demo Student">
+                            <input type="file" id="resumeFile" accept=".pdf,.docx,.txt">
+                            <textarea id="resumeText" rows="10" placeholder="Paste resume text here if you do not want to upload a file."></textarea>
+                            <button type="submit" class="primary-button">Analyze Resume</button>
+                        </form>
+                    </section>
+                    <section class="panel-card" id="resumeResult">
+                        <h3>ATS Analysis</h3>
+                        <p class="muted">Upload a resume to extract skills, projects, education, certifications, ATS score, missing keywords, and suggestions.</p>
+                    </section>
+                </div>
+            </section>
+
+            <section id="aptitudeView" data-role="student" class="view module-view">
+                <section class="panel-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Aptitude Module</h3>
+                            <p>Timed random questions with AI explanations.</p>
+                        </div>
+                        <div class="module-controls">
+                            <select id="aptitudeTopic"></select>
+                            <select id="aptitudeDifficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            <button data-generate-module="aptitude" class="secondary-button">Generate</button>
+                            <button data-submit-module="aptitude" class="primary-button">Submit</button>
+                        </div>
+                    </div>
+                    <div id="aptitudeQuestions" class="question-stack"></div>
+                    <div id="aptitudeResult" class="result-slot"></div>
+                </section>
+            </section>
+
+            <section id="logicalView" data-role="student" class="view module-view">
+                <section class="panel-card">
+                    <div class="module-header">
+                        <div><h3>Logical Reasoning</h3><p>Randomized questions with explanation after submission.</p></div>
+                        <div class="module-controls">
+                            <select id="logicalTopic"></select>
+                            <select id="logicalDifficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            <button data-generate-module="logical" class="secondary-button">Generate</button>
+                            <button data-submit-module="logical" class="primary-button">Submit</button>
+                        </div>
+                    </div>
+                    <div id="logicalQuestions" class="question-stack"></div>
+                    <div id="logicalResult" class="result-slot"></div>
+                </section>
+            </section>
+
+            <section id="verbalView" data-role="student" class="view module-view">
+                <section class="panel-card">
+                    <div class="module-header">
+                        <div><h3>Verbal Ability</h3><p>Synonyms, antonyms, comprehension, and grammar practice.</p></div>
+                        <div class="module-controls">
+                            <select id="verbalTopic"></select>
+                            <select id="verbalDifficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            <button data-generate-module="verbal" class="secondary-button">Generate</button>
+                            <button data-submit-module="verbal" class="primary-button">Submit</button>
+                        </div>
+                    </div>
+                    <div id="verbalQuestions" class="question-stack"></div>
+                    <div id="verbalResult" class="result-slot"></div>
+                </section>
+            </section>
+
+            <section id="technicalMcqView" data-role="student" class="view module-view">
+                <section class="panel-card">
+                    <div class="module-header">
+                        <div><h3>Technical MCQ</h3><p>Java, Python, C++, DBMS, OOPS, SQL, React, AI/ML and more.</p></div>
+                        <div class="module-controls">
+                            <select id="technicalTopic"></select>
+                            <select id="technicalDifficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                            <button data-generate-module="technical" class="secondary-button">Generate</button>
+                            <button data-submit-module="technical" class="primary-button">Submit</button>
+                        </div>
+                    </div>
+                    <div id="technicalQuestions" class="question-stack"></div>
+                    <div id="technicalResult" class="result-slot"></div>
+                </section>
+            </section>
+
+            <section id="codingView" data-role="student" class="view">
+                <div class="grid grid-2">
+                    <section class="panel-card">
+                        <h3>Coding Assessment</h3>
+                        <div class="module-controls">
+                            <select id="codingLanguage">
+                                <option>Java</option>
+                                <option selected>Python</option>
+                                <option>C++</option>
+                                <option>JavaScript</option>
+                            </select>
+                            <input id="codingProblem" type="text" value="Two Sum" placeholder="Problem statement">
+                        </div>
+                        <textarea id="codingEditor" rows="18">def two_sum(nums, target):
+    return []</textarea>
+                        <button id="codingReviewBtn" class="primary-button">Run AI Code Review</button>
+                    </section>
+                    <section class="panel-card" id="codingResult">
+                        <h3>Hidden Test Cases and Review</h3>
+                        <p class="muted">Review hidden tests, runtime, complexity analysis, and AI feedback here.</p>
+                    </section>
+                </div>
+            </section>
+
+            <section id="gdView" data-role="student" class="view">
+                <div class="grid grid-2">
+                    <section class="panel-card">
+                        <h3>Group Discussion Simulator</h3>
+                        <select id="gdTopic">
+                            <option>AI in education</option>
+                            <option>Sustainability in technology</option>
+                            <option>Remote work and productivity</option>
+                            <option>Startups vs product companies</option>
+                        </select>
+                        <textarea id="gdTranscript" rows="10" placeholder="Type or transcribe your GD response here."></textarea>
+                        <button id="gdSimulateBtn" class="primary-button">Evaluate GD</button>
+                    </section>
+                    <section class="panel-card" id="gdResult">
+                        <h3>GD Feedback</h3>
+                        <p class="muted">AI will score communication, confidence, vocabulary, grammar, relevance, and fluency.</p>
+                    </section>
+                </div>
+            </section>
+
+            <section id="legacyInterviewView" data-role="student" class="view">
+                <div class="grid grid-2">
+                    <section class="panel-card">
+                        <h3>HR Interview Module</h3>
+                        <div class="stack-form">
+                            <input id="interviewName" type="text" placeholder="Your name">
+                            <select id="jobRole">
+                                <option>Software Engineer</option>
+                                <option>Data Scientist</option>
+                                <option>Product Manager</option>
+                                <option>Machine Learning Engineer</option>
+                                <option>DevOps Engineer</option>
+                                <option>UX Designer</option>
+                                <option>Quality Assurance</option>
+                                <option>Business Analyst</option>
+                            </select>
+                        </div>
+                        <div class="interview-shell">
+                            <video id="videoElement" autoplay muted playsinline></video>
+                            <div class="control-row">
+                                <span id="recordingIndicator" class="record-indicator" style="display:none"></span>
+                                <button id="recordBtn" class="secondary-button" disabled>Start Recording</button>
+                                <button id="stopBtn" class="secondary-button" disabled>Stop Recording</button>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="panel-card">
+                        <h3>Live Question Flow</h3>
+                        <div class="question-display">
+                            <p>Question <span id="questionNumber">1</span> of 5</p>
+                            <h4 id="questionText">Start the interview to see the first question.</h4>
+                        </div>
+                        <div class="analysis-box">
+                            <h4>Live Transcription</h4>
+                            <p id="transcriptionText" class="muted"></p>
+                        </div>
+                        <div class="analysis-box">
+                            <h4>Real-time Analysis</h4>
+                            <div class="analysis-row"><span>Confidence</span><strong id="confidenceScore">--</strong></div>
+                            <div class="analysis-row"><span>Filler Words</span><strong id="fillerCount">0</strong></div>
+                            <div class="analysis-row"><span>Sentiment</span><strong id="sentimentType">--</strong></div>
+                        </div>
+                        <button id="submitBtn" class="primary-button" disabled>Submit Response</button>
+                    </section>
+                </div>
+            </section>
+
+            <section id="legacyResultsView" class="view">
+                <section class="panel-card">
+                    <h3>Interview Feedback Report</h3>
+                    <div class="grid grid-3">
+                        <div class="score-tile"><span>Overall</span><strong id="overallScore">--</strong></div>
+                        <div class="score-tile"><span>Communication</span><strong id="communicationScore">--</strong></div>
+                        <div class="score-tile"><span>Technical</span><strong id="technicalScore">--</strong></div>
+                    </div>
+                    <div class="grid grid-2">
+                        <div class="panel-subcard"><h4>Strengths</h4><ul id="strengthsList"></ul></div>
+                        <div class="panel-subcard"><h4>Areas for Improvement</h4><ul id="improvementsList"></ul></div>
+                    </div>
+                    <div class="panel-subcard"><h4>Recommendations</h4><ul id="recommendationsList"></ul></div>
+                    <div class="panel-subcard"><h4>Response Details</h4><div id="responseDetails"></div></div>
+                    <div class="control-row">
+                        <button id="newInterviewBtn" class="secondary-button">Start New Interview</button>
+                        <button id="downloadReportBtn" class="primary-button">Download Report</button>
+                    </div>
+                </section>
+            </section>
+
+            <section id="technicalInterviewView" data-role="student" class="view module-view">
+                <div class="grid grid-2">
+                    <section class="panel-card">
+                        <h3>Technical Interview Module</h3>
+                        <div class="module-controls">
+                            <input id="technicalInterviewTechnology" type="text" value="Python" placeholder="Technology">
+                            <input id="technicalInterviewJobDescription" type="text" placeholder="Job description context">
+                        </div>
+                        <textarea id="technicalInterviewSkills" rows="8" placeholder="Comma-separated resume skills">Python, SQL, React</textarea>
+                        <button id="technicalInterviewGenerate" class="primary-button">Generate Adaptive Question</button>
+                    </section>
+                    <section class="panel-card" id="technicalInterviewResult">
+                        <h3>Adaptive Question</h3>
+                        <p class="muted">Question depends on selected technology, resume skills, and job description.</p>
+                    </section>
+                </div>
+            </section>
+
+            <section id="companyView" data-role="student" class="view">
+                <div class="grid grid-2">
+                    <section class="panel-card">
+                        <h3>Company Wise Preparation</h3>
+                        <select id="companySelect"></select>
+                    </section>
+                    <section class="panel-card" id="companyTrackResult">
+                        <h3>Company Track</h3>
+                        <p class="muted">Each company includes aptitude, technical, coding, and interview prep.</p>
+                    </section>
+                </div>
+            </section>
+
+            <section id="analyticsView" class="view">
+                <section class="panel-card">
+                    <h3>Performance Analytics</h3>
+                    <div id="analyticsResult"></div>
+                </section>
+            </section>
+
+            <section id="coachView" class="view">
+                <section class="panel-card">
+                    <h3>AI Career Coach</h3>
+                    <div id="coachResult"></div>
+                </section>
+            </section>
+
+            <section id="adminView" data-role="admin" class="view">
+                <section class="panel-card">
+                    <h3>Admin Panel</h3>
+                    <div id="adminResult"></div>
+                </section>
+            </section>
+
+            <section id="profileView" class="view">
+                <section class="panel-card">
+                    <h3>Student Profile</h3>
+                    <div id="profileResult"></div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <script src="apiClient.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

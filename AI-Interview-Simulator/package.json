@@ -1,0 +1,25 @@
+{
+  "name": "AI Interview Simulator",
+  "version": "1.0.0",
+  "description": "Practice interviews with AI interviewer featuring real-time speech analysis",
+  "author": "Rithika",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rithika5656/AI-Interview-Simulator.git"
+  },
+  "keywords": [
+    "ai",
+    "interview",
+    "simulator",
+    "speech-recognition",
+    "nlp",
+    "sentiment-analysis",
+    "openai",
+    "whisper"
+  ],
+  "license": "MIT",
+  "engines": {
+    "python": ">=3.8",
+    "node": ">=14.0.0"
+  }
+}

@@ -38,8 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
     restoreTheme();
     updateActiveUserProfileUI();
     showView('dashboardView');
+    // Show "not connected" placeholders immediately
+    showOfflinePlaceholders();
+    // Check backend health - panels load only after successful connection
     checkBackendHealth();
-    loadAllPanels();
     setTimeout(initMonacoEditor, 500); // Load Monaco Editor
 });
 
@@ -165,24 +167,24 @@ function hydrateSelectors() {
 }
 
 async function apiGet(path) {
+    if (!API_URL) throw new Error('Backend not connected. Enter your backend URL in the banner above.');
     if (window.HireVisionApiClient?.get) {
         return window.HireVisionApiClient.get(path);
     }
-
     const response = await fetch(`${API_URL}${path}`);
     const body = await safeJson(response);
-    if (!response.ok) throw new Error(body.error || 'Request failed');
+    if (!response.ok) throw new Error(body.error || `Server error ${response.status}`);
     return body;
 }
 
 async function apiPost(path, payload, options = {}) {
+    if (!API_URL) throw new Error('Backend not connected. Enter your backend URL in the banner above.');
     if (window.HireVisionApiClient?.post) {
         if (options.body instanceof FormData) {
             return window.HireVisionApiClient.post(path, options.body, { headers: options.headers });
         }
         return window.HireVisionApiClient.post(path, payload, { headers: options.headers });
     }
-
     const isFormData = payload instanceof FormData || options.body instanceof FormData;
     const response = await fetch(`${API_URL}${path}`, {
         method: 'POST',
@@ -190,7 +192,7 @@ async function apiPost(path, payload, options = {}) {
         body: options.body || (isFormData ? payload : JSON.stringify(payload || {})),
     });
     const body = await safeJson(response);
-    if (!response.ok) throw new Error(body.error || 'Request failed');
+    if (!response.ok) throw new Error(body.error || `Server error ${response.status}`);
     return body;
 }
 
@@ -208,6 +210,18 @@ function loadingCard(message) {
 
 function errorCard(title, message) {
     return `<div class="state-card error"><strong>${title}</strong><p>${message}</p></div>`;
+}
+
+function showOfflinePlaceholders() {
+    const notConnectedHtml = `<div class="state-card" style="text-align:center; padding: 24px;">
+        <i class="fa-solid fa-plug-circle-xmark" style="font-size:2rem; color:var(--muted); margin-bottom:10px;"></i>
+        <p style="color:var(--muted); margin:0;">Waiting for backend connection...</p>
+    </div>`;
+    const panels = ['#dashboardMetrics', '#analyticsResult', '#coachResult', '#profileResult', '#companyTrackResult'];
+    panels.forEach(sel => {
+        const el = $(sel);
+        if (el) el.innerHTML = notConnectedHtml;
+    });
 }
 
 async function loadAllPanels() {
@@ -1464,113 +1478,120 @@ function bindProfileEdit() {
 // Backend Health Check Wakeup Retry
 let healthCheckInterval = null;
 let connectionAttempts = 0;
+let panelsLoaded = false;
+
+function showBackendConnectForm(reason) {
+    const badge = $('#backendStatus');
+    const alert = $('#systemAlert');
+    if (badge) {
+        badge.className = 'backend-status status-offline';
+        badge.querySelector('.status-text').textContent = 'Not Connected';
+    }
+    if (!alert) return;
+    alert.hidden = false;
+    const currentUrl = API_URL ? API_URL.replace(/\/api\/?$/, '') : '';
+    alert.innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:12px; width:100%">
+            <div style="display:flex; align-items:flex-start; gap:15px;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size:1.5rem; color:var(--warning); flex-shrink:0; margin-top:2px;"></i>
+                <div>
+                    <strong style="font-size:1rem;">Connect Your Backend</strong>
+                    <p style="margin: 6px 0 0 0; font-size: 0.88rem; color: var(--muted);">${reason}</p>
+                    <p style="margin: 4px 0 0 0; font-size: 0.82rem; color: var(--muted);">Deploy your backend to <a href="https://render.com" target="_blank" style="color:var(--primary)">Render.com</a> (free), then paste the URL below:</p>
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; width:100%; flex-wrap:wrap;">
+                <input type="text" id="customBackendInput" value="${currentUrl}" placeholder="https://your-backend.onrender.com" 
+                    style="flex:1; min-width:200px; padding:10px 14px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--text); outline:none; font-size:0.95rem;">
+                <button id="saveCustomBackendBtn" class="btn btn-primary" style="white-space:nowrap;">
+                    <i class="fa-solid fa-plug"></i> Connect Backend
+                </button>
+            </div>
+        </div>
+    `;
+    const saveBtn = $('#saveCustomBackendBtn');
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            let url = ($('#customBackendInput')?.value || '').trim();
+            if (!url) { showToast('Please enter a valid URL', 'warning'); return; }
+            url = url.replace(/\/+$/, '');
+            const apiUrl = url.endsWith('/api') ? url : `${url}/api`;
+            localStorage.setItem('hirevisionCustomApiUrl', apiUrl);
+            localStorage.setItem('hirevisionCustomSocketUrl', url);
+            showToast('Connecting to backend...', 'info');
+            setTimeout(() => window.location.reload(), 800);
+        });
+    }
+}
+
 async function checkBackendHealth() {
     const badge = $('#backendStatus');
     const alert = $('#systemAlert');
-    
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    
-    // If no backend API URL is set OR we have failed to connect 4 times in a row, prompt the user
-    if ((!API_URL && !isLocal) || connectionAttempts >= 4) {
-        if (badge) {
-            badge.className = 'backend-status status-offline';
-            badge.querySelector('.status-text').textContent = 'Config Needed';
-        }
-        if (alert) {
-            alert.hidden = false;
-            const currentUrl = API_URL ? API_URL.replace(/\/api\/?$/, '') : '';
-            alert.innerHTML = `
-                <div style="display:flex; flex-direction:column; gap:10px; width:100%">
-                    <div style="display:flex; align-items:center; gap:15px;">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size:1.5rem; color:var(--warning)"></i>
-                        <div>
-                            <strong>Connect Production Backend</strong>
-                            <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: var(--muted);">
-                                ${connectionAttempts >= 4 
-                                    ? `Could not reach backend at <code>${currentUrl}</code>. Please check your Render/Railway instance status or enter a new URL below.`
-                                    : 'No backend environment variable was supplied during Vercel build. Please enter your Render/Railway backend URL below to connect.'}
-                            </p>
-                        </div>
-                    </div>
-                    <div style="display:flex; gap:10px; margin-top:5px; width:100%">
-                        <input type="text" id="customBackendInput" value="${currentUrl}" placeholder="e.g. https://hirevision-backend.onrender.com" style="flex:1; padding:8px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--text); outline:none;">
-                        <button id="saveCustomBackendBtn" class="btn btn-primary" style="padding:8px 16px;">Connect Backend</button>
-                    </div>
-                </div>
-            `;
-            
-            const saveBtn = $('#saveCustomBackendBtn');
-            const customInput = $('#customBackendInput');
-            if (saveBtn && customInput) {
-                saveBtn.addEventListener('click', () => {
-                    let url = customInput.value.trim();
-                    if (!url) {
-                        showToast('Please enter a valid URL', 'warning');
-                        return;
-                    }
-                    url = url.replace(/\/+$/, '');
-                    const socketUrl = url;
-                    const apiUrl = url.endsWith('/api') ? url : `${url}/api`;
-                    
-                    localStorage.setItem('hirevisionCustomApiUrl', apiUrl);
-                    localStorage.setItem('hirevisionCustomSocketUrl', socketUrl);
-                    showToast('Backend configuration saved! Reconnecting...', 'success');
-                    setTimeout(() => window.location.reload(), 1000);
-                });
-            }
-        }
+
+    // Immediately show connection form if no URL configured on production
+    if (!API_URL && !isLocal) {
+        showBackendConnectForm('No backend URL was configured. The Vercel build did not receive the API_URL environment variable.');
+        return;
+    }
+
+    if (connectionAttempts >= 5) {
+        showBackendConnectForm(`Could not reach backend after 5 attempts. Current URL: ${API_URL.replace(/\/api\/?$/, '')}`);
         return;
     }
 
     try {
-        const response = await fetch(`${API_URL.replace(/\/api\/?$/, '')}/health`);
-        if (response.ok) {
-            connectionAttempts = 0;
-            if (badge) {
-                badge.className = 'backend-status status-online';
-                const customUrl = localStorage.getItem('hirevisionCustomApiUrl');
-                if (customUrl) {
-                    badge.querySelector('.status-text').innerHTML = `Online <a href="#" id="resetBackendBtn" style="color:var(--primary); font-size:0.75rem; margin-left:8px; text-decoration:underline; font-weight:bold;">(Disconnect)</a>`;
-                    const resetBtn = $('#resetBackendBtn');
-                    if (resetBtn) {
-                        resetBtn.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            localStorage.removeItem('hirevisionCustomApiUrl');
-                            localStorage.removeItem('hirevisionCustomSocketUrl');
-                            showToast('Custom backend URL disconnected', 'info');
-                            setTimeout(() => window.location.reload(), 1000);
-                        });
-                    }
-                } else {
-                    badge.querySelector('.status-text').textContent = 'Online';
-                }
+        const healthUrl = `${API_URL.replace(/\/api\/?$/, '')}/health`;
+        const response = await fetch(healthUrl, { signal: AbortSignal.timeout(8000) });
+        if (!response.ok) throw new Error(`Status ${response.status}`);
+
+        // SUCCESS - Backend is online
+        connectionAttempts = 0;
+        if (badge) {
+            badge.className = 'backend-status status-online';
+            const isCustomUrl = !!localStorage.getItem('hirevisionCustomApiUrl');
+            badge.querySelector('.status-text').innerHTML = isCustomUrl
+                ? `Online <a href="#" id="resetBackendBtn" style="color:var(--primary);font-size:0.75rem;margin-left:6px;text-decoration:underline;">(Disconnect)</a>`
+                : 'Online';
+            const resetBtn = $('#resetBackendBtn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('hirevisionCustomApiUrl');
+                    localStorage.removeItem('hirevisionCustomSocketUrl');
+                    setTimeout(() => window.location.reload(), 500);
+                });
             }
-            if (alert) alert.hidden = true;
-            clearInterval(healthCheckInterval);
-            healthCheckInterval = null;
-        } else {
-            throw new Error();
+        }
+        if (alert) alert.hidden = true;
+        clearInterval(healthCheckInterval);
+        healthCheckInterval = null;
+
+        // Load all panels now that backend is confirmed available
+        if (!panelsLoaded) {
+            panelsLoaded = true;
+            loadAllPanels();
         }
     } catch (e) {
         connectionAttempts++;
         if (badge) {
             badge.className = 'backend-status status-connecting';
-            badge.querySelector('.status-text').textContent = `Connecting (${connectionAttempts}/4)...`;
+            badge.querySelector('.status-text').textContent = `Waking up... (${connectionAttempts}/5)`;
         }
         if (alert) {
             alert.hidden = false;
             alert.innerHTML = `
                 <div style="display:flex; align-items:center; gap:15px; width:100%">
-                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size:1.5rem; color:var(--warning)"></i>
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size:1.4rem; color:var(--warning)"></i>
                     <div>
-                        <strong>AI Backend is starting up (Attempt ${connectionAttempts}/4)</strong>
-                        <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: var(--muted);">The backend runs on an ephemeral Render instance. Waking it up (takes up to 50 seconds)...</p>
+                        <strong>Backend is waking up (attempt ${connectionAttempts}/5)</strong>
+                        <p style="margin:4px 0 0; font-size:0.85rem; color:var(--muted)">Free Render instances sleep when idle. This takes 30-60 seconds...</p>
                     </div>
                 </div>
             `;
         }
         if (!healthCheckInterval) {
-            healthCheckInterval = setInterval(checkBackendHealth, 3000);
+            healthCheckInterval = setInterval(checkBackendHealth, 5000);
         }
     }
 }

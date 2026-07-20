@@ -20,15 +20,12 @@ const state = {
 document.addEventListener('DOMContentLoaded', () => {
     bindNavigation();
     bindThemeToggle();
-    bindProfileModeToggle();
     bindModuleForms();
     bindLegacyInterview();
     bindTechnicalInterview();
     hydrateSelectors();
     restoreTheme();
-    syncProfileMode();
     showView('dashboardView');
-    checkBackendStatus();
     loadAllPanels();
 });
 
@@ -60,55 +57,6 @@ function bindThemeToggle() {
         const next = document.body.classList.contains('theme-light') ? 'dark' : 'light';
         applyTheme(next);
     });
-}
-
-function bindProfileModeToggle() {
-    const studentBtn = $('#studentModeBtn');
-    const adminBtn = $('#adminModeBtn');
-
-    if (studentBtn) {
-        studentBtn.addEventListener('click', () => setProfileMode('student'));
-    }
-
-    if (adminBtn) {
-        adminBtn.addEventListener('click', () => setProfileMode('admin'));
-    }
-}
-
-function setProfileMode(mode) {
-    state.profileMode = mode === 'admin' ? 'admin' : 'student';
-    localStorage.setItem('hirevisionProfileMode', state.profileMode);
-    syncProfileMode();
-    loadProfile();
-    loadAdmin();
-    updateStatusLabel();
-}
-
-function syncProfileMode() {
-    document.body.dataset.profileMode = state.profileMode;
-    $all('[data-profile-mode]').forEach((button) => {
-        button.classList.toggle('active', button.dataset.profileMode === state.profileMode);
-    });
-    $all('[data-role="admin"]').forEach((element) => {
-        element.classList.toggle('hidden-role', state.profileMode !== 'admin');
-    });
-    $all('[data-role="student"]').forEach((element) => {
-        element.classList.toggle('hidden-role', state.profileMode !== 'student');
-    });
-    const adminView = $('#adminView');
-    if (adminView) adminView.classList.toggle('hidden-role', state.profileMode !== 'admin');
-    const activeView = $('.view.active');
-    if (activeView && activeView.classList.contains('hidden-role')) {
-        showView('dashboardView');
-    }
-    updateStatusLabel();
-}
-
-function updateStatusLabel() {
-    const status = $('.status-pill');
-    if (status) {
-        status.textContent = state.profileMode === 'admin' ? 'Admin Profile' : 'Student Profile';
-    }
 }
 
 function applyTheme(theme) {
@@ -237,23 +185,7 @@ function errorCard(title, message) {
 }
 
 async function loadAllPanels() {
-    await Promise.allSettled([loadDashboard(), loadAnalytics(), loadCoach(), loadAdmin(), loadProfile(), loadCompanyTrack($('#companySelect')?.value || 'TCS')]);
-}
-
-async function checkBackendStatus() {
-    const alertBox = $('#systemAlert');
-    if (!alertBox || !window.HireVisionApiClient?.healthCheck) return;
-
-    const result = await window.HireVisionApiClient.healthCheck();
-    if (result.ok) {
-        alertBox.hidden = true;
-        alertBox.textContent = '';
-        return;
-    }
-
-    const message = result.error?.message || result.payload?.error || 'Backend API is unreachable.';
-    alertBox.textContent = `Demo mode active: ${message}`;
-    alertBox.hidden = false;
+    await Promise.allSettled([loadDashboard(), loadAnalytics(), loadCoach(), loadProfile(), loadCompanyTrack($('#companySelect')?.value || 'TCS')]);
 }
 
 async function loadDashboard() {
@@ -277,6 +209,9 @@ function renderDashboard(data) {
         ['Coding Progress', metrics.coding_progress || 0],
         ['Interview Score', metrics.interview_score || 0],
         ['GD Score', metrics.gd_score || 0],
+        ['Technical Score', metrics.technical_score || 0],
+        ['Logical Score', metrics.logical_score || 0],
+        ['Verbal Score', metrics.verbal_score || 0],
     ].map(([label, value]) => `
         <article class="metric-card">
             <p>${label}</p>
@@ -338,8 +273,8 @@ function renderDashboardCharts(metrics) {
         state.charts.accuracyChart = new Chart(accuracy, {
             type: 'bar',
             data: {
-                labels: ['Resume', 'Aptitude', 'Coding', 'Interview', 'GD'],
-                datasets: [{ label: 'Scores', data: [metrics.resume_score || 0, metrics.aptitude_progress || 0, metrics.coding_progress || 0, metrics.interview_score || 0, metrics.gd_score || 0], backgroundColor: ['#60a5fa', '#38bdf8', '#4ade80', '#f59e0b', '#f472b6'] }],
+                labels: ['Resume', 'Aptitude', 'Coding', 'Interview', 'GD', 'Technical', 'Logical', 'Verbal'],
+                datasets: [{ label: 'Scores', data: [metrics.resume_score || 0, metrics.aptitude_progress || 0, metrics.coding_progress || 0, metrics.interview_score || 0, metrics.gd_score || 0, metrics.technical_score || 0, metrics.logical_score || 0, metrics.verbal_score || 0], backgroundColor: ['#60a5fa', '#38bdf8', '#4ade80', '#f59e0b', '#f472b6', '#8b5cf6', '#ec4899', '#06b6d4'] }],
             },
             options: chartOptions(),
         });
@@ -600,51 +535,10 @@ async function loadCoach() {
     }
 }
 
-async function loadAdmin() {
-    const result = $('#adminResult');
-    if (!result || state.profileMode !== 'admin') return;
-    try {
-        const data = await apiGet('/admin/overview');
-        result.innerHTML = `
-            <div class="analysis-card success">
-                <h3>Admin Overview</h3>
-                <div class="admin-grid">${Object.entries(data.totals || {}).map(([key, value]) => `<div class="admin-tile"><span>${humanize(key)}</span><strong>${value}</strong></div>`).join('')}</div>
-                <p><strong>Weak Areas:</strong> ${(data.weak_areas || []).join(', ')}</p>
-            </div>
-            <div class="analysis-card">
-                <h3>Faculty Controls</h3>
-                <p>Monitor student scores, weak areas, interview attempts, leaderboard position, and module completion from one place.</p>
-            </div>
-        `;
-    } catch (error) {
-        result.innerHTML = errorCard('Admin overview failed', error.message);
-    }
-}
-
 async function loadProfile() {
     const result = $('#profileResult');
     if (!result) return;
     try {
-        if (state.profileMode === 'admin') {
-            const data = await apiGet('/admin/overview');
-            result.innerHTML = `
-                <div class="analysis-card success">
-                    <h3>Admin Profile</h3>
-                    <p><strong>Total Users:</strong> ${data.totals?.users || 0}</p>
-                    <p><strong>Interviews:</strong> ${data.totals?.interviews || 0}</p>
-                    <p><strong>Coding Tests:</strong> ${data.totals?.coding_tests || 0}</p>
-                    <p><strong>Aptitude Tests:</strong> ${data.totals?.aptitude_tests || 0}</p>
-                    <p><strong>GD Sessions:</strong> ${data.totals?.gd_sessions || 0}</p>
-                    <p><strong>Weak Areas:</strong> ${(data.weak_areas || []).join(', ')}</p>
-                </div>
-                <div class="analysis-card">
-                    <h3>Admin Summary</h3>
-                    <p>Track student performance, reports, weak topics, and interview attempts from the faculty dashboard.</p>
-                </div>
-            `;
-            return;
-        }
-
         const data = await apiGet('/profile/demo_student');
         result.innerHTML = `
             <div class="analysis-card success">

@@ -7,7 +7,6 @@ from flask import Blueprint, jsonify, request
 from services.placement_service import (
     analyze_resume_payload,
     analyze_coding_submission,
-    build_admin_overview,
     build_analytics,
     build_career_coach,
     build_company_track,
@@ -40,7 +39,6 @@ def list_modules():
                 "company-wise",
                 "analytics",
                 "career-coach",
-                "admin",
                 "profile",
             ]
         }
@@ -143,11 +141,6 @@ def technical_interview_question():
             job_description=payload.get("job_description"),
         )
     )
-
-
-@placement_bp.route("/admin/overview", methods=["GET"])
-def admin_overview():
-    return jsonify(build_admin_overview())
 
 
 @placement_bp.route("/profile/<user_id>", methods=["GET"])

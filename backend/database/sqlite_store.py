@@ -33,7 +33,6 @@ def init_db() -> None:
                 name TEXT NOT NULL,
                 email TEXT,
                 role TEXT NOT NULL DEFAULT 'student',
-                is_admin INTEGER NOT NULL DEFAULT 0,
                 created_at TEXT NOT NULL,
                 updated_at TEXT NOT NULL
             );
@@ -105,6 +104,18 @@ def init_db() -> None:
                 created_at TEXT NOT NULL
             );
 
+            CREATE TABLE IF NOT EXISTS verbal_tests (
+                id TEXT PRIMARY KEY,
+                user_id TEXT,
+                topic TEXT NOT NULL,
+                difficulty TEXT NOT NULL,
+                questions_json TEXT,
+                score REAL,
+                correct_count INTEGER,
+                total_count INTEGER,
+                created_at TEXT NOT NULL
+            );
+
             CREATE TABLE IF NOT EXISTS technical_tests (
                 id TEXT PRIMARY KEY,
                 user_id TEXT,
@@ -156,10 +167,10 @@ def seed_demo_data() -> None:
         now = _now()
         connection.execute(
             """
-            INSERT INTO users (id, name, email, role, is_admin, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO users (id, name, email, role, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?)
             """,
-            ("demo_student", "Demo Student", "demo@example.com", "student", 0, now, now),
+            ("demo_student", "Demo Student", "demo@example.com", "student", now, now),
         )
         connection.execute(
             """
@@ -355,6 +366,7 @@ def get_dashboard_metrics(user_id: str) -> dict[str, Any]:
     gd = latest_by_table("gd_sessions", user_id)
     technical = latest_by_table("technical_tests", user_id)
     logical = latest_by_table("logical_tests", user_id)
+    verbal = latest_by_table("verbal_tests", user_id)
 
     resume_score = float(resume["ats_score"]) if resume and resume.get("ats_score") is not None else 72.0
     aptitude_score = float(aptitude["score"]) if aptitude and aptitude.get("score") is not None else 65.0
@@ -376,15 +388,17 @@ def get_dashboard_metrics(user_id: str) -> dict[str, Any]:
 
     technical_score = float(technical["score"]) if technical and technical.get("score") is not None else 69.0
     logical_score = float(logical["score"]) if logical and logical.get("score") is not None else 64.0
+    verbal_score = float(verbal["score"]) if verbal and verbal.get("score") is not None else 66.0
 
     placement_readiness = round(
-        (resume_score * 0.18)
-        + (aptitude_score * 0.16)
-        + (coding_score * 0.18)
-        + (interview_score * 0.2)
-        + (gd_score * 0.1)
+        (resume_score * 0.15)
+        + (aptitude_score * 0.12)
+        + (coding_score * 0.15)
+        + (interview_score * 0.18)
+        + (gd_score * 0.08)
         + (technical_score * 0.12)
-        + (logical_score * 0.06),
+        + (logical_score * 0.08)
+        + (verbal_score * 0.12),
         1,
     )
 
@@ -395,6 +409,9 @@ def get_dashboard_metrics(user_id: str) -> dict[str, Any]:
         "coding_progress": round(coding_score, 1),
         "interview_score": round(interview_score, 1),
         "gd_score": round(gd_score, 1),
+        "technical_score": round(technical_score, 1),
+        "logical_score": round(logical_score, 1),
+        "verbal_score": round(verbal_score, 1),
     }
 
 

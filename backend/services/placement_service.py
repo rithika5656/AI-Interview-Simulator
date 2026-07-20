@@ -250,31 +250,6 @@ def build_career_coach(user_id: str) -> dict[str, Any]:
     return generate_career_coach_snapshot(metrics)
 
 
-def build_admin_overview() -> dict[str, Any]:
-    users = fetch_all("SELECT COUNT(*) AS total_users FROM users")
-    interviews = fetch_all("SELECT COUNT(*) AS total_interviews FROM interviews")
-    coding = fetch_all("SELECT COUNT(*) AS total_coding_tests FROM coding_tests")
-    aptitude = fetch_all("SELECT COUNT(*) AS total_aptitude_tests FROM aptitude_tests")
-    logical = fetch_all("SELECT COUNT(*) AS total_logical_tests FROM logical_tests")
-    technical = fetch_all("SELECT COUNT(*) AS total_technical_tests FROM technical_tests")
-    gd = fetch_all("SELECT COUNT(*) AS total_gd_sessions FROM gd_sessions")
-
-    return {
-        "totals": {
-            "users": users[0]["total_users"],
-            "interviews": interviews[0]["total_interviews"],
-            "coding_tests": coding[0]["total_coding_tests"],
-            "aptitude_tests": aptitude[0]["total_aptitude_tests"],
-            "logical_tests": logical[0]["total_logical_tests"],
-            "technical_tests": technical[0]["total_technical_tests"],
-            "gd_sessions": gd[0]["total_gd_sessions"],
-        },
-        "leaderboard": [],
-        "weak_areas": ["Coding optimization", "Timed aptitude", "Mock interview repetition"],
-        "reports": [],
-    }
-
-
 def build_profile(user_id: str) -> dict[str, Any]:
     resume = latest_resume(user_id)
     interview = latest_by_table("interviews", user_id)

@@ -28,19 +28,18 @@
 
             <nav class="sidebar-nav">
                 <button data-view="dashboardView" class="nav-item active"><i class="fa-solid fa-house"></i> Dashboard</button>
-                <button data-view="resumeView" data-role="student" class="nav-item"><i class="fa-solid fa-file-pdf"></i> Resume Analyzer</button>
-                <button data-view="aptitudeView" data-role="student" class="nav-item"><i class="fa-solid fa-brain"></i> Aptitude</button>
-                <button data-view="logicalView" data-role="student" class="nav-item"><i class="fa-solid fa-puzzle-piece"></i> Logical Reasoning</button>
-                <button data-view="verbalView" data-role="student" class="nav-item"><i class="fa-solid fa-language"></i> Verbal Ability</button>
-                <button data-view="technicalMcqView" data-role="student" class="nav-item"><i class="fa-solid fa-microchip"></i> Technical MCQ</button>
-                <button data-view="codingView" data-role="student" class="nav-item"><i class="fa-solid fa-code"></i> Coding Assessment</button>
-                <button data-view="gdView" data-role="student" class="nav-item"><i class="fa-solid fa-users"></i> Group Discussion</button>
-                <button data-view="legacyInterviewView" data-role="student" class="nav-item"><i class="fa-solid fa-user-tie"></i> HR Interview</button>
-                <button data-view="technicalInterviewView" data-role="student" class="nav-item"><i class="fa-solid fa-laptop-code"></i> Technical Interview</button>
-                <button data-view="companyView" data-role="student" class="nav-item"><i class="fa-solid fa-building"></i> Company Wise</button>
+                <button data-view="resumeView" class="nav-item"><i class="fa-solid fa-file-pdf"></i> Resume Analyzer</button>
+                <button data-view="aptitudeView" class="nav-item"><i class="fa-solid fa-brain"></i> Aptitude</button>
+                <button data-view="logicalView" class="nav-item"><i class="fa-solid fa-puzzle-piece"></i> Logical Reasoning</button>
+                <button data-view="verbalView" class="nav-item"><i class="fa-solid fa-language"></i> Verbal Ability</button>
+                <button data-view="technicalMcqView" class="nav-item"><i class="fa-solid fa-microchip"></i> Technical MCQ</button>
+                <button data-view="codingView" class="nav-item"><i class="fa-solid fa-code"></i> Coding Assessment</button>
+                <button data-view="gdView" class="nav-item"><i class="fa-solid fa-users"></i> Group Discussion</button>
+                <button data-view="legacyInterviewView" class="nav-item"><i class="fa-solid fa-user-tie"></i> HR Interview</button>
+                <button data-view="technicalInterviewView" class="nav-item"><i class="fa-solid fa-laptop-code"></i> Technical Interview</button>
+                <button data-view="companyView" class="nav-item"><i class="fa-solid fa-building"></i> Company Wise</button>
                 <button data-view="analyticsView" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</button>
                 <button data-view="coachView" class="nav-item"><i class="fa-solid fa-chalkboard-user"></i> AI Career Coach</button>
-                <button data-view="adminView" data-role="admin" class="nav-item"><i class="fa-solid fa-shield-halved"></i> Admin Panel</button>
                 <button data-view="profileView" class="nav-item"><i class="fa-solid fa-user"></i> Profile</button>
             </nav>
         </aside>
@@ -53,11 +52,6 @@
                 </div>
                 <div class="topbar-actions">
                     <button id="themeToggle" class="btn btn-secondary" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-                    <div class="profile-switcher" aria-label="Profile mode switcher">
-                        <button id="studentModeBtn" data-profile-mode="student" class="profile-chip active" type="button">Student Mode</button>
-                        <button id="adminModeBtn" data-profile-mode="admin" class="profile-chip" type="button">Admin Mode</button>
-                    </div>
-                    <span class="status-pill"><i class="fa-solid fa-circle-dot"></i> Live AI</span>
                     <button id="startLegacyInterviewBtn" class="btn btn-primary"><i class="fa-solid fa-video"></i> Start HR Interview</button>
                 </div>
             </header>
@@ -97,7 +91,7 @@
                 </section>
             </section>
 
-            <section id="resumeView" data-role="student" class="view">
+            <section id="resumeView" class="view">
                 <div class="grid grid-2">
                     <section class="panel-card">
                         <h3>Resume Analyzer</h3>
@@ -115,7 +109,7 @@
                 </div>
             </section>
 
-            <section id="aptitudeView" data-role="student" class="view module-view">
+            <section id="aptitudeView" class="view module-view">
                 <section class="panel-card">
                     <div class="module-header">
                         <div>
@@ -138,7 +132,7 @@
                 </section>
             </section>
 
-            <section id="logicalView" data-role="student" class="view module-view">
+            <section id="logicalView" class="view module-view">
                 <section class="panel-card">
                     <div class="module-header">
                         <div><h3>Logical Reasoning</h3><p>Randomized questions with explanation after submission.</p></div>
@@ -158,7 +152,7 @@
                 </section>
             </section>
 
-            <section id="verbalView" data-role="student" class="view module-view">
+            <section id="verbalView" class="view module-view">
                 <section class="panel-card">
                     <div class="module-header">
                         <div><h3>Verbal Ability</h3><p>Synonyms, antonyms, comprehension, and grammar practice.</p></div>
@@ -178,7 +172,7 @@
                 </section>
             </section>
 
-            <section id="technicalMcqView" data-role="student" class="view module-view">
+            <section id="technicalMcqView" class="view module-view">
                 <section class="panel-card">
                     <div class="module-header">
                         <div><h3>Technical MCQ</h3><p>Java, Python, C++, DBMS, OOPS, SQL, React, AI/ML and more.</p></div>
@@ -198,7 +192,7 @@
                 </section>
             </section>
 
-            <section id="codingView" data-role="student" class="view">
+            <section id="codingView" class="view">
                 <div class="grid grid-2">
                     <section class="panel-card">
                         <h3>Coding Assessment</h3>
@@ -222,7 +216,7 @@
                 </div>
             </section>
 
-            <section id="gdView" data-role="student" class="view">
+            <section id="gdView" class="view">
                 <div class="grid grid-2">
                     <section class="panel-card">
                         <h3>Group Discussion Simulator</h3>
@@ -242,7 +236,7 @@
                 </div>
             </section>
 
-            <section id="legacyInterviewView" data-role="student" class="view">
+            <section id="legacyInterviewView" class="view">
                 <div class="grid grid-2">
                     <section class="panel-card">
                         <h3>HR Interview Module</h3>
@@ -310,7 +304,7 @@
                 </section>
             </section>
 
-            <section id="technicalInterviewView" data-role="student" class="view module-view">
+            <section id="technicalInterviewView" class="view module-view">
                 <div class="grid grid-2">
                     <section class="panel-card">
                         <h3>Technical Interview Module</h3>
@@ -328,7 +322,7 @@
                 </div>
             </section>
 
-            <section id="companyView" data-role="student" class="view">
+            <section id="companyView" class="view">
                 <div class="grid grid-2">
                     <section class="panel-card">
                         <h3>Company Wise Preparation</h3>
@@ -355,12 +349,7 @@
                 </section>
             </section>
 
-            <section id="adminView" data-role="admin" class="view">
-                <section class="panel-card">
-                    <h3>Admin Panel</h3>
-                    <div id="adminResult"></div>
-                </section>
-            </section>
+
 
             <section id="profileView" class="view">
                 <section class="panel-card">

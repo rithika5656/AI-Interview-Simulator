@@ -18,6 +18,9 @@
     "whisper"
   ],
   "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build-config.js"
+  },
   "engines": {
     "python": ">=3.8",
     "node": ">=14.0.0"

@@ -46,7 +46,8 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 app = Flask(__name__)
-frontend_origins = os.getenv("FRONTEND_ORIGINS", "*")
+origins_env = os.getenv("FRONTEND_ORIGINS", "*")
+frontend_origins = [o.strip() for o in origins_env.split(",") if o.strip()] if origins_env != "*" else "*"
 CORS(
     app,
     resources={r"/api/*": {"origins": frontend_origins}, r"/health": {"origins": frontend_origins}},
@@ -71,8 +72,10 @@ def start_interview():
     data = request.json
     interview_id = data.get('interview_id')
     job_role = data.get('job_role', 'Software Engineer')
+    user_id = data.get('user_id', 'demo_student')
     
     interview_sessions[interview_id] = {
+        'user_id': user_id,
         'job_role': job_role,
         'responses': [],
         'analysis': [],
@@ -165,6 +168,7 @@ def submit_response():
 @app.route('/api/end-interview', methods=['POST'])
 def end_interview():
     """Generate final report and end interview"""
+    import json
     data = request.json
     interview_id = data.get('interview_id')
     
@@ -174,6 +178,32 @@ def end_interview():
     session = interview_sessions[interview_id]
     report = generate_report(session)
     
+    # Save report to sqlite database
+    try:
+        from database.sqlite_store import save_record
+        from datetime import datetime
+        now = datetime.utcnow().isoformat(timespec="seconds") + "Z"
+        
+        save_record("interviews", {
+            "id": interview_id,
+            "user_id": session.get('user_id', 'demo_student'),
+            "interview_type": "hr",
+            "domain": session.get('job_role', 'Software Engineer'),
+            "company": "General Practice",
+            "questions_json": json.dumps([r.get('text') for r in session.get('responses', [])]), # Fallback text
+            "responses_json": json.dumps([r.get('text') for r in session.get('responses', [])]),
+            "scores_json": json.dumps({
+                "overall": report.get('summary', {}).get('overall_score', 75),
+                "communication": report.get('summary', {}).get('communication_score', 75),
+                "technical": report.get('summary', {}).get('technical_score', 75)
+            }),
+            "transcript_json": json.dumps(report.get('response_details', [])),
+            "created_at": now,
+            "updated_at": now
+        })
+    except Exception as e:
+        print(f"Error saving interview record: {e}")
+        
     return jsonify({
         "interview_id": interview_id,
         "report": report,

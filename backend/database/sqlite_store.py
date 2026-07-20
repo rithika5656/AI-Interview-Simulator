@@ -16,7 +16,7 @@ DB_PATH = Path(__file__).resolve().parent / "hirevision.db"
 
 
 def get_connection() -> sqlite3.Connection:
-    connection = sqlite3.connect(DB_PATH)
+    connection = sqlite3.connect(DB_PATH, timeout=20)
     connection.row_factory = sqlite3.Row
     return connection
 
@@ -33,6 +33,9 @@ def init_db() -> None:
                 name TEXT NOT NULL,
                 email TEXT,
                 role TEXT NOT NULL DEFAULT 'student',
+                target_role TEXT,
+                skills_json TEXT,
+                achievements_json TEXT,
                 created_at TEXT NOT NULL,
                 updated_at TEXT NOT NULL
             );
@@ -156,6 +159,14 @@ def init_db() -> None:
             );
             """
         )
+        
+        # SQLite schema migration: add columns to users table if they do not exist
+        for col, col_type in [("target_role", "TEXT"), ("skills_json", "TEXT"), ("achievements_json", "TEXT")]:
+            try:
+                connection.execute(f"ALTER TABLE users ADD COLUMN {col} {col_type}")
+            except sqlite3.OperationalError:
+                pass
+        connection.commit()
 
 
 def seed_demo_data() -> None:
@@ -167,10 +178,10 @@ def seed_demo_data() -> None:
         now = _now()
         connection.execute(
             """
-            INSERT INTO users (id, name, email, role, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO users (id, name, email, role, target_role, skills_json, achievements_json, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
-            ("demo_student", "Demo Student", "demo@example.com", "student", now, now),
+            ("demo_student", "Demo Student", "demo@example.com", "student", "Software Engineer", json.dumps(["Python", "SQL", "React"]), json.dumps(["Hackathon winner"]), now, now),
         )
         connection.execute(
             """
@@ -270,20 +281,23 @@ def seed_demo_data() -> None:
         connection.commit()
 
 
-def upsert_user(user_id: str, name: str, email: str | None = None, role: str = "student") -> None:
+def upsert_user(user_id: str, name: str, email: str | None = None, role: str = "student", target_role: str | None = None, skills_json: str | None = None, achievements_json: str | None = None) -> None:
     timestamp = _now()
     with get_connection() as connection:
         connection.execute(
             """
-            INSERT INTO users (id, name, email, role, created_at, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO users (id, name, email, role, target_role, skills_json, achievements_json, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(id) DO UPDATE SET
                 name=excluded.name,
                 email=COALESCE(excluded.email, users.email),
                 role=excluded.role,
+                target_role=COALESCE(excluded.target_role, users.target_role),
+                skills_json=COALESCE(excluded.skills_json, users.skills_json),
+                achievements_json=COALESCE(excluded.achievements_json, users.achievements_json),
                 updated_at=excluded.updated_at
             """,
-            (user_id, name, email, role, timestamp, timestamp),
+            (user_id, name, email, role, target_role, skills_json, achievements_json, timestamp, timestamp),
         )
         connection.commit()
 
@@ -333,6 +347,7 @@ def list_recent_activity(user_id: str, limit: int = 6) -> list[dict[str, Any]]:
         "coding_tests": ("language", "Coding"),
         "aptitude_tests": ("topic", "Aptitude"),
         "logical_tests": ("topic", "Logical"),
+        "verbal_tests": ("topic", "Verbal"),
         "technical_tests": ("topic", "Technical"),
         "gd_sessions": ("topic", "GD"),
         "reports": ("report_type", "Report"),

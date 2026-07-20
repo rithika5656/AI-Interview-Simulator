@@ -877,3 +877,140 @@ body.theme-light .nav-item:hover {
     from { opacity: 1; transform: translateX(0); }
     to { opacity: 0; transform: translateX(100%); }
 }
+
+/* Backend Status Badge */
+.backend-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    background: var(--card-strong);
+}
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.status-connecting .status-dot {
+    background-color: var(--warning);
+    box-shadow: 0 0 8px var(--warning);
+    animation: pulse 1.5s infinite;
+}
+.status-online .status-dot {
+    background-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+.status-offline .status-dot {
+    background-color: var(--danger);
+    box-shadow: 0 0 8px var(--danger);
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+/* User Profile Card in Sidebar */
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--card-strong);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+.user-profile-card .user-avatar {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+.user-profile-card .user-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+.user-profile-card .user-details strong {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text);
+}
+.user-profile-card .user-details span {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+.user-profile-card .btn-icon {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    transition: color 0.2s;
+}
+.user-profile-card .btn-icon:hover {
+    color: var(--primary);
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+.modal.active {
+    display: flex;
+}
+.modal-content {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 30px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: var(--shadow);
+    color: var(--text);
+}
+.modal-content h3 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: 1.35rem;
+}
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.modal-buttons button {
+    flex: 1;
+}
+
+/* Editable transcription box styles */
+.editable-transcription {
+    width: 100%;
+    background: var(--card-strong);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.95rem;
+    resize: vertical;
+}
+

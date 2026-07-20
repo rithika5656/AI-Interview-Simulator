@@ -6,14 +6,16 @@
     const defaultBaseUrl = `${defaultProtocol}//${defaultHost}:5000/api`;
     const defaultSocketUrl = `${defaultProtocol}//${defaultHost}:5000`;
     
-    const apiBaseUrl = window.__HIREVISION_API_BASE__
+    const apiBaseUrl = window.HireVisionConfig?.apiBaseUrl
+        || window.__HIREVISION_API_BASE__
         || localStorage.getItem('hirevisionApiBaseUrl')
         || (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_API_URL)
         || (typeof process !== 'undefined' && process.env?.REACT_APP_API_URL)
         // Fallback - user must replace this with their deployed backend URL
         || defaultBaseUrl;
 
-    const socketUrl = window.__HIREVISION_SOCKET_URL__
+    const socketUrl = window.HireVisionConfig?.socketUrl
+        || window.__HIREVISION_SOCKET_URL__
         || localStorage.getItem('hirevisionSocketUrl')
         || (typeof process !== 'undefined' && process.env?.NEXT_PUBLIC_SOCKET_URL)
         || (typeof process !== 'undefined' && process.env?.REACT_APP_SOCKET_URL)
@@ -25,7 +27,6 @@
             method: options.method || 'GET',
             headers: options.headers,
             body: options.body,
-            credentials: 'include',
         });
 
         let payload;

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Load Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
 </head>
 <body class="theme-dark">
     <div id="toastContainer" class="toast-container"></div>
@@ -24,7 +26,15 @@
                 </div>
             </div>
 
-
+            <!-- Active User Profile Card -->
+            <div id="userProfileCard" class="user-profile-card">
+                <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
+                <div class="user-details">
+                    <strong id="activeUserName">Demo Student</strong>
+                    <span id="activeUserRole">student</span>
+                </div>
+                <button id="switchUserBtn" class="btn btn-icon" title="Sign In / Switch User"><i class="fa-solid fa-user-pen"></i></button>
+            </div>
 
             <nav class="sidebar-nav">
                 <button data-view="dashboardView" class="nav-item active"><i class="fa-solid fa-house"></i> Dashboard</button>
@@ -51,6 +61,11 @@
                     <h2>Prepare. Practice. Perform.</h2>
                 </div>
                 <div class="topbar-actions">
+                    <!-- Backend Status Indicator -->
+                    <div id="backendStatus" class="backend-status status-connecting">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Checking Backend...</span>
+                    </div>
                     <button id="themeToggle" class="btn btn-secondary" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
                     <button id="startLegacyInterviewBtn" class="btn btn-primary"><i class="fa-solid fa-video"></i> Start HR Interview</button>
                 </div>
@@ -198,16 +213,18 @@
                         <h3>Coding Assessment</h3>
                         <div class="module-controls">
                             <select id="codingLanguage">
-                                <option>Java</option>
-                                <option selected>Python</option>
-                                <option>C++</option>
-                                <option>JavaScript</option>
+                                <option value="Java">Java</option>
+                                <option value="Python" selected>Python</option>
+                                <option value="C++">C++</option>
+                                <option value="JavaScript">JavaScript</option>
                             </select>
                             <input id="codingProblem" type="text" value="Two Sum" placeholder="Problem statement">
                         </div>
-                        <textarea id="codingEditor" rows="18">def two_sum(nums, target):
-    return []</textarea>
-                        <button id="codingReviewBtn" class="btn btn-primary">Run AI Code Review</button>
+                        <div id="codingEditorContainer" style="height: 380px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 15px 0;"></div>
+                        <div class="control-row">
+                            <button id="codingRunBtn" class="btn btn-secondary"><i class="fa-solid fa-play"></i> Run Code</button>
+                            <button id="codingReviewBtn" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Code & Review</button>
+                        </div>
                     </section>
                     <section class="panel-card" id="codingResult">
                         <h3>Hidden Test Cases and Review</h3>
@@ -316,8 +333,25 @@
                         <button id="technicalInterviewGenerate" class="btn btn-primary">Generate Adaptive Question</button>
                     </section>
                     <section class="panel-card" id="technicalInterviewResult">
-                        <h3>Adaptive Question</h3>
-                        <p class="muted">Question depends on selected technology, resume skills, and job description.</p>
+                        <h3>Adaptive Question Terminal</h3>
+                        <div id="techQuestionBox" style="display:none">
+                            <div class="question-display">
+                                <h4 id="techQuestionText"></h4>
+                                <p class="muted" style="margin-top: 10px;"><em>Hint: <span id="techQuestionHint"></span></em></p>
+                            </div>
+                            <div class="interview-shell" style="margin-top: 20px;">
+                                <div class="control-row">
+                                    <span id="techRecordingIndicator" class="record-indicator" style="display:none"></span>
+                                    <button id="techRecordBtn" class="btn btn-secondary">Start Recording</button>
+                                    <button id="techStopBtn" class="btn btn-secondary" disabled>Stop Recording</button>
+                                </div>
+                            </div>
+                            <textarea id="techResponseText" rows="6" placeholder="Speak or type your answer here..." style="width:100%; margin-top: 15px;"></textarea>
+                            <button id="techSubmitBtn" class="btn btn-primary" style="margin-top: 15px; width: 100%;">Submit Technical Answer</button>
+                        </div>
+                        <div id="techResultDisplay">
+                            <p class="muted">Generate an adaptive question using the left panel, then record/type and submit your answer for real-time AI feedback.</p>
+                        </div>
                     </section>
                 </div>
             </section>
@@ -349,20 +383,56 @@
                 </section>
             </section>
 
-
-
             <section id="profileView" class="view">
-                <section class="panel-card">
-                    <h3>Student Profile</h3>
-                    <div id="profileResult"></div>
-                </section>
+                <div class="grid grid-2">
+                    <section class="panel-card">
+                        <h3>Student Profile & History</h3>
+                        <div id="profileResult"></div>
+                    </section>
+                    <section class="panel-card">
+                        <h3>Edit Student Profile</h3>
+                        <form id="profileEditForm" class="stack-form">
+                            <label>Full Name</label>
+                            <input type="text" id="profileName" required>
+                            <label>Email Address</label>
+                            <input type="email" id="profileEmail" required>
+                            <label>Target Job Role</label>
+                            <input type="text" id="profileTargetRole" placeholder="e.g. Software Engineer">
+                            <label>Key Skills (comma-separated)</label>
+                            <input type="text" id="profileSkills" placeholder="e.g. Python, React, SQL">
+                            <label>Achievements (comma-separated)</label>
+                            <input type="text" id="profileAchievements" placeholder="e.g. Hackathon Winner, AWS Certified">
+                            <button type="submit" class="btn btn-primary">Save Profile</button>
+                        </form>
+                    </section>
+                </div>
             </section>
         </main>
     </div>
 
+    <!-- Simple Registration / Sign-In Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <h3>Sign In / Create Profile</h3>
+            <p>Create or load a custom student profile to save your resume score, test histories, and dashboard metrics.</p>
+            <form id="authForm" class="stack-form">
+                <input type="text" id="authName" placeholder="Full Name" required>
+                <input type="email" id="authEmail" placeholder="Email Address" required>
+                <select id="authRole">
+                    <option value="student" selected>Student</option>
+                    <option value="administrator">Administrator</option>
+                </select>
+                <input type="text" id="authTargetRole" placeholder="Target Job Role (e.g. Software Engineer)">
+                <div class="modal-buttons">
+                    <button type="submit" class="btn btn-primary">Save & Sign In</button>
+                    <button type="button" id="closeAuthBtn" class="btn btn-secondary">Use Default</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
     <script src="apiClient.js"></script>
     <script src="app.js"></script>
-</body>
-</html>
 </body>
 </html>

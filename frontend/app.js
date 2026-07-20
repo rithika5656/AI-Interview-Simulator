@@ -1,11 +1,12 @@
 
 const apiClient = window.HireVisionApiClient || {};
-const API_URL = apiClient.baseUrl || `${window.location.protocol}//${window.location.hostname}:5000/api`;
+const API_URL = apiClient.baseUrl || (window.HireVisionConfig?.apiBaseUrl) || `${window.location.protocol}//${window.location.hostname}:5000/api`;
 const socket = window.io && window.location.protocol !== 'file:'
-    ? io(apiClient.socketUrl || `${window.location.protocol}//${window.location.hostname}:5000`)
+    ? io(apiClient.socketUrl || (window.HireVisionConfig?.socketUrl) || `${window.location.protocol}//${window.location.hostname}:5000`)
     : null;
 
 const state = {
+    userId: localStorage.getItem('hirevisionUserId') || 'demo_student',
     currentInterviewId: null,
     questionCount: 0,
     mediaRecorder: null,
@@ -15,6 +16,9 @@ const state = {
     charts: {},
     resumeData: null,
     profileMode: localStorage.getItem('hirevisionProfileMode') || 'student',
+    editor: null, // Monaco editor instance
+    currentTechQuestion: '',
+    currentTechTechnology: 'Python'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,10 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
     bindModuleForms();
     bindLegacyInterview();
     bindTechnicalInterview();
+    bindAuthEvents();
+    bindProfileEdit();
     hydrateSelectors();
     restoreTheme();
+    updateActiveUserProfileUI();
     showView('dashboardView');
+    checkBackendHealth();
     loadAllPanels();
+    setTimeout(initMonacoEditor, 500); // Load Monaco Editor
 });
 
 function $(selector, root = document) {
@@ -42,6 +51,11 @@ function showView(viewId) {
     const target = $(`#${viewId}`);
     if (target) target.classList.add('active');
     $all('[data-view]').forEach((button) => button.classList.toggle('active', button.dataset.view === viewId));
+    
+    // Trigger editor layout recalculation when Coding Assessment tab is clicked
+    if (viewId === 'codingView' && state.editor) {
+        setTimeout(() => state.editor.layout(), 100);
+    }
 }
 
 function bindNavigation() {
@@ -83,8 +97,11 @@ function bindModuleForms() {
     const gdBtn = $('#gdSimulateBtn');
     if (gdBtn) gdBtn.addEventListener('click', simulateGD);
 
-    const codingBtn = $('#codingReviewBtn');
-    if (codingBtn) codingBtn.addEventListener('click', reviewCoding);
+    const codingRunBtn = $('#codingRunBtn');
+    if (codingRunBtn) codingRunBtn.addEventListener('click', runCoding);
+
+    const codingReviewBtn = $('#codingReviewBtn');
+    if (codingReviewBtn) codingReviewBtn.addEventListener('click', reviewCoding);
 
     const companySelect = $('#companySelect');
     if (companySelect) companySelect.addEventListener('change', () => loadCompanyTrack(companySelect.value));
@@ -116,6 +133,9 @@ function bindLegacyInterview() {
 function bindTechnicalInterview() {
     const generateBtn = $('#technicalInterviewGenerate');
     if (generateBtn) generateBtn.addEventListener('click', generateTechnicalInterviewQuestion);
+    
+    const submitBtn = $('#techSubmitBtn');
+    if (submitBtn) submitBtn.addEventListener('click', submitTechnicalAnswer);
 }
 
 function hydrateSelectors() {
@@ -158,10 +178,11 @@ async function apiPost(path, payload, options = {}) {
         return window.HireVisionApiClient.post(path, payload, { headers: options.headers });
     }
 
+    const isFormData = payload instanceof FormData || options.body instanceof FormData;
     const response = await fetch(`${API_URL}${path}`, {
         method: 'POST',
-        headers: options.headers || { 'Content-Type': 'application/json' },
-        body: options.body || JSON.stringify(payload || {}),
+        headers: options.headers || (isFormData ? undefined : { 'Content-Type': 'application/json' }),
+        body: options.body || (isFormData ? payload : JSON.stringify(payload || {})),
     });
     const body = await safeJson(response);
     if (!response.ok) throw new Error(body.error || 'Request failed');
@@ -177,7 +198,7 @@ async function safeJson(response) {
 }
 
 function loadingCard(message) {
-    return `<div class="state-card">${message}</div>`;
+    return `<div class="state-card"><i class="fa-solid fa-circle-notch fa-spin"></i> &nbsp; ${message}</div>`;
 }
 
 function errorCard(title, message) {
@@ -193,7 +214,7 @@ async function loadDashboard() {
     if (!panel) return;
     panel.innerHTML = loadingCard('Loading dashboard metrics...');
     try {
-        const data = await apiGet('/dashboard/overview?user_id=demo_student');
+        const data = await apiGet(`/dashboard/overview?user_id=${state.userId}`);
         renderDashboard(data);
     } catch (error) {
         panel.innerHTML = errorCard('Dashboard failed', error.message);
@@ -296,7 +317,7 @@ async function handleResumeUpload(event) {
     event.preventDefault();
     const output = $('#resumeResult');
     const formData = new FormData();
-    formData.append('user_id', 'demo_student');
+    formData.append('user_id', state.userId);
 
     const fileInput = $('#resumeFile');
     const textInput = $('#resumeText');
@@ -380,10 +401,10 @@ async function submitModule(moduleKey) {
 
     if (result) result.innerHTML = loadingCard('Submitting answers...');
     try {
-        const data = await apiPost(`/${moduleKey}/submit`, { questions, answers });
+        const data = await apiPost(`/${moduleKey}/submit`, { user_id: state.userId, questions, answers, topic: questions[0]?.topic || 'General', difficulty: questions[0]?.difficulty || 'medium' });
         const reviewedQuestions = questions.map((question, index) => {
             const selectedIndex = answers[index];
-            const correctIndex = Number.isInteger(question.correct_index) ? question.correct_index : null;
+            const correctIndex = Number.isInteger(question.correct_index) ? question.correct_index : (Number.isInteger(question.answer_index) ? question.answer_index : null);
             return {
                 question: question.question,
                 selectedAnswer: selectedIndex !== null && selectedIndex !== undefined ? question.options?.[selectedIndex] : 'Not answered',
@@ -420,25 +441,37 @@ async function submitModule(moduleKey) {
 
 async function reviewCoding() {
     const result = $('#codingResult');
-    if (result) result.innerHTML = loadingCard('Reviewing code...');
+    if (result) result.innerHTML = loadingCard('Submitting code for deep AI review...');
     try {
+        const codeText = state.editor ? state.editor.getValue() : ($('#codingEditor')?.value || '');
         const data = await apiPost('/coding/review', {
+            user_id: state.userId,
             language: $('#codingLanguage')?.value || 'Python',
-            code: $('#codingEditor')?.value || '',
+            code: codeText,
             problem_statement: $('#codingProblem')?.value || '',
         });
         if (result) {
             result.innerHTML = `
                 <div class="analysis-card success">
-                    <h3>Code Review</h3>
-                    <p><strong>Score:</strong> ${Number(data.score || 0).toFixed(1)}%</p>
-                    <p><strong>Runtime:</strong> ${data.runtime}</p>
-                    <p><strong>Complexity:</strong> ${data.complexity_analysis}</p>
-                    <p><strong>AI Review:</strong> ${data.ai_review}</p>
-                    <ul>${(data.hidden_tests || []).map((test) => `<li>${test.input} - ${test.status}</li>`).join('')}</ul>
+                    <h3>AI Code Review Report</h3>
+                    <p><strong>Evaluation Score:</strong> ${Number(data.score || 0).toFixed(1)}%</p>
+                    <p><strong>Complexity:</strong> ${data.complexity_analysis || 'N/A'}</p>
+                    <p><strong>Est. Runtime:</strong> ${data.runtime || 'N/A'}</p>
+                    <p><strong>AI Critique:</strong> ${data.ai_review}</p>
+                    
+                    <h4>Dry Run Test Cases</h4>
+                    <ul>${(data.hidden_tests || []).map((test) => `
+                        <li>
+                            <strong>Input:</strong> ${test.input}<br>
+                            <strong>Expected:</strong> ${test.expected} | <strong>Actual:</strong> ${test.actual || 'N/A'}<br>
+                            <strong>Status:</strong> <span class="status-text ${test.status === 'passed' ? 'success' : 'error'}">${test.status.toUpperCase()}</span>
+                        </li>
+                    `).join('')}</ul>
                 </div>
             `;
         }
+        loadProfile();
+        loadDashboard();
     } catch (error) {
         if (result) result.innerHTML = errorCard('Code review failed', error.message);
     }
@@ -451,7 +484,7 @@ async function simulateGD() {
         const data = await apiPost('/gd/simulate', {
             topic: $('#gdTopic')?.value || 'AI in education',
             transcript: $('#gdTranscript')?.value || '',
-            user_id: 'demo_student',
+            user_id: state.userId,
         });
         if (result) {
             result.innerHTML = `
@@ -486,9 +519,32 @@ async function loadCompanyTrack(company) {
                 <p><strong>Difficulty:</strong> ${data.difficulty}</p>
                 <p><strong>Focus Areas:</strong> ${(data.focus_areas || []).join(', ')}</p>
                 <p>${data.interview_focus}</p>
-                <div class="grid grid-2">
-                    <div class="panel-subcard"><h4>Aptitude</h4>${(data.modules?.aptitude || []).map((q) => `<p>${q.question}</p>`).join('')}</div>
-                    <div class="panel-subcard"><h4>Technical</h4>${(data.modules?.technical || []).map((q) => `<p>${q.question}</p>`).join('')}</div>
+
+                <h4>Interview Process Rounds</h4>
+                <ul class="bullet-list">
+                    ${(data.interview_patterns || []).map(round => `<li>${round}</li>`).join('')}
+                </ul>
+
+                <div class="grid grid-2" style="margin-top: 15px;">
+                    <div class="panel-subcard">
+                        <h4>Aptitude Questions</h4>
+                        ${(data.modules?.aptitude || []).map((q) => `<p>• ${q.question}</p>`).join('')}
+                    </div>
+                    <div class="panel-subcard">
+                        <h4>Technical Core</h4>
+                        ${(data.modules?.technical || []).map((q) => `<p>• ${q.question}</p>`).join('')}
+                    </div>
+                </div>
+
+                <div class="grid grid-2" style="margin-top: 15px;">
+                    <div class="panel-subcard">
+                        <h4>Company Specific Coding</h4>
+                        ${(data.coding_problems || []).map((p) => `<p><strong>${p.title}:</strong> ${p.desc}</p>`).join('')}
+                    </div>
+                    <div class="panel-subcard">
+                        <h4>Sample HR Questions</h4>
+                        ${(data.hr_questions || []).map((q) => `<p>• ${q}</p>`).join('')}
+                    </div>
                 </div>
             </div>
         `;
@@ -501,7 +557,7 @@ async function loadAnalytics() {
     const result = $('#analyticsResult');
     if (!result) return;
     try {
-        const data = await apiGet('/analytics/summary?user_id=demo_student');
+        const data = await apiGet(`/analytics/summary?user_id=${state.userId}`);
         result.innerHTML = `
             <div class="grid grid-2">
                 <div class="panel-subcard"><h4>Daily Progress</h4><p>${(data.daily_progress || []).join(' → ')}</p></div>
@@ -519,7 +575,7 @@ async function loadCoach() {
     const result = $('#coachResult');
     if (!result) return;
     try {
-        const data = await apiGet('/career-coach?user_id=demo_student');
+        const data = await apiGet(`/career-coach?user_id=${state.userId}`);
         result.innerHTML = `
             <div class="analysis-card success">
                 <h3>AI Career Coach</h3>
@@ -539,20 +595,40 @@ async function loadProfile() {
     const result = $('#profileResult');
     if (!result) return;
     try {
-        const data = await apiGet('/profile/demo_student');
+        const data = await apiGet(`/profile/${state.userId}`);
+        
+        // Populate edit profile fields
+        const profileName = $('#profileName');
+        const profileEmail = $('#profileEmail');
+        const profileTargetRole = $('#profileTargetRole');
+        const profileSkills = $('#profileSkills');
+        const profileAchievements = $('#profileAchievements');
+        if (profileName) profileName.value = data.name || '';
+        if (profileEmail) profileEmail.value = data.email || '';
+        if (profileTargetRole) profileTargetRole.value = data.target_role || '';
+        if (profileSkills) profileSkills.value = (data.skills || []).join(', ');
+        if (profileAchievements) profileAchievements.value = (data.achievements || []).join(', ');
+
         result.innerHTML = `
             <div class="analysis-card success">
-                <h3>Student Profile</h3>
+                <h3>Student Profile: ${data.name || 'Practice Student'}</h3>
+                <p><strong>Email:</strong> ${data.email || 'N/A'}</p>
+                <p><strong>Target Role:</strong> ${data.target_role || 'N/A'}</p>
+                <p><strong>Skills:</strong> ${(data.skills || []).join(', ') || 'None added yet'}</p>
+                <p><strong>Achievements:</strong> ${(data.achievements || []).join(', ') || 'None added yet'}</p>
                 <p><strong>Placement Score:</strong> ${Number(data.placement_score || 0).toFixed(1)}%</p>
                 <p><strong>Resume:</strong> ${data.resume?.filename || 'Not uploaded yet'}</p>
-                <p><strong>Interview History:</strong> ${data.interview_history?.length || 0}</p>
-                <p><strong>Coding History:</strong> ${data.coding_history?.length || 0}</p>
-                <p><strong>Aptitude History:</strong> ${data.aptitude_history?.length || 0}</p>
+                <p><strong>Interview Practice Sessions:</strong> ${data.interview_history?.length || 0}</p>
+                <p><strong>Coding Practice Submissions:</strong> ${data.coding_history?.length || 0}</p>
+                <p><strong>Aptitude Tests:</strong> ${data.aptitude_history?.length || 0}</p>
+                <p><strong>Logical Tests:</strong> ${data.logical_history?.length || 0}</p>
+                <p><strong>Verbal Tests:</strong> ${data.verbal_history?.length || 0}</p>
+                <p><strong>Technical MCQ Tests:</strong> ${data.technical_mcq_history?.length || 0}</p>
                 <p><strong>GD History:</strong> ${data.gd_history?.length || 0}</p>
             </div>
             <div class="analysis-card">
-                <h3>Student Progress</h3>
-                <p>This profile is focused on exam readiness, practice history, and placement score.</p>
+                <h3>Student Progress Report</h3>
+                <p>This profile tracks overall assessment history, placement readiness, and custom achievements to build a resume recommendation.</p>
             </div>
         `;
     } catch (error) {
@@ -589,13 +665,14 @@ async function startInterview() {
             interview_id: state.currentInterviewId,
             job_role: jobRole,
             interview_name: interviewName,
+            user_id: state.userId
         });
         $('#questionText').textContent = data.question;
         $('#questionNumber').textContent = state.questionCount;
         showView('legacyInterviewView');
         await startWebcam();
     } catch (error) {
-        showToast(`Error starting interview: ${error.message}`);
+        showToast(`Error starting interview: ${error.message}`, 'error');
     }
 }
 
@@ -610,7 +687,7 @@ async function startWebcam() {
         state.mediaRecorder.ondataavailable = (event) => {
             if (!event.data || event.data.size === 0) return;
             state.audioChunks.push(event.data);
-            if (!socket) return;
+            if (!socket || socket.disconnected) return;
 
             const reader = new FileReader();
             reader.onload = () => {
@@ -625,53 +702,93 @@ async function startWebcam() {
         if (recordBtn) recordBtn.disabled = false;
         if (stopBtn) stopBtn.disabled = true;
     } catch (error) {
-        showToast('Please allow access to camera and microphone');
+        showToast('Camera and microphone enabled. Press Start to practice speaking.', 'info');
+        // Fallback: Enable typing response if camera/microphone access throws error
+        const recordBtn = $('#recordBtn');
+        if (recordBtn) recordBtn.disabled = true;
+        
+        // Turn transcription box into editable textarea
+        const transcription = $('#transcriptionText');
+        if (transcription && transcription.tagName !== 'TEXTAREA') {
+            const textarea = document.createElement('textarea');
+            textarea.id = 'transcriptionText';
+            textarea.className = 'editable-transcription';
+            textarea.placeholder = 'Type your practicing answer here since camera/microphone is unavailable...';
+            transcription.replaceWith(textarea);
+        }
+        
+        const submitBtn = $('#submitBtn');
+        if (submitBtn) submitBtn.disabled = false;
     }
 }
 
 function toggleRecording() {
-    if (!state.mediaRecorder) return;
-
-    if (state.mediaRecorder.state === 'inactive') {
+    const recordBtn = $('#recordBtn');
+    const stopBtn = $('#stopBtn');
+    const indicator = $('#recordingIndicator');
+    
+    if (state.mediaRecorder && state.mediaRecorder.state === 'inactive') {
         state.mediaRecorder.start(500);
-        const recordBtn = $('#recordBtn');
-        const stopBtn = $('#stopBtn');
-        const indicator = $('#recordingIndicator');
         if (recordBtn) recordBtn.disabled = true;
         if (stopBtn) stopBtn.disabled = false;
         if (indicator) indicator.style.display = 'block';
     }
+    
+    // Start local SpeechRecognition fallback
+    startHrSpeech();
 }
 
 function stopRecording() {
-    if (!state.mediaRecorder || state.mediaRecorder.state !== 'recording') return;
-
-    state.mediaRecorder.stop();
     const recordBtn = $('#recordBtn');
     const stopBtn = $('#stopBtn');
     const submitBtn = $('#submitBtn');
     const indicator = $('#recordingIndicator');
+
+    if (state.mediaRecorder && state.mediaRecorder.state === 'recording') {
+        state.mediaRecorder.stop();
+    }
+    
     if (recordBtn) recordBtn.disabled = false;
     if (stopBtn) stopBtn.disabled = true;
     if (submitBtn) submitBtn.disabled = false;
     if (indicator) indicator.style.display = 'none';
+    
+    // Stop local SpeechRecognition
+    stopHrSpeech();
 }
 
 async function submitResponse() {
-    if (state.audioChunks.length === 0) {
-        showToast('Please record your response first');
+    const transcription = $('#transcriptionText');
+    const answerText = transcription ? (transcription.value || transcription.textContent || '') : '';
+    
+    if (!answerText.trim() && state.audioChunks.length === 0) {
+        showToast('Please record or type your response first', 'warning');
         return;
     }
 
     try {
-        const blob = new Blob(state.audioChunks, { type: 'audio/webm' });
         const formData = new FormData();
         formData.append('interview_id', state.currentInterviewId);
-        formData.append('audio', blob, 'response.webm');
-        formData.append('text', $('#transcriptionText')?.textContent || '');
+        
+        if (state.audioChunks.length > 0) {
+            const blob = new Blob(state.audioChunks, { type: 'audio/webm' });
+            formData.append('audio', blob, 'response.webm');
+        }
+        
+        formData.append('text', answerText);
 
         const data = await apiPost('/submit-response', formData);
-        $('#transcriptionText').textContent = data.immediate_feedback.text;
+        
+        // Show immediate feedback
+        const transcriptionTextElement = $('#transcriptionText');
+        if (transcriptionTextElement) {
+            if (transcriptionTextElement.tagName === 'TEXTAREA') {
+                transcriptionTextElement.value = data.immediate_feedback.text;
+            } else {
+                transcriptionTextElement.textContent = data.immediate_feedback.text;
+            }
+        }
+        
         $('#confidenceScore').textContent = data.immediate_feedback.sentiment.confidence.toFixed(2);
         $('#fillerCount').textContent = data.immediate_feedback.filler_words.length;
         $('#sentimentType').textContent = data.immediate_feedback.sentiment.sentiment_type;
@@ -681,6 +798,15 @@ async function submitResponse() {
         if (state.questionCount <= 5) {
             $('#questionNumber').textContent = state.questionCount;
             $('#questionText').textContent = data.next_question;
+            
+            // Clear transcription text for next question
+            if (transcriptionTextElement) {
+                if (transcriptionTextElement.tagName === 'TEXTAREA') {
+                    transcriptionTextElement.value = '';
+                } else {
+                    transcriptionTextElement.textContent = '';
+                }
+            }
         } else {
             await endInterview();
         }
@@ -689,7 +815,7 @@ async function submitResponse() {
         const submitBtn = $('#submitBtn');
         if (submitBtn) submitBtn.disabled = true;
     } catch (error) {
-        showToast(`Error submitting response: ${error.message}`);
+        showToast(`Error submitting response: ${error.message}`, 'error');
     }
 }
 
@@ -698,8 +824,14 @@ async function endInterview() {
         const data = await apiPost('/end-interview', { interview_id: state.currentInterviewId });
         displayResults(data.report);
         showView('legacyResultsView');
+        
+        // Stop stream if practicing
+        if (state.stream) {
+            state.stream.getTracks().forEach(track => track.stop());
+            state.stream = null;
+        }
     } catch (error) {
-        showToast(`Error generating report: ${error.message}`);
+        showToast(`Error generating report: ${error.message}`, 'error');
     }
 }
 
@@ -724,7 +856,14 @@ function displayResults(report) {
 function startNewInterview() {
     $('#jobRole').value = 'Software Engineer';
     $('#interviewName').value = '';
-    $('#transcriptionText').textContent = '';
+    const transcription = $('#transcriptionText');
+    if (transcription) {
+        if (transcription.tagName === 'TEXTAREA') {
+            transcription.value = '';
+        } else {
+            transcription.textContent = '';
+        }
+    }
     $('#recordBtn').disabled = false;
     $('#stopBtn').disabled = true;
     state.audioChunks = [];
@@ -751,9 +890,12 @@ function downloadReport() {
     document.body.removeChild(link);
 }
 
+// Interactive Technical Interview
 async function generateTechnicalInterviewQuestion() {
-    const result = $('#technicalInterviewResult');
-    if (result) result.innerHTML = loadingCard('Generating adaptive question...');
+    const result = $('#techResultDisplay');
+    const questionBox = $('#techQuestionBox');
+    if (result) result.innerHTML = loadingCard('Generating adaptive technical question...');
+    if (questionBox) questionBox.style.display = 'none';
 
     try {
         const resumeSkills = ($('#technicalInterviewSkills')?.value || '').split(',').map((item) => item.trim()).filter(Boolean);
@@ -762,26 +904,403 @@ async function generateTechnicalInterviewQuestion() {
             resume_skills: resumeSkills,
             job_description: $('#technicalInterviewJobDescription')?.value || '',
         });
+        
+        state.currentTechQuestion = data.question;
+        state.currentTechTechnology = data.technology;
+        
+        $('#techQuestionText').textContent = data.question;
+        $('#techQuestionHint').textContent = data.follow_up_hint;
+        
+        if (questionBox) questionBox.style.display = 'block';
+        if (result) result.innerHTML = '';
+        
+        // Reset answer field
+        if ($('#techResponseText')) $('#techResponseText').value = '';
+        initTechSpeech();
+    } catch (error) {
+        if (result) result.innerHTML = errorCard('Technical question failed', error.message);
+    }
+}
+
+let techSpeechRecognition = null;
+function initTechSpeech() {
+    const recordBtn = $('#techRecordBtn');
+    const stopBtn = $('#techStopBtn');
+    const indicator = $('#techRecordingIndicator');
+    const textarea = $('#techResponseText');
+    
+    if (!recordBtn) return;
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        recordBtn.style.display = 'none';
+        stopBtn.style.display = 'none';
+        return;
+    }
+    
+    if (!techSpeechRecognition) {
+        techSpeechRecognition = new SpeechRecognition();
+        techSpeechRecognition.continuous = true;
+        techSpeechRecognition.interimResults = true;
+        techSpeechRecognition.lang = 'en-US';
+        
+        techSpeechRecognition.onstart = () => {
+            if (indicator) indicator.style.display = 'inline-block';
+            recordBtn.disabled = true;
+            stopBtn.disabled = false;
+        };
+        
+        techSpeechRecognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                }
+            }
+            if (textarea && finalTranscript) {
+                textarea.value += (textarea.value ? ' ' : '') + finalTranscript;
+            }
+        };
+        
+        techSpeechRecognition.onend = () => {
+            if (indicator) indicator.style.display = 'none';
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+        };
+        
+        techSpeechRecognition.onerror = (event) => {
+            showToast(`Speech recognition warning: ${event.error}`, 'warning');
+        };
+    }
+    
+    recordBtn.onclick = () => {
+        try {
+            techSpeechRecognition.start();
+        } catch (e) {
+            techSpeechRecognition.stop();
+        }
+    };
+    
+    stopBtn.onclick = () => {
+        techSpeechRecognition.stop();
+    };
+}
+
+async function submitTechnicalAnswer() {
+    const result = $('#techResultDisplay');
+    const responseText = $('#techResponseText')?.value || '';
+    if (!responseText.trim()) {
+        showToast('Please type or speak your answer before submitting', 'warning');
+        return;
+    }
+
+    if (result) result.innerHTML = loadingCard('Submitting answer for AI evaluation...');
+    try {
+        const data = await apiPost('/technical-interview/submit', {
+            user_id: state.userId,
+            technology: state.currentTechTechnology || 'Python',
+            question: state.currentTechQuestion || '',
+            response: responseText
+        });
+        
         if (result) {
             result.innerHTML = `
                 <div class="analysis-card success">
-                    <h3>${data.technology} Interview Question</h3>
-                    <p>${data.question}</p>
-                    <p><strong>Hint:</strong> ${data.follow_up_hint}</p>
+                    <h3>AI Technical Assessment Report</h3>
+                    <p><strong>Clarity Score:</strong> ${Number(data.clarity_score || 0).toFixed(1)}/100</p>
+                    <p><strong>Technical Depth Score:</strong> ${Number(data.depth_score || 0).toFixed(1)}/100</p>
+                    <p><strong>Overall Score:</strong> ${Number(data.score || 0).toFixed(1)}/100</p>
+                    <p><strong>AI Critique:</strong> ${data.feedback}</p>
+                    <p><strong>Key Strengths:</strong> ${(data.key_strengths || []).join(', ')}</p>
+                    <p><strong>Areas for Improvement:</strong> ${(data.improvement_areas || []).join(', ')}</p>
+                </div>
+            `;
+            const questionBox = $('#techQuestionBox');
+            if (questionBox) questionBox.style.display = 'none';
+        }
+        loadProfile();
+        loadDashboard();
+    } catch (error) {
+        if (result) result.innerHTML = errorCard('Evaluation failed', error.message);
+    }
+}
+
+// Local Speech Recognition (Web Speech API) for HR Interview
+let hrSpeechRecognition = null;
+function startHrSpeech() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+
+    const transcription = $('#transcriptionText');
+    if (!transcription) return;
+
+    if (!hrSpeechRecognition) {
+        hrSpeechRecognition = new SpeechRecognition();
+        hrSpeechRecognition.continuous = true;
+        hrSpeechRecognition.interimResults = true;
+        hrSpeechRecognition.lang = 'en-US';
+
+        hrSpeechRecognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                }
+            }
+            if (finalTranscript) {
+                if (transcription.tagName === 'TEXTAREA') {
+                    transcription.value += (transcription.value ? ' ' : '') + finalTranscript;
+                } else {
+                    transcription.textContent += (transcription.textContent ? ' ' : '') + finalTranscript;
+                }
+            }
+        };
+
+        hrSpeechRecognition.onerror = (e) => {
+            console.log('HR Speech recognition error:', e.error);
+        };
+    }
+
+    try {
+        hrSpeechRecognition.start();
+    } catch (e) {
+        hrSpeechRecognition.stop();
+    }
+}
+
+function stopHrSpeech() {
+    if (hrSpeechRecognition) {
+        hrSpeechRecognition.stop();
+    }
+}
+
+// Monaco Editor Integration
+function initMonacoEditor() {
+    if (typeof require === 'undefined') return;
+    require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs' } });
+    require(['vs/editor/editor.main'], function () {
+        const container = document.getElementById('codingEditorContainer');
+        if (!container) return;
+        state.editor = monaco.editor.create(container, {
+            value: 'def two_sum(nums, target):\n    return []',
+            language: 'python',
+            theme: 'vs-dark',
+            automaticLayout: true,
+            fontSize: 14,
+            minimap: { enabled: false }
+        });
+        
+        // Listen to language selector changes
+        const codingLangSelect = $('#codingLanguage');
+        if (codingLangSelect) {
+            codingLangSelect.addEventListener('change', (e) => {
+                if (!state.editor) return;
+                const lang = e.target.value;
+                const model = state.editor.getModel();
+                let code = '';
+                if (lang === 'Python') {
+                    code = 'def two_sum(nums, target):\n    return []';
+                } else if (lang === 'Java') {
+                    code = 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        return new int[0];\n    }\n}';
+                } else if (lang === 'C++') {
+                    code = 'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        return {};\n    }\n};';
+                } else if (lang === 'JavaScript') {
+                    code = 'function twoSum(nums, target) {\n    return [];\n}';
+                }
+                state.editor.setValue(code);
+                const monacoLang = lang === 'C++' ? 'cpp' : lang.toLowerCase();
+                monaco.editor.setModelLanguage(model, monacoLang);
+            });
+        }
+    });
+}
+
+async function runCoding() {
+    const result = $('#codingResult');
+    if (result) result.innerHTML = loadingCard('Compiling and running sample test cases...');
+    try {
+        const codeText = state.editor ? state.editor.getValue() : '';
+        const data = await apiPost('/coding/review', {
+            user_id: state.userId,
+            language: $('#codingLanguage')?.value || 'Python',
+            code: codeText,
+            problem_statement: $('#codingProblem')?.value || '',
+        });
+        if (result) {
+            const passes = (data.hidden_tests || []).filter(t => t.status === 'passed').length;
+            const total = (data.hidden_tests || []).length;
+            result.innerHTML = `
+                <div class="analysis-card success">
+                    <h3>Run Outputs & Hidden Tests</h3>
+                    <p><strong>Status:</strong> ${passes === total ? 'All Tests Passed' : 'Some Tests Failed'}</p>
+                    <p><strong>Sample Cases:</strong> ${passes}/${total} passed</p>
+                    <p><strong>Estimated Complexity:</strong> ${data.complexity_analysis || 'N/A'}</p>
+                    <p><strong>Estimated Runtime:</strong> ${data.runtime || 'N/A'}</p>
+                    
+                    <h4>Execution Log</h4>
+                    <ul>${(data.hidden_tests || []).map((test) => `
+                        <li>
+                            <strong>Case:</strong> ${test.input}<br>
+                            <strong>Expected:</strong> ${test.expected} | <strong>Status:</strong> <span class="status-text ${test.status === 'passed' ? 'success' : 'error'}">${test.status.toUpperCase()}</span>
+                        </li>
+                    `).join('')}</ul>
                 </div>
             `;
         }
     } catch (error) {
-        if (result) result.innerHTML = errorCard('Technical interview failed', error.message);
+        if (result) result.innerHTML = errorCard('Run execution failed', error.message);
     }
 }
 
-function humanize(value) {
-    return value.replace(/_/g, ' ').replace(/\b\w/g, (match) => match.toUpperCase());
+// User Authentication Modal UI and Switch Profile
+function bindAuthEvents() {
+    const modal = $('#authModal');
+    const switchBtn = $('#switchUserBtn');
+    const closeBtn = $('#closeAuthBtn');
+    const form = $('#authForm');
+    
+    if (switchBtn) {
+        switchBtn.addEventListener('click', () => {
+            $('#authName').value = localStorage.getItem('hirevisionUserName') || '';
+            $('#authEmail').value = localStorage.getItem('hirevisionUserEmail') || '';
+            $('#authRole').value = localStorage.getItem('hirevisionUserRole') || 'student';
+            $('#authTargetRole').value = localStorage.getItem('hirevisionUserTargetRole') || 'Software Engineer';
+            modal.classList.add('active');
+        });
+    }
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    }
+    
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = $('#authName').value.trim();
+            const email = $('#authEmail').value.trim();
+            const role = $('#authRole').value;
+            const targetRole = $('#authTargetRole').value.trim();
+            const userId = 'user_' + email.replace(/[^a-zA-Z0-9]/g, '_');
+            
+            try {
+                // Save user on backend
+                await apiPost('/profile/save', {
+                    user_id: userId,
+                    name,
+                    email,
+                    role,
+                    target_role: targetRole,
+                    skills: [],
+                    achievements: []
+                });
+                
+                // Save locally
+                localStorage.setItem('hirevisionUserId', userId);
+                localStorage.setItem('hirevisionUserName', name);
+                localStorage.setItem('hirevisionUserEmail', email);
+                localStorage.setItem('hirevisionUserRole', role);
+                localStorage.setItem('hirevisionUserTargetRole', targetRole);
+                
+                state.userId = userId;
+                updateActiveUserProfileUI();
+                modal.classList.remove('active');
+                showToast('Profile switched successfully!', 'success');
+                
+                // Reload dashboard/profile datasets
+                loadAllPanels();
+            } catch (error) {
+                showToast(`Failed to register profile: ${error.message}`, 'error');
+            }
+        });
+    }
 }
 
-function formatDate(timestamp) {
-    return timestamp ? new Date(timestamp).toLocaleString() : 'Recent';
+function updateActiveUserProfileUI() {
+    const name = localStorage.getItem('hirevisionUserName') || 'Demo Student';
+    const role = localStorage.getItem('hirevisionUserRole') || 'student';
+    if ($('#activeUserName')) $('#activeUserName').textContent = name;
+    if ($('#activeUserRole')) $('#activeUserRole').textContent = role;
+}
+
+// Edit Profile Form Submit
+function bindProfileEdit() {
+    const form = $('#profileEditForm');
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = $('#profileName').value.trim();
+        const email = $('#profileEmail').value.trim();
+        const targetRole = $('#profileTargetRole').value.trim();
+        const skills = $('#profileSkills').value.split(',').map(s => s.trim()).filter(Boolean);
+        const achievements = $('#profileAchievements').value.split(',').map(s => s.trim()).filter(Boolean);
+        
+        try {
+            await apiPost('/profile/save', {
+                user_id: state.userId,
+                name,
+                email,
+                role: localStorage.getItem('hirevisionUserRole') || 'student',
+                target_role: targetRole,
+                skills,
+                achievements
+            });
+            
+            localStorage.setItem('hirevisionUserName', name);
+            localStorage.setItem('hirevisionUserEmail', email);
+            localStorage.setItem('hirevisionUserTargetRole', targetRole);
+            
+            updateActiveUserProfileUI();
+            showToast('Student profile updated successfully!', 'success');
+            loadProfile();
+            loadDashboard();
+        } catch (error) {
+            showToast(`Profile update failed: ${error.message}`, 'error');
+        }
+    });
+}
+
+// Backend Health Check Wakeup Retry
+let healthCheckInterval = null;
+async function checkBackendHealth() {
+    const badge = $('#backendStatus');
+    const alert = $('#systemAlert');
+    try {
+        // Strip /api prefix to hit raw health check
+        const response = await fetch(`${API_URL.replace(/\/api\/?$/, '')}/health`);
+        if (response.ok) {
+            if (badge) {
+                badge.className = 'backend-status status-online';
+                badge.querySelector('.status-text').textContent = 'Online';
+            }
+            if (alert) alert.hidden = true;
+            clearInterval(healthCheckInterval);
+            healthCheckInterval = null;
+        } else {
+            throw new Error();
+        }
+    } catch (e) {
+        if (badge) {
+            badge.className = 'backend-status status-connecting';
+            badge.querySelector('.status-text').textContent = 'Connecting...';
+        }
+        if (alert) {
+            alert.hidden = false;
+            alert.innerHTML = `
+                <div style="display:flex; align-items:center; gap:15px; width:100%">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size:1.5rem; color:var(--warning)"></i>
+                    <div>
+                        <strong>AI Backend is starting up</strong>
+                        <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: var(--muted);">The backend runs on an ephemeral Render instance. Waking it up (takes up to 50 seconds)...</p>
+                    </div>
+                </div>
+            `;
+        }
+        if (!healthCheckInterval) {
+            healthCheckInterval = setInterval(checkBackendHealth, 3000);
+        }
+    }
 }
 
 window.startInterview = startInterview;

@@ -33,6 +33,7 @@ TEST_TABLE_MAP = {
     "aptitude": "aptitude_tests",
     "logical": "logical_tests",
     "verbal": "verbal_tests",
+    "technical": "technical_tests",
     "technical-mcq": "technical_tests",
 }
 
@@ -192,6 +193,69 @@ def technical_interview_question():
 @placement_bp.route("/profile/<user_id>", methods=["GET"])
 def profile(user_id: str):
     return jsonify(build_profile(user_id))
+
+
+@placement_bp.route("/profile/save", methods=["POST"])
+def profile_save():
+    payload = request.get_json(silent=True) or {}
+    user_id = payload.get("user_id")
+    if not user_id:
+        return jsonify({"error": "User ID is required"}), 400
+    
+    name = payload.get("name", "Student")
+    email = payload.get("email")
+    role = payload.get("role", "student")
+    target_role = payload.get("target_role", "Software Engineer")
+    skills = payload.get("skills", [])
+    achievements = payload.get("achievements", [])
+    
+    from database.sqlite_store import upsert_user
+    upsert_user(
+        user_id=user_id,
+        name=name,
+        email=email,
+        role=role,
+        target_role=target_role,
+        skills_json=json.dumps(skills),
+        achievements_json=json.dumps(achievements)
+    )
+    
+    return jsonify({"success": True, "message": "Profile updated successfully"})
+
+
+@placement_bp.route("/technical-interview/submit", methods=["POST"])
+def technical_interview_submit():
+    payload = request.get_json(silent=True) or {}
+    user_id = payload.get("user_id", "demo_student")
+    technology = payload.get("technology", "Python")
+    question = payload.get("question", "")
+    response = payload.get("response", "")
+    
+    if not question.strip():
+        return jsonify({"error": "Question is required"}), 400
+        
+    from ai.hirevision_ai import evaluate_technical_response
+    result = evaluate_technical_response(technology, question, response)
+    
+    save_record("interviews", {
+        "id": str(uuid.uuid4()),
+        "user_id": user_id,
+        "interview_type": "technical",
+        "domain": technology,
+        "company": "General Practice",
+        "questions_json": json.dumps([question]),
+        "responses_json": json.dumps([response]),
+        "scores_json": json.dumps({
+            "overall": result.get("score", 70),
+            "communication": result.get("clarity_score", 70),
+            "technical": result.get("depth_score", 70)
+        }),
+        "transcript_json": json.dumps([{"question": question, "answer": response, "feedback": result.get("feedback", "")}]),
+        "created_at": _now(),
+        "updated_at": _now()
+    })
+    
+    return jsonify(result)
 
 
 def _extract_text_from_upload(uploaded_file) -> str:

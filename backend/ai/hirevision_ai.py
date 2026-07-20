@@ -219,3 +219,66 @@ def _fallback_resume_analysis(resume_text: str) -> dict[str, Any]:
         "missing_keywords": missing_keywords[:5],
         "suggestions": ["Add impact metrics to project bullets", "Include ATS-friendly keywords from the target role"],
     }
+
+
+def evaluate_coding_code(language: str, code: str, problem_statement: str) -> dict[str, Any]:
+    prompt = f"""
+Evaluate the following programming code.
+Language: {language}
+Problem Statement: {problem_statement}
+User Code:
+{code}
+
+Analyze the code and return a JSON object with these keys:
+- score: (number 0-100 based on correctness, efficiency, and formatting)
+- runtime: (string, e.g. "O(N)" or "O(N^2)")
+- complexity_analysis: (string, e.g. "Time: O(N), Space: O(N) because of hashing")
+- ai_review: (detailed critique of the approach and suggestions for improvement)
+- hidden_tests: (array of objects, each containing: "input" (string), "expected" (string), "actual" (string), "status" (string "passed" or "failed"))
+Make sure the hidden_tests represent real test cases for the problem, and evaluate how the user's code handles them.
+
+Return ONLY valid JSON.
+"""
+    fallback = {
+        "score": 50,
+        "runtime": "O(N^2)",
+        "complexity_analysis": "Time: O(N^2), Space: O(1)",
+        "ai_review": "Could not contact AI evaluator. Please ensure your code has proper syntax and loops.",
+        "hidden_tests": [
+            {"input": "Default case", "expected": "Success", "actual": "Unknown", "status": "failed"}
+        ]
+    }
+    return _call_json_prompt(prompt, fallback, max_tokens=600)
+
+
+def evaluate_technical_response(technology: str, question: str, response: str) -> dict[str, Any]:
+    prompt = f"""
+Evaluate the candidate's response to the following technical question.
+Technology: {technology}
+Question: {question}
+Candidate Response: {response}
+
+Analyze the response and return a JSON object with these keys:
+- score: (number 0-100 based on correctness and relevance)
+- relevance_score: (number 0-100)
+- clarity_score: (number 0-100)
+- depth_score: (number 0-100)
+- feedback: (string, brief feedback on the answer quality)
+- filler_words: (array of strings, e.g. ["like", "um"])
+- key_strengths: (array of 1-3 strings)
+- improvement_areas: (array of 1-3 strings)
+
+Return ONLY valid JSON.
+"""
+    fallback = {
+        "score": 60,
+        "relevance_score": 60,
+        "clarity_score": 60,
+        "depth_score": 60,
+        "feedback": "Response received. Could not perform AI evaluation due to service limitations.",
+        "filler_words": [],
+        "key_strengths": ["Answered the question"],
+        "improvement_areas": ["Elaborate further with examples"]
+    }
+    return _call_json_prompt(prompt, fallback, max_tokens=450)
+

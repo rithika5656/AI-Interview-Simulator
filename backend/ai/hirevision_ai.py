@@ -66,10 +66,13 @@ def generate_structured_mcq(module: str, topic: str, difficulty: str) -> dict[st
     fallback = _fallback_mcq(module, topic, difficulty)
     prompt = f"""
 Generate one {module} multiple-choice question for the topic '{topic}' at '{difficulty}' difficulty.
-Return JSON with keys: question, options (array of 4 strings), answer_index (0-3), explanation, difficulty, topic.
+Return JSON with keys: question, options (array of 4 strings), answer_index (0-3), correct_index (0-3), explanation, difficulty, topic.
 Make the question clear, practical, and suitable for placement preparation.
 """
-    return _call_json_prompt(prompt, fallback, max_tokens=450)
+    result = _call_json_prompt(prompt, fallback, max_tokens=450)
+    if "correct_index" not in result and "answer_index" in result:
+        result["correct_index"] = result["answer_index"]
+    return result
 
 
 def generate_resume_analysis(resume_text: str) -> dict[str, Any]:
@@ -152,12 +155,14 @@ def _fallback_mcq(module: str, topic: str, difficulty: str) -> dict[str, Any]:
                 "question": "What is 15% of 240?",
                 "options": ["24", "30", "36", "42"],
                 "answer_index": 2,
+                "correct_index": 2,
                 "explanation": "15% of 240 is 36.",
             },
             "Ratio": {
                 "question": "If the ratio of boys to girls is 3:5 and there are 40 students, how many girls are there?",
                 "options": ["15", "20", "25", "30"],
                 "answer_index": 2,
+                "correct_index": 2,
                 "explanation": "Total parts are 8, so each part is 5 and girls are 5 × 5 = 25.",
             },
         },
@@ -166,12 +171,14 @@ def _fallback_mcq(module: str, topic: str, difficulty: str) -> dict[str, Any]:
                 "question": "Which SQL clause is used to filter aggregated results?",
                 "options": ["WHERE", "HAVING", "GROUP BY", "ORDER BY"],
                 "answer_index": 1,
+                "correct_index": 1,
                 "explanation": "HAVING filters groups after aggregation.",
             },
             "OOPS": {
                 "question": "Which OOP concept allows one interface to represent multiple forms?",
                 "options": ["Encapsulation", "Abstraction", "Polymorphism", "Inheritance"],
                 "answer_index": 2,
+                "correct_index": 2,
                 "explanation": "Polymorphism lets the same interface behave differently based on context.",
             },
         },
@@ -190,6 +197,7 @@ def _fallback_mcq(module: str, topic: str, difficulty: str) -> dict[str, Any]:
         "question": f"Sample {module} question on {topic}.",
         "options": ["Option A", "Option B", "Option C", "Option D"],
         "answer_index": 0,
+        "correct_index": 0,
         "explanation": f"This is a fallback explanation for {topic}.",
         "topic": topic,
         "difficulty": difficulty,

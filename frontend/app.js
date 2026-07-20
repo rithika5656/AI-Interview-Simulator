@@ -722,17 +722,82 @@ async function startWebcam() {
             reader.onload = () => {
                 const base64 = String(reader.result).split(',')[1];
                 socket.emit('audio_chunk', { interview_id: state.currentInterviewId, audio_chunk: base64, final: false });
+            };
+            reader.readAsDataURL(event.data);
+        };
 
+        const recordBtn = $('#recordBtn');
+        const stopBtn = $('#stopBtn');
+        if (recordBtn) recordBtn.disabled = false;
+        if (stopBtn) stopBtn.disabled = true;
+    } catch (error) {
         showToast('Please allow access to camera and microphone');
     }
 }
 
+function toggleRecording() {
+    if (!state.mediaRecorder) return;
 
+    if (state.mediaRecorder.state === 'inactive') {
+        state.mediaRecorder.start(500);
+        const recordBtn = $('#recordBtn');
+        const stopBtn = $('#stopBtn');
+        const indicator = $('#recordingIndicator');
+        if (recordBtn) recordBtn.disabled = true;
+        if (stopBtn) stopBtn.disabled = false;
+        if (indicator) indicator.style.display = 'block';
+    }
+}
+
+function stopRecording() {
+    if (!state.mediaRecorder || state.mediaRecorder.state !== 'recording') return;
+
+    state.mediaRecorder.stop();
+    const recordBtn = $('#recordBtn');
+    const stopBtn = $('#stopBtn');
+    const submitBtn = $('#submitBtn');
+    const indicator = $('#recordingIndicator');
+    if (recordBtn) recordBtn.disabled = false;
+    if (stopBtn) stopBtn.disabled = true;
+    if (submitBtn) submitBtn.disabled = false;
+    if (indicator) indicator.style.display = 'none';
+}
+
+async function submitResponse() {
+    if (state.audioChunks.length === 0) {
         showToast('Please record your response first');
         return;
     }
 
+    try {
+        const blob = new Blob(state.audioChunks, { type: 'audio/webm' });
+        const formData = new FormData();
+        formData.append('interview_id', state.currentInterviewId);
+        formData.append('audio', blob, 'response.webm');
+        formData.append('text', $('#transcriptionText')?.textContent || '');
 
+        const data = await apiPost('/submit-response', formData);
+        $('#transcriptionText').textContent = data.immediate_feedback.text;
+        $('#confidenceScore').textContent = data.immediate_feedback.sentiment.confidence.toFixed(2);
+        $('#fillerCount').textContent = data.immediate_feedback.filler_words.length;
+        $('#sentimentType').textContent = data.immediate_feedback.sentiment.sentiment_type;
+
+        state.questionCount++;
+
+        if (state.questionCount <= 5) {
+            $('#questionNumber').textContent = state.questionCount;
+            $('#questionText').textContent = data.next_question;
+        } else {
+            await endInterview();
+        }
+
+        state.audioChunks = [];
+        const submitBtn = $('#submitBtn');
+        if (submitBtn) submitBtn.disabled = true;
+    } catch (error) {
+        showToast(`Error submitting response: ${error.message}`);
+    }
+}
 
 async function endInterview() {
     try {

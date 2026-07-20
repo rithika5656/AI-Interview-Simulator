@@ -179,7 +179,7 @@ def grade_mcq_submission(questions: list[dict[str, Any]], answers: list[int | No
 
     for index, question in enumerate(questions):
         selected_answer = answers[index] if index < len(answers) else None
-        correct_answer = int(question.get("answer_index", 0))
+        correct_answer = int(question.get("correct_index", question.get("answer_index", 0)))
         is_correct = selected_answer == correct_answer
         if is_correct:
             correct_count += 1

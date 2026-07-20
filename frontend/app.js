@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const apiClient = window.HireVisionApiClient || {};
 const API_URL = apiClient.baseUrl || `${window.location.protocol}//${window.location.hostname}:5000/api`;
 const socket = window.io && window.location.protocol !== 'file:'
@@ -686,49 +686,7 @@ function humanize(value) {
 async function startInterview() {
     const jobRole = $('#jobRole')?.value || 'Software Engineer';
     const interviewName = $('#interviewName')?.value || 'Demo Student';
-=======
-const API_URL = 'http://localhost:5000/api';
-const socket = io('http://localhost:5000');
 
-let mediaRecorder;
-let audioChunks = [];
-let currentInterviewId;
-let questionCount = 0;
-let isRecording = false;
-
-// Socket events
-socket.on('connect', () => {
-    console.log('Connected to server');
-});
-
-socket.on('transcription_update', (data) => {
-    document.getElementById('transcriptionText').textContent = data.text;
-});
-
-socket.on('disconnect', () => {
-    console.log('Disconnected from server');
-});
-
-// Screen management
-function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    document.getElementById(screenId).classList.add('active');
-}
-
-// Start interview
-async function startInterview() {
-    const jobRole = document.getElementById('jobRole').value;
-    const interviewName = document.getElementById('interviewName').value;
-
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
-    if (!interviewName.trim()) {
-        alert('Please enter your name');
-        return;
-    }
-
-<<<<<<< HEAD
     state.currentInterviewId = `interview_${Date.now()}`;
     state.questionCount = 1;
 
@@ -743,7 +701,7 @@ async function startInterview() {
         showView('legacyInterviewView');
         await startWebcam();
     } catch (error) {
-        alert(`Error starting interview: ${error.message}`);
+        showToast(`Error starting interview: ${error.message}`);
     }
 }
 
@@ -764,250 +722,17 @@ async function startWebcam() {
             reader.onload = () => {
                 const base64 = String(reader.result).split(',')[1];
                 socket.emit('audio_chunk', { interview_id: state.currentInterviewId, audio_chunk: base64, final: false });
-=======
-    currentInterviewId = `interview_${Date.now()}`;
-    questionCount = 1;
 
-    try {
-        const response = await fetch(`${API_URL}/start-interview`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                interview_id: currentInterviewId,
-                job_role: jobRole,
-                interview_name: interviewName
-            })
-        });
-
-        const data = await response.json();
-        document.getElementById('questionText').textContent = data.question;
-        document.getElementById('questionNumber').textContent = questionCount;
-
-        showScreen('interviewScreen');
-        startWebcam();
-    } catch (error) {
-        console.error('Error starting interview:', error);
-        alert('Error starting interview. Please try again.');
+        showToast('Please allow access to camera and microphone');
     }
 }
 
-// Webcam setup
-async function startWebcam() {
-    try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: { width: { ideal: 640 }, height: { ideal: 480 } },
-            audio: true
-        });
 
-        const videoElement = document.getElementById('videoElement');
-        videoElement.srcObject = stream;
-
-        // Use an audio-only recorder for live transcription (avoid sending video chunks)
-        const audioStream = new MediaStream(stream.getAudioTracks());
-        mediaRecorder = new MediaRecorder(audioStream, { mimeType: 'audio/webm' });
-
-        mediaRecorder.ondataavailable = (event) => {
-            if (!event.data || event.data.size === 0) return;
-            audioChunks.push(event.data);
-
-            // Send chunk to server as base64 for live transcription
-            const reader = new FileReader();
-            reader.onload = () => {
-                try {
-                    const dataUrl = reader.result; // data:audio/webm;base64,...
-                    const base64 = dataUrl.split(',')[1];
-                    socket.emit('audio_chunk', {
-                        interview_id: currentInterviewId,
-                        audio_chunk: base64,
-                        final: false
-                    });
-                } catch (e) {
-                    console.error('Failed to send audio chunk', e);
-                }
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
-            };
-            reader.readAsDataURL(event.data);
-        };
-    } catch (error) {
-<<<<<<< HEAD
-=======
-        console.error('Error accessing webcam:', error);
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
-        alert('Please allow access to camera and microphone');
-    }
-}
-
-<<<<<<< HEAD
-function toggleRecording() {
-    if (!state.mediaRecorder || state.mediaRecorder.state === 'recording') return;
-    state.audioChunks = [];
-    state.mediaRecorder.start();
-    $('#recordBtn').disabled = true;
-    $('#stopBtn').disabled = false;
-    $('#submitBtn').disabled = true;
-    document.body.classList.add('is-recording');
-    const indicator = $('#recordingIndicator');
-    if (indicator) indicator.style.display = 'inline-block';
-}
-
-function stopRecording() {
-    if (!state.mediaRecorder || state.mediaRecorder.state !== 'recording') return;
-    state.mediaRecorder.stop();
-    $('#recordBtn').disabled = false;
-    $('#stopBtn').disabled = true;
-    $('#submitBtn').disabled = false;
-    document.body.classList.remove('is-recording');
-    const indicator = $('#recordingIndicator');
-    if (indicator) indicator.style.display = 'none';
-
-    if (state.audioChunks.length && socket) {
-        const finalBlob = new Blob(state.audioChunks, { type: 'audio/webm' });
-        const reader = new FileReader();
-        reader.onload = () => {
-            const base64 = String(reader.result).split(',')[1];
-            socket.emit('audio_chunk', { interview_id: state.currentInterviewId, audio_chunk: base64, final: true });
-=======
-// Recording controls
-function toggleRecording() {
-    if (!isRecording) {
-        audioChunks = [];
-        mediaRecorder.start();
-        isRecording = true;
-        document.getElementById('recordBtn').disabled = true;
-        document.getElementById('stopBtn').disabled = false;
-        document.getElementById('submitBtn').disabled = true;
-        document.body.classList.add('is-recording');
-        const indicator = document.getElementById('recordingIndicator');
-        if (indicator) indicator.style.display = 'inline-block';
-    }
-}
-
-function stopRecording() {
-    mediaRecorder.stop();
-    isRecording = false;
-    document.getElementById('recordBtn').disabled = false;
-    document.getElementById('stopBtn').disabled = true;
-    document.getElementById('submitBtn').disabled = false;
-    document.body.classList.remove('is-recording');
-    const indicator = document.getElementById('recordingIndicator');
-    if (indicator) indicator.style.display = 'none';
-    // Send final chunk to server for a final transcription pass
-    if (audioChunks.length > 0) {
-        const finalBlob = new Blob(audioChunks, { type: 'audio/webm' });
-        const reader = new FileReader();
-        reader.onload = () => {
-            try {
-                const dataUrl = reader.result;
-                const base64 = dataUrl.split(',')[1];
-                socket.emit('audio_chunk', {
-                    interview_id: currentInterviewId,
-                    audio_chunk: base64,
-                    final: true
-                });
-            } catch (e) {
-                console.error('Failed to send final audio chunk', e);
-            }
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
-        };
-        reader.readAsDataURL(finalBlob);
-    }
-}
-
-<<<<<<< HEAD
-async function submitResponse() {
-    if (!state.audioChunks.length) {
-=======
-// Submit response
-async function submitResponse() {
-    if (audioChunks.length === 0) {
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
-        alert('Please record your response first');
+        showToast('Please record your response first');
         return;
     }
 
-<<<<<<< HEAD
-    const audioBlob = new Blob(state.audioChunks, { type: 'audio/webm' });
-    const formData = new FormData();
-    formData.append('interview_id', state.currentInterviewId);
-    formData.append('audio', audioBlob, 'response.webm');
 
-    try {
-        $('#submitBtn').disabled = true;
-        const data = await apiPost('/submit-response', null, { body: formData });
-
-        $('#transcriptionText').textContent = data.immediate_feedback?.text || 'Processing...';
-        $('#confidenceScore').textContent = `${((data.immediate_feedback?.sentiment?.confidence ?? 0) * 100).toFixed(0)}%`;
-        $('#fillerCount').textContent = data.immediate_feedback?.filler_words?.length || 0;
-        $('#sentimentType').textContent = data.immediate_feedback?.sentiment?.sentiment_type || 'Neutral';
-
-        state.questionCount += 1;
-        if (state.questionCount <= 5) {
-            setTimeout(() => {
-                $('#questionNumber').textContent = state.questionCount;
-                $('#questionText').textContent = data.next_question;
-                $('#transcriptionText').textContent = '';
-                $('#recordBtn').disabled = false;
-                $('#submitBtn').disabled = false;
-                state.audioChunks = [];
-            }, 1000);
-=======
-    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-    const formData = new FormData();
-    formData.append('interview_id', currentInterviewId);
-    formData.append('audio', audioBlob, 'response.webm');
-
-    try {
-        document.getElementById('submitBtn').disabled = true;
-        const response = await fetch(`${API_URL}/submit-response`, {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) {
-            let errText = 'Error processing response. Please try again.';
-            try {
-                const errJson = await response.json();
-                errText = errJson.error || errText;
-            } catch (e) {}
-            alert(errText);
-            document.getElementById('submitBtn').disabled = false;
-            return;
-        }
-
-        const data = await response.json();
-
-        // Update transcription
-        const transText = data.immediate_feedback?.text || data.immediate_feedback?.transcript || 'Processing...';
-        document.getElementById('transcriptionText').textContent = transText;
-
-        // Update feedback
-        document.getElementById('confidenceScore').textContent = 
-            ((data.immediate_feedback.sentiment?.confidence ?? 0) * 100).toFixed(0) + '%';
-        document.getElementById('fillerCount').textContent = 
-            data.immediate_feedback.filler_words?.length || 0;
-        document.getElementById('sentimentType').textContent = 
-            data.immediate_feedback.sentiment?.sentiment_type || 'Neutral';
-
-        questionCount++;
-        if (questionCount <= 5) {
-            setTimeout(() => {
-                document.getElementById('questionNumber').textContent = questionCount;
-                document.getElementById('questionText').textContent = data.next_question;
-                document.getElementById('transcriptionText').textContent = '';
-                document.getElementById('recordBtn').disabled = false;
-                document.getElementById('submitBtn').disabled = false;
-                audioChunks = [];
-            }, 1500);
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
-        } else {
-            endInterview();
-        }
-    } catch (error) {
-<<<<<<< HEAD
-        alert(error.message);
-        $('#submitBtn').disabled = false;
-    }
-}
 
 async function endInterview() {
     try {
@@ -1015,7 +740,7 @@ async function endInterview() {
         displayResults(data.report);
         showView('legacyResultsView');
     } catch (error) {
-        alert(`Error generating report: ${error.message}`);
+        showToast(`Error generating report: ${error.message}`);
     }
 }
 
@@ -1107,110 +832,30 @@ window.submitResponse = submitResponse;
 window.endInterview = endInterview;
 window.startNewInterview = startNewInterview;
 window.downloadReport = downloadReport;
-=======
-        console.error('Error submitting response:', error);
-        alert('Error processing response. Please try again.');
-        document.getElementById('submitBtn').disabled = false;
-    }
-}
 
-// End interview and show results
-async function endInterview() {
-    try {
-        const response = await fetch(`${API_URL}/end-interview`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ interview_id: currentInterviewId })
+window.showToast = function(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+
+    let iconClass = 'fa-circle-info';
+    if (type === 'success') iconClass = 'fa-circle-check';
+    if (type === 'error') iconClass = 'fa-circle-xmark';
+    if (type === 'warning') iconClass = 'fa-triangle-exclamation';
+
+    toast.innerHTML = `
+        <i class="fa-solid ${iconClass}"></i>
+        <div class="toast-message">${message}</div>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('hiding');
+        toast.addEventListener('animationend', () => {
+            toast.remove();
         });
-
-        const data = await response.json();
-        displayResults(data.report);
-        showScreen('resultsScreen');
-    } catch (error) {
-        console.error('Error ending interview:', error);
-        alert('Error generating report. Please try again.');
-    }
-}
-
-// Display results
-function displayResults(report) {
-    // Scores
-    document.getElementById('overallScore').textContent = 
-        report.summary.overall_score.toFixed(1) + '/100';
-    document.getElementById('communicationScore').textContent = 
-        report.summary.communication_score.toFixed(1) + '/100';
-    document.getElementById('technicalScore').textContent = 
-        report.summary.technical_score.toFixed(1) + '/100';
-
-    // Strengths
-    const strengthsList = document.getElementById('strengthsList');
-    strengthsList.innerHTML = report.detailed_feedback.strengths
-        .map(s => `<li>${s}</li>`)
-        .join('');
-
-    // Improvements
-    const improvementsList = document.getElementById('improvementsList');
-    improvementsList.innerHTML = report.detailed_feedback.areas_for_improvement
-        .map(i => `<li>${i}</li>`)
-        .join('');
-
-    // Recommendations
-    const recommendationsList = document.getElementById('recommendationsList');
-    recommendationsList.innerHTML = report.recommendations
-        .map(r => `<li>${r}</li>`)
-        .join('');
-
-    // Response details
-    const responseDetails = document.getElementById('responseDetails');
-    responseDetails.innerHTML = report.response_details
-        .map((r, idx) => `
-            <div class="response-detail">
-                <h4>Response ${idx + 1}</h4>
-                <p><strong>Your Answer:</strong> ${r.text}</p>
-                <p><strong>Relevance Score:</strong> ${r.analysis.relevance_score || 'N/A'}/100</p>
-                <p><strong>Sentiment:</strong> ${r.sentiment.sentiment_type || 'Neutral'}</p>
-                <p><strong>Key Strengths:</strong> ${(r.analysis.key_strengths || []).join(', ') || 'N/A'}</p>
-            </div>
-        `)
-        .join('');
-}
-
-// Start new interview
-function startNewInterview() {
-    document.getElementById('jobRole').value = 'Software Engineer';
-    document.getElementById('interviewName').value = '';
-    document.getElementById('transcriptionText').textContent = '';
-    document.getElementById('recordBtn').disabled = false;
-    document.getElementById('stopBtn').disabled = true;
-    audioChunks = [];
-    questionCount = 0;
-    showScreen('setupScreen');
-}
-
-// Download report
-function downloadReport() {
-    const report = {
-        interviewId: currentInterviewId,
-        overallScore: document.getElementById('overallScore').textContent,
-        communicationScore: document.getElementById('communicationScore').textContent,
-        technicalScore: document.getElementById('technicalScore').textContent,
-        strengths: Array.from(document.querySelectorAll('#strengthsList li')).map(li => li.textContent),
-        improvements: Array.from(document.querySelectorAll('#improvementsList li')).map(li => li.textContent),
-        timestamp: new Date().toISOString()
-    };
-
-    const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(report, null, 2)));
-    element.setAttribute('download', `interview_report_${currentInterviewId}.json`);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-}
-
-// Initialize on load
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('AI Interview Simulator loaded');
-    showScreen('setupScreen');
-});
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
+    }, 4000);
+};

@@ -8,10 +8,8 @@ Real-time speech analysis and AI-powered interview questions
 # newer Python versions.
 import pkgutil
 import importlib.util
-<<<<<<< HEAD
 import sys
-=======
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
+
 if not hasattr(pkgutil, 'get_loader'):
     def _get_loader(name):
         # Some callers may pass '__main__' or other names that don't have
@@ -38,7 +36,6 @@ from utils.speech_processor import process_audio
 from utils.nlp_engine import generate_questions, analyze_response
 from utils.sentiment_analyzer import analyze_sentiment
 from utils.feedback_generator import generate_report
-<<<<<<< HEAD
 from database.sqlite_store import init_db, seed_demo_data
 from routes.placement_routes import placement_bp
 
@@ -63,14 +60,6 @@ app.register_blueprint(placement_bp)
 
 init_db()
 seed_demo_data()
-=======
-
-load_dotenv()
-
-app = Flask(__name__)
-CORS(app)
-socketio = SocketIO(app, cors_allowed_origins="*")
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
 
 # Store interview sessions
 interview_sessions = {}
@@ -258,10 +247,6 @@ def handle_audio_chunk(data):
             print(f"Error handling audio_chunk: {e}")
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     host = os.getenv('HOST', '0.0.0.0')
     port = int(os.getenv('PORT', '5000'))
-    socketio.run(app, debug=True, host=host, port=port)
-=======
-    socketio.run(app, debug=True, host='0.0.0.0', port=5000)
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c
+    socketio.run(app, debug=True, host=host, port=port, allow_unsafe_werkzeug=True)

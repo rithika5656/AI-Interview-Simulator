@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <title>HireVision - AI Placement Preparation System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="theme-dark">
+    <div id="toastContainer" class="toast-container"></div>
     <div class="app-shell">
         <aside class="sidebar">
             <div class="brand-block">
@@ -23,24 +24,24 @@
                 </div>
             </div>
 
-            <button id="themeToggle" class="theme-toggle">Toggle Theme</button>
+
 
             <nav class="sidebar-nav">
-                <button data-view="dashboardView" class="nav-item active">Dashboard</button>
-                <button data-view="resumeView" data-role="student" class="nav-item">Resume Analyzer</button>
-                <button data-view="aptitudeView" data-role="student" class="nav-item">Aptitude</button>
-                <button data-view="logicalView" data-role="student" class="nav-item">Logical Reasoning</button>
-                <button data-view="verbalView" data-role="student" class="nav-item">Verbal Ability</button>
-                <button data-view="technicalMcqView" data-role="student" class="nav-item">Technical MCQ</button>
-                <button data-view="codingView" data-role="student" class="nav-item">Coding Assessment</button>
-                <button data-view="gdView" data-role="student" class="nav-item">Group Discussion</button>
-                <button data-view="legacyInterviewView" data-role="student" class="nav-item">HR Interview</button>
-                <button data-view="technicalInterviewView" data-role="student" class="nav-item">Technical Interview</button>
-                <button data-view="companyView" data-role="student" class="nav-item">Company Wise</button>
-                <button data-view="analyticsView" class="nav-item">Analytics</button>
-                <button data-view="coachView" class="nav-item">AI Career Coach</button>
-                <button data-view="adminView" data-role="admin" class="nav-item">Admin Panel</button>
-                <button data-view="profileView" class="nav-item">Profile</button>
+                <button data-view="dashboardView" class="nav-item active"><i class="fa-solid fa-house"></i> Dashboard</button>
+                <button data-view="resumeView" data-role="student" class="nav-item"><i class="fa-solid fa-file-pdf"></i> Resume Analyzer</button>
+                <button data-view="aptitudeView" data-role="student" class="nav-item"><i class="fa-solid fa-brain"></i> Aptitude</button>
+                <button data-view="logicalView" data-role="student" class="nav-item"><i class="fa-solid fa-puzzle-piece"></i> Logical Reasoning</button>
+                <button data-view="verbalView" data-role="student" class="nav-item"><i class="fa-solid fa-language"></i> Verbal Ability</button>
+                <button data-view="technicalMcqView" data-role="student" class="nav-item"><i class="fa-solid fa-microchip"></i> Technical MCQ</button>
+                <button data-view="codingView" data-role="student" class="nav-item"><i class="fa-solid fa-code"></i> Coding Assessment</button>
+                <button data-view="gdView" data-role="student" class="nav-item"><i class="fa-solid fa-users"></i> Group Discussion</button>
+                <button data-view="legacyInterviewView" data-role="student" class="nav-item"><i class="fa-solid fa-user-tie"></i> HR Interview</button>
+                <button data-view="technicalInterviewView" data-role="student" class="nav-item"><i class="fa-solid fa-laptop-code"></i> Technical Interview</button>
+                <button data-view="companyView" data-role="student" class="nav-item"><i class="fa-solid fa-building"></i> Company Wise</button>
+                <button data-view="analyticsView" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</button>
+                <button data-view="coachView" class="nav-item"><i class="fa-solid fa-chalkboard-user"></i> AI Career Coach</button>
+                <button data-view="adminView" data-role="admin" class="nav-item"><i class="fa-solid fa-shield-halved"></i> Admin Panel</button>
+                <button data-view="profileView" class="nav-item"><i class="fa-solid fa-user"></i> Profile</button>
             </nav>
         </aside>
 
@@ -51,12 +52,13 @@
                     <h2>Prepare. Practice. Perform.</h2>
                 </div>
                 <div class="topbar-actions">
+                    <button id="themeToggle" class="btn btn-secondary" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
                     <div class="profile-switcher" aria-label="Profile mode switcher">
-                        <button id="studentModeBtn" data-profile-mode="student" class="profile-chip active" type="button">Student Profile</button>
-                        <button id="adminModeBtn" data-profile-mode="admin" class="profile-chip" type="button">Admin Profile</button>
+                        <button id="studentModeBtn" data-profile-mode="student" class="profile-chip active" type="button">Student Mode</button>
+                        <button id="adminModeBtn" data-profile-mode="admin" class="profile-chip" type="button">Admin Mode</button>
                     </div>
-                    <span class="status-pill">Live AI modules</span>
-                    <button id="startLegacyInterviewBtn" class="primary-button">Start HR Interview</button>
+                    <span class="status-pill"><i class="fa-solid fa-circle-dot"></i> Live AI</span>
+                    <button id="startLegacyInterviewBtn" class="btn btn-primary"><i class="fa-solid fa-video"></i> Start HR Interview</button>
                 </div>
             </header>
 
@@ -103,7 +105,7 @@
                             <input type="text" id="resumeName" placeholder="Student name" value="Demo Student">
                             <input type="file" id="resumeFile" accept=".pdf,.docx,.txt">
                             <textarea id="resumeText" rows="10" placeholder="Paste resume text here if you do not want to upload a file."></textarea>
-                            <button type="submit" class="primary-button">Analyze Resume</button>
+                            <button type="submit" class="btn btn-primary">Analyze Resume</button>
                         </form>
                     </section>
                     <section class="panel-card" id="resumeResult">
@@ -127,8 +129,8 @@
                                 <option value="medium" selected>Medium</option>
                                 <option value="hard">Hard</option>
                             </select>
-                            <button data-generate-module="aptitude" class="secondary-button">Generate</button>
-                            <button data-submit-module="aptitude" class="primary-button">Submit</button>
+                            <button data-generate-module="aptitude" class="btn btn-secondary">Generate</button>
+                            <button data-submit-module="aptitude" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                     <div id="aptitudeQuestions" class="question-stack"></div>
@@ -147,8 +149,8 @@
                                 <option value="medium" selected>Medium</option>
                                 <option value="hard">Hard</option>
                             </select>
-                            <button data-generate-module="logical" class="secondary-button">Generate</button>
-                            <button data-submit-module="logical" class="primary-button">Submit</button>
+                            <button data-generate-module="logical" class="btn btn-secondary">Generate</button>
+                            <button data-submit-module="logical" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                     <div id="logicalQuestions" class="question-stack"></div>
@@ -167,8 +169,8 @@
                                 <option value="medium" selected>Medium</option>
                                 <option value="hard">Hard</option>
                             </select>
-                            <button data-generate-module="verbal" class="secondary-button">Generate</button>
-                            <button data-submit-module="verbal" class="primary-button">Submit</button>
+                            <button data-generate-module="verbal" class="btn btn-secondary">Generate</button>
+                            <button data-submit-module="verbal" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                     <div id="verbalQuestions" class="question-stack"></div>
@@ -187,8 +189,8 @@
                                 <option value="medium" selected>Medium</option>
                                 <option value="hard">Hard</option>
                             </select>
-                            <button data-generate-module="technical" class="secondary-button">Generate</button>
-                            <button data-submit-module="technical" class="primary-button">Submit</button>
+                            <button data-generate-module="technical" class="btn btn-secondary">Generate</button>
+                            <button data-submit-module="technical" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                     <div id="technicalQuestions" class="question-stack"></div>
@@ -211,7 +213,7 @@
                         </div>
                         <textarea id="codingEditor" rows="18">def two_sum(nums, target):
     return []</textarea>
-                        <button id="codingReviewBtn" class="primary-button">Run AI Code Review</button>
+                        <button id="codingReviewBtn" class="btn btn-primary">Run AI Code Review</button>
                     </section>
                     <section class="panel-card" id="codingResult">
                         <h3>Hidden Test Cases and Review</h3>
@@ -231,7 +233,7 @@
                             <option>Startups vs product companies</option>
                         </select>
                         <textarea id="gdTranscript" rows="10" placeholder="Type or transcribe your GD response here."></textarea>
-                        <button id="gdSimulateBtn" class="primary-button">Evaluate GD</button>
+                        <button id="gdSimulateBtn" class="btn btn-primary">Evaluate GD</button>
                     </section>
                     <section class="panel-card" id="gdResult">
                         <h3>GD Feedback</h3>
@@ -261,8 +263,8 @@
                             <video id="videoElement" autoplay muted playsinline></video>
                             <div class="control-row">
                                 <span id="recordingIndicator" class="record-indicator" style="display:none"></span>
-                                <button id="recordBtn" class="secondary-button" disabled>Start Recording</button>
-                                <button id="stopBtn" class="secondary-button" disabled>Stop Recording</button>
+                                <button id="recordBtn" class="btn btn-secondary" disabled>Start Recording</button>
+                                <button id="stopBtn" class="btn btn-secondary" disabled>Stop Recording</button>
                             </div>
                         </div>
                     </section>
@@ -282,7 +284,7 @@
                             <div class="analysis-row"><span>Filler Words</span><strong id="fillerCount">0</strong></div>
                             <div class="analysis-row"><span>Sentiment</span><strong id="sentimentType">--</strong></div>
                         </div>
-                        <button id="submitBtn" class="primary-button" disabled>Submit Response</button>
+                        <button id="submitBtn" class="btn btn-primary" disabled>Submit Response</button>
                     </section>
                 </div>
             </section>
@@ -302,8 +304,8 @@
                     <div class="panel-subcard"><h4>Recommendations</h4><ul id="recommendationsList"></ul></div>
                     <div class="panel-subcard"><h4>Response Details</h4><div id="responseDetails"></div></div>
                     <div class="control-row">
-                        <button id="newInterviewBtn" class="secondary-button">Start New Interview</button>
-                        <button id="downloadReportBtn" class="primary-button">Download Report</button>
+                        <button id="newInterviewBtn" class="btn btn-secondary">Start New Interview</button>
+                        <button id="downloadReportBtn" class="btn btn-primary">Download Report</button>
                     </div>
                 </section>
             </section>
@@ -317,7 +319,7 @@
                             <input id="technicalInterviewJobDescription" type="text" placeholder="Job description context">
                         </div>
                         <textarea id="technicalInterviewSkills" rows="8" placeholder="Comma-separated resume skills">Python, SQL, React</textarea>
-                        <button id="technicalInterviewGenerate" class="primary-button">Generate Adaptive Question</button>
+                        <button id="technicalInterviewGenerate" class="btn btn-primary">Generate Adaptive Question</button>
                     </section>
                     <section class="panel-card" id="technicalInterviewResult">
                         <h3>Adaptive Question</h3>
@@ -373,141 +375,5 @@
     <script src="app.js"></script>
 </body>
 </html>
-=======
-    <title>AI Interview Simulator</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>AI Interview Simulator</h1>
-            <p>Practice interviews with real-time AI feedback</p>
-        </header>
-
-        <main>
-            <!-- Setup Screen -->
-            <div id="setupScreen" class="screen active">
-                <div class="setup-form">
-                    <h2>Start Your Interview</h2>
-                    <div class="form-group">
-                        <label for="jobRole">Select Job Role:</label>
-                        <select id="jobRole">
-                            <option value="Software Engineer">Software Engineer</option>
-                            <option value="Data Scientist">Data Scientist</option>
-                            <option value="Product Manager">Product Manager</option>
-                            <option value="Machine Learning Engineer">Machine Learning Engineer</option>
-                            <option value="DevOps Engineer">DevOps Engineer</option>
-                            <option value="UX Designer">UX Designer</option>
-                            <option value="Quality Assurance">Quality Assurance</option>
-                            <option value="Business Analyst">Business Analyst</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="interviewName">Your Name:</label>
-                        <input type="text" id="interviewName" placeholder="Enter your name">
-                    </div>
-                    <button onclick="startInterview()" class="btn btn-primary">Start Interview</button>
-                </div>
-            </div>
-
-            <!-- Interview Screen -->
-            <div id="interviewScreen" class="screen">
-                <div class="interview-layout">
-                    <div class="video-section">
-                        <video id="videoElement" autoplay muted playsinline></video>
-                        <div class="controls">
-                            <span id="recordingIndicator" class="recording-indicator" title="Recording" style="display:none"></span>
-                            <button id="recordBtn" onclick="toggleRecording()" class="btn btn-record">Start Recording</button>
-                                <button id="stopBtn" onclick="stopRecording()" class="btn btn-stop" disabled>Stop Recording</button>
-                        </div>
-                    </div>
-
-                    <div class="question-section">
-                        <div class="question-display">
-                            <h3>Question <span id="questionNumber">1</span> of 5</h3>
-                            <p id="questionText"></p>
-                        </div>
-
-                        <div class="transcription-box">
-                            <h4>Live Transcription:</h4>
-                            <div id="transcriptionText" class="transcription"></div>
-                        </div>
-
-                        <div class="real-time-feedback">
-                            <h4>Real-time Analysis:</h4>
-                            <div class="feedback-item">
-                                <span>Confidence:</span>
-                                <span id="confidenceScore">--</span>
-                            </div>
-                            <div class="feedback-item">
-                                <span>Filler Words:</span>
-                                <span id="fillerCount">0</span>
-                            </div>
-                            <div class="feedback-item">
-                                <span>Sentiment:</span>
-                                <span id="sentimentType">--</span>
-                            </div>
-                        </div>
-
-                        <button id="submitBtn" onclick="submitResponse()" class="btn btn-primary" disabled>Submit Response</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Results Screen -->
-            <div id="resultsScreen" class="screen">
-                <div class="results-container">
-                    <h2>Interview Feedback Report</h2>
-                    
-                    <div class="scores-section">
-                        <div class="score-card">
-                            <h3>Overall Score</h3>
-                            <div class="score-value" id="overallScore">--</div>
-                        </div>
-                        <div class="score-card">
-                            <h3>Communication</h3>
-                            <div class="score-value" id="communicationScore">--</div>
-                        </div>
-                        <div class="score-card">
-                            <h3>Technical</h3>
-                            <div class="score-value" id="technicalScore">--</div>
-                        </div>
-                    </div>
-
-                    <div class="feedback-section">
-                        <div class="feedback-box">
-                            <h3>Strengths</h3>
-                            <ul id="strengthsList"></ul>
-                        </div>
-                        <div class="feedback-box">
-                            <h3>Areas for Improvement</h3>
-                            <ul id="improvementsList"></ul>
-                        </div>
-                    </div>
-
-                    <div class="recommendations-section">
-                        <h3>Recommendations</h3>
-                        <ul id="recommendationsList"></ul>
-                    </div>
-
-                    <div class="details-section">
-                        <h3>Response Details</h3>
-                        <div id="responseDetails"></div>
-                    </div>
-
-                    <button onclick="startNewInterview()" class="btn btn-primary">Start New Interview</button>
-                    <button onclick="downloadReport()" class="btn btn-secondary">Download Report</button>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            <p>AI Interview Simulator © 2025 | Powered by OpenAI & Real-time Analytics</p>
-        </footer>
-    </div>
-
-    <script src="app.js"></script>
 </body>
 </html>
->>>>>>> 4810e42438ff13fcabdec9d766a8ddd15c8da89c

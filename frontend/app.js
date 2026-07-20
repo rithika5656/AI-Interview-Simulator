@@ -1,8 +1,13 @@
-
 const apiClient = window.HireVisionApiClient || {};
-const API_URL = apiClient.baseUrl || (window.HireVisionConfig?.apiBaseUrl) || `${window.location.protocol}//${window.location.hostname}:5000/api`;
-const socket = window.io && window.location.protocol !== 'file:'
-    ? io(apiClient.socketUrl || (window.HireVisionConfig?.socketUrl) || `${window.location.protocol}//${window.location.hostname}:5000`)
+const customApiUrl = localStorage.getItem('hirevisionCustomApiUrl');
+const customSocketUrl = localStorage.getItem('hirevisionCustomSocketUrl');
+
+const API_URL = customApiUrl || apiClient.baseUrl || (window.HireVisionConfig?.apiBaseUrl) || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? `${window.location.protocol}//${window.location.hostname}:5000/api`
+    : '');
+
+const socket = window.io && window.location.protocol !== 'file:' && (customSocketUrl || apiClient.socketUrl || window.HireVisionConfig?.socketUrl || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? io(customSocketUrl || apiClient.socketUrl || (window.HireVisionConfig?.socketUrl) || `${window.location.protocol}//${window.location.hostname}:5000`)
     : null;
 
 const state = {
@@ -1216,6 +1221,201 @@ function bindAuthEvents() {
         });
     }
 }
+        if (result) result.innerHTML = errorCard('Evaluation failed', error.message);
+    }
+}
+
+// Local Speech Recognition (Web Speech API) for HR Interview
+let hrSpeechRecognition = null;
+function startHrSpeech() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+
+    const transcription = $('#transcriptionText');
+    if (!transcription) return;
+
+    if (!hrSpeechRecognition) {
+        hrSpeechRecognition = new SpeechRecognition();
+        hrSpeechRecognition.continuous = true;
+        hrSpeechRecognition.interimResults = true;
+        hrSpeechRecognition.lang = 'en-US';
+
+        hrSpeechRecognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                }
+            }
+            if (finalTranscript) {
+                if (transcription.tagName === 'TEXTAREA') {
+                    transcription.value += (transcription.value ? ' ' : '') + finalTranscript;
+                } else {
+                    transcription.textContent += (transcription.textContent ? ' ' : '') + finalTranscript;
+                }
+            }
+        };
+
+        hrSpeechRecognition.onerror = (e) => {
+            console.log('HR Speech recognition error:', e.error);
+        };
+    }
+
+    try {
+        hrSpeechRecognition.start();
+    } catch (e) {
+        hrSpeechRecognition.stop();
+    }
+}
+
+function stopHrSpeech() {
+    if (hrSpeechRecognition) {
+        hrSpeechRecognition.stop();
+    }
+}
+
+// Monaco Editor Integration
+function initMonacoEditor() {
+    if (typeof require === 'undefined') return;
+    require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs' } });
+    require(['vs/editor/editor.main'], function () {
+        const container = document.getElementById('codingEditorContainer');
+        if (!container) return;
+        state.editor = monaco.editor.create(container, {
+            value: 'def two_sum(nums, target):\n    return []',
+            language: 'python',
+            theme: 'vs-dark',
+            automaticLayout: true,
+            fontSize: 14,
+            minimap: { enabled: false }
+        });
+        
+        // Listen to language selector changes
+        const codingLangSelect = $('#codingLanguage');
+        if (codingLangSelect) {
+            codingLangSelect.addEventListener('change', (e) => {
+                if (!state.editor) return;
+                const lang = e.target.value;
+                const model = state.editor.getModel();
+                let code = '';
+                if (lang === 'Python') {
+                    code = 'def two_sum(nums, target):\n    return []';
+                } else if (lang === 'Java') {
+                    code = 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        return new int[0];\n    }\n}';
+                } else if (lang === 'C++') {
+                    code = 'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        return {};\n    }\n};';
+                } else if (lang === 'JavaScript') {
+                    code = 'function twoSum(nums, target) {\n    return [];\n}';
+                }
+                state.editor.setValue(code);
+                const monacoLang = lang === 'C++' ? 'cpp' : lang.toLowerCase();
+                monaco.editor.setModelLanguage(model, monacoLang);
+            });
+        }
+    });
+}
+
+async function runCoding() {
+    const result = $('#codingResult');
+    if (result) result.innerHTML = loadingCard('Compiling and running sample test cases...');
+    try {
+        const codeText = state.editor ? state.editor.getValue() : '';
+        const data = await apiPost('/coding/review', {
+            user_id: state.userId,
+            language: $('#codingLanguage')?.value || 'Python',
+            code: codeText,
+            problem_statement: $('#codingProblem')?.value || '',
+        });
+        if (result) {
+            const passes = (data.hidden_tests || []).filter(t => t.status === 'passed').length;
+            const total = (data.hidden_tests || []).length;
+            result.innerHTML = `
+                <div class="analysis-card success">
+                    <h3>Run Outputs & Hidden Tests</h3>
+                    <p><strong>Status:</strong> ${passes === total ? 'All Tests Passed' : 'Some Tests Failed'}</p>
+                    <p><strong>Sample Cases:</strong> ${passes}/${total} passed</p>
+                    <p><strong>Estimated Complexity:</strong> ${data.complexity_analysis || 'N/A'}</p>
+                    <p><strong>Estimated Runtime:</strong> ${data.runtime || 'N/A'}</p>
+                    
+                    <h4>Execution Log</h4>
+                    <ul>${(data.hidden_tests || []).map((test) => `
+                        <li>
+                            <strong>Case:</strong> ${test.input}<br>
+                            <strong>Expected:</strong> ${test.expected} | <strong>Status:</strong> <span class="status-text ${test.status === 'passed' ? 'success' : 'error'}">${test.status.toUpperCase()}</span>
+                        </li>
+                    `).join('')}</ul>
+                </div>
+            `;
+        }
+    } catch (error) {
+        if (result) result.innerHTML = errorCard('Run execution failed', error.message);
+    }
+}
+
+// User Authentication Modal UI and Switch Profile
+function bindAuthEvents() {
+    const modal = $('#authModal');
+    const switchBtn = $('#switchUserBtn');
+    const closeBtn = $('#closeAuthBtn');
+    const form = $('#authForm');
+    
+    if (switchBtn) {
+        switchBtn.addEventListener('click', () => {
+            $('#authName').value = localStorage.getItem('hirevisionUserName') || '';
+            $('#authEmail').value = localStorage.getItem('hirevisionUserEmail') || '';
+            $('#authRole').value = localStorage.getItem('hirevisionUserRole') || 'student';
+            $('#authTargetRole').value = localStorage.getItem('hirevisionUserTargetRole') || 'Software Engineer';
+            modal.classList.add('active');
+        });
+    }
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    }
+    
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = $('#authName').value.trim();
+            const email = $('#authEmail').value.trim();
+            const role = $('#authRole').value;
+            const targetRole = $('#authTargetRole').value.trim();
+            const userId = 'user_' + email.replace(/[^a-zA-Z0-9]/g, '_');
+            
+            try {
+                // Save user on backend
+                await apiPost('/profile/save', {
+                    user_id: userId,
+                    name,
+                    email,
+                    role,
+                    target_role: targetRole,
+                    skills: [],
+                    achievements: []
+                });
+                
+                // Save locally
+                localStorage.setItem('hirevisionUserId', userId);
+                localStorage.setItem('hirevisionUserName', name);
+                localStorage.setItem('hirevisionUserEmail', email);
+                localStorage.setItem('hirevisionUserRole', role);
+                localStorage.setItem('hirevisionUserTargetRole', targetRole);
+                
+                state.userId = userId;
+                updateActiveUserProfileUI();
+                modal.classList.remove('active');
+                showToast('Profile switched successfully!', 'success');
+                
+                // Reload dashboard/profile datasets
+                loadAllPanels();
+            } catch (error) {
+                showToast(`Failed to register profile: ${error.message}`, 'error');
+            }
+        });
+    }
+}
 
 function updateActiveUserProfileUI() {
     const name = localStorage.getItem('hirevisionUserName') || 'Demo Student';
@@ -1263,16 +1463,87 @@ function bindProfileEdit() {
 
 // Backend Health Check Wakeup Retry
 let healthCheckInterval = null;
+let connectionAttempts = 0;
 async function checkBackendHealth() {
     const badge = $('#backendStatus');
     const alert = $('#systemAlert');
+    
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    // If no backend API URL is set OR we have failed to connect 4 times in a row, prompt the user
+    if ((!API_URL && !isLocal) || connectionAttempts >= 4) {
+        if (badge) {
+            badge.className = 'backend-status status-offline';
+            badge.querySelector('.status-text').textContent = 'Config Needed';
+        }
+        if (alert) {
+            alert.hidden = false;
+            const currentUrl = API_URL ? API_URL.replace(/\/api\/?$/, '') : '';
+            alert.innerHTML = `
+                <div style="display:flex; flex-direction:column; gap:10px; width:100%">
+                    <div style="display:flex; align-items:center; gap:15px;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size:1.5rem; color:var(--warning)"></i>
+                        <div>
+                            <strong>Connect Production Backend</strong>
+                            <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: var(--muted);">
+                                ${connectionAttempts >= 4 
+                                    ? `Could not reach backend at <code>${currentUrl}</code>. Please check your Render/Railway instance status or enter a new URL below.`
+                                    : 'No backend environment variable was supplied during Vercel build. Please enter your Render/Railway backend URL below to connect.'}
+                            </p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:5px; width:100%">
+                        <input type="text" id="customBackendInput" value="${currentUrl}" placeholder="e.g. https://hirevision-backend.onrender.com" style="flex:1; padding:8px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--text); outline:none;">
+                        <button id="saveCustomBackendBtn" class="btn btn-primary" style="padding:8px 16px;">Connect Backend</button>
+                    </div>
+                </div>
+            `;
+            
+            const saveBtn = $('#saveCustomBackendBtn');
+            const customInput = $('#customBackendInput');
+            if (saveBtn && customInput) {
+                saveBtn.addEventListener('click', () => {
+                    let url = customInput.value.trim();
+                    if (!url) {
+                        showToast('Please enter a valid URL', 'warning');
+                        return;
+                    }
+                    url = url.replace(/\/+$/, '');
+                    const socketUrl = url;
+                    const apiUrl = url.endsWith('/api') ? url : `${url}/api`;
+                    
+                    localStorage.setItem('hirevisionCustomApiUrl', apiUrl);
+                    localStorage.setItem('hirevisionCustomSocketUrl', socketUrl);
+                    showToast('Backend configuration saved! Reconnecting...', 'success');
+                    setTimeout(() => window.location.reload(), 1000);
+                });
+            }
+        }
+        return;
+    }
+
     try {
-        // Strip /api prefix to hit raw health check
         const response = await fetch(`${API_URL.replace(/\/api\/?$/, '')}/health`);
         if (response.ok) {
+            connectionAttempts = 0;
             if (badge) {
                 badge.className = 'backend-status status-online';
-                badge.querySelector('.status-text').textContent = 'Online';
+                const customUrl = localStorage.getItem('hirevisionCustomApiUrl');
+                if (customUrl) {
+                    badge.querySelector('.status-text').innerHTML = `Online <a href="#" id="resetBackendBtn" style="color:var(--primary); font-size:0.75rem; margin-left:8px; text-decoration:underline; font-weight:bold;">(Disconnect)</a>`;
+                    const resetBtn = $('#resetBackendBtn');
+                    if (resetBtn) {
+                        resetBtn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            localStorage.removeItem('hirevisionCustomApiUrl');
+                            localStorage.removeItem('hirevisionCustomSocketUrl');
+                            showToast('Custom backend URL disconnected', 'info');
+                            setTimeout(() => window.location.reload(), 1000);
+                        });
+                    }
+                } else {
+                    badge.querySelector('.status-text').textContent = 'Online';
+                }
             }
             if (alert) alert.hidden = true;
             clearInterval(healthCheckInterval);
@@ -1281,9 +1552,10 @@ async function checkBackendHealth() {
             throw new Error();
         }
     } catch (e) {
+        connectionAttempts++;
         if (badge) {
             badge.className = 'backend-status status-connecting';
-            badge.querySelector('.status-text').textContent = 'Connecting...';
+            badge.querySelector('.status-text').textContent = `Connecting (${connectionAttempts}/4)...`;
         }
         if (alert) {
             alert.hidden = false;
@@ -1291,7 +1563,7 @@ async function checkBackendHealth() {
                 <div style="display:flex; align-items:center; gap:15px; width:100%">
                     <i class="fa-solid fa-circle-notch fa-spin" style="font-size:1.5rem; color:var(--warning)"></i>
                     <div>
-                        <strong>AI Backend is starting up</strong>
+                        <strong>AI Backend is starting up (Attempt ${connectionAttempts}/4)</strong>
                         <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: var(--muted);">The backend runs on an ephemeral Render instance. Waking it up (takes up to 50 seconds)...</p>
                     </div>
                 </div>
@@ -1301,6 +1573,14 @@ async function checkBackendHealth() {
             healthCheckInterval = setInterval(checkBackendHealth, 3000);
         }
     }
+}
+
+function formatDate(timestamp) {
+    return timestamp ? new Date(timestamp).toLocaleString() : 'Recent';
+}
+
+function humanize(value) {
+    return value.replace(/_/g, ' ').replace(/\b\w/g, (match) => match.toUpperCase());
 }
 
 window.startInterview = startInterview;

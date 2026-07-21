@@ -16,8 +16,7 @@ from ai.hirevision_ai import (
     generate_resume_analysis,
     generate_structured_mcq,
 )
-from database.sqlite_store import (
-    fetch_all,
+from database.mongo_store import (
     get_dashboard_metrics,
     latest_by_table,
     latest_resume,
@@ -361,20 +360,20 @@ def build_career_coach(user_id: str) -> dict[str, Any]:
 
 
 def build_profile(user_id: str) -> dict[str, Any]:
-    from database.sqlite_store import fetch_one, fetch_all
-    user = fetch_one("SELECT * FROM users WHERE id = ?", (user_id,))
+    from database.mongo_store import fetch_one_mongo, fetch_all_mongo
+    user = fetch_one_mongo("users", {"id": user_id})
     if not user:
         ensure_demo_user(user_id)
-        user = fetch_one("SELECT * FROM users WHERE id = ?", (user_id,))
+        user = fetch_one_mongo("users", {"id": user_id})
 
     resume = latest_resume(user_id)
-    interview_history = fetch_all("SELECT * FROM interviews WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
-    coding_history = fetch_all("SELECT * FROM coding_tests WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
-    aptitude_history = fetch_all("SELECT * FROM aptitude_tests WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
-    logical_history = fetch_all("SELECT * FROM logical_tests WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
-    verbal_history = fetch_all("SELECT * FROM verbal_tests WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
-    technical_mcq_history = fetch_all("SELECT * FROM technical_tests WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
-    gd_history = fetch_all("SELECT * FROM gd_sessions WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
+    interview_history = fetch_all_mongo("interviews", {"user_id": user_id}, sort_by=[("created_at", -1)])
+    coding_history = fetch_all_mongo("coding_tests", {"user_id": user_id}, sort_by=[("created_at", -1)])
+    aptitude_history = fetch_all_mongo("aptitude_tests", {"user_id": user_id}, sort_by=[("created_at", -1)])
+    logical_history = fetch_all_mongo("logical_tests", {"user_id": user_id}, sort_by=[("created_at", -1)])
+    verbal_history = fetch_all_mongo("verbal_tests", {"user_id": user_id}, sort_by=[("created_at", -1)])
+    technical_mcq_history = fetch_all_mongo("technical_tests", {"user_id": user_id}, sort_by=[("created_at", -1)])
+    gd_history = fetch_all_mongo("gd_sessions", {"user_id": user_id}, sort_by=[("created_at", -1)])
 
     skills = []
     achievements = []

@@ -36,7 +36,7 @@ from utils.speech_processor import process_audio
 from utils.nlp_engine import generate_questions, analyze_response
 from utils.sentiment_analyzer import analyze_sentiment
 from utils.feedback_generator import generate_report
-from database.sqlite_store import init_db, seed_demo_data
+from database.mongo_store import init_db
 from routes.placement_routes import placement_bp
 
 load_dotenv()
@@ -57,7 +57,6 @@ socketio = SocketIO(app, cors_allowed_origins=frontend_origins)
 app.register_blueprint(placement_bp)
 
 init_db()
-seed_demo_data()
 
 # Store interview sessions
 interview_sessions = {}
@@ -180,7 +179,7 @@ def end_interview():
     
     # Save report to sqlite database
     try:
-        from database.sqlite_store import save_record
+        from database.mongo_store import save_record
         from datetime import datetime
         now = datetime.utcnow().isoformat(timespec="seconds") + "Z"
         

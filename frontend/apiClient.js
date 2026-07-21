@@ -1,24 +1,16 @@
 (() => {
-    const host = window.location.hostname || 'localhost';
-    const protocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
-    const isLocal = host === 'localhost' || host === '127.0.0.1';
-
-    // ONLY use :5000 fallback on localhost. On production, leave empty so the app
-    // shows the "Connect Backend" form and prompts the user for their Render URL.
-    const localFallbackBase = isLocal ? `${protocol}//${host}:5000/api` : '';
-    const localFallbackSocket = isLocal ? `${protocol}//${host}:5000` : '';
-
+    // Rely exclusively on injected configuration for production setup
     const apiBaseUrl = window.HireVisionConfig?.apiBaseUrl
         || window.__HIREVISION_API_BASE__
         || localStorage.getItem('hirevisionApiBaseUrl')
         || localStorage.getItem('hirevisionCustomApiUrl')
-        || localFallbackBase;
+        || '';
 
     const socketUrl = window.HireVisionConfig?.socketUrl
         || window.__HIREVISION_SOCKET_URL__
         || localStorage.getItem('hirevisionSocketUrl')
         || localStorage.getItem('hirevisionCustomSocketUrl')
-        || localFallbackSocket;
+        || '';
 
     async function request(path, options = {}) {
         const url = `${apiBaseUrl}${path}`;

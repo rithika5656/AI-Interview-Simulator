@@ -19,7 +19,7 @@ from services.placement_service import (
 )
 import uuid
 import json
-from database.sqlite_store import save_record
+from database.mongo_store import save_record
 from datetime import datetime
 
 placement_bp = Blueprint("placement", __name__, url_prefix="/api")
@@ -209,7 +209,7 @@ def profile_save():
     skills = payload.get("skills", [])
     achievements = payload.get("achievements", [])
     
-    from database.sqlite_store import upsert_user
+    from database.mongo_store import upsert_user
     upsert_user(
         user_id=user_id,
         name=name,

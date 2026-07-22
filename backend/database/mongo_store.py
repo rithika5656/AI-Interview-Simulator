@@ -147,27 +147,27 @@ def get_dashboard_metrics(user_id: str) -> dict[str, Any]:
     logical = latest_by_table("logical_tests", user_id)
     verbal = latest_by_table("verbal_tests", user_id)
 
-    resume_score = float(resume.get("ats_score", 72.0)) if resume and resume.get("ats_score") is not None else 72.0
-    aptitude_score = float(aptitude.get("score", 65.0)) if aptitude and aptitude.get("score") is not None else 65.0
-    coding_score = float(coding.get("score", 61.0)) if coding and coding.get("score") is not None else 61.0
+    resume_score = float(resume.get("ats_score", 0.0)) if resume and resume.get("ats_score") is not None else 0.0
+    aptitude_score = float(aptitude.get("score", 0.0)) if aptitude and aptitude.get("score") is not None else 0.0
+    coding_score = float(coding.get("score", 0.0)) if coding and coding.get("score") is not None else 0.0
 
-    interview_score = 70.0
+    interview_score = 0.0
     if interview and interview.get("scores_json"):
         try:
-            interview_score = float(json.loads(interview["scores_json"]).get("overall", 70))
+            interview_score = float(json.loads(interview["scores_json"]).get("overall", 0.0))
         except Exception:
             pass
 
-    gd_score = 68.0
+    gd_score = 0.0
     if gd and gd.get("scores_json"):
         try:
-            gd_score = float(json.loads(gd["scores_json"]).get("communication", 68))
+            gd_score = float(json.loads(gd["scores_json"]).get("communication", 0.0))
         except Exception:
             pass
 
-    technical_score = float(technical.get("score", 69.0)) if technical and technical.get("score") is not None else 69.0
-    logical_score = float(logical.get("score", 64.0)) if logical and logical.get("score") is not None else 64.0
-    verbal_score = float(verbal.get("score", 66.0)) if verbal and verbal.get("score") is not None else 66.0
+    technical_score = float(technical.get("score", 0.0)) if technical and technical.get("score") is not None else 0.0
+    logical_score = float(logical.get("score", 0.0)) if logical and logical.get("score") is not None else 0.0
+    verbal_score = float(verbal.get("score", 0.0)) if verbal and verbal.get("score") is not None else 0.0
 
     placement_readiness = round(
         (resume_score * 0.15)

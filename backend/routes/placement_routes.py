@@ -63,14 +63,18 @@ def list_modules():
 
 @placement_bp.route("/dashboard/overview", methods=["GET"])
 def dashboard_overview():
-    user_id = request.args.get("user_id", "demo_student")
+    user_id = request.args.get("user_id")
+    if not user_id:
+        return jsonify({"error": "user_id is required"}), 400
     return jsonify(build_dashboard(user_id))
 
 
 @placement_bp.route("/resume/analyze", methods=["POST"])
 def resume_analyze():
     payload = request.get_json(silent=True) or {}
-    user_id = request.form.get("user_id") or payload.get("user_id", "demo_student")
+    user_id = request.form.get("user_id") or payload.get("user_id")
+    if not user_id:
+        return jsonify({"error": "user_id is required"}), 400
     filename = None
     resume_text = ""
 
@@ -104,7 +108,7 @@ def submit_module(module_key: str):
     answers = payload.get("answers", [])
     topic = payload.get("topic", "General")
     difficulty = payload.get("difficulty", "medium")
-    user_id = payload.get("user_id", "demo_student")
+    user_id = payload.get("user_id")
     result = grade_mcq_submission(questions, answers)
     
     table_name = TEST_TABLE_MAP.get(module_key)
@@ -133,7 +137,7 @@ def coding_review():
         payload.get("problem_statement", ""),
     )
     
-    user_id = payload.get("user_id", "demo_student")
+    user_id = payload.get("user_id")
     save_record("coding_tests", {
         "id": str(uuid.uuid4()),
         "user_id": user_id,
@@ -154,7 +158,7 @@ def simulate_gd():
     payload = request.get_json(silent=True) or {}
     topic = payload.get("topic", "Emerging technologies")
     transcript = payload.get("transcript", "")
-    user_id = payload.get("user_id", "demo_student")
+    user_id = payload.get("user_id")
     return jsonify(gd_session_feedback(topic, transcript, user_id))
 
 
@@ -165,13 +169,17 @@ def company_track(company: str):
 
 @placement_bp.route("/analytics/summary", methods=["GET"])
 def analytics_summary():
-    user_id = request.args.get("user_id", "demo_student")
+    user_id = request.args.get("user_id")
+    if not user_id:
+        return jsonify({"error": "user_id is required"}), 400
     return jsonify(build_analytics(user_id))
 
 
 @placement_bp.route("/career-coach", methods=["GET"])
 def career_coach():
-    user_id = request.args.get("user_id", "demo_student")
+    user_id = request.args.get("user_id")
+    if not user_id:
+        return jsonify({"error": "user_id is required"}), 400
     return jsonify(build_career_coach(user_id))
 
 
@@ -226,7 +234,7 @@ def profile_save():
 @placement_bp.route("/technical-interview/submit", methods=["POST"])
 def technical_interview_submit():
     payload = request.get_json(silent=True) or {}
-    user_id = payload.get("user_id", "demo_student")
+    user_id = payload.get("user_id")
     technology = payload.get("technology", "Python")
     question = payload.get("question", "")
     response = payload.get("response", "")

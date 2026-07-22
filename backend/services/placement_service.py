@@ -86,12 +86,10 @@ COMPANY_TRACKS = {
 }
 
 
-def ensure_demo_user(user_id: str = "demo_student") -> None:
-    upsert_user(user_id=user_id, name="Demo Student", email="demo@example.com")
 
 
 def build_dashboard(user_id: str) -> dict[str, Any]:
-    ensure_demo_user(user_id)
+
     metrics = get_dashboard_metrics(user_id)
     activities = list_recent_activity(user_id)
     recent_resume = latest_resume(user_id)
@@ -128,7 +126,7 @@ def build_dashboard(user_id: str) -> dict[str, Any]:
 
 
 def analyze_resume_payload(user_id: str, resume_text: str, filename: str | None = None) -> dict[str, Any]:
-    ensure_demo_user(user_id)
+
     analysis = generate_resume_analysis(resume_text)
 
     save_record(
@@ -205,7 +203,7 @@ def grade_mcq_submission(questions: list[dict[str, Any]], answers: list[int | No
 
 
 def gd_session_feedback(topic: str, transcript: str, user_id: str) -> dict[str, Any]:
-    ensure_demo_user(user_id)
+
     feedback = generate_gd_feedback(topic, transcript)
     scores = {
         "communication": feedback.get("communication", 0),
@@ -363,7 +361,7 @@ def build_profile(user_id: str) -> dict[str, Any]:
     from database.mongo_store import fetch_one_mongo, fetch_all_mongo
     user = fetch_one_mongo("users", {"id": user_id})
     if not user:
-        ensure_demo_user(user_id)
+
         user = fetch_one_mongo("users", {"id": user_id})
 
     resume = latest_resume(user_id)

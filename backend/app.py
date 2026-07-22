@@ -64,7 +64,7 @@ interview_sessions = {}
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    return jsonify({"status": "healthy"}), 200
+    return jsonify({"status": "ok"}), 200
 
 @app.route('/api/start-interview', methods=['POST'])
 def start_interview():
@@ -72,7 +72,7 @@ def start_interview():
     data = request.json
     interview_id = data.get('interview_id')
     job_role = data.get('job_role', 'Software Engineer')
-    user_id = data.get('user_id', 'demo_student')
+    user_id = data.get('user_id')
     
     interview_sessions[interview_id] = {
         'user_id': user_id,
@@ -178,7 +178,7 @@ def end_interview():
     session = interview_sessions[interview_id]
     report = generate_report(session)
     
-    # Save report to sqlite database
+    # Save report to mongodb database
     try:
         from database.mongo_store import save_record
         from datetime import datetime
@@ -186,7 +186,7 @@ def end_interview():
         
         save_record("interviews", {
             "id": interview_id,
-            "user_id": session.get('user_id', 'demo_student'),
+            "user_id": session.get('user_id'),
             "interview_type": "hr",
             "domain": session.get('job_role', 'Software Engineer'),
             "company": "General Practice",

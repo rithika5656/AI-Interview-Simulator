@@ -1,12 +1,7 @@
-const apiClient = window.HireVisionApiClient || {};
-const customApiUrl = localStorage.getItem('hirevisionCustomApiUrl');
-const customSocketUrl = localStorage.getItem('hirevisionCustomSocketUrl');
+const API_URL = (typeof process !== 'undefined' && process.env.API_URL) ? process.env.API_URL : (window.__APP_CONFIG__ && window.__APP_CONFIG__.API_URL);
 
-const API_URL = customApiUrl || apiClient.baseUrl || (window.HireVisionConfig?.apiBaseUrl) || '';
-
-const socket = window.io && window.location.protocol !== 'file:' && (customSocketUrl || apiClient.socketUrl || window.HireVisionConfig?.socketUrl)
-    ? io(customSocketUrl || apiClient.socketUrl || (window.HireVisionConfig?.socketUrl) || '')
-    : null;
+const SOCKET_URL = (typeof process !== 'undefined' && process.env.SOCKET_URL) ? process.env.SOCKET_URL : (window.__APP_CONFIG__ && window.__APP_CONFIG__.SOCKET_URL);
+const socket = window.io ? io(SOCKET_URL, { secure: true, reconnection: true }) : null;
 
 const state = {
     userId: localStorage.getItem('hirevisionUserId') || 'demo_student',

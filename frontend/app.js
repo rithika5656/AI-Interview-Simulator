@@ -1,6 +1,6 @@
-const API_URL = (typeof process !== 'undefined' && process.env.API_URL) ? process.env.API_URL : (window.__APP_CONFIG__ && window.__APP_CONFIG__.API_URL);
+const API_URL = (typeof process !== 'undefined' && process.env.API_URL) ? process.env.API_URL : (window.HireVisionConfig?.apiBaseUrl || window.__APP_CONFIG__?.API_URL || 'https://ai-interview-simulator-12.onrender.com/api');
 
-const SOCKET_URL = (typeof process !== 'undefined' && process.env.SOCKET_URL) ? process.env.SOCKET_URL : (window.__APP_CONFIG__ && window.__APP_CONFIG__.SOCKET_URL);
+const SOCKET_URL = (typeof process !== 'undefined' && process.env.SOCKET_URL) ? process.env.SOCKET_URL : (window.HireVisionConfig?.socketUrl || window.__APP_CONFIG__?.SOCKET_URL || 'https://ai-interview-simulator-12.onrender.com');
 const socket = window.io ? io(SOCKET_URL, { secure: true, reconnection: true }) : null;
 
 const state = {

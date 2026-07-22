@@ -47,7 +47,7 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 app = Flask(__name__, static_folder="../frontend", static_url_path="/")
-origins_env = os.getenv("FRONTEND_ORIGINS", "*")
+origins_env = os.getenv("FRONTEND_ORIGINS", "https://ai-interview-simulator-xi-three.vercel.app")
 frontend_origins = [o.strip() for o in origins_env.split(",") if o.strip()] if origins_env != "*" else "*"
 CORS(
     app,

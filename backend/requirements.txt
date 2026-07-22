@@ -11,7 +11,7 @@ python-engineio==4.7.0
 requests==2.31.0
 pypdf==4.0.0
 python-docx==1.0.1
-eventlet==0.36.1
+
 gunicorn==22.0.0
 pymongo==4.6.1
 dnspython==2.5.0

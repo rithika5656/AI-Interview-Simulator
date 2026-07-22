@@ -162,6 +162,15 @@ def simulate_gd():
     return jsonify(gd_session_feedback(topic, transcript, user_id))
 
 
+@placement_bp.route("/gd/generate-topic", methods=["POST"])
+def generate_gd_topic_route():
+    payload = request.get_json(silent=True) or {}
+    exclude_topics = payload.get("exclude_topics", [])
+    from ai.hirevision_ai import generate_gd_topic
+    topic = generate_gd_topic(exclude_topics)
+    return jsonify({"topic": topic})
+
+
 @placement_bp.route("/company-track/<company>", methods=["GET"])
 def company_track(company: str):
     return jsonify(build_company_track(company))

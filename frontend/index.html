@@ -237,14 +237,27 @@
                 <div class="grid grid-2">
                     <section class="panel-card">
                         <h3>Group Discussion Simulator</h3>
-                        <select id="gdTopic">
-                            <option>AI in education</option>
-                            <option>Sustainability in technology</option>
-                            <option>Remote work and productivity</option>
-                            <option>Startups vs product companies</option>
-                        </select>
-                        <textarea id="gdTranscript" rows="10" placeholder="Type or transcribe your GD response here."></textarea>
-                        <button id="gdSimulateBtn" class="btn btn-primary">Evaluate GD</button>
+                        <div class="module-controls" style="margin-bottom: 12px; display: flex; gap: 10px; width: 100%;">
+                            <select id="gdTopic" style="flex-grow: 1; min-width: 0;">
+                                <option>AI in education</option>
+                                <option>Sustainability in technology</option>
+                                <option>Remote work and productivity</option>
+                                <option>Startups vs product companies</option>
+                            </select>
+                            <button id="gdGenerateTopicBtn" class="btn btn-secondary" style="width: auto; flex-shrink: 0;"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Topic</button>
+                        </div>
+                        
+                        <div class="interview-shell">
+                            <video id="gdVideoElement" autoplay muted playsinline></video>
+                            <div class="control-row">
+                                <span id="gdRecordingIndicator" class="record-indicator" style="display:none"></span>
+                                <button id="gdRecordBtn" class="btn btn-secondary">Start Recording</button>
+                                <button id="gdStopBtn" class="btn btn-secondary" disabled>Stop Recording</button>
+                            </div>
+                        </div>
+
+                        <textarea id="gdTranscript" rows="8" placeholder="Speak or type your GD response here..." style="margin-top: 15px; width: 100%;"></textarea>
+                        <button id="gdSimulateBtn" class="btn btn-primary" style="margin-top: 15px; width: 100%;">Evaluate GD</button>
                     </section>
                     <section class="panel-card" id="gdResult">
                         <h3>GD Feedback</h3>
@@ -340,6 +353,7 @@
                                 <p class="muted" style="margin-top: 10px;"><em>Hint: <span id="techQuestionHint"></span></em></p>
                             </div>
                             <div class="interview-shell" style="margin-top: 20px;">
+                                <video id="techVideoElement" autoplay muted playsinline></video>
                                 <div class="control-row">
                                     <span id="techRecordingIndicator" class="record-indicator" style="display:none"></span>
                                     <button id="techRecordBtn" class="btn btn-secondary">Start Recording</button>

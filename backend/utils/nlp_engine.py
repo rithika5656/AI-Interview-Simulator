@@ -51,35 +51,36 @@ INTERVIEW_PROMPTS = {
     ]
 }
 
-def generate_questions(job_role, question_number=1, previous_response=None):
+def generate_questions(job_role, question_number=1, previous_response=None, exclude_questions=None):
     """
     Generate interview questions based on job role
     Args:
         job_role: Position being interviewed for
         question_number: Question sequence number
         previous_response: Candidate's previous response for context
+        exclude_questions: List of questions already asked in this session to prevent repetition
     Returns:
         Generated question
     """
-    try:
-        # Get predefined questions if available
-        if job_role in INTERVIEW_PROMPTS:
-            if question_number <= len(INTERVIEW_PROMPTS[job_role]):
-                return INTERVIEW_PROMPTS[job_role][question_number - 1]
+    if exclude_questions is None:
+        exclude_questions = []
+
+    if previous_response:
+        prompt = f"""Based on this interview response for a {job_role} position:
         
-        # Use GPT for dynamic follow-up questions
-        if previous_response:
-            prompt = f"""Based on this interview response for a {job_role} position:
-            
 Response: {previous_response}
 
-Generate a thoughtful follow-up question that digs deeper into their experience and competencies.
-Keep it concise and professional."""
-        else:
-            prompt = f"""Generate a strong opening interview question for a {job_role} position.
+Generate a thoughtful, professional follow-up question that digs deeper into their experience and competencies.
+Do not ask any questions similar to the following: {", ".join(exclude_questions)}
+Keep it concise and professional (maximum 1-2 sentences)."""
+    else:
+        prompt = f"""Generate a strong opening interview question for a {job_role} position.
 The question should help assess technical skills, problem-solving ability, and communication.
-Keep it concise and professional."""
-        
+Do not ask any questions similar to the following: {", ".join(exclude_questions)}
+Keep it concise and professional (maximum 1-2 sentences)."""
+
+    try:
+        # Try generating using the LLM
         if _use_modern_client:
             response = _client.chat.completions.create(
                 model="gpt-3.5-turbo",
@@ -95,10 +96,27 @@ Keep it concise and professional."""
                 temperature=0.7
             )
 
-        return _extract_chat_content(response)
+        question = _extract_chat_content(response).strip()
+        if question:
+            return question
     except Exception as e:
         print(f"Error generating question: {e}")
-        return "Tell me about your professional background."
+        
+    # Fallback to local prompt bank, but randomize and exclude already asked questions
+    import random
+    prompts = INTERVIEW_PROMPTS.get(job_role, [
+        "Tell me about a time you had to solve a difficult problem.",
+        "How do you handle working in a team with diverse perspectives?",
+        "What are your long-term career goals?",
+        "Describe your ideal work environment.",
+        "How do you stay motivated and prioritize tasks?"
+    ])
+    
+    # Filter out excluded questions
+    available = [p for p in prompts if p not in exclude_questions]
+    if not available:
+        return random.choice(prompts)
+    return random.choice(available)
 
 def analyze_response(response_text, job_role):
     """

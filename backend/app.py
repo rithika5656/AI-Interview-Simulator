@@ -82,11 +82,13 @@ def start_interview():
         'started_at': None,
         # live_buffer: accumulate bytes for live transcription
         'live_buffer': bytearray(),
-        'last_transcribe': 0
+        'last_transcribe': 0,
+        'questions': []
     }
     
     # Generate initial question
-    initial_question = generate_questions(job_role, question_number=1)
+    initial_question = generate_questions(job_role, question_number=1, exclude_questions=[])
+    interview_sessions[interview_id]['questions'].append(initial_question)
     
     return jsonify({
         "interview_id": interview_id,
@@ -145,11 +147,14 @@ def submit_response():
     # Generate follow-up question
     response_number = len(interview_sessions[interview_id]['responses'])
     if response_number < 5:
+        asked_questions = interview_sessions[interview_id].setdefault('questions', [])
         next_question = generate_questions(
             interview_sessions[interview_id]['job_role'],
             question_number=response_number + 1,
-            previous_response=user_text
+            previous_response=user_text,
+            exclude_questions=asked_questions
         )
+        asked_questions.append(next_question)
         follow_up = next_question
     else:
         follow_up = "Thank you for completing the interview! We'll now generate your report."

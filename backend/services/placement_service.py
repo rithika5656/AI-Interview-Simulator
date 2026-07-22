@@ -139,6 +139,10 @@ def analyze_resume_payload(user_id: str, resume_text: str, filename: str | None 
             "projects_json": json.dumps(analysis.get("projects", [])),
             "education_json": json.dumps(analysis.get("education", [])),
             "certifications_json": json.dumps(analysis.get("certifications", [])),
+            "experience_json": json.dumps(analysis.get("experience", [])),
+            "achievements_json": json.dumps(analysis.get("achievements", [])),
+            "internships_json": json.dumps(analysis.get("internships", [])),
+            "languages_json": json.dumps(analysis.get("languages", [])),
             "ats_score": float(analysis.get("ats_score", 0)),
             "missing_keywords_json": json.dumps(analysis.get("missing_keywords", [])),
             "suggestions_json": json.dumps(analysis.get("suggestions", [])),
@@ -147,10 +151,17 @@ def analyze_resume_payload(user_id: str, resume_text: str, filename: str | None 
     )
 
     return {
+        "name": analysis.get("name", "Demo Student"),
+        "email": analysis.get("email", ""),
+        "phone": analysis.get("phone", ""),
         "skills": analysis.get("skills", []),
         "projects": analysis.get("projects", []),
         "education": analysis.get("education", []),
         "certifications": analysis.get("certifications", []),
+        "experience": analysis.get("experience", []),
+        "achievements": analysis.get("achievements", []),
+        "internships": analysis.get("internships", []),
+        "languages": analysis.get("languages", []),
         "ats_score": float(analysis.get("ats_score", 0)),
         "missing_keywords": analysis.get("missing_keywords", []),
         "suggestions": analysis.get("suggestions", []),
@@ -158,15 +169,92 @@ def analyze_resume_payload(user_id: str, resume_text: str, filename: str | None 
     }
 
 
-def generate_question_set(module: str, topic: str, difficulty: str, count: int = 5) -> list[dict[str, Any]]:
+def get_random_bank_question(module: str, topic: str, difficulty: str, company: str = None, exclude_texts: list[str] = None) -> dict[str, Any]:
+    from database.question_bank import QUESTION_BANK
+    import random
+    import copy
+    
+    # Try finding exact topic
+    m_key = module.lower()
+    if m_key == "technical-mcq":
+        m_key = "technical"
+    elif m_key == "logical reasoning":
+        m_key = "logical"
+    elif m_key == "verbal ability":
+        m_key = "verbal"
+        
+    m_bank = QUESTION_BANK.get(m_key, {})
+    t_bank = m_bank.get(topic)
+    
+    if not t_bank:
+        # Get all questions under module
+        all_questions = []
+        for q_list in m_bank.values():
+            all_questions.extend(q_list)
+        t_bank = all_questions
+        
+    if not t_bank:
+        # Complete fallback
+        t_bank = [{
+            "question": f"What is a key concept in {topic}?",
+            "options": ["Concept A", "Concept B", "Concept C", "Concept D"],
+            "correct_index": 0,
+            "explanation": "This is a generic concept explanation."
+        }]
+        
+    # Exclude already generated ones
+    if exclude_texts:
+        available = [q for q in t_bank if q.get("question") not in exclude_texts]
+    else:
+        available = t_bank
+        
+    if not available:
+        available = t_bank
+        
+    selected = random.choice(available)
+    return copy.deepcopy(selected)
+
+
+def generate_question_set(module: str, topic: str, difficulty: str, count: int = 5, company: str = None) -> list[dict[str, Any]]:
     questions = []
+    used_questions = set()
+    
     for index in range(count):
-        question = generate_structured_mcq(module, topic, difficulty)
+        # 1. Try using the LLM
+        question = None
+        try:
+            question = generate_structured_mcq(module, topic, difficulty, company=company, exclude_texts=list(used_questions))
+        except Exception:
+            pass
+            
+        # 2. If LLM fails or returns generic fallback, use our local bank
+        if not question or not question.get("question") or "Sample" in question.get("question", "") or question.get("options") == ["Option A", "Option B", "Option C", "Option D"]:
+            question = get_random_bank_question(module, topic, difficulty, company=company, exclude_texts=list(used_questions))
+            
         question["id"] = str(uuid.uuid4())
         question["order"] = index + 1
         question.setdefault("topic", topic)
         question.setdefault("difficulty", difficulty)
+        
+        # Randomize options order and adjust correct_index
+        options = question.get("options", [])
+        correct_idx = int(question.get("correct_index", question.get("answer_index", 0)))
+        
+        if len(options) == 4:
+            correct_option = options[correct_idx]
+            indexed_options = list(enumerate(options))
+            random.shuffle(indexed_options)
+            
+            new_options = [opt for _, opt in indexed_options]
+            new_correct_idx = next(i for i, (old_idx, _) in enumerate(indexed_options) if old_idx == correct_idx)
+            
+            question["options"] = new_options
+            question["correct_index"] = new_correct_idx
+            question["answer_index"] = new_correct_idx
+            
         questions.append(question)
+        used_questions.add(question["question"])
+        
     return questions
 
 
@@ -345,8 +433,8 @@ def build_company_track(company: str) -> dict[str, Any]:
         "hr_questions": info["hr_questions"],
         "coding_problems": info["coding_problems"],
         "modules": {
-            "aptitude": generate_question_set("aptitude", random.choice(APPLIED_TOPICS["aptitude"]), details["difficulty"], count=3),
-            "technical": generate_question_set("technical", random.choice(APPLIED_TOPICS["technical"]), details["difficulty"], count=3),
+            "aptitude": generate_question_set("aptitude", random.choice(APPLIED_TOPICS["aptitude"]), details["difficulty"], count=3, company=company),
+            "technical": generate_question_set("technical", random.choice(APPLIED_TOPICS["technical"]), details["difficulty"], count=3, company=company),
         },
         "interview_focus": f"Prepare company-specific questions for {company} and tailor examples to the role.",
     }

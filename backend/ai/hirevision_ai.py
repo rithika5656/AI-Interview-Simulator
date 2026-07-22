@@ -62,13 +62,20 @@ def _call_json_prompt(prompt: str, fallback: dict[str, Any], max_tokens: int = 5
         return fallback
 
 
-def generate_structured_mcq(module: str, topic: str, difficulty: str) -> dict[str, Any]:
+def generate_structured_mcq(module: str, topic: str, difficulty: str, company: str = None, exclude_texts: list[str] = None) -> dict[str, Any]:
+    if exclude_texts is None:
+        exclude_texts = []
+        
     fallback = _fallback_mcq(module, topic, difficulty)
     prompt = f"""
-Generate one {module} multiple-choice question for the topic '{topic}' at '{difficulty}' difficulty.
+Generate one {module} multiple-choice question for the topic '{topic}' at '{difficulty}' difficulty{f" specifically tailored for {company} placement preparation" if company else ""}.
+Do NOT use generic options like 'Option 1', 'Option 2', 'Option A', etc. All options must be realistic, meaningful, and distinct answer choices related to the question. There must be exactly one correct answer.
 Return JSON with keys: question, options (array of 4 strings), answer_index (0-3), correct_index (0-3), explanation, difficulty, topic.
 Make the question clear, practical, and suitable for placement preparation.
 """
+    if exclude_texts:
+        prompt += f"\nDo NOT generate a question similar to any of these: {json.dumps(exclude_texts)}"
+
     result = _call_json_prompt(prompt, fallback, max_tokens=450)
     if "correct_index" not in result and "answer_index" in result:
         result["correct_index"] = result["answer_index"]
@@ -76,10 +83,26 @@ Make the question clear, practical, and suitable for placement preparation.
 
 
 def generate_resume_analysis(resume_text: str) -> dict[str, Any]:
-    fallback = _fallback_resume_analysis(resume_text)
+    from services.resume_parser import parse_resume
+    fallback = parse_resume(resume_text)
     prompt = f"""
-Analyze this resume text for a placement preparation system.
-Return JSON with keys: skills (array), projects (array), education (array), certifications (array), ats_score (number 0-100), missing_keywords (array), suggestions (array).
+Analyze the following resume text for a placement preparation system.
+Extract and return a JSON object with these exact keys:
+- name: (string, candidate's name)
+- email: (string, candidate's email)
+- phone: (string, candidate's phone number)
+- skills: (array of strings, technical and soft skills)
+- education: (array of strings, degrees, universities, GPA/CGPA if any)
+- experience: (array of strings, work experience descriptions and roles)
+- projects: (array of strings, project titles and descriptions)
+- certifications: (array of strings, certificates earned)
+- achievements: (array of strings, awards, competitive programming ranks, etc.)
+- internships: (array of strings, internship details)
+- languages: (array of strings, languages spoken)
+- ats_score: (number 0-100, computed dynamically based on resume formatting, completeness, skills, and projects)
+- missing_keywords: (array of 3-5 strings of keywords/technologies missing from the resume but relevant to the candidate's target role)
+- suggestions: (array of 3-5 actionable recommendations to improve the resume)
+
 Resume text:
 {resume_text[:6000]}
 """
@@ -121,13 +144,18 @@ Return JSON with keys: strengths (array), weaknesses (array), learning_plan (arr
     return _call_json_prompt(prompt, fallback, max_tokens=500)
 
 
-def generate_follow_up_question(domain: str, previous_response: str | None = None) -> str:
+def generate_follow_up_question(domain: str, previous_response: str | None = None, exclude_questions: list[str] = None) -> str:
+    if exclude_questions is None:
+        exclude_questions = []
     context = previous_response or "fresh opening question"
     prompt = f"""
 Create one concise follow-up interview question for a {domain} interview.
 Use this context: {context}
 Return plain text only.
 """
+    if exclude_questions:
+        prompt += f"\nDo NOT ask any of the following questions: {', '.join(exclude_questions)}"
+        
     try:
         if _use_modern_client:
             response = _client.chat.completions.create(
@@ -145,7 +173,53 @@ Return plain text only.
             )
         return _extract_content(response).strip()
     except Exception:
-        return f"Tell me more about your experience related to {domain}."
+        fallback_questions = [
+            f"Can you explain your experience with {domain} in more detail?",
+            f"What do you think is the biggest challenge when working with {domain}?",
+            f"How do you stay up-to-date with best practices in {domain}?",
+            f"Tell me about a specific project where you applied your {domain} skills."
+        ]
+        import random
+        available = [q for q in fallback_questions if q not in exclude_questions]
+        return random.choice(available) if available else random.choice(fallback_questions)
+
+
+def generate_gd_topic(exclude_topics: list[str] = None) -> str:
+    if exclude_topics is None:
+        exclude_topics = []
+    prompt = f"""Generate one interesting and current topic for a group discussion in a corporate placement or college interview.
+Return only the topic name as plain text (maximum 6-10 words).
+Do not generate a topic similar to any of these: {", ".join(exclude_topics)}"""
+    try:
+        if _use_modern_client:
+            response = _client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=50,
+                temperature=0.8
+            )
+        else:
+            response = _client.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=50,
+                temperature=0.8
+            )
+        return _extract_content(response).strip().strip('"')
+    except Exception:
+        fallback_topics = [
+            "Impact of AI on Job Market",
+            "Cryptocurrency: Future Currency or Bubble?",
+            "Is Remote Work Here to Stay?",
+            "Social Media: Connecting or Isolating Us?",
+            "Electric Vehicles: The Future of Transportation",
+            "Cybersecurity Challenges in the Digital Age",
+            "Universal Basic Income: Pros and Cons",
+            "The Role of Ethics in AI Development"
+        ]
+        import random
+        available = [t for t in fallback_topics if t not in exclude_topics]
+        return random.choice(available) if available else random.choice(fallback_topics)
 
 
 def _fallback_mcq(module: str, topic: str, difficulty: str) -> dict[str, Any]:

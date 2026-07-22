@@ -52,6 +52,17 @@ function showView(viewId) {
     if (target) target.classList.add('active');
     $all('[data-view]').forEach((button) => button.classList.toggle('active', button.dataset.view === viewId));
     
+    // Auto start/stop webcam preview based on active view
+    if (viewId === 'legacyInterviewView') {
+        startWebcam('videoElement');
+    } else if (viewId === 'technicalInterviewView') {
+        startWebcam('techVideoElement');
+    } else if (viewId === 'gdView') {
+        startWebcam('gdVideoElement');
+    } else {
+        stopWebcam();
+    }
+
     // Trigger editor layout recalculation when Coding Assessment tab is clicked
     if (viewId === 'codingView' && state.editor) {
         setTimeout(() => state.editor.layout(), 100);
@@ -96,6 +107,11 @@ function bindModuleForms() {
 
     const gdBtn = $('#gdSimulateBtn');
     if (gdBtn) gdBtn.addEventListener('click', simulateGD);
+
+    const gdGenerateBtn = $('#gdGenerateTopicBtn');
+    if (gdGenerateBtn) gdGenerateBtn.addEventListener('click', generateGdTopic);
+
+    initGdSpeech();
 
     const codingRunBtn = $('#codingRunBtn');
     if (codingRunBtn) codingRunBtn.addEventListener('click', runCoding);
@@ -350,11 +366,22 @@ async function handleResumeUpload(event) {
             output.innerHTML = `
                 <div class="analysis-card success">
                     <h3>ATS Score: ${Number(data.ats_score || 0).toFixed(1)}%</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 15px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px;">
+                        <p style="margin: 4px 0;"><strong>Name:</strong> ${data.name || 'Not detected'}</p>
+                        <p style="margin: 4px 0;"><strong>Email:</strong> ${data.email || 'Not detected'}</p>
+                        <p style="margin: 4px 0;"><strong>Phone:</strong> ${data.phone || 'Not detected'}</p>
+                        <p style="margin: 4px 0;"><strong>Languages:</strong> ${(data.languages || []).join(', ') || 'Not detected'}</p>
+                    </div>
                     <p><strong>Skills:</strong> ${(data.skills || []).join(', ') || 'Not detected'}</p>
+                    <p><strong>Education:</strong> ${(data.education || []).join(' | ') || 'Not detected'}</p>
+                    <p><strong>Experience:</strong> ${(data.experience || []).join(' | ') || 'Not detected'}</p>
                     <p><strong>Projects:</strong> ${(data.projects || []).join(' | ') || 'Not detected'}</p>
-                    <p><strong>Education:</strong> ${(data.education || []).join(', ') || 'Not detected'}</p>
+                    <p><strong>Certifications:</strong> ${(data.certifications || []).join(', ') || 'Not detected'}</p>
+                    <p><strong>Achievements:</strong> ${(data.achievements || []).join(', ') || 'Not detected'}</p>
+                    <p><strong>Internships:</strong> ${(data.internships || []).join(', ') || 'Not detected'}</p>
                     <p><strong>Missing Keywords:</strong> ${(data.missing_keywords || []).join(', ') || 'None'}</p>
-                    <ul>${(data.suggestions || []).map((suggestion) => `<li>${suggestion}</li>`).join('')}</ul>
+                    <h4 style="margin-top: 15px; margin-bottom: 8px;">Suggestions & Recommendations:</h4>
+                    <ul style="margin: 0; padding-left: 20px;">${(data.suggestions || []).map((suggestion) => `<li>${suggestion}</li>`).join('')}</ul>
                 </div>
             `;
         }
@@ -514,8 +541,10 @@ async function simulateGD() {
                 </div>
             `;
         }
+        stopWebcam();
     } catch (error) {
         if (result) result.innerHTML = errorCard('GD analysis failed', error.message);
+        stopWebcam();
     }
 }
 
@@ -554,7 +583,7 @@ async function loadCompanyTrack(company) {
                         ${(data.coding_problems || []).map((p) => `<p><strong>${p.title}:</strong> ${p.desc}</p>`).join('')}
                     </div>
                     <div class="panel-subcard">
-                        <h4>Sample HR Questions</h4>
+                        <h4>Company HR Questions</h4>
                         ${(data.hr_questions || []).map((q) => `<p>• ${q}</p>`).join('')}
                     </div>
                 </div>
@@ -682,56 +711,72 @@ async function startInterview() {
         $('#questionText').textContent = data.question;
         $('#questionNumber').textContent = state.questionCount;
         showView('legacyInterviewView');
-        await startWebcam();
+        await startWebcam('videoElement');
     } catch (error) {
         showToast(`Error starting interview: ${error.message}`, 'error');
     }
 }
 
-async function startWebcam() {
+async function startWebcam(videoElementId = 'videoElement') {
+    if (state.stream) {
+        state.stream.getTracks().forEach(track => track.stop());
+        state.stream = null;
+    }
     try {
         state.stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 } }, audio: true });
-        const video = $('#videoElement');
+        const video = $(`#${videoElementId}`);
         if (video) video.srcObject = state.stream;
 
-        const audioStream = new MediaStream(state.stream.getAudioTracks());
-        state.mediaRecorder = new MediaRecorder(audioStream, { mimeType: 'audio/webm' });
-        state.mediaRecorder.ondataavailable = (event) => {
-            if (!event.data || event.data.size === 0) return;
-            state.audioChunks.push(event.data);
-            if (!socket || socket.disconnected) return;
+        if (videoElementId === 'videoElement') {
+            const audioStream = new MediaStream(state.stream.getAudioTracks());
+            state.mediaRecorder = new MediaRecorder(audioStream, { mimeType: 'audio/webm' });
+            state.mediaRecorder.ondataavailable = (event) => {
+                if (!event.data || event.data.size === 0) return;
+                state.audioChunks.push(event.data);
+                if (!socket || socket.disconnected) return;
 
-            const reader = new FileReader();
-            reader.onload = () => {
-                const base64 = String(reader.result).split(',')[1];
-                socket.emit('audio_chunk', { interview_id: state.currentInterviewId, audio_chunk: base64, final: false });
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const base64 = String(reader.result).split(',')[1];
+                    socket.emit('audio_chunk', { interview_id: state.currentInterviewId, audio_chunk: base64, final: false });
+                };
+                reader.readAsDataURL(event.data);
             };
-            reader.readAsDataURL(event.data);
-        };
+        }
 
-        const recordBtn = $('#recordBtn');
-        const stopBtn = $('#stopBtn');
+        const recordBtn = videoElementId === 'videoElement' ? $('#recordBtn') : (videoElementId === 'techVideoElement' ? $('#techRecordBtn') : $('#gdRecordBtn'));
+        const stopBtn = videoElementId === 'videoElement' ? $('#stopBtn') : (videoElementId === 'techVideoElement' ? $('#techStopBtn') : $('#gdStopBtn'));
         if (recordBtn) recordBtn.disabled = false;
         if (stopBtn) stopBtn.disabled = true;
     } catch (error) {
         showToast('Camera and microphone enabled. Press Start to practice speaking.', 'info');
-        // Fallback: Enable typing response if camera/microphone access throws error
-        const recordBtn = $('#recordBtn');
-        if (recordBtn) recordBtn.disabled = true;
+        const recordBtn = videoElementId === 'videoElement' ? $('#recordBtn') : (videoElementId === 'techVideoElement' ? $('#techRecordBtn') : $('#gdRecordBtn'));
+        if (recordBtn) recordBtn.disabled = false;
         
-        // Turn transcription box into editable textarea
-        const transcription = $('#transcriptionText');
-        if (transcription && transcription.tagName !== 'TEXTAREA') {
-            const textarea = document.createElement('textarea');
-            textarea.id = 'transcriptionText';
-            textarea.className = 'editable-transcription';
-            textarea.placeholder = 'Type your practicing answer here since camera/microphone is unavailable...';
-            transcription.replaceWith(textarea);
+        if (videoElementId === 'videoElement') {
+            const transcription = $('#transcriptionText');
+            if (transcription && transcription.tagName !== 'TEXTAREA') {
+                const textarea = document.createElement('textarea');
+                textarea.id = 'transcriptionText';
+                textarea.className = 'editable-transcription';
+                textarea.placeholder = 'Type your practicing answer here since camera/microphone is unavailable...';
+                transcription.replaceWith(textarea);
+            }
+            const submitBtn = $('#submitBtn');
+            if (submitBtn) submitBtn.disabled = false;
         }
-        
-        const submitBtn = $('#submitBtn');
-        if (submitBtn) submitBtn.disabled = false;
     }
+}
+
+function stopWebcam() {
+    if (state.stream) {
+        state.stream.getTracks().forEach(track => track.stop());
+        state.stream = null;
+    }
+    ['videoElement', 'techVideoElement', 'gdVideoElement'].forEach(id => {
+        const video = $(`#${id}`);
+        if (video) video.srcObject = null;
+    });
 }
 
 function toggleRecording() {
@@ -994,6 +1039,201 @@ function initTechSpeech() {
     };
     
     stopBtn.onclick = () => {
+        }
+        
+        $('#confidenceScore').textContent = data.immediate_feedback.sentiment.confidence.toFixed(2);
+        $('#fillerCount').textContent = data.immediate_feedback.filler_words.length;
+        $('#sentimentType').textContent = data.immediate_feedback.sentiment.sentiment_type;
+
+        state.questionCount++;
+
+        if (state.questionCount <= 5) {
+            $('#questionNumber').textContent = state.questionCount;
+            $('#questionText').textContent = data.next_question;
+            
+            // Clear transcription text for next question
+            if (transcriptionTextElement) {
+                if (transcriptionTextElement.tagName === 'TEXTAREA') {
+                    transcriptionTextElement.value = '';
+                } else {
+                    transcriptionTextElement.textContent = '';
+                }
+            }
+        } else {
+            await endInterview();
+        }
+
+        state.audioChunks = [];
+        const submitBtn = $('#submitBtn');
+        if (submitBtn) submitBtn.disabled = true;
+    } catch (error) {
+        showToast(`Error submitting response: ${error.message}`, 'error');
+    }
+}
+
+async function endInterview() {
+    try {
+        const data = await apiPost('/end-interview', { interview_id: state.currentInterviewId });
+        displayResults(data.report);
+        showView('legacyResultsView');
+        
+        // Stop stream if practicing
+        if (state.stream) {
+            state.stream.getTracks().forEach(track => track.stop());
+            state.stream = null;
+        }
+    } catch (error) {
+        showToast(`Error generating report: ${error.message}`, 'error');
+    }
+}
+
+function displayResults(report) {
+    $('#overallScore').textContent = `${report.summary.overall_score.toFixed(1)}/100`;
+    $('#communicationScore').textContent = `${report.summary.communication_score.toFixed(1)}/100`;
+    $('#technicalScore').textContent = `${report.summary.technical_score.toFixed(1)}/100`;
+    $('#strengthsList').innerHTML = (report.detailed_feedback.strengths || []).map((item) => `<li>${item}</li>`).join('');
+    $('#improvementsList').innerHTML = (report.detailed_feedback.areas_for_improvement || []).map((item) => `<li>${item}</li>`).join('');
+    $('#recommendationsList').innerHTML = (report.recommendations || []).map((item) => `<li>${item}</li>`).join('');
+    $('#responseDetails').innerHTML = (report.response_details || []).map((entry, index) => `
+        <div class="response-detail">
+            <h4>Response ${index + 1}</h4>
+            <p><strong>Your Answer:</strong> ${entry.text}</p>
+            <p><strong>Relevance Score:</strong> ${entry.analysis?.relevance_score || 'N/A'}/100</p>
+            <p><strong>Sentiment:</strong> ${entry.sentiment?.sentiment_type || 'Neutral'}</p>
+            <p><strong>Key Strengths:</strong> ${(entry.analysis?.key_strengths || []).join(', ') || 'N/A'}</p>
+        </div>
+    `).join('');
+}
+
+function startNewInterview() {
+    $('#jobRole').value = 'Software Engineer';
+    $('#interviewName').value = '';
+    const transcription = $('#transcriptionText');
+    if (transcription) {
+        if (transcription.tagName === 'TEXTAREA') {
+            transcription.value = '';
+        } else {
+            transcription.textContent = '';
+        }
+    }
+    $('#recordBtn').disabled = false;
+    $('#stopBtn').disabled = true;
+    state.audioChunks = [];
+    state.questionCount = 0;
+    showView('dashboardView');
+}
+
+function downloadReport() {
+    const report = {
+        interviewId: state.currentInterviewId,
+        overallScore: $('#overallScore').textContent,
+        communicationScore: $('#communicationScore').textContent,
+        technicalScore: $('#technicalScore').textContent,
+        strengths: Array.from($('#strengthsList').querySelectorAll('li')).map((li) => li.textContent),
+        improvements: Array.from($('#improvementsList').querySelectorAll('li')).map((li) => li.textContent),
+        timestamp: new Date().toISOString(),
+    };
+
+    const link = document.createElement('a');
+    link.href = `data:text/plain;charset=utf-8,${encodeURIComponent(JSON.stringify(report, null, 2))}`;
+    link.download = `hirevision_report_${state.currentInterviewId || 'session'}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Interactive Technical Interview
+async function generateTechnicalInterviewQuestion() {
+    const result = $('#techResultDisplay');
+    const questionBox = $('#techQuestionBox');
+    if (result) result.innerHTML = loadingCard('Generating adaptive technical question...');
+    if (questionBox) questionBox.style.display = 'none';
+
+    try {
+        const resumeSkills = ($('#technicalInterviewSkills')?.value || '').split(',').map((item) => item.trim()).filter(Boolean);
+        const data = await apiPost('/technical-interview/question', {
+            technology: $('#technicalInterviewTechnology')?.value || 'Python',
+            resume_skills: resumeSkills,
+            job_description: $('#technicalInterviewJobDescription')?.value || '',
+        });
+        
+        state.currentTechQuestion = data.question;
+        state.currentTechTechnology = data.technology;
+        
+        $('#techQuestionText').textContent = data.question;
+        $('#techQuestionHint').textContent = data.follow_up_hint;
+        
+        if (questionBox) questionBox.style.display = 'block';
+        if (result) result.innerHTML = '';
+        
+        // Reset answer field
+        if ($('#techResponseText')) $('#techResponseText').value = '';
+        initTechSpeech();
+    } catch (error) {
+        if (result) result.innerHTML = errorCard('Technical question failed', error.message);
+    }
+}
+
+let techSpeechRecognition = null;
+function initTechSpeech() {
+    const recordBtn = $('#techRecordBtn');
+    const stopBtn = $('#techStopBtn');
+    const indicator = $('#techRecordingIndicator');
+    const textarea = $('#techResponseText');
+    
+    if (!recordBtn) return;
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        recordBtn.style.display = 'none';
+        stopBtn.style.display = 'none';
+        return;
+    }
+    
+    if (!techSpeechRecognition) {
+        techSpeechRecognition = new SpeechRecognition();
+        techSpeechRecognition.continuous = true;
+        techSpeechRecognition.interimResults = true;
+        techSpeechRecognition.lang = 'en-US';
+        
+        techSpeechRecognition.onstart = () => {
+            if (indicator) indicator.style.display = 'inline-block';
+            recordBtn.disabled = true;
+            stopBtn.disabled = false;
+        };
+        
+        techSpeechRecognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                }
+            }
+            if (textarea && finalTranscript) {
+                textarea.value += (textarea.value ? ' ' : '') + finalTranscript;
+            }
+        };
+        
+        techSpeechRecognition.onend = () => {
+            if (indicator) indicator.style.display = 'none';
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+        };
+        
+        techSpeechRecognition.onerror = (event) => {
+            showToast(`Speech recognition warning: ${event.error}`, 'warning');
+        };
+    }
+    
+    recordBtn.onclick = () => {
+        try {
+            techSpeechRecognition.start();
+        } catch (e) {
+            techSpeechRecognition.stop();
+        }
+    };
+    
+    stopBtn.onclick = () => {
         techSpeechRecognition.stop();
     };
 }
@@ -1030,10 +1270,12 @@ async function submitTechnicalAnswer() {
             const questionBox = $('#techQuestionBox');
             if (questionBox) questionBox.style.display = 'none';
         }
+        stopWebcam();
         loadProfile();
         loadDashboard();
     } catch (error) {
         if (result) result.innerHTML = errorCard('Evaluation failed', error.message);
+        stopWebcam();
     }
 }
 
@@ -1320,6 +1562,98 @@ function formatDate(timestamp) {
 
 function humanize(value) {
     return value.replace(/_/g, ' ').replace(/\b\w/g, (match) => match.toUpperCase());
+}
+
+let gdSpeechRecognition = null;
+function initGdSpeech() {
+    const recordBtn = $('#gdRecordBtn');
+    const stopBtn = $('#gdStopBtn');
+    const indicator = $('#gdRecordingIndicator');
+    const textarea = $('#gdTranscript');
+    
+    if (!recordBtn) return;
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        recordBtn.style.display = 'none';
+        stopBtn.style.display = 'none';
+        return;
+    }
+    
+    if (!gdSpeechRecognition) {
+        gdSpeechRecognition = new SpeechRecognition();
+        gdSpeechRecognition.continuous = true;
+        gdSpeechRecognition.interimResults = true;
+        gdSpeechRecognition.lang = 'en-US';
+        
+        gdSpeechRecognition.onstart = () => {
+            if (indicator) indicator.style.display = 'inline-block';
+            recordBtn.disabled = true;
+            stopBtn.disabled = false;
+        };
+        
+        gdSpeechRecognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                }
+            }
+            if (textarea && finalTranscript) {
+                textarea.value += (textarea.value ? ' ' : '') + finalTranscript;
+            }
+        };
+        
+        gdSpeechRecognition.onend = () => {
+            if (indicator) indicator.style.display = 'none';
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+        };
+        
+        gdSpeechRecognition.onerror = (event) => {
+            showToast(`Speech recognition warning: ${event.error}`, 'warning');
+        };
+    }
+    
+    recordBtn.onclick = () => {
+        try {
+            gdSpeechRecognition.start();
+        } catch (e) {
+            gdSpeechRecognition.stop();
+        }
+    };
+    
+    stopBtn.onclick = () => {
+        gdSpeechRecognition.stop();
+    };
+}
+
+async function generateGdTopic() {
+    const select = $('#gdTopic');
+    const btn = $('#gdGenerateTopicBtn');
+    if (!select || !btn) return;
+    
+    btn.disabled = true;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
+    
+    try {
+        const excludeTopics = Array.from(select.options).map(opt => opt.value);
+        const data = await apiPost('/gd/generate-topic', { exclude_topics: excludeTopics });
+        if (data && data.topic) {
+            const newOpt = document.createElement('option');
+            newOpt.value = data.topic;
+            newOpt.textContent = data.topic;
+            select.appendChild(newOpt);
+            select.value = data.topic;
+            showToast('AI Topic generated successfully!', 'success');
+        }
+    } catch (error) {
+        showToast(`Failed to generate topic: ${error.message}`, 'error');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+    }
 }
 
 window.startInterview = startInterview;

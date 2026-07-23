@@ -109,16 +109,23 @@ def build_dashboard(user_id: str) -> dict[str, Any]:
         upcoming_tests = []
     else:
         coach = generate_career_coach_snapshot(metrics)
-        daily_goals = [
-            "Solve 3 aptitude problems",
-            "Revise 1 technical topic",
-            "Record 1 mock interview answer",
-        ]
-        upcoming_tests = [
-            {"title": "Aptitude Sprint", "module": "Aptitude", "time": "Today 7:00 PM"},
-            {"title": "Technical Mock", "module": "Technical Interview", "time": "Tomorrow 6:30 PM"},
-            {"title": "Coding Challenge", "module": "Coding", "time": "Friday 8:00 PM"},
-        ]
+        daily_goals = []
+        if metrics["aptitude_progress"] < 80:
+            daily_goals.append("Practice 3 Aptitude questions to improve your score")
+        if metrics["coding_progress"] < 80:
+            daily_goals.append("Solve 1 new Coding problem today")
+        if metrics["interview_score"] < 80:
+            daily_goals.append("Record 1 HR Interview response")
+        if len(daily_goals) < 3:
+            daily_goals.append("Review a Company Preparation Track")
+            
+        upcoming_tests = []
+        if metrics["aptitude_progress"] < 90:
+            upcoming_tests.append({"title": "Aptitude Refresher", "module": "Aptitude", "time": "Recommended Today"})
+        if metrics["coding_progress"] < 90:
+            upcoming_tests.append({"title": "Coding Challenge", "module": "Coding", "time": "Recommended Tomorrow"})
+        if not upcoming_tests:
+            upcoming_tests.append({"title": "Mastery Assessment", "module": "Technical Interview", "time": "Anytime"})
 
     return {
         "user_id": user_id,
@@ -436,13 +443,35 @@ def build_company_track(company: str) -> dict[str, Any]:
 
     info = company_data.get(company, default_company_data)
 
+    from database.coding_question_bank import CODING_QUESTION_BANK
+    
+    hr_pool = [
+        "Tell me about a time you faced a difficult challenge at work.",
+        "How do you handle working with a difficult team member?",
+        "Describe a situation where you had to meet a tight deadline.",
+        "What is your greatest professional achievement?",
+        "Why do you want to work for this company?",
+        "Where do you see yourself in five years?",
+        "Tell me about a time you failed and what you learned from it.",
+        "How do you stay updated with the latest technologies?",
+        "Describe your ideal work environment.",
+        "What are your greatest strengths and weaknesses?"
+    ]
+    
+    dynamic_hr = random.sample(info["hr_questions"] + hr_pool, 3)
+    
+    difficulty_level = details["difficulty"].lower()
+    coding_pool = CODING_QUESTION_BANK.get(difficulty_level, CODING_QUESTION_BANK["easy"])
+    dynamic_coding_raw = random.sample(coding_pool, min(2, len(coding_pool)))
+    dynamic_coding = [{"title": p["title"], "desc": p["problem_statement"]} for p in dynamic_coding_raw]
+
     return {
         "company": company,
         "focus_areas": details["focus"],
         "difficulty": details["difficulty"],
         "interview_patterns": info["rounds"],
-        "hr_questions": info["hr_questions"],
-        "coding_problems": info["coding_problems"],
+        "hr_questions": dynamic_hr,
+        "coding_problems": dynamic_coding,
         "modules": {
             "aptitude": generate_question_set("aptitude", random.choice(APPLIED_TOPICS["aptitude"]), details["difficulty"], count=3, company=company),
             "technical": generate_question_set("technical", random.choice(APPLIED_TOPICS["technical"]), details["difficulty"], count=3, company=company),
@@ -506,16 +535,45 @@ def build_profile(user_id: str) -> dict[str, Any]:
 
 
 def build_analytics(user_id: str) -> dict[str, Any]:
+    from database.mongo_store import fetch_all_mongo
+    
+    apt_tests = fetch_all_mongo("aptitude_tests", {"user_id": user_id})
+    cod_tests = fetch_all_mongo("coding_tests", {"user_id": user_id})
+    int_tests = fetch_all_mongo("interviews", {"user_id": user_id})
+    tech_tests = fetch_all_mongo("technical_tests", {"user_id": user_id})
+    log_tests = fetch_all_mongo("logical_tests", {"user_id": user_id})
+    verb_tests = fetch_all_mongo("verbal_tests", {"user_id": user_id})
+    
+    topic_scores = {}
+    for tests in [apt_tests, tech_tests, log_tests, verb_tests]:
+        for t in tests:
+            if "topic" in t and "score" in t:
+                topic_scores.setdefault(t["topic"], []).append(float(t["score"]))
+                
+    for t in cod_tests:
+        if "language" in t and "score" in t:
+            topic_scores.setdefault(t["language"], []).append(float(t["score"]))
+            
+    weak_topics = []
+    strong_topics = []
+    if topic_scores:
+        avg_scores = {k: sum(v)/len(v) for k, v in topic_scores.items()}
+        sorted_topics = sorted(avg_scores.items(), key=lambda x: x[1])
+        weak_topics = [k for k, v in sorted_topics[:3] if v < 70]
+        strong_topics = [k for k, v in sorted_topics[-3:] if v >= 70]
+        
     metrics = get_dashboard_metrics(user_id)
     base = metrics["placement_readiness_score"]
+    history_len = len(apt_tests) + len(cod_tests) + len(int_tests) + len(tech_tests) + len(log_tests) + len(verb_tests)
+    
     return {
         "daily_progress": [max(base - 6, 0), max(base - 2, 0), base],
         "weekly_progress": [max(base - 12, 0), max(base - 7, 0), max(base - 3, 0), base],
         "monthly_progress": [max(base - 15, 0), max(base - 10, 0), max(base - 5, 0), base],
-        "interview_trend": [68, 70, 72, metrics["interview_score"]],
-        "coding_accuracy": [58, 61, 65, metrics["coding_progress"]],
-        "aptitude_accuracy": [60, 63, 66, metrics["aptitude_progress"]],
-        "technical_accuracy": [62, 65, 68, metrics["interview_score"]],
+        "interview_trend": [max(metrics["interview_score"] - 10, 0), max(metrics["interview_score"] - 5, 0), metrics["interview_score"]],
+        "weak_topics": weak_topics or ["Needs more data"],
+        "strong_topics": strong_topics or ["Needs more data"],
+        "total_tests_taken": history_len
     }
 
 

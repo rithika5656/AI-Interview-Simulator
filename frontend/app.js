@@ -73,6 +73,22 @@ function showView(viewId) {
             setTimeout(loadCodingProblem, 200);
         }
     }
+    
+    // Lazy load panels
+    triggerPanelLoad(viewId);
+}
+
+const loadedPanels = new Set();
+function triggerPanelLoad(viewId, force = false) {
+    if (!force && loadedPanels.has(viewId)) return;
+    
+    if (viewId === 'dashboardView') loadDashboard();
+    else if (viewId === 'analyticsView') loadAnalytics();
+    else if (viewId === 'profileView') loadProfile();
+    else if (viewId === 'companyView') loadCompanyTrack($('#companySelect')?.value || 'TCS');
+    else if (viewId === 'coachView') loadCoach();
+    
+    loadedPanels.add(viewId);
 }
 
 function bindNavigation() {
@@ -243,7 +259,13 @@ function showOfflinePlaceholders() {
 }
 
 async function loadAllPanels() {
-    await Promise.allSettled([loadDashboard(), loadAnalytics(), loadCoach(), loadProfile(), loadCompanyTrack($('#companySelect')?.value || 'TCS')]);
+    loadedPanels.clear();
+    const activeView = $('.view.active');
+    if (activeView) {
+        triggerPanelLoad(activeView.id, true);
+    } else {
+        triggerPanelLoad('dashboardView', true);
+    }
 }
 
 async function loadDashboard() {
@@ -628,10 +650,10 @@ async function loadAnalytics() {
         const data = await apiGet(`/analytics/summary?user_id=${state.userId}`);
         result.innerHTML = `
             <div class="grid grid-2">
-                <div class="panel-subcard"><h4>Daily Progress</h4><p>${(data.daily_progress || []).join(' → ')}</p></div>
-                <div class="panel-subcard"><h4>Weekly Progress</h4><p>${(data.weekly_progress || []).join(' → ')}</p></div>
-                <div class="panel-subcard"><h4>Monthly Progress</h4><p>${(data.monthly_progress || []).join(' → ')}</p></div>
-                <div class="panel-subcard"><h4>Interview Trend</h4><p>${(data.interview_trend || []).join(' → ')}</p></div>
+                <div class="panel-subcard"><h4>Strong Topics</h4><p>${(data.strong_topics || []).join(', ')}</p></div>
+                <div class="panel-subcard"><h4>Weak Topics</h4><p>${(data.weak_topics || []).join(', ')}</p></div>
+                <div class="panel-subcard"><h4>Total Tests Taken</h4><p>${data.total_tests_taken || 0}</p></div>
+                <div class="panel-subcard"><h4>Performance Trend</h4><p>${(data.weekly_progress || []).map(n => Number(n).toFixed(1) + '%').join(' → ')}</p></div>
             </div>
         `;
     } catch (error) {
@@ -1067,6 +1089,70 @@ function initTechSpeech() {
     
     stopBtn.onclick = () => {
         techSpeechRecognition.stop();
+    };
+}
+
+let gdSpeechRecognition = null;
+function initGdSpeech() {
+    const recordBtn = $('#gdRecordBtn');
+    const stopBtn = $('#gdStopBtn');
+    const indicator = $('#gdRecordingIndicator');
+    const textarea = $('#gdTranscript');
+    
+    if (!recordBtn) return;
+    
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        recordBtn.style.display = 'none';
+        stopBtn.style.display = 'none';
+        return;
+    }
+    
+    if (!gdSpeechRecognition) {
+        gdSpeechRecognition = new SpeechRecognition();
+        gdSpeechRecognition.continuous = true;
+        gdSpeechRecognition.interimResults = true;
+        gdSpeechRecognition.lang = 'en-US';
+        
+        gdSpeechRecognition.onstart = () => {
+            if (indicator) indicator.style.display = 'inline-block';
+            recordBtn.disabled = true;
+            stopBtn.disabled = false;
+        };
+        
+        gdSpeechRecognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                }
+            }
+            if (textarea && finalTranscript) {
+                textarea.value += (textarea.value ? ' ' : '') + finalTranscript;
+            }
+        };
+        
+        gdSpeechRecognition.onend = () => {
+            if (indicator) indicator.style.display = 'none';
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+        };
+        
+        gdSpeechRecognition.onerror = (event) => {
+            showToast(`Speech recognition warning: ${event.error}`, 'warning');
+        };
+    }
+    
+    recordBtn.onclick = () => {
+        try {
+            gdSpeechRecognition.start();
+        } catch (e) {
+            gdSpeechRecognition.stop();
+        }
+    };
+    
+    stopBtn.onclick = () => {
+        gdSpeechRecognition.stop();
     };
 }
 

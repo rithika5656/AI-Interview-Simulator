@@ -218,7 +218,18 @@
                                 <option value="C++">C++</option>
                                 <option value="JavaScript">JavaScript</option>
                             </select>
-                            <input id="codingProblem" type="text" value="Two Sum" placeholder="Problem statement">
+                            <select id="codingDifficulty" style="max-width: 120px;">
+                                <option value="Easy" selected>Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                            <button id="codingProblemBtn" class="btn btn-secondary" style="width: auto; flex-shrink: 0;"><i class="fa-solid fa-wand-magic-sparkles"></i> Get Problem</button>
+                        </div>
+                        <div id="codingProblemDetails" style="margin-top: 15px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid var(--line);">
+                            <h4 id="codingProblemTitle" style="margin: 0 0 8px 0; color: var(--text-bright);">Select a difficulty and click 'Get Problem' to begin.</h4>
+                            <p id="codingProblemDesc" class="muted" style="margin: 0; font-size: 0.95rem; line-height: 1.5;"></p>
+                            <div id="codingProblemExamples" style="margin-top: 12px; font-size: 0.9rem; line-height: 1.4;"></div>
+                            <div id="codingProblemConstraints" style="margin-top: 12px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;"></div>
                         </div>
                         <div id="codingEditorContainer" style="height: 380px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 15px 0;"></div>
                         <div class="control-row">

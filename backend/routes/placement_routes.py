@@ -128,6 +128,14 @@ def submit_module(module_key: str):
     return jsonify({"module": module_key, **result})
 
 
+@placement_bp.route("/coding/problem", methods=["GET"])
+def coding_problem():
+    user_id = request.args.get("user_id", "default_user")
+    difficulty = request.args.get("difficulty", "easy").lower()
+    from services.placement_service import get_random_coding_problem
+    return jsonify(get_random_coding_problem(user_id, difficulty))
+
+
 @placement_bp.route("/coding/review", methods=["POST"])
 def coding_review():
     payload = request.get_json(silent=True) or {}

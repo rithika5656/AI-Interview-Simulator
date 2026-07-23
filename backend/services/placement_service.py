@@ -93,19 +93,32 @@ def build_dashboard(user_id: str) -> dict[str, Any]:
     metrics = get_dashboard_metrics(user_id)
     activities = list_recent_activity(user_id)
     recent_resume = latest_resume(user_id)
-    coach = generate_career_coach_snapshot(metrics)
 
-    daily_goals = [
-        "Solve 3 aptitude problems",
-        "Revise 1 technical topic",
-        "Record 1 mock interview answer",
-    ]
+    # Check if the user is a brand new user
+    is_new = (len(activities) == 0 and recent_resume is None)
 
-    upcoming_tests = [
-        {"title": "Aptitude Sprint", "module": "Aptitude", "time": "Today 7:00 PM"},
-        {"title": "Technical Mock", "module": "Technical Interview", "time": "Tomorrow 6:30 PM"},
-        {"title": "Coding Challenge", "module": "Coding", "time": "Friday 8:00 PM"},
-    ]
+    if is_new:
+        coach = {
+            "strengths": ["No activity yet"],
+            "weaknesses": ["No analytics available"],
+            "learning_plan": [],
+            "recommended_topics": [],
+            "placement_readiness": 0.0,
+        }
+        daily_goals = []
+        upcoming_tests = []
+    else:
+        coach = generate_career_coach_snapshot(metrics)
+        daily_goals = [
+            "Solve 3 aptitude problems",
+            "Revise 1 technical topic",
+            "Record 1 mock interview answer",
+        ]
+        upcoming_tests = [
+            {"title": "Aptitude Sprint", "module": "Aptitude", "time": "Today 7:00 PM"},
+            {"title": "Technical Mock", "module": "Technical Interview", "time": "Tomorrow 6:30 PM"},
+            {"title": "Coding Challenge", "module": "Coding", "time": "Friday 8:00 PM"},
+        ]
 
     return {
         "user_id": user_id,
@@ -216,32 +229,31 @@ def get_random_bank_question(module: str, topic: str, difficulty: str, company: 
 
 
 def generate_question_set(module: str, topic: str, difficulty: str, count: int = 5, company: str = None) -> list[dict[str, Any]]:
-    questions = []
-    used_questions = set()
+    from database.mcq_generator import get_mcq_questions
+    import copy
+    import uuid
+    import random
     
-    for index in range(count):
-        # 1. Try using the LLM
-        question = None
-        try:
-            question = generate_structured_mcq(module, topic, difficulty, company=company, exclude_texts=list(used_questions))
-        except Exception:
-            pass
-            
-        # 2. If LLM fails or returns generic fallback, use our local bank
-        if not question or not question.get("question") or "Sample" in question.get("question", "") or question.get("options") == ["Option A", "Option B", "Option C", "Option D"]:
-            question = get_random_bank_question(module, topic, difficulty, company=company, exclude_texts=list(used_questions))
-            
+    # Get the 120+ pool of questions for this module & difficulty
+    pool = get_mcq_questions(module, topic, difficulty)
+    
+    # Slice the first count questions
+    selected_pool = pool[:count]
+    
+    questions = []
+    for index, q in enumerate(selected_pool):
+        question = copy.deepcopy(q)
         question["id"] = str(uuid.uuid4())
         question["order"] = index + 1
-        question.setdefault("topic", topic)
-        question.setdefault("difficulty", difficulty)
+        question["topic"] = topic or question.get("topic", "General")
+        question["difficulty"] = difficulty
         
-        # Randomize options order and adjust correct_index
+        # Randomize options order and adjust correct_index using Fisher-Yates
         options = question.get("options", [])
-        correct_idx = int(question.get("correct_index", question.get("answer_index", 0)))
+        correct_idx = int(question.get("correct_index", 0))
         
         if len(options) == 4:
-            correct_option = options[correct_idx]
+            # Shuffle using random.shuffle (which uses Fisher-Yates under the hood)
             indexed_options = list(enumerate(options))
             random.shuffle(indexed_options)
             
@@ -253,7 +265,6 @@ def generate_question_set(module: str, topic: str, difficulty: str, count: int =
             question["answer_index"] = new_correct_idx
             
         questions.append(question)
-        used_questions.add(question["question"])
         
     return questions
 
@@ -540,3 +551,22 @@ def generate_mock_module(module_key: str, topic: str | None, difficulty: str, co
 
 def _now() -> str:
     return datetime.utcnow().isoformat(timespec="seconds") + "Z"
+
+
+user_last_coding_problem = {}
+
+def get_random_coding_problem(user_id: str, difficulty: str) -> dict[str, Any]:
+    from database.coding_question_bank import CODING_QUESTION_BANK
+    import random
+    import copy
+    
+    problems = CODING_QUESTION_BANK.get(difficulty.lower(), CODING_QUESTION_BANK["easy"])
+    last_title = user_last_coding_problem.get(user_id)
+    
+    available = [p for p in problems if p["title"] != last_title]
+    if not available:
+        available = problems
+        
+    problem = copy.deepcopy(random.choice(available))
+    user_last_coding_problem[user_id] = problem["title"]
+    return problem

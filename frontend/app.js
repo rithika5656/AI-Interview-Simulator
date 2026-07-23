@@ -16,7 +16,8 @@ const state = {
     profileMode: localStorage.getItem('hirevisionProfileMode') || 'student',
     editor: null, // Monaco editor instance
     currentTechQuestion: '',
-    currentTechTechnology: 'Python'
+    currentTechTechnology: 'Python',
+    currentCodingProblem: null
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,8 +65,13 @@ function showView(viewId) {
     }
 
     // Trigger editor layout recalculation when Coding Assessment tab is clicked
-    if (viewId === 'codingView' && state.editor) {
-        setTimeout(() => state.editor.layout(), 100);
+    if (viewId === 'codingView') {
+        if (state.editor) {
+            setTimeout(() => state.editor.layout(), 100);
+        }
+        if (!state.currentCodingProblem) {
+            setTimeout(loadCodingProblem, 200);
+        }
     }
 }
 
@@ -118,6 +124,9 @@ function bindModuleForms() {
 
     const codingReviewBtn = $('#codingReviewBtn');
     if (codingReviewBtn) codingReviewBtn.addEventListener('click', reviewCoding);
+
+    const codingProblemBtn = $('#codingProblemBtn');
+    if (codingProblemBtn) codingProblemBtn.addEventListener('click', loadCodingProblem);
 
     const companySelect = $('#companySelect');
     if (companySelect) companySelect.addEventListener('change', () => loadCompanyTrack(companySelect.value));
@@ -273,29 +282,47 @@ function renderDashboard(data) {
     if (metricsPanel) metricsPanel.innerHTML = cards;
 
     const goalsPanel = $('#dailyGoals');
-    if (goalsPanel) goalsPanel.innerHTML = (data.daily_goals || []).map((goal) => `<li>${goal}</li>`).join('');
+    if (goalsPanel) {
+        goalsPanel.innerHTML = (data.daily_goals && data.daily_goals.length > 0)
+            ? data.daily_goals.map((goal) => `<li>${goal}</li>`).join('')
+            : '<p class="muted" style="padding: 10px 0;">No interview completed</p>';
+    }
 
     const activityPanel = $('#recentActivities');
     if (activityPanel) {
-        activityPanel.innerHTML = (data.recent_activities || []).map((activity) => `
-            <div class="activity-row"><span>${activity.type}</span><strong>${activity.title}</strong><small>${formatDate(activity.timestamp)}</small></div>
-        `).join('') || '<p class="muted">No recent activity yet.</p>';
+        activityPanel.innerHTML = (data.recent_activities && data.recent_activities.length > 0)
+            ? data.recent_activities.map((activity) => `
+                <div class="activity-row"><span>${activity.type}</span><strong>${activity.title}</strong><small>${formatDate(activity.timestamp)}</small></div>
+            `).join('')
+            : '<p class="muted" style="padding: 10px 0;">No activity yet</p>';
     }
 
     const upcomingPanel = $('#upcomingTests');
     if (upcomingPanel) {
-        upcomingPanel.innerHTML = (data.upcoming_mock_tests || []).map((test) => `
-            <div class="upcoming-row"><div><strong>${test.title}</strong><p>${test.module}</p></div><span>${test.time}</span></div>
-        `).join('');
+        upcomingPanel.innerHTML = (data.upcoming_mock_tests && data.upcoming_mock_tests.length > 0)
+            ? data.upcoming_mock_tests.map((test) => `
+                <div class="upcoming-row"><div><strong>${test.title}</strong><p>${test.module}</p></div><span>${test.time}</span></div>
+            `).join('')
+            : '<p class="muted" style="padding: 10px 0;">No coding submissions</p>';
     }
 
     const coachPanel = $('#dashboardCoach');
     if (coachPanel && data.career_coach) {
-        coachPanel.innerHTML = `
-            <div class="analysis-card"><h4>Strengths</h4><p>${(data.career_coach.strengths || []).join(', ')}</p></div>
-            <div class="analysis-card"><h4>Weaknesses</h4><p>${(data.career_coach.weaknesses || []).join(', ')}</p></div>
-            <div class="analysis-card"><h4>Placement Readiness</h4><p>${Number(data.career_coach.placement_readiness || metrics.placement_readiness_score || 0).toFixed(1)}%</p></div>
-        `;
+        const isNewUser = (data.career_coach.strengths || []).includes("No activity yet");
+        if (isNewUser) {
+            coachPanel.innerHTML = `
+                <div class="analysis-card" style="grid-column: span 3; text-align: center; padding: 20px;">
+                    <h4>AI Coach Feedback</h4>
+                    <p class="muted">No analytics available</p>
+                </div>
+            `;
+        } else {
+            coachPanel.innerHTML = `
+                <div class="analysis-card"><h4>Strengths</h4><p>${(data.career_coach.strengths || []).join(', ')}</p></div>
+                <div class="analysis-card"><h4>Weaknesses</h4><p>${(data.career_coach.weaknesses || []).join(', ')}</p></div>
+                <div class="analysis-card"><h4>Placement Readiness</h4><p>${Number(data.career_coach.placement_readiness || metrics.placement_readiness_score || 0).toFixed(1)}%</p></div>
+            `;
+        }
     }
 
     renderDashboardCharts(metrics);
@@ -487,7 +514,7 @@ async function reviewCoding() {
             user_id: state.userId,
             language: $('#codingLanguage')?.value || 'Python',
             code: codeText,
-            problem_statement: $('#codingProblem')?.value || '',
+            problem_statement: state.currentCodingProblem?.title || 'Two Sum',
         });
         if (result) {
             result.innerHTML = `
@@ -1157,14 +1184,18 @@ function initMonacoEditor() {
                 const lang = e.target.value;
                 const model = state.editor.getModel();
                 let code = '';
-                if (lang === 'Python') {
-                    code = 'def two_sum(nums, target):\n    return []';
-                } else if (lang === 'Java') {
-                    code = 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        return new int[0];\n    }\n}';
-                } else if (lang === 'C++') {
-                    code = 'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        return {};\n    }\n};';
-                } else if (lang === 'JavaScript') {
-                    code = 'function twoSum(nums, target) {\n    return [];\n}';
+                if (state.currentCodingProblem && state.currentCodingProblem.starter_code && state.currentCodingProblem.starter_code[lang]) {
+                    code = state.currentCodingProblem.starter_code[lang];
+                } else {
+                    if (lang === 'Python') {
+                        code = 'def two_sum(nums, target):\n    return []';
+                    } else if (lang === 'Java') {
+                        code = 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        return new int[0];\n    }\n}';
+                    } else if (lang === 'C++') {
+                        code = 'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        return {};\n    }\n};';
+                    } else if (lang === 'JavaScript') {
+                        code = 'function twoSum(nums, target) {\n    return [];\n}';
+                    }
                 }
                 state.editor.setValue(code);
                 const monacoLang = lang === 'C++' ? 'cpp' : lang.toLowerCase();
@@ -1183,7 +1214,7 @@ async function runCoding() {
             user_id: state.userId,
             language: $('#codingLanguage')?.value || 'Python',
             code: codeText,
-            problem_statement: $('#codingProblem')?.value || '',
+            problem_statement: state.currentCodingProblem?.title || 'Two Sum',
         });
         if (result) {
             const passes = (data.hidden_tests || []).filter(t => t.status === 'passed').length;
@@ -1495,3 +1526,53 @@ window.showToast = function(message, type = 'info') {
         });
     }, 4000);
 };
+
+async function loadCodingProblem() {
+    const difficulty = $('#codingDifficulty')?.value || 'Easy';
+    const titleEl = $('#codingProblemTitle');
+    const descEl = $('#codingProblemDesc');
+    const examplesEl = $('#codingProblemExamples');
+    const constraintsEl = $('#codingProblemConstraints');
+    const btn = $('#codingProblemBtn');
+    
+    if (btn) btn.disabled = true;
+    if (titleEl) titleEl.textContent = 'Loading problem...';
+    if (descEl) descEl.textContent = '';
+    if (examplesEl) examplesEl.innerHTML = '';
+    if (constraintsEl) constraintsEl.innerHTML = '';
+    
+    try {
+        const problem = await apiGet(`/coding/problem?difficulty=${difficulty}&user_id=${state.userId}`);
+        state.currentCodingProblem = problem;
+        
+        if (titleEl) titleEl.innerHTML = `${problem.title} <span class="badge ${difficulty.toLowerCase()}">${difficulty}</span>`;
+        if (descEl) descEl.textContent = problem.problem_statement;
+        
+        if (examplesEl) {
+            examplesEl.innerHTML = '<strong>Examples:</strong><br>' + (problem.examples || []).map(ex => `
+                <div style="background: rgba(255,255,255,0.01); padding: 8px; border-radius: 6px; margin-top: 5px; border: 1px solid rgba(255,255,255,0.03);">
+                    <strong>Input:</strong> <code>${ex.input}</code><br>
+                    <strong>Output:</strong> <code>${ex.output}</code><br>
+                    ${ex.explanation ? `<strong>Explanation:</strong> <small class="muted">${ex.explanation}</small>` : ''}
+                </div>
+            `).join('');
+        }
+        
+        if (constraintsEl) {
+            constraintsEl.innerHTML = '<strong>Constraints:</strong><ul style="margin: 4px 0 0 0; padding-left: 20px;">' + 
+                (problem.constraints || []).map(c => `<li><code>${c}</code></li>`).join('') + '</ul>';
+        }
+        
+        // Update starter code in Monaco editor
+        if (state.editor) {
+            const lang = $('#codingLanguage')?.value || 'Python';
+            const code = problem.starter_code?.[lang] || '';
+            state.editor.setValue(code);
+        }
+    } catch (error) {
+        if (titleEl) titleEl.textContent = 'Failed to load problem';
+        if (descEl) descEl.textContent = error.message;
+    } finally {
+        if (btn) btn.disabled = false;
+    }
+}

@@ -1,7 +1,7 @@
 const API_URL = (typeof process !== 'undefined' && process.env.API_URL) ? process.env.API_URL : (window.HireVisionConfig?.apiBaseUrl || window.__APP_CONFIG__?.API_URL || 'https://ai-interview-simulator-12.onrender.com/api');
 
 const SOCKET_URL = (typeof process !== 'undefined' && process.env.SOCKET_URL) ? process.env.SOCKET_URL : (window.HireVisionConfig?.socketUrl || window.__APP_CONFIG__?.SOCKET_URL || 'https://ai-interview-simulator-12.onrender.com');
-const socket = window.io ? io(SOCKET_URL, { secure: true, reconnection: true }) : null;
+const socket = window.io ? io(SOCKET_URL, { secure: true, reconnection: true, transports: ['websocket', 'polling'] }) : null;
 
 const state = {
     userId: localStorage.getItem('hirevisionUserId') || 'demo_student',
@@ -1486,69 +1486,6 @@ function humanize(value) {
     return value.replace(/_/g, ' ').replace(/\b\w/g, (match) => match.toUpperCase());
 }
 
-let gdSpeechRecognition = null;
-function initGdSpeech() {
-    const recordBtn = $('#gdRecordBtn');
-    const stopBtn = $('#gdStopBtn');
-    const indicator = $('#gdRecordingIndicator');
-    const textarea = $('#gdTranscript');
-    
-    if (!recordBtn) return;
-    
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-        recordBtn.style.display = 'none';
-        stopBtn.style.display = 'none';
-        return;
-    }
-    
-    if (!gdSpeechRecognition) {
-        gdSpeechRecognition = new SpeechRecognition();
-        gdSpeechRecognition.continuous = true;
-        gdSpeechRecognition.interimResults = true;
-        gdSpeechRecognition.lang = 'en-US';
-        
-        gdSpeechRecognition.onstart = () => {
-            if (indicator) indicator.style.display = 'inline-block';
-            recordBtn.disabled = true;
-            stopBtn.disabled = false;
-        };
-        
-        gdSpeechRecognition.onresult = (event) => {
-            let finalTranscript = '';
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    finalTranscript += event.results[i][0].transcript;
-                }
-            }
-            if (textarea && finalTranscript) {
-                textarea.value += (textarea.value ? ' ' : '') + finalTranscript;
-            }
-        };
-        
-        gdSpeechRecognition.onend = () => {
-            if (indicator) indicator.style.display = 'none';
-            recordBtn.disabled = false;
-            stopBtn.disabled = true;
-        };
-        
-        gdSpeechRecognition.onerror = (event) => {
-            showToast(`Speech recognition warning: ${event.error}`, 'warning');
-        };
-    }
-    
-    recordBtn.onclick = () => {
-        try {
-            gdSpeechRecognition.start();
-        } catch (e) {
-            gdSpeechRecognition.stop();
-        }
-    };
-    
-    stopBtn.onclick = () => {
-        gdSpeechRecognition.stop();
-    };
-}
 
 async function generateGdTopic() {
     const select = $('#gdTopic');

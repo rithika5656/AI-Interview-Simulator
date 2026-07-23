@@ -97,8 +97,9 @@ def generate_module(module_key: str):
     payload = request.get_json(silent=True) or {}
     topic = payload.get("topic")
     difficulty = payload.get("difficulty", "medium")
-    count = int(payload.get("count", 5))
-    return jsonify(generate_mock_module(module_key, topic, difficulty, count=count))
+    count = int(payload.get("count", 20))
+    user_id = payload.get("user_id") or request.args.get("user_id")
+    return jsonify(generate_mock_module(module_key, topic, difficulty, count=count, user_id=user_id))
 
 
 @placement_bp.route("/<module_key>/submit", methods=["POST"])
@@ -313,3 +314,4 @@ def _extract_text_from_upload(uploaded_file) -> str:
             pass
 
     return raw_bytes.decode("utf-8", errors="ignore")
+

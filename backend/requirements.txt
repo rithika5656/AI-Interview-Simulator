@@ -18,4 +18,3 @@ pymongo==4.6.1
 dnspython==2.5.0
 setuptools>=70.0.0
 wheel
-eventlet==0.35.2

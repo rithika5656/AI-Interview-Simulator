@@ -54,7 +54,7 @@ CORS(
     resources={r"/api/*": {"origins": frontend_origins}, r"/health": {"origins": frontend_origins}},
     supports_credentials=True,
 )
-socketio = SocketIO(app, cors_allowed_origins=frontend_origins)
+socketio = SocketIO(app, cors_allowed_origins=frontend_origins, async_mode="threading")
 app.register_blueprint(placement_bp)
 
 init_db()

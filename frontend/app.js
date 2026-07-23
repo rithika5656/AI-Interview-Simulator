@@ -760,23 +760,26 @@ async function startInterview() {
         $('#questionText').textContent = data.question;
         $('#questionNumber').textContent = state.questionCount;
         showView('legacyInterviewView');
-        await startWebcam('videoElement');
     } catch (error) {
         showToast(`Error starting interview: ${error.message}`, 'error');
     }
 }
 
 async function startWebcam(videoElementId = 'videoElement') {
-    if (state.stream) {
-        state.stream.getTracks().forEach(track => track.stop());
-        state.stream = null;
-    }
+    let requestedNewStream = false;
     try {
-        state.stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 } }, audio: true });
-        const video = $(`#${videoElementId}`);
-        if (video) video.srcObject = state.stream;
+        if (!state.stream || state.stream.getTracks().some(t => t.readyState === 'ended')) {
+            state.stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 } }, audio: true });
+            requestedNewStream = true;
+        }
 
-        if (videoElementId === 'videoElement') {
+        const video = $(`#${videoElementId}`);
+        if (video) {
+            video.srcObject = state.stream;
+            try { await video.play(); } catch (e) { console.warn("Video playback blocked", e); }
+        }
+
+        if (videoElementId === 'videoElement' && (!state.mediaRecorder || requestedNewStream)) {
             const audioStream = new MediaStream(state.stream.getAudioTracks());
             state.mediaRecorder = new MediaRecorder(audioStream, { mimeType: 'audio/webm' });
             state.mediaRecorder.ondataavailable = (event) => {
@@ -797,8 +800,12 @@ async function startWebcam(videoElementId = 'videoElement') {
         const stopBtn = videoElementId === 'videoElement' ? $('#stopBtn') : (videoElementId === 'techVideoElement' ? $('#techStopBtn') : $('#gdStopBtn'));
         if (recordBtn) recordBtn.disabled = false;
         if (stopBtn) stopBtn.disabled = true;
+
+        if (requestedNewStream) {
+            showToast('Camera and microphone enabled.', 'success');
+        }
     } catch (error) {
-        showToast('Camera and microphone enabled. Press Start to practice speaking.', 'info');
+        if (!state.stream) showToast('Camera/Microphone access denied. You can manually type your responses.', 'error');
         const recordBtn = videoElementId === 'videoElement' ? $('#recordBtn') : (videoElementId === 'techVideoElement' ? $('#techRecordBtn') : $('#gdRecordBtn'));
         if (recordBtn) recordBtn.disabled = false;
         

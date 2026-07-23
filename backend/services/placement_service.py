@@ -597,27 +597,65 @@ def generate_technical_interview_question(technology: str, resume_skills: list[s
 
 
 def generate_mock_module(module_key: str, topic: str | None, difficulty: str, count: int = 20) -> dict[str, Any]:
-    topic = topic or random.choice(APPLIED_TOPICS.get(module_key, [module_key.title()]))
+    import os
+    import json
+    import copy
     
-    easy_count = int(count * 0.35)
-    hard_count = int(count * 0.25)
-    medium_count = count - easy_count - hard_count
+    # Map module_key to json file (e.g. "logical reasoning" -> "logical")
+    file_key = module_key.lower().replace(' reasoning', '').replace(' ability', '').replace('-mcq', '')
     
-    q_easy = generate_question_set(module_key, topic, "easy", count=easy_count)
-    q_medium = generate_question_set(module_key, topic, "medium", count=medium_count)
-    q_hard = generate_question_set(module_key, topic, "hard", count=hard_count)
+    json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", f"{file_key}.json")
     
-    questions = q_easy + q_medium + q_hard
-    random.shuffle(questions)
+    if not os.path.exists(json_path):
+        return {
+            "module": module_key,
+            "topic": topic or "General",
+            "difficulty": difficulty,
+            "questions": [],
+            "error": f"JSON database {json_path} not found"
+        }
+        
+    with open(json_path, 'r', encoding='utf-8') as f:
+        all_questions = json.load(f)
+        
+    # Filter by difficulty
+    filtered = [q for q in all_questions if q.get("difficulty", "medium").lower() == difficulty.lower()]
     
+    # Filter by topic if specified (though the prompt only said filter by subject and difficulty)
+    if topic:
+        topic_filtered = [q for q in filtered if q.get("topic", "").lower() == topic.lower()]
+        if len(topic_filtered) >= count:
+            filtered = topic_filtered
+            
+    # Shuffle the list and take up to 20
+    random.shuffle(filtered)
+    questions = filtered[:count]
+    
+    # Shuffle options internally for each question just in case
+    final_questions = []
     for idx, q in enumerate(questions):
-        q["order"] = idx + 1
+        q_copy = copy.deepcopy(q)
+        q_copy["order"] = idx + 1
+        
+        opts = q_copy.get("options", [])
+        correct_idx = q_copy.get("answer", 0)
+        
+        if len(opts) == 4:
+            indexed_opts = list(enumerate(opts))
+            random.shuffle(indexed_opts)
+            new_opts = [opt for _, opt in indexed_opts]
+            new_correct = next(i for i, (old_idx, _) in enumerate(indexed_opts) if old_idx == correct_idx)
+            
+            q_copy["options"] = new_opts
+            q_copy["correct_index"] = new_correct # Standardize with the frontend expecting correct_index
+            
+        final_questions.append(q_copy)
 
     return {
         "module": module_key,
-        "topic": topic,
-        "difficulty": "Mixed",
-        "questions": questions,
+        "topic": topic or "Mixed",
+        "difficulty": difficulty,
+        "questions": final_questions,
     }
 
 

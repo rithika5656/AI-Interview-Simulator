@@ -1,0 +1,842 @@
+[
+    {
+        "id": "cdca6586-f834-49da-bdd4-43e44fe22d6a",
+        "difficulty": "easy",
+        "topic": "Profit and Loss",
+        "question": "What is 10% of 10?",
+        "options": [
+            "6",
+            "-4",
+            "1",
+            "11"
+        ],
+        "answer": 2,
+        "explanation": "(10/100) * 10 = 1"
+    },
+    {
+        "id": "16290d9b-890c-4118-b5ca-f65b1f1a36bf",
+        "difficulty": "easy",
+        "topic": "Speed and Distance",
+        "question": "What is 20% of 20?",
+        "options": [
+            "14",
+            "4",
+            "-1",
+            "9"
+        ],
+        "answer": 1,
+        "explanation": "(20/100) * 20 = 4"
+    },
+    {
+        "id": "a6ed5d0e-4b23-47d7-9a77-ac0a7c51408e",
+        "difficulty": "easy",
+        "topic": "Percentages",
+        "question": "What is 30% of 30?",
+        "options": [
+            "19",
+            "9",
+            "4",
+            "14"
+        ],
+        "answer": 1,
+        "explanation": "(30/100) * 30 = 9"
+    },
+    {
+        "id": "7ee3f475-f3b5-4f80-948a-d8b50bad9003",
+        "difficulty": "easy",
+        "topic": "Time and Work",
+        "question": "What is 40% of 40?",
+        "options": [
+            "16",
+            "21",
+            "26",
+            "11"
+        ],
+        "answer": 0,
+        "explanation": "(40/100) * 40 = 16"
+    },
+    {
+        "id": "6a301556-5e54-46f3-8cf2-cc77a7567b7f",
+        "difficulty": "easy",
+        "topic": "Time and Work",
+        "question": "What is 50% of 50?",
+        "options": [
+            "35",
+            "20",
+            "30",
+            "25"
+        ],
+        "answer": 3,
+        "explanation": "(50/100) * 50 = 25"
+    },
+    {
+        "id": "40a04765-9573-4602-b989-1e71eb8a61e7",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 10% of 60?",
+        "options": [
+            "11",
+            "1",
+            "6",
+            "16"
+        ],
+        "answer": 2,
+        "explanation": "(10/100) * 60 = 6"
+    },
+    {
+        "id": "cec74217-dd76-4556-8768-976ed41b1f1c",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 20% of 70?",
+        "options": [
+            "19",
+            "9",
+            "14",
+            "24"
+        ],
+        "answer": 2,
+        "explanation": "(20/100) * 70 = 14"
+    },
+    {
+        "id": "6e261f76-1a95-4abf-a629-61004bc84e5c",
+        "difficulty": "easy",
+        "topic": "Percentages",
+        "question": "What is 30% of 80?",
+        "options": [
+            "24",
+            "34",
+            "29",
+            "19"
+        ],
+        "answer": 0,
+        "explanation": "(30/100) * 80 = 24"
+    },
+    {
+        "id": "febfec27-dcd1-41a8-863f-fc46bcc004fe",
+        "difficulty": "easy",
+        "topic": "Profit and Loss",
+        "question": "What is 40% of 90?",
+        "options": [
+            "36",
+            "41",
+            "31",
+            "46"
+        ],
+        "answer": 0,
+        "explanation": "(40/100) * 90 = 36"
+    },
+    {
+        "id": "4fe96df0-7e07-4484-99bb-40dd0da4c246",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 50% of 100?",
+        "options": [
+            "60",
+            "50",
+            "55",
+            "45"
+        ],
+        "answer": 1,
+        "explanation": "(50/100) * 100 = 50"
+    },
+    {
+        "id": "9acd6e7d-423b-4816-a2f1-a17f68a649d9",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 10% of 110?",
+        "options": [
+            "11",
+            "21",
+            "6",
+            "16"
+        ],
+        "answer": 0,
+        "explanation": "(10/100) * 110 = 11"
+    },
+    {
+        "id": "60409c98-268a-424d-a8e6-c58ef4277d6b",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 20% of 120?",
+        "options": [
+            "24",
+            "19",
+            "29",
+            "34"
+        ],
+        "answer": 0,
+        "explanation": "(20/100) * 120 = 24"
+    },
+    {
+        "id": "9530bf80-d6db-4e59-85f8-715b6e42257a",
+        "difficulty": "easy",
+        "topic": "Profit and Loss",
+        "question": "What is 30% of 130?",
+        "options": [
+            "34",
+            "49",
+            "39",
+            "44"
+        ],
+        "answer": 2,
+        "explanation": "(30/100) * 130 = 39"
+    },
+    {
+        "id": "c2239a3b-e168-43d7-8bbb-df8dfa3f9c0c",
+        "difficulty": "easy",
+        "topic": "Profit and Loss",
+        "question": "What is 40% of 140?",
+        "options": [
+            "61",
+            "51",
+            "66",
+            "56"
+        ],
+        "answer": 3,
+        "explanation": "(40/100) * 140 = 56"
+    },
+    {
+        "id": "55735e44-461d-4c25-bc8d-441d44bf82d4",
+        "difficulty": "easy",
+        "topic": "Percentages",
+        "question": "What is 50% of 150?",
+        "options": [
+            "80",
+            "85",
+            "75",
+            "70"
+        ],
+        "answer": 2,
+        "explanation": "(50/100) * 150 = 75"
+    },
+    {
+        "id": "39b4270e-3c66-4dcb-aad3-fcde790b35fb",
+        "difficulty": "easy",
+        "topic": "Time and Work",
+        "question": "What is 10% of 160?",
+        "options": [
+            "26",
+            "21",
+            "16",
+            "11"
+        ],
+        "answer": 2,
+        "explanation": "(10/100) * 160 = 16"
+    },
+    {
+        "id": "57f7e986-44f2-454e-94ed-769ab9fb59a7",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 20% of 170?",
+        "options": [
+            "44",
+            "39",
+            "29",
+            "34"
+        ],
+        "answer": 3,
+        "explanation": "(20/100) * 170 = 34"
+    },
+    {
+        "id": "917b6451-cf4f-4be7-a35b-4725093ec5e4",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 30% of 180?",
+        "options": [
+            "64",
+            "49",
+            "54",
+            "59"
+        ],
+        "answer": 2,
+        "explanation": "(30/100) * 180 = 54"
+    },
+    {
+        "id": "d9c49cf8-0ccb-4129-9159-b9b03762fbb1",
+        "difficulty": "easy",
+        "topic": "Percentages",
+        "question": "What is 40% of 190?",
+        "options": [
+            "71",
+            "86",
+            "76",
+            "81"
+        ],
+        "answer": 2,
+        "explanation": "(40/100) * 190 = 76"
+    },
+    {
+        "id": "dde495e6-dea5-4a08-b31e-8e6c35cbebb8",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "What is 50% of 200?",
+        "options": [
+            "100",
+            "105",
+            "95",
+            "110"
+        ],
+        "answer": 0,
+        "explanation": "(50/100) * 200 = 100"
+    },
+    {
+        "id": "62023931-3f8b-47dc-9d28-36cc52f6d7ee",
+        "difficulty": "medium",
+        "topic": "Speed and Distance",
+        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
+        "options": [
+            "6.0",
+            "5.0",
+            "25",
+            "8.0"
+        ],
+        "answer": 0,
+        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
+    },
+    {
+        "id": "c768d9e1-6a12-4427-b920-7935238c1797",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
+        "options": [
+            "6.52",
+            "27",
+            "8.52",
+            "5.52"
+        ],
+        "answer": 0,
+        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
+    },
+    {
+        "id": "9307a0d9-f7b6-4b11-b21b-8493dc389798",
+        "difficulty": "medium",
+        "topic": "Profit and Loss",
+        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
+        "options": [
+            "6.03",
+            "9.030000000000001",
+            "29",
+            "7.03"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
+    },
+    {
+        "id": "6c1bf5f2-c8f9-4867-ae63-4025403333ec",
+        "difficulty": "medium",
+        "topic": "Probability",
+        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
+        "options": [
+            "7.55",
+            "31",
+            "6.55",
+            "9.55"
+        ],
+        "answer": 0,
+        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
+    },
+    {
+        "id": "c6bbe2cc-d746-45cf-9e72-c4e5dc0b1555",
+        "difficulty": "medium",
+        "topic": "Probability",
+        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
+        "options": [
+            "10.06",
+            "33",
+            "7.0600000000000005",
+            "8.06"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
+    },
+    {
+        "id": "0a9504e2-c3d2-4722-8328-358121b54b73",
+        "difficulty": "medium",
+        "topic": "Time and Work",
+        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
+        "options": [
+            "5.0",
+            "25",
+            "8.0",
+            "6.0"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
+    },
+    {
+        "id": "3c4bebd4-0e0b-4626-a7d9-c81c40ffff49",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
+        "options": [
+            "8.52",
+            "6.52",
+            "5.52",
+            "27"
+        ],
+        "answer": 1,
+        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
+    },
+    {
+        "id": "2b038662-ed30-4616-831f-8a5c6b6323f9",
+        "difficulty": "medium",
+        "topic": "Speed and Distance",
+        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
+        "options": [
+            "9.030000000000001",
+            "7.03",
+            "29",
+            "6.03"
+        ],
+        "answer": 1,
+        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
+    },
+    {
+        "id": "3f6ee743-6397-418c-bae1-89de345a0bd1",
+        "difficulty": "medium",
+        "topic": "Profit and Loss",
+        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
+        "options": [
+            "6.55",
+            "31",
+            "9.55",
+            "7.55"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
+    },
+    {
+        "id": "fc995cb8-1376-4844-ad9c-9e4da53e1d86",
+        "difficulty": "medium",
+        "topic": "Speed and Distance",
+        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
+        "options": [
+            "33",
+            "10.06",
+            "8.06",
+            "7.0600000000000005"
+        ],
+        "answer": 2,
+        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
+    },
+    {
+        "id": "7bf0f7b1-8cd0-41fd-a9e1-5354cc8e5a8b",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
+        "options": [
+            "25",
+            "8.0",
+            "5.0",
+            "6.0"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
+    },
+    {
+        "id": "ef00383b-db67-4164-b856-180f74846fbd",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
+        "options": [
+            "27",
+            "5.52",
+            "8.52",
+            "6.52"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
+    },
+    {
+        "id": "e05f898a-b93a-492b-bfaf-a1fd5d1ae51c",
+        "difficulty": "medium",
+        "topic": "Profit and Loss",
+        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
+        "options": [
+            "29",
+            "6.03",
+            "9.030000000000001",
+            "7.03"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
+    },
+    {
+        "id": "5e191c1b-a022-4ff1-b83f-76dc258395a4",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
+        "options": [
+            "6.55",
+            "9.55",
+            "31",
+            "7.55"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
+    },
+    {
+        "id": "34509bfb-3ff7-4a69-ab48-5151d2614ca4",
+        "difficulty": "medium",
+        "topic": "Profit and Loss",
+        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
+        "options": [
+            "33",
+            "7.0600000000000005",
+            "8.06",
+            "10.06"
+        ],
+        "answer": 2,
+        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
+    },
+    {
+        "id": "48d9c16c-9f8d-4eeb-abba-8a73f2deba3c",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
+        "options": [
+            "5.0",
+            "25",
+            "8.0",
+            "6.0"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
+    },
+    {
+        "id": "b3f33483-b48a-4741-a90a-1ecf62edb453",
+        "difficulty": "medium",
+        "topic": "Speed and Distance",
+        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
+        "options": [
+            "27",
+            "5.52",
+            "8.52",
+            "6.52"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
+    },
+    {
+        "id": "7e42b032-8a75-40c4-b061-c79999af5c78",
+        "difficulty": "medium",
+        "topic": "Time and Work",
+        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
+        "options": [
+            "29",
+            "6.03",
+            "9.030000000000001",
+            "7.03"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
+    },
+    {
+        "id": "1e73258f-a9b3-4012-a09d-32347d43a9cc",
+        "difficulty": "medium",
+        "topic": "Time and Work",
+        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
+        "options": [
+            "7.55",
+            "6.55",
+            "31",
+            "9.55"
+        ],
+        "answer": 0,
+        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
+    },
+    {
+        "id": "0369ab87-b910-453c-8137-169eec2687ba",
+        "difficulty": "medium",
+        "topic": "Speed and Distance",
+        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
+        "options": [
+            "33",
+            "10.06",
+            "7.0600000000000005",
+            "8.06"
+        ],
+        "answer": 3,
+        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
+    },
+    {
+        "id": "c8530c0b-1478-4246-aa19-117d9e55d889",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "3/7",
+            "12/42",
+            "4/7",
+            "6/42"
+        ],
+        "answer": 3,
+        "explanation": "(3/7) * (2/6) = 6/42"
+    },
+    {
+        "id": "fdb680e5-bc17-495e-a41a-e6ad9d430e6a",
+        "difficulty": "hard",
+        "topic": "Time and Work",
+        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "4/9",
+            "5/9",
+            "12/72",
+            "20/72"
+        ],
+        "answer": 2,
+        "explanation": "(4/9) * (3/8) = 12/72"
+    },
+    {
+        "id": "c04fb0c4-b91d-4f66-a429-7193ef77ae66",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "20/110",
+            "5/11",
+            "6/11",
+            "30/110"
+        ],
+        "answer": 0,
+        "explanation": "(5/11) * (4/10) = 20/110"
+    },
+    {
+        "id": "f38f784f-2f05-4874-bd3f-9240b862ac4a",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "7/13",
+            "6/13",
+            "30/156",
+            "42/156"
+        ],
+        "answer": 2,
+        "explanation": "(6/13) * (5/12) = 30/156"
+    },
+    {
+        "id": "45bdcd2d-63aa-4958-b26a-a130feb97030",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "12/42",
+            "3/7",
+            "6/42",
+            "4/7"
+        ],
+        "answer": 2,
+        "explanation": "(3/7) * (2/6) = 6/42"
+    },
+    {
+        "id": "0dfab41b-cdc7-4a67-b5f0-1c9114906f99",
+        "difficulty": "hard",
+        "topic": "Time and Work",
+        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "12/72",
+            "20/72",
+            "4/9",
+            "5/9"
+        ],
+        "answer": 0,
+        "explanation": "(4/9) * (3/8) = 12/72"
+    },
+    {
+        "id": "d6e75b3f-5f62-4aaa-9649-89b62b436f69",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "30/110",
+            "6/11",
+            "20/110",
+            "5/11"
+        ],
+        "answer": 2,
+        "explanation": "(5/11) * (4/10) = 20/110"
+    },
+    {
+        "id": "b3ab115c-a4c4-4b04-bd55-7b4152c403cc",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "6/13",
+            "30/156",
+            "42/156",
+            "7/13"
+        ],
+        "answer": 1,
+        "explanation": "(6/13) * (5/12) = 30/156"
+    },
+    {
+        "id": "d0e1e776-719b-4761-9cce-0908fc2e4fa5",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "4/7",
+            "12/42",
+            "6/42",
+            "3/7"
+        ],
+        "answer": 2,
+        "explanation": "(3/7) * (2/6) = 6/42"
+    },
+    {
+        "id": "a79ee153-b32b-465e-a280-ffda8bf2e38f",
+        "difficulty": "hard",
+        "topic": "Probability",
+        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "12/72",
+            "4/9",
+            "20/72",
+            "5/9"
+        ],
+        "answer": 0,
+        "explanation": "(4/9) * (3/8) = 12/72"
+    },
+    {
+        "id": "78a2bc30-0c24-496f-81af-8f9b1b7db610",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "30/110",
+            "6/11",
+            "20/110",
+            "5/11"
+        ],
+        "answer": 2,
+        "explanation": "(5/11) * (4/10) = 20/110"
+    },
+    {
+        "id": "0a961b7a-e307-44db-acc9-042d7ad738a3",
+        "difficulty": "hard",
+        "topic": "Speed and Distance",
+        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "6/13",
+            "7/13",
+            "42/156",
+            "30/156"
+        ],
+        "answer": 3,
+        "explanation": "(6/13) * (5/12) = 30/156"
+    },
+    {
+        "id": "dddf7375-8218-40f2-bb33-84d119c50d79",
+        "difficulty": "hard",
+        "topic": "Time and Work",
+        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "4/7",
+            "3/7",
+            "6/42",
+            "12/42"
+        ],
+        "answer": 2,
+        "explanation": "(3/7) * (2/6) = 6/42"
+    },
+    {
+        "id": "29979df7-d884-4d9d-8434-8c4e7960c087",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "12/72",
+            "5/9",
+            "20/72",
+            "4/9"
+        ],
+        "answer": 0,
+        "explanation": "(4/9) * (3/8) = 12/72"
+    },
+    {
+        "id": "850a0a81-d354-47b7-9547-35e5a32bf739",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "30/110",
+            "20/110",
+            "6/11",
+            "5/11"
+        ],
+        "answer": 1,
+        "explanation": "(5/11) * (4/10) = 20/110"
+    },
+    {
+        "id": "13d1c42f-83b6-42c5-8429-157eebd4bdc2",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "42/156",
+            "7/13",
+            "30/156",
+            "6/13"
+        ],
+        "answer": 2,
+        "explanation": "(6/13) * (5/12) = 30/156"
+    },
+    {
+        "id": "a81661ec-ddab-4eb8-87c1-6154452d6374",
+        "difficulty": "hard",
+        "topic": "Probability",
+        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "12/42",
+            "6/42",
+            "3/7",
+            "4/7"
+        ],
+        "answer": 1,
+        "explanation": "(3/7) * (2/6) = 6/42"
+    },
+    {
+        "id": "62ed77b7-ca76-4846-9f65-ad76fe821374",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "20/72",
+            "4/9",
+            "5/9",
+            "12/72"
+        ],
+        "answer": 3,
+        "explanation": "(4/9) * (3/8) = 12/72"
+    },
+    {
+        "id": "cde94de5-4ae0-40af-8aee-b94cc422e3fd",
+        "difficulty": "hard",
+        "topic": "Speed and Distance",
+        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "5/11",
+            "30/110",
+            "6/11",
+            "20/110"
+        ],
+        "answer": 3,
+        "explanation": "(5/11) * (4/10) = 20/110"
+    },
+    {
+        "id": "698894ff-5f41-4611-8019-d5cce4c94860",
+        "difficulty": "hard",
+        "topic": "Profit and Loss",
+        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
+        "options": [
+            "30/156",
+            "42/156",
+            "7/13",
+            "6/13"
+        ],
+        "answer": 0,
+        "explanation": "(6/13) * (5/12) = 30/156"
+    }
+]

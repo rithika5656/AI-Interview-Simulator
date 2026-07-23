@@ -1,0 +1,842 @@
+[
+    {
+        "id": "e73836dc-e396-41fc-bbf6-131243270bb8",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: >, ?, @",
+        "options": [
+            "C",
+            "D",
+            "B",
+            "A"
+        ],
+        "answer": 3,
+        "explanation": "Letters increment by 1. Next is A"
+    },
+    {
+        "id": "3fec9641-8d0e-44ca-a009-4c657f74f4e4",
+        "difficulty": "easy",
+        "topic": "Coding Decoding",
+        "question": "Find the next letter in series: ?, @, A",
+        "options": [
+            "E",
+            "B",
+            "C",
+            "D"
+        ],
+        "answer": 1,
+        "explanation": "Letters increment by 1. Next is B"
+    },
+    {
+        "id": "ce62633d-810f-4aeb-bf0c-95094835ca45",
+        "difficulty": "easy",
+        "topic": "Coding Decoding",
+        "question": "Find the next letter in series: @, A, B",
+        "options": [
+            "E",
+            "D",
+            "F",
+            "C"
+        ],
+        "answer": 3,
+        "explanation": "Letters increment by 1. Next is C"
+    },
+    {
+        "id": "fad76d84-6f99-4550-b229-0cdccc86f4ff",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: A, B, C",
+        "options": [
+            "D",
+            "F",
+            "E",
+            "G"
+        ],
+        "answer": 0,
+        "explanation": "Letters increment by 1. Next is D"
+    },
+    {
+        "id": "290d36ae-1115-4b3c-8246-6a8ab6532f08",
+        "difficulty": "easy",
+        "topic": "Blood Relations",
+        "question": "Find the next letter in series: B, C, D",
+        "options": [
+            "F",
+            "H",
+            "E",
+            "G"
+        ],
+        "answer": 2,
+        "explanation": "Letters increment by 1. Next is E"
+    },
+    {
+        "id": "744bae16-4237-4240-b940-66a7c5283aa4",
+        "difficulty": "easy",
+        "topic": "Coding Decoding",
+        "question": "Find the next letter in series: C, D, E",
+        "options": [
+            "I",
+            "G",
+            "F",
+            "H"
+        ],
+        "answer": 2,
+        "explanation": "Letters increment by 1. Next is F"
+    },
+    {
+        "id": "2196e2b0-9da1-4013-9a21-0c71dcbb664e",
+        "difficulty": "easy",
+        "topic": "Direction Sense",
+        "question": "Find the next letter in series: D, E, F",
+        "options": [
+            "H",
+            "J",
+            "G",
+            "I"
+        ],
+        "answer": 2,
+        "explanation": "Letters increment by 1. Next is G"
+    },
+    {
+        "id": "e3cd6eae-1523-47a4-b29a-d8279181b8e9",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: E, F, G",
+        "options": [
+            "I",
+            "J",
+            "K",
+            "H"
+        ],
+        "answer": 3,
+        "explanation": "Letters increment by 1. Next is H"
+    },
+    {
+        "id": "185ca3b5-7eb7-4491-9a2b-9ca98d7a1906",
+        "difficulty": "easy",
+        "topic": "Direction Sense",
+        "question": "Find the next letter in series: F, G, H",
+        "options": [
+            "I",
+            "K",
+            "L",
+            "J"
+        ],
+        "answer": 0,
+        "explanation": "Letters increment by 1. Next is I"
+    },
+    {
+        "id": "5ef51e28-b2cb-4b86-8339-463fb8ece781",
+        "difficulty": "easy",
+        "topic": "Direction Sense",
+        "question": "Find the next letter in series: G, H, I",
+        "options": [
+            "M",
+            "K",
+            "L",
+            "J"
+        ],
+        "answer": 3,
+        "explanation": "Letters increment by 1. Next is J"
+    },
+    {
+        "id": "1c5dca00-0eb6-4d19-b649-b5147c280e3a",
+        "difficulty": "easy",
+        "topic": "Blood Relations",
+        "question": "Find the next letter in series: H, I, J",
+        "options": [
+            "K",
+            "L",
+            "N",
+            "M"
+        ],
+        "answer": 0,
+        "explanation": "Letters increment by 1. Next is K"
+    },
+    {
+        "id": "a9a87e52-19bc-4d69-8609-0121888e6282",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: I, J, K",
+        "options": [
+            "L",
+            "N",
+            "M",
+            "O"
+        ],
+        "answer": 0,
+        "explanation": "Letters increment by 1. Next is L"
+    },
+    {
+        "id": "a6e1d1bf-d274-4f8e-875e-33e18947a038",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: J, K, L",
+        "options": [
+            "M",
+            "O",
+            "N",
+            "P"
+        ],
+        "answer": 0,
+        "explanation": "Letters increment by 1. Next is M"
+    },
+    {
+        "id": "198d28ab-16d0-4307-938e-80cb6c810f57",
+        "difficulty": "easy",
+        "topic": "Direction Sense",
+        "question": "Find the next letter in series: K, L, M",
+        "options": [
+            "Q",
+            "O",
+            "P",
+            "N"
+        ],
+        "answer": 3,
+        "explanation": "Letters increment by 1. Next is N"
+    },
+    {
+        "id": "04af3ba1-8242-4b13-bb5e-d40a0b0dc9b7",
+        "difficulty": "easy",
+        "topic": "Blood Relations",
+        "question": "Find the next letter in series: L, M, N",
+        "options": [
+            "R",
+            "O",
+            "Q",
+            "P"
+        ],
+        "answer": 1,
+        "explanation": "Letters increment by 1. Next is O"
+    },
+    {
+        "id": "d71c1d20-87ba-40f9-af3e-f79d6d6fd3c9",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: M, N, O",
+        "options": [
+            "Q",
+            "S",
+            "P",
+            "R"
+        ],
+        "answer": 2,
+        "explanation": "Letters increment by 1. Next is P"
+    },
+    {
+        "id": "f089bd0f-0429-4c91-9188-2df7d87c0fb8",
+        "difficulty": "easy",
+        "topic": "Blood Relations",
+        "question": "Find the next letter in series: N, O, P",
+        "options": [
+            "S",
+            "R",
+            "Q",
+            "T"
+        ],
+        "answer": 2,
+        "explanation": "Letters increment by 1. Next is Q"
+    },
+    {
+        "id": "5317e2f8-8199-4123-b466-e74a7a3a8514",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: O, P, Q",
+        "options": [
+            "U",
+            "R",
+            "T",
+            "S"
+        ],
+        "answer": 1,
+        "explanation": "Letters increment by 1. Next is R"
+    },
+    {
+        "id": "f0f49bb8-dd12-47eb-9cb6-1e474ea030b5",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: P, Q, R",
+        "options": [
+            "U",
+            "T",
+            "S",
+            "V"
+        ],
+        "answer": 2,
+        "explanation": "Letters increment by 1. Next is S"
+    },
+    {
+        "id": "a367599c-7eb0-4f0e-9754-e6d92242d343",
+        "difficulty": "easy",
+        "topic": "Number Series",
+        "question": "Find the next letter in series: Q, R, S",
+        "options": [
+            "V",
+            "T",
+            "U",
+            "W"
+        ],
+        "answer": 1,
+        "explanation": "Letters increment by 1. Next is T"
+    },
+    {
+        "id": "5b971e8c-0108-4146-ba34-03a77c25c07f",
+        "difficulty": "medium",
+        "topic": "Blood Relations",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Uncle)",
+        "options": [
+            "Uncle",
+            "Father",
+            "Nephew",
+            "Son"
+        ],
+        "answer": 0,
+        "explanation": "Deduction points to Uncle"
+    },
+    {
+        "id": "a739afac-7017-4063-9197-2919e056e72d",
+        "difficulty": "medium",
+        "topic": "Blood Relations",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Brother)",
+        "options": [
+            "Son",
+            "Brother",
+            "Father",
+            "Nephew"
+        ],
+        "answer": 1,
+        "explanation": "Deduction points to Brother"
+    },
+    {
+        "id": "1f5c52c5-364d-4bdb-be3d-82c9507767f4",
+        "difficulty": "medium",
+        "topic": "Blood Relations",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Grandfather)",
+        "options": [
+            "Father",
+            "Son",
+            "Nephew",
+            "Grandfather"
+        ],
+        "answer": 3,
+        "explanation": "Deduction points to Grandfather"
+    },
+    {
+        "id": "dc39bf99-8e30-42d1-9dc3-dbd781bdf8dc",
+        "difficulty": "medium",
+        "topic": "Blood Relations",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Cousin)",
+        "options": [
+            "Father",
+            "Nephew",
+            "Cousin",
+            "Son"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Cousin"
+    },
+    {
+        "id": "da8ab1f3-202d-412d-a35e-04395b338467",
+        "difficulty": "medium",
+        "topic": "Coding Decoding",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Uncle)",
+        "options": [
+            "Uncle",
+            "Father",
+            "Nephew",
+            "Son"
+        ],
+        "answer": 0,
+        "explanation": "Deduction points to Uncle"
+    },
+    {
+        "id": "c1ea5cc6-ffe7-4740-b3d7-32f9f97ce290",
+        "difficulty": "medium",
+        "topic": "Direction Sense",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Brother)",
+        "options": [
+            "Nephew",
+            "Brother",
+            "Father",
+            "Son"
+        ],
+        "answer": 1,
+        "explanation": "Deduction points to Brother"
+    },
+    {
+        "id": "457ef688-63da-486c-a6ad-b252908a86c4",
+        "difficulty": "medium",
+        "topic": "Blood Relations",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Grandfather)",
+        "options": [
+            "Grandfather",
+            "Son",
+            "Nephew",
+            "Father"
+        ],
+        "answer": 0,
+        "explanation": "Deduction points to Grandfather"
+    },
+    {
+        "id": "2aa05910-65fc-4e8c-8b9f-2dd3156b56af",
+        "difficulty": "medium",
+        "topic": "Number Series",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Cousin)",
+        "options": [
+            "Father",
+            "Nephew",
+            "Son",
+            "Cousin"
+        ],
+        "answer": 3,
+        "explanation": "Deduction points to Cousin"
+    },
+    {
+        "id": "437db406-703e-4a19-a960-d84564172f38",
+        "difficulty": "medium",
+        "topic": "Coding Decoding",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Uncle)",
+        "options": [
+            "Son",
+            "Uncle",
+            "Father",
+            "Nephew"
+        ],
+        "answer": 1,
+        "explanation": "Deduction points to Uncle"
+    },
+    {
+        "id": "005a7628-c7c4-492d-94dc-dd9314ec190c",
+        "difficulty": "medium",
+        "topic": "Blood Relations",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Brother)",
+        "options": [
+            "Brother",
+            "Son",
+            "Father",
+            "Nephew"
+        ],
+        "answer": 0,
+        "explanation": "Deduction points to Brother"
+    },
+    {
+        "id": "f4cdea0f-e46c-41bb-9972-096ed597a583",
+        "difficulty": "medium",
+        "topic": "Coding Decoding",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Grandfather)",
+        "options": [
+            "Grandfather",
+            "Nephew",
+            "Father",
+            "Son"
+        ],
+        "answer": 0,
+        "explanation": "Deduction points to Grandfather"
+    },
+    {
+        "id": "4f04e6b8-e83f-4941-8097-3241c5459206",
+        "difficulty": "medium",
+        "topic": "Direction Sense",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Cousin)",
+        "options": [
+            "Nephew",
+            "Father",
+            "Cousin",
+            "Son"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Cousin"
+    },
+    {
+        "id": "17e71b78-667e-41fb-8486-dd9e30b65d93",
+        "difficulty": "medium",
+        "topic": "Direction Sense",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Uncle)",
+        "options": [
+            "Nephew",
+            "Father",
+            "Son",
+            "Uncle"
+        ],
+        "answer": 3,
+        "explanation": "Deduction points to Uncle"
+    },
+    {
+        "id": "69807ad8-dac7-46ca-a46f-4e8e17b2a17f",
+        "difficulty": "medium",
+        "topic": "Direction Sense",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Brother)",
+        "options": [
+            "Brother",
+            "Son",
+            "Father",
+            "Nephew"
+        ],
+        "answer": 0,
+        "explanation": "Deduction points to Brother"
+    },
+    {
+        "id": "73f49925-ddd0-4960-9905-e77ea6b372db",
+        "difficulty": "medium",
+        "topic": "Number Series",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Grandfather)",
+        "options": [
+            "Father",
+            "Nephew",
+            "Grandfather",
+            "Son"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Grandfather"
+    },
+    {
+        "id": "0efdf2f2-129c-47be-9349-77b0a64e1717",
+        "difficulty": "medium",
+        "topic": "Number Series",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Cousin)",
+        "options": [
+            "Father",
+            "Nephew",
+            "Cousin",
+            "Son"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Cousin"
+    },
+    {
+        "id": "0a51afff-4824-472e-9d54-0ebd282131d4",
+        "difficulty": "medium",
+        "topic": "Direction Sense",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Uncle)",
+        "options": [
+            "Son",
+            "Father",
+            "Uncle",
+            "Nephew"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Uncle"
+    },
+    {
+        "id": "e9cec59b-a005-4e66-8729-2b2524bbde4a",
+        "difficulty": "medium",
+        "topic": "Blood Relations",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Brother)",
+        "options": [
+            "Son",
+            "Nephew",
+            "Brother",
+            "Father"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Brother"
+    },
+    {
+        "id": "92ee5eac-ffa6-4a26-9bfa-e9d08823116b",
+        "difficulty": "medium",
+        "topic": "Direction Sense",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Grandfather)",
+        "options": [
+            "Nephew",
+            "Son",
+            "Grandfather",
+            "Father"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Grandfather"
+    },
+    {
+        "id": "8ad92386-d126-4564-b70b-4041781380d6",
+        "difficulty": "medium",
+        "topic": "Number Series",
+        "question": "Pointing to a photo, a man says \"He is the son of the only son of my grandfather.\" How is he related? (Assume Cousin)",
+        "options": [
+            "Son",
+            "Nephew",
+            "Cousin",
+            "Father"
+        ],
+        "answer": 2,
+        "explanation": "Deduction points to Cousin"
+    },
+    {
+        "id": "b79fb411-1aff-4e1a-890a-b8d621999443",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "West",
+            "East",
+            "South",
+            "North"
+        ],
+        "answer": 3,
+        "explanation": "Facing North after turns."
+    },
+    {
+        "id": "62d5d43e-1b0a-4e35-9d24-ad45e475c3d7",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "East",
+            "South",
+            "North",
+            "West"
+        ],
+        "answer": 1,
+        "explanation": "Facing South after turns."
+    },
+    {
+        "id": "86b2731e-2554-48c1-9b5f-2fd64b0cbfbb",
+        "difficulty": "hard",
+        "topic": "Blood Relations",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "West",
+            "East",
+            "North"
+        ],
+        "answer": 2,
+        "explanation": "Facing East after turns."
+    },
+    {
+        "id": "b227803b-2a0e-4a1f-b7b3-4ec547ceef2d",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "East",
+            "North",
+            "West"
+        ],
+        "answer": 3,
+        "explanation": "Facing West after turns."
+    },
+    {
+        "id": "49498a9a-656a-4b34-90d8-2bd9bbe038e1",
+        "difficulty": "hard",
+        "topic": "Coding Decoding",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "West",
+            "North",
+            "South",
+            "East"
+        ],
+        "answer": 1,
+        "explanation": "Facing North after turns."
+    },
+    {
+        "id": "f6bcc74c-4216-43be-a47e-6766aab351f2",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "East",
+            "West",
+            "North"
+        ],
+        "answer": 0,
+        "explanation": "Facing South after turns."
+    },
+    {
+        "id": "a22f55a7-262e-4dc6-9ea1-6fae3e56c0da",
+        "difficulty": "hard",
+        "topic": "Number Series",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "West",
+            "North",
+            "East"
+        ],
+        "answer": 3,
+        "explanation": "Facing East after turns."
+    },
+    {
+        "id": "a0792191-d688-4a1e-9c9b-7fa86f968fc0",
+        "difficulty": "hard",
+        "topic": "Coding Decoding",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "West",
+            "South",
+            "North",
+            "East"
+        ],
+        "answer": 0,
+        "explanation": "Facing West after turns."
+    },
+    {
+        "id": "7e648bc4-b52a-4e22-a048-cf32d6b3fd0b",
+        "difficulty": "hard",
+        "topic": "Blood Relations",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "North",
+            "South",
+            "West",
+            "East"
+        ],
+        "answer": 0,
+        "explanation": "Facing North after turns."
+    },
+    {
+        "id": "1d021b97-1b1b-4389-9b63-b7eb396acadc",
+        "difficulty": "hard",
+        "topic": "Coding Decoding",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "West",
+            "North",
+            "South",
+            "East"
+        ],
+        "answer": 2,
+        "explanation": "Facing South after turns."
+    },
+    {
+        "id": "0e56ea89-8420-415c-a269-72e4af86c7ef",
+        "difficulty": "hard",
+        "topic": "Blood Relations",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "West",
+            "East",
+            "North",
+            "South"
+        ],
+        "answer": 1,
+        "explanation": "Facing East after turns."
+    },
+    {
+        "id": "8ef54e8f-f47a-43cc-b8e3-c6ebe51be920",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "North",
+            "East",
+            "West",
+            "South"
+        ],
+        "answer": 2,
+        "explanation": "Facing West after turns."
+    },
+    {
+        "id": "df5f26d4-c450-43df-b16b-e3e03791d39d",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "North",
+            "West",
+            "East",
+            "South"
+        ],
+        "answer": 0,
+        "explanation": "Facing North after turns."
+    },
+    {
+        "id": "ca87c0d8-82b3-4657-a40e-27842cd04913",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "North",
+            "West",
+            "East",
+            "South"
+        ],
+        "answer": 3,
+        "explanation": "Facing South after turns."
+    },
+    {
+        "id": "7990d862-1db5-4a11-96a3-42e47c70bee4",
+        "difficulty": "hard",
+        "topic": "Coding Decoding",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "North",
+            "East",
+            "West"
+        ],
+        "answer": 2,
+        "explanation": "Facing East after turns."
+    },
+    {
+        "id": "457487db-3b65-4fda-ad65-b57c583e64f6",
+        "difficulty": "hard",
+        "topic": "Blood Relations",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "East",
+            "North",
+            "West"
+        ],
+        "answer": 3,
+        "explanation": "Facing West after turns."
+    },
+    {
+        "id": "471900bd-cd13-402e-b195-72900efde865",
+        "difficulty": "hard",
+        "topic": "Coding Decoding",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "North",
+            "East",
+            "West"
+        ],
+        "answer": 1,
+        "explanation": "Facing North after turns."
+    },
+    {
+        "id": "9ef3e793-a7a8-4e87-9804-e8380d4490b0",
+        "difficulty": "hard",
+        "topic": "Direction Sense",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "East",
+            "North",
+            "West"
+        ],
+        "answer": 0,
+        "explanation": "Facing South after turns."
+    },
+    {
+        "id": "c9fe5b3a-3224-4732-b79d-976324538097",
+        "difficulty": "hard",
+        "topic": "Number Series",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "South",
+            "North",
+            "East",
+            "West"
+        ],
+        "answer": 2,
+        "explanation": "Facing East after turns."
+    },
+    {
+        "id": "327c5fd3-33ac-4a05-954c-0092b1d456be",
+        "difficulty": "hard",
+        "topic": "Number Series",
+        "question": "A walks 10m North, turns left walks 20m, turns left walks 10m. Which direction is he facing?",
+        "options": [
+            "West",
+            "North",
+            "South",
+            "East"
+        ],
+        "answer": 0,
+        "explanation": "Facing West after turns."
+    }
+]

@@ -201,6 +201,7 @@ function applyAuthenticatedUser(user) {
     if (!user) return;
     state.authUser = user;
     state.isAuthenticated = true;
+    state.authChecked = true;  // CRITICAL: Mark auth check as complete
     state.userId = user.id;
     localStorage.setItem('hirevisionUserId', user.id || '');
     localStorage.setItem('hirevisionUserName', user.full_name || user.name || 'Student');

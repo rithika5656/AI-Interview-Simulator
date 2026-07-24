@@ -108,6 +108,7 @@
 
     function RouteBridge() {
         const navigate = useNavigate();
+        const prevAuthStateRef = React.useRef(null);
 
         React.useEffect(() => {
             window.HireVisionRouteNavigate = (path) => navigate(path);
@@ -118,7 +119,18 @@
             };
         }, [navigate]);
 
+        // Monitor state changes on every render
+        const currentAuthState = window.state ? JSON.stringify({
+            isAuthenticated: window.state.isAuthenticated,
+            authChecked: window.state.authChecked
+        }) : null;
+        
         React.useEffect(() => {
+            if (prevAuthStateRef.current === currentAuthState) {
+                return;
+            }
+            prevAuthStateRef.current = currentAuthState;
+
             if (window.state && !window.state.authChecked) return;
             if (!window.state || !window.state.isAuthenticated) {
                 if (window.location.pathname !== '/login' && window.location.pathname !== '/register' && window.location.pathname !== '/forgot-password') {
@@ -141,7 +153,7 @@
             const appShell = document.querySelector('.app-shell');
             if (authScreen) authScreen.hidden = true;
             if (appShell) appShell.style.display = 'grid';
-        }, [navigate]);
+        }, [currentAuthState, navigate]);
 
         return React.createElement(Routes, null,
             React.createElement(Route, {

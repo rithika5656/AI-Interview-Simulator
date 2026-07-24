@@ -218,14 +218,8 @@ function applyAuthenticatedUser(user) {
     if (interviewName) interviewName.value = user.full_name || user.name || '';
     if (resumeName) resumeName.value = user.full_name || user.name || '';
     
-    console.log('[AUTH] Triggering router update...');
-    // Trigger React Router to re-render and detect auth state change
-    if (window.triggerRouterUpdate) {
-        console.log('[AUTH] Calling window.triggerRouterUpdate()');
-        window.triggerRouterUpdate();
-    } else {
-        console.error('[AUTH] ERROR: window.triggerRouterUpdate not available!');
-    }
+    console.log('[AUTH] Dispatching auth-changed event for router');
+    window.dispatchEvent(new Event('auth-changed'));
 }
 
 async function bootstrapAuth() {
@@ -237,10 +231,8 @@ async function bootstrapAuth() {
         state.isAuthenticated = false;
         state.authChecked = true;
         prepareShellForAuth();
-        if (window.triggerRouterUpdate) {
-            console.log('[AUTH] Triggering router update (no token)');
-            window.triggerRouterUpdate();
-        }
+        console.log('[AUTH] Dispatching auth-changed (no token)');
+        window.dispatchEvent(new Event('auth-changed'));
         return;
     }
 
@@ -250,10 +242,8 @@ async function bootstrapAuth() {
         console.log('[AUTH] /auth/me response:', response);
         applyAuthenticatedUser(response.user);
         // applyAuthenticatedUser sets authChecked and triggers router update
-        if (window.HireVisionRouteNavigate) {
-            console.log('[AUTH] Navigating to /dashboard from bootstrap');
-            window.HireVisionRouteNavigate('/dashboard');
-        }
+        console.log('[AUTH] Dispatching navigate-to /dashboard from bootstrap');
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
     } catch (error) {
         console.error('[AUTH] Error during bootstrap auth:', error);
         clearAuthSession();
@@ -263,14 +253,10 @@ async function bootstrapAuth() {
         state.authChecked = true;
         prepareShellForAuth();
         showToast('Session expired. Please sign in again.', 'warning');
-        if (window.triggerRouterUpdate) {
-            console.log('[AUTH] Triggering router update (error)');
-            window.triggerRouterUpdate();
-        }
-        if (window.HireVisionRouteNavigate) {
-            console.log('[AUTH] Navigating to /login (error)');
-            window.HireVisionRouteNavigate('/login');
-        }
+        console.log('[AUTH] Dispatching auth-changed (error)');
+        window.dispatchEvent(new Event('auth-changed'));
+        console.log('[AUTH] Dispatching navigate-to /login (error)');
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/login' } }));
     }
 }
 
@@ -291,8 +277,8 @@ function bindNavigation() {
     $all('[data-view]').forEach((button) => {
         button.addEventListener('click', () => {
             const route = viewRouteMap[button.dataset.view];
-            if (route && window.HireVisionRouteNavigate && state.isAuthenticated) {
-                window.HireVisionRouteNavigate(route);
+            if (route && state.isAuthenticated) {
+                window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: route } }));
                 return;
             }
             showView(button.dataset.view);
@@ -1665,15 +1651,8 @@ async function handleLogin(event) {
         
         showToast('Welcome back to HireVision.', 'success');
         
-        console.log('[AUTH] window.HireVisionRouteNavigate:', typeof window.HireVisionRouteNavigate);
-        console.log('[AUTH] window.triggerRouterUpdate:', typeof window.triggerRouterUpdate);
-        
-        if (window.HireVisionRouteNavigate) {
-            console.log('[AUTH] Calling navigate("/dashboard")');
-            window.HireVisionRouteNavigate('/dashboard');
-        } else {
-            console.error('[AUTH] ERROR: window.HireVisionRouteNavigate is not available!');
-        }
+        console.log('[AUTH] Dispatching navigate-to /dashboard');
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
     } catch (error) {
         console.error('[AUTH] Login error:', error);
         showToast(`Login failed: ${error.message}`, 'error');
@@ -1701,9 +1680,7 @@ async function handleRegister(event) {
         // DO NOT call showAuthenticatedShell() here - let router.js handle it
         // Just navigate to dashboard, the ProtectedRoute will load the shell
         showToast('Account created successfully.', 'success');
-        if (window.HireVisionRouteNavigate) {
-            window.HireVisionRouteNavigate('/dashboard');
-        }
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
     } catch (error) {
         showToast(`Registration failed: ${error.message}`, 'error');
     }
@@ -1720,9 +1697,7 @@ async function handleForgotPassword(event) {
             resetToken.value = response.reset_token;
         }
         openAuthScreen('reset');
-        if (window.HireVisionRouteNavigate) {
-            window.HireVisionRouteNavigate('/forgot-password');
-        }
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/forgot-password' } }));
         showToast('Reset token generated. Use it to set a new password.', 'success');
     } catch (error) {
         showToast(`Password reset request failed: ${error.message}`, 'error');
@@ -1739,9 +1714,7 @@ async function handleResetPassword(event) {
         await apiPost('/auth/reset-password', { email, reset_token: resetToken, password });
         showToast('Password updated. Please sign in.', 'success');
         openAuthScreen('login');
-        if (window.HireVisionRouteNavigate) {
-            window.HireVisionRouteNavigate('/login');
-        }
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/login' } }));
     } catch (error) {
         showToast(`Password reset failed: ${error.message}`, 'error');
     }
@@ -1764,10 +1737,8 @@ async function logout() {
     prepareShellForAuth();
     openAuthScreen('login');
     showToast('You have been logged out.', 'info');
-    if (window.triggerRouterUpdate) window.triggerRouterUpdate();
-    if (window.HireVisionRouteNavigate) {
-        window.HireVisionRouteNavigate('/login');
-    }
+    window.dispatchEvent(new Event('auth-changed'));
+    window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/login' } }));
 }
 
 // Edit Profile Form Submit

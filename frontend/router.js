@@ -1,10 +1,12 @@
 (function () {
-    if (!window.React || !window.ReactDOM || !window.ReactRouterDOM) {
-        console.error('React Router bridge could not start.');
-        return;
-    }
+    function startWhenReady() {
+        if (!window.React || !window.ReactDOM || !window.ReactRouterDOM) {
+            console.warn('React not ready yet, retrying router initialization...');
+            setTimeout(startWhenReady, 200);
+            return;
+        }
 
-    const { BrowserRouter, Routes, Route, Navigate, useNavigate } = window.ReactRouterDOM;
+        const { BrowserRouter, Routes, Route, Navigate, useNavigate } = window.ReactRouterDOM;
 
     const protectedViewMap = {
         '/dashboard': 'dashboardView',
@@ -31,7 +33,7 @@
     function AuthRoute({ mode }) {
         React.useEffect(() => {
             if (window.state && window.state.isAuthenticated) {
-                if (window.HireVisionRouteNavigate) window.HireVisionRouteNavigate('/dashboard');
+                window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
                 return;
             }
             // Ensure auth screen is shown and app shell is hidden
@@ -111,20 +113,24 @@
         const [, forceUpdate] = React.useReducer(x => x + 1, 0);
         const prevAuthStateRef = React.useRef(null);
 
-        // Expose force update for when window.state changes
-        window.triggerRouterUpdate = forceUpdate;
+        // Re-render when auth state changes via dispatched event
+        React.useEffect(() => {
+            const handler = () => forceUpdate();
+            window.addEventListener('auth-changed', handler);
+            return () => window.removeEventListener('auth-changed', handler);
+        }, []);
 
         React.useEffect(() => {
-            console.log('[ROUTER] Setting up window.HireVisionRouteNavigate');
-            window.HireVisionRouteNavigate = (path) => {
-                console.log('[ROUTER] navigate() called with path:', path);
-                navigate(path);
-            };
-            return () => {
-                if (window.HireVisionRouteNavigate) {
-                    delete window.HireVisionRouteNavigate;
+            console.log('[ROUTER] Setting up navigate listener');
+            const navHandler = (e) => {
+                const path = e?.detail?.path;
+                if (path) {
+                    console.log('[ROUTER] navigate event received:', path);
+                    navigate(path);
                 }
             };
+            window.addEventListener('navigate-to', navHandler);
+            return () => window.removeEventListener('navigate-to', navHandler);
         }, [navigate]);
 
         // Monitor state changes
@@ -265,4 +271,8 @@
     } else {
         mountRouter();
     }
+}
+
+// Kick off router init and keep retrying until React/Router are available
+startWhenReady();
 })();

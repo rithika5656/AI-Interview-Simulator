@@ -596,65 +596,93 @@ def generate_technical_interview_question(technology: str, resume_skills: list[s
     }
 
 
-def generate_mock_module(module_key: str, topic: str | None, difficulty: str, count: int = 20) -> dict[str, Any]:
-    import os
-    import json
+def generate_mock_module(
+    module_key: str,
+    topic: str | None,
+    difficulty: str,
+    count: int = 20,
+    user_id: str | None = None,
+) -> dict[str, Any]:
     import copy
-    
-    # Map module_key to json file (e.g. "logical reasoning" -> "logical")
-    file_key = module_key.lower().replace(' reasoning', '').replace(' ability', '').replace('-mcq', '')
-    
-    json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", f"{file_key}.json")
-    
-    if not os.path.exists(json_path):
-        return {
-            "module": module_key,
-            "topic": topic or "General",
-            "difficulty": difficulty,
-            "questions": [],
-            "error": f"JSON database {json_path} not found"
-        }
-        
-    with open(json_path, 'r', encoding='utf-8') as f:
-        all_questions = json.load(f)
-        
-    # Filter by difficulty
-    filtered = [q for q in all_questions if q.get("difficulty", "medium").lower() == difficulty.lower()]
-    
-    # Filter by topic if specified (though the prompt only said filter by subject and difficulty)
+    from pathlib import Path
+
+    subject_aliases = {
+        "aptitude": "aptitude",
+        "logical": "logical",
+        "logical reasoning": "logical",
+        "verbal": "verbal",
+        "verbal ability": "verbal",
+        "technical": "technical",
+        "technical-mcq": "technical",
+    }
+    subject_key = subject_aliases.get(module_key.strip().lower(), module_key.strip().lower())
+    data_dir = Path(__file__).resolve().parents[1] / "data"
+    json_path = data_dir / f"{subject_key}.json"
+
+    if not json_path.exists():
+        raise FileNotFoundError(f"Question bank not found: {json_path}")
+
+    with json_path.open("r", encoding="utf-8") as file_handle:
+        all_questions = json.load(file_handle)
+
+    if not isinstance(all_questions, list):
+        raise ValueError(f"Invalid question bank format in {json_path}")
+
+    normalized_difficulty = difficulty.strip().lower() if isinstance(difficulty, str) else "medium"
+    filtered = [
+        question
+        for question in all_questions
+        if str(question.get("difficulty", "medium")).strip().lower() == normalized_difficulty
+    ]
+
     if topic:
-        topic_filtered = [q for q in filtered if q.get("topic", "").lower() == topic.lower()]
-        if len(topic_filtered) >= count:
-            filtered = topic_filtered
-            
-    # Shuffle the list and take up to 20
-    random.shuffle(filtered)
-    questions = filtered[:count]
-    
-    # Shuffle options internally for each question just in case
+        topic_questions = [
+            question
+            for question in filtered
+            if str(question.get("topic", "")).strip().lower() == topic.strip().lower()
+        ]
+        if len(topic_questions) >= 20:
+            filtered = topic_questions
+
+    if len(filtered) < 20:
+        raise ValueError(
+            f"Not enough {normalized_difficulty} questions for {subject_key}: expected 20, found {len(filtered)}"
+        )
+
+    questions = random.sample(filtered, 20)
+
     final_questions = []
-    for idx, q in enumerate(questions):
-        q_copy = copy.deepcopy(q)
-        q_copy["order"] = idx + 1
-        
-        opts = q_copy.get("options", [])
-        correct_idx = q_copy.get("answer", 0)
-        
-        if len(opts) == 4:
-            indexed_opts = list(enumerate(opts))
-            random.shuffle(indexed_opts)
-            new_opts = [opt for _, opt in indexed_opts]
-            new_correct = next(i for i, (old_idx, _) in enumerate(indexed_opts) if old_idx == correct_idx)
-            
-            q_copy["options"] = new_opts
-            q_copy["correct_index"] = new_correct # Standardize with the frontend expecting correct_index
-            
-        final_questions.append(q_copy)
+    for idx, question in enumerate(questions):
+        question_copy = copy.deepcopy(question)
+        question_copy["order"] = idx + 1
+
+        options = question_copy.get("options", [])
+        correct_idx = question_copy.get("answer", question_copy.get("correct_index", question_copy.get("answer_index", 0)))
+        correct_idx = int(correct_idx)
+
+        if len(options) != 4:
+            raise ValueError(f"Question {question_copy.get('id')} in {json_path.name} does not have 4 options")
+
+        indexed_options = list(enumerate(options))
+        random.shuffle(indexed_options)
+        new_options = [option for _, option in indexed_options]
+        new_correct_idx = next(
+            index for index, (original_index, _) in enumerate(indexed_options) if original_index == correct_idx
+        )
+
+        question_copy["options"] = new_options
+        question_copy["answer"] = new_correct_idx
+        question_copy["answer_index"] = new_correct_idx
+        question_copy["correct_index"] = new_correct_idx
+        final_questions.append(question_copy)
 
     return {
+        "success": True,
         "module": module_key,
+        "subject": subject_key,
         "topic": topic or "Mixed",
-        "difficulty": difficulty,
+        "difficulty": normalized_difficulty,
+        "count": len(final_questions),
         "questions": final_questions,
     }
 

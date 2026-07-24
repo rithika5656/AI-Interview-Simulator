@@ -33,6 +33,7 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit, join_room
 import os
 from dotenv import load_dotenv
+from werkzeug.exceptions import HTTPException
 from utils.speech_processor import process_audio
 from utils.nlp_engine import generate_questions, analyze_response
 from utils.sentiment_analyzer import analyze_sentiment
@@ -65,6 +66,25 @@ interview_sessions = {}
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "ok"}), 200
+
+
+@app.errorhandler(HTTPException)
+def handle_http_exception(error):
+    response = jsonify({
+        "success": False,
+        "error": error.description,
+    })
+    response.status_code = error.code or 500
+    return response
+
+
+@app.errorhandler(Exception)
+def handle_unexpected_exception(error):
+    app.logger.exception(error)
+    return jsonify({
+        "success": False,
+        "error": str(error),
+    }), 500
 
 @app.route('/api/start-interview', methods=['POST'])
 def start_interview():

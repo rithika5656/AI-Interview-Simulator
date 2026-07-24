@@ -94,39 +94,50 @@ def resume_analyze():
 
 @placement_bp.route("/<module_key>/generate", methods=["POST"])
 def generate_module(module_key: str):
-    payload = request.get_json(silent=True) or {}
-    topic = payload.get("topic")
-    difficulty = payload.get("difficulty", "medium")
-    count = int(payload.get("count", 20))
-    user_id = payload.get("user_id") or request.args.get("user_id")
-    return jsonify(generate_mock_module(module_key, topic, difficulty, count=count, user_id=user_id))
+    try:
+        payload = request.get_json(silent=True) or {}
+        topic = payload.get("topic")
+        difficulty = payload.get("difficulty", "medium")
+        user_id = payload.get("user_id") or request.args.get("user_id")
+        return jsonify(generate_mock_module(module_key, topic, difficulty, count=20, user_id=user_id))
+    except Exception as e:
+        from flask import current_app
+
+        current_app.logger.exception(e)
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 @placement_bp.route("/<module_key>/submit", methods=["POST"])
 def submit_module(module_key: str):
-    payload = request.get_json(silent=True) or {}
-    questions = payload.get("questions", [])
-    answers = payload.get("answers", [])
-    topic = payload.get("topic", "General")
-    difficulty = payload.get("difficulty", "medium")
-    user_id = payload.get("user_id")
-    result = grade_mcq_submission(questions, answers)
-    
-    table_name = TEST_TABLE_MAP.get(module_key)
-    if table_name:
-        save_record(table_name, {
-            "id": str(uuid.uuid4()),
-            "user_id": user_id,
-            "topic": topic,
-            "difficulty": difficulty,
-            "questions_json": json.dumps(questions),
-            "score": result.get("score"),
-            "correct_count": result.get("correct_count"),
-            "total_count": result.get("total_count"),
-            "created_at": _now(),
-        })
-        
-    return jsonify({"module": module_key, **result})
+    try:
+        payload = request.get_json(silent=True) or {}
+        questions = payload.get("questions", [])
+        answers = payload.get("answers", [])
+        topic = payload.get("topic", "General")
+        difficulty = payload.get("difficulty", "medium")
+        user_id = payload.get("user_id")
+        result = grade_mcq_submission(questions, answers)
+
+        table_name = TEST_TABLE_MAP.get(module_key)
+        if table_name:
+            save_record(table_name, {
+                "id": str(uuid.uuid4()),
+                "user_id": user_id,
+                "topic": topic,
+                "difficulty": difficulty,
+                "questions_json": json.dumps(questions),
+                "score": result.get("score"),
+                "correct_count": result.get("correct_count"),
+                "total_count": result.get("total_count"),
+                "created_at": _now(),
+            })
+
+        return jsonify({"module": module_key, **result})
+    except Exception as e:
+        from flask import current_app
+
+        current_app.logger.exception(e)
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 @placement_bp.route("/coding/problem", methods=["GET"])

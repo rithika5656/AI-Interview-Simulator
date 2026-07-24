@@ -10,6 +10,7 @@ const state = {
     userId: null,
     authUser: null,
     isAuthenticated: false,
+    authChecked: false,
     currentInterviewId: null,
     questionCount: 0,
     mediaRecorder: null,
@@ -24,6 +25,8 @@ const state = {
     currentTechTechnology: 'Python',
     currentCodingProblem: null
 };
+
+window.state = state;
 
 document.addEventListener('DOMContentLoaded', () => {
     bindNavigation();
@@ -113,6 +116,7 @@ function prepareShellForAuth() {
     const appShell = $('.app-shell');
     if (authScreen) authScreen.hidden = false;
     if (appShell) appShell.style.display = 'none';
+    document.body.style.overflow = 'hidden';
 }
 
 function showAuthenticatedShell() {
@@ -120,6 +124,7 @@ function showAuthenticatedShell() {
     const appShell = $('.app-shell');
     if (authScreen) authScreen.hidden = true;
     if (appShell) appShell.style.display = 'grid';
+    document.body.style.overflow = '';
 }
 
 function applyAuthenticatedUser(user) {
@@ -143,6 +148,7 @@ async function bootstrapAuth() {
     const token = getStoredAuthToken();
     if (!token) {
         state.isAuthenticated = false;
+        state.authChecked = true;
         prepareShellForAuth();
         return;
     }
@@ -150,19 +156,27 @@ async function bootstrapAuth() {
     try {
         const response = await apiGet('/auth/me');
         applyAuthenticatedUser(response.user);
+        state.authChecked = true;
         showAuthenticatedShell();
         showView('dashboardView');
         if (backendHealthy && !panelsLoaded) {
             panelsLoaded = true;
             loadAllPanels();
         }
+        if (window.HireVisionRouteNavigate) {
+            window.HireVisionRouteNavigate('/dashboard');
+        }
     } catch (error) {
         clearAuthSession();
         state.authUser = null;
         state.isAuthenticated = false;
         state.userId = null;
+        state.authChecked = true;
         prepareShellForAuth();
         showToast('Session expired. Please sign in again.', 'warning');
+        if (window.HireVisionRouteNavigate) {
+            window.HireVisionRouteNavigate('/login');
+        }
     }
 }
 
@@ -1455,6 +1469,8 @@ function bindAuthEvents() {
     const showLoginBtn = $('#showLoginBtn');
     const showForgotBtn = $('#showForgotBtn');
     const showResetBtn = $('#showResetBtn');
+    const showForgotBtnInline = $('#showForgotBtnInline');
+    const showRegisterBtnInline = $('#showRegisterBtnInline');
     const cancelAuthBtn = $('#backToLoginBtn');
 
     if (switchBtn) {
@@ -1475,6 +1491,8 @@ function bindAuthEvents() {
     if (showLoginBtn) showLoginBtn.addEventListener('click', () => openAuthScreen('login'));
     if (showForgotBtn) showForgotBtn.addEventListener('click', () => openAuthScreen('forgot'));
     if (showResetBtn) showResetBtn.addEventListener('click', () => openAuthScreen('reset'));
+    if (showForgotBtnInline) showForgotBtnInline.addEventListener('click', () => openAuthScreen('forgot'));
+    if (showRegisterBtnInline) showRegisterBtnInline.addEventListener('click', () => openAuthScreen('register'));
     if (cancelAuthBtn) cancelAuthBtn.addEventListener('click', () => openAuthScreen('login'));
 
     if (loginForm) {
@@ -1526,11 +1544,13 @@ async function handleLogin(event) {
         storeAuthToken(response.token, rememberMe || response.remember_me);
         applyAuthenticatedUser(response.user);
         showAuthenticatedShell();
-        showView('dashboardView');
         if (backendHealthy) {
             loadAllPanels();
         }
         showToast('Welcome back to HireVision.', 'success');
+        if (window.HireVisionRouteNavigate) {
+            window.HireVisionRouteNavigate('/dashboard');
+        }
     } catch (error) {
         showToast(`Login failed: ${error.message}`, 'error');
     }
@@ -1555,11 +1575,13 @@ async function handleRegister(event) {
         storeAuthToken(response.token, response.remember_me);
         applyAuthenticatedUser(response.user);
         showAuthenticatedShell();
-        showView('dashboardView');
         if (backendHealthy) {
             loadAllPanels();
         }
         showToast('Account created successfully.', 'success');
+        if (window.HireVisionRouteNavigate) {
+            window.HireVisionRouteNavigate('/dashboard');
+        }
     } catch (error) {
         showToast(`Registration failed: ${error.message}`, 'error');
     }
@@ -1576,6 +1598,9 @@ async function handleForgotPassword(event) {
             resetToken.value = response.reset_token;
         }
         openAuthScreen('reset');
+        if (window.HireVisionRouteNavigate) {
+            window.HireVisionRouteNavigate('/forgot-password');
+        }
         showToast('Reset token generated. Use it to set a new password.', 'success');
     } catch (error) {
         showToast(`Password reset request failed: ${error.message}`, 'error');
@@ -1592,6 +1617,9 @@ async function handleResetPassword(event) {
         await apiPost('/auth/reset-password', { email, reset_token: resetToken, password });
         showToast('Password updated. Please sign in.', 'success');
         openAuthScreen('login');
+        if (window.HireVisionRouteNavigate) {
+            window.HireVisionRouteNavigate('/login');
+        }
     } catch (error) {
         showToast(`Password reset failed: ${error.message}`, 'error');
     }
@@ -1612,6 +1640,9 @@ async function logout() {
     prepareShellForAuth();
     openAuthScreen('login');
     showToast('You have been logged out.', 'info');
+    if (window.HireVisionRouteNavigate) {
+        window.HireVisionRouteNavigate('/login');
+    }
 }
 
 // Edit Profile Form Submit

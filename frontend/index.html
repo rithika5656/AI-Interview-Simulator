@@ -16,6 +16,7 @@
 </head>
 <body class="theme-dark">
     <div id="toastContainer" class="toast-container"></div>
+    <div id="routerRoot" hidden></div>
     <section id="authScreen" class="auth-screen" hidden>
         <div class="auth-shell">
             <section class="auth-hero glass-panel">
@@ -24,6 +25,23 @@
                     <div>
                         <h1>HireVision</h1>
                         <p>Professional placement preparation</p>
+                    </div>
+                </div>
+                <div class="auth-illustration" aria-hidden="true">
+                    <div class="illustration-orbit illustration-orbit-1"></div>
+                    <div class="illustration-orbit illustration-orbit-2"></div>
+                    <div class="illustration-card illustration-card-main">
+                        <span><i class="fa-solid fa-briefcase"></i></span>
+                        <strong>Placement Ready</strong>
+                        <small>Resume + aptitude + interview prep</small>
+                    </div>
+                    <div class="illustration-card illustration-card-top">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Secure JWT auth</span>
+                    </div>
+                    <div class="illustration-card illustration-card-bottom">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Track progress across modules</span>
                     </div>
                 </div>
                 <h2>Build interview momentum with a secure, personalized workspace.</h2>
@@ -50,6 +68,14 @@
                         <label class="checkbox-row"><input type="checkbox" id="loginRemember"> Remember me</label>
                         <button type="submit" class="btn btn-primary btn-wide">Login</button>
                     </form>
+                    <div class="auth-inline-actions">
+                        <button id="showForgotBtnInline" type="button" class="auth-link">Forgot Password?</button>
+                        <button id="showRegisterBtnInline" type="button" class="auth-link">Create a new account</button>
+                    </div>
+                    <div class="auth-social">
+                        <button type="button" class="social-btn"><i class="fa-brands fa-google"></i> Continue with Google</button>
+                        <button type="button" class="social-btn"><i class="fa-brands fa-github"></i> Continue with GitHub</button>
+                    </div>
                 </div>
 
                 <div class="auth-panel" data-auth-panel="register">
@@ -521,5 +547,9 @@
     <script src="config.js"></script>
     <script src="apiClient.js"></script>
     <script src="app.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react-router-dom@6/umd/react-router-dom.development.js"></script>
+    <script src="router.js"></script>
 </body>
 </html>

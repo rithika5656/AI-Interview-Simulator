@@ -27,23 +27,16 @@ const state = {
 };
 
 window.state = state;
+let dashboardShellMounted = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-    bindNavigation();
-    bindThemeToggle();
-    bindModuleForms();
-    bindLegacyInterview();
-    bindTechnicalInterview();
     bindAuthEvents();
-    bindProfileEdit();
-    hydrateSelectors();
     restoreTheme();
     prepareShellForAuth();
     // Show "not connected" placeholders immediately
     showOfflinePlaceholders();
     // Check backend health - panels load only after successful connection
     checkBackendHealth();
-    setTimeout(initMonacoEditor, 500); // Load Monaco Editor
     bootstrapAuth();
 });
 
@@ -86,6 +79,22 @@ function showView(viewId) {
     triggerPanelLoad(viewId);
 }
 
+const viewRouteMap = {
+    dashboardView: '/dashboard',
+    resumeView: '/resume',
+    aptitudeView: '/aptitude',
+    logicalView: '/logical',
+    verbalView: '/verbal',
+    technicalMcqView: '/technical',
+    codingView: '/coding',
+    gdView: '/gd',
+    legacyInterviewView: '/hr',
+    technicalInterviewView: '/hr',
+    analyticsView: '/analytics',
+    coachView: '/career-coach',
+    profileView: '/profile',
+};
+
 function getStoredAuthToken() {
     return sessionStorage.getItem(AUTH_SESSION_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
 }
@@ -116,15 +125,49 @@ function prepareShellForAuth() {
     const appShell = $('.app-shell');
     if (authScreen) authScreen.hidden = false;
     if (appShell) appShell.style.display = 'none';
+    document.body.classList.add('auth-locked');
     document.body.style.overflow = 'hidden';
 }
 
 function showAuthenticatedShell() {
+    mountDashboardShell();
     const authScreen = $('#authScreen');
     const appShell = $('.app-shell');
     if (authScreen) authScreen.hidden = true;
     if (appShell) appShell.style.display = 'grid';
+    document.body.classList.remove('auth-locked');
     document.body.style.overflow = '';
+}
+
+function unmountDashboardShell() {
+    const appShell = $('.app-shell');
+    if (appShell) {
+        appShell.remove();
+    }
+    dashboardShellMounted = false;
+}
+
+function mountDashboardShell() {
+    if (dashboardShellMounted) return;
+    const template = document.getElementById('appShellTemplate');
+    if (!template || !template.content) return;
+
+    const fragment = template.content.cloneNode(true);
+    document.body.appendChild(fragment);
+    dashboardShellMounted = true;
+
+    bindNavigation();
+    bindThemeToggle();
+    bindModuleForms();
+    bindLegacyInterview();
+    bindTechnicalInterview();
+    bindProfileEdit();
+    hydrateSelectors();
+    updateActiveUserProfileUI();
+
+    if (typeof initMonacoEditor === 'function') {
+        setTimeout(initMonacoEditor, 200);
+    }
 }
 
 function applyAuthenticatedUser(user) {
@@ -157,6 +200,7 @@ async function bootstrapAuth() {
         const response = await apiGet('/auth/me');
         applyAuthenticatedUser(response.user);
         state.authChecked = true;
+        mountDashboardShell();
         showAuthenticatedShell();
         showView('dashboardView');
         if (backendHealthy && !panelsLoaded) {
@@ -195,7 +239,14 @@ function triggerPanelLoad(viewId, force = false) {
 
 function bindNavigation() {
     $all('[data-view]').forEach((button) => {
-        button.addEventListener('click', () => showView(button.dataset.view));
+        button.addEventListener('click', () => {
+            const route = viewRouteMap[button.dataset.view];
+            if (route && window.HireVisionRouteNavigate && state.isAuthenticated) {
+                window.HireVisionRouteNavigate(route);
+                return;
+            }
+            showView(button.dataset.view);
+        });
     });
 }
 
@@ -1637,6 +1688,7 @@ async function logout() {
     state.isAuthenticated = false;
     state.userId = null;
     updateActiveUserProfileUI();
+    unmountDashboardShell();
     prepareShellForAuth();
     openAuthScreen('login');
     showToast('You have been logged out.', 'info');

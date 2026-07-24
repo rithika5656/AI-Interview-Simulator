@@ -49,6 +49,11 @@ body {
     font-family: 'Inter', system-ui, sans-serif;
 }
 
+body.auth-locked {
+    overflow: hidden;
+    height: 100vh;
+}
+
 button, input, textarea, select {
     font: inherit;
 }
@@ -131,6 +136,40 @@ button, input, textarea, select {
     color: var(--muted);
     line-height: 1.7;
     margin: 18px 0 24px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.feature-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    color: var(--text);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(110, 231, 249, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.feature-card i {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, rgba(110, 231, 249, 0.18), rgba(79, 140, 255, 0.22));
+    color: var(--primary);
 }
 
 .auth-illustration {
@@ -247,6 +286,17 @@ button, input, textarea, select {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(110, 231, 249, 0.28);
+}
+
+.social-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.72;
+    transform: none;
+}
+
+.social-btn span {
+    color: var(--muted);
+    font-size: 0.86rem;
 }
 
 .auth-bullets {
@@ -406,6 +456,10 @@ button, input, textarea, select {
     }
 
     .auth-grid-form {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-grid {
         grid-template-columns: 1fr;
     }
 

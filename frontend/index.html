@@ -14,7 +14,7 @@
     <!-- Load Monaco Editor -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
 </head>
-<body class="theme-dark">
+<body class="theme-dark auth-locked">
     <div id="toastContainer" class="toast-container"></div>
     <div id="routerRoot" hidden></div>
     <section id="authScreen" class="auth-screen" hidden>
@@ -44,13 +44,15 @@
                         <span>Track progress across modules</span>
                     </div>
                 </div>
-                <h2>Build interview momentum with a secure, personalized workspace.</h2>
-                <p class="auth-copy">Log in to continue your assessments, track scores across modules, and keep your profile synced to MongoDB with JWT protection.</p>
-                <ul class="auth-bullets">
-                    <li>Resume, aptitude, verbal, logical, technical, coding, GD, and HR practice in one place.</li>
-                    <li>JWT sign-in, remember-me sessions, logout, and password reset flow.</li>
-                    <li>Glassmorphism UI that matches the existing HireVision dark theme.</li>
-                </ul>
+                <h2>Prepare Smarter. Ace Every Interview.</h2>
+                <p class="auth-copy">AI-powered placement preparation platform with resume analysis, coding, aptitude, HR interview simulation, analytics and career coaching.</p>
+                <div class="feature-grid">
+                    <article class="feature-card"><i class="fa-solid fa-file-arrow-up"></i><span>Resume Analysis</span></article>
+                    <article class="feature-card"><i class="fa-solid fa-code"></i><span>Coding Assessment</span></article>
+                    <article class="feature-card"><i class="fa-solid fa-comments"></i><span>AI Mock Interviews</span></article>
+                    <article class="feature-card"><i class="fa-solid fa-chart-column"></i><span>Analytics</span></article>
+                    <article class="feature-card"><i class="fa-solid fa-tachograph-digital"></i><span>Placement Dashboard</span></article>
+                </div>
             </section>
 
             <section class="auth-card glass-panel">
@@ -73,8 +75,8 @@
                         <button id="showRegisterBtnInline" type="button" class="auth-link">Create a new account</button>
                     </div>
                     <div class="auth-social">
-                        <button type="button" class="social-btn"><i class="fa-brands fa-google"></i> Continue with Google</button>
-                        <button type="button" class="social-btn"><i class="fa-brands fa-github"></i> Continue with GitHub</button>
+                        <button type="button" class="social-btn" disabled><i class="fa-brands fa-google"></i> Google <span>Coming Soon</span></button>
+                        <button type="button" class="social-btn" disabled><i class="fa-brands fa-github"></i> GitHub <span>Coming Soon</span></button>
                     </div>
                 </div>
 
@@ -117,7 +119,8 @@
         </div>
     </section>
 
-    <div class="app-shell" style="display:none;">
+    <template id="appShellTemplate">
+    <div class="app-shell">
         <aside class="sidebar">
             <div class="brand-block">
                 <div class="brand-mark">HV</div>
@@ -543,6 +546,7 @@
             </section>
         </main>
     </div>
+    </template>
 
     <script src="config.js"></script>
     <script src="apiClient.js"></script>

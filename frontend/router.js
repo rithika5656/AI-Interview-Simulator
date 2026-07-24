@@ -10,11 +10,15 @@
         '/dashboard': 'dashboardView',
         '/resume': 'resumeView',
         '/aptitude': 'aptitudeView',
+        '/logical': 'logicalView',
+        '/verbal': 'verbalView',
         '/technical': 'technicalMcqView',
         '/coding': 'codingView',
         '/gd': 'gdView',
         '/hr': 'legacyInterviewView',
         '/analytics': 'analyticsView',
+        '/career-coach': 'coachView',
+        '/profile': 'profileView',
     };
 
     function authRouteMode(pathname) {
@@ -118,6 +122,14 @@
                 element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/technical'] }),
             }),
             React.createElement(Route, {
+                path: '/logical',
+                element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/logical'] }),
+            }),
+            React.createElement(Route, {
+                path: '/verbal',
+                element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/verbal'] }),
+            }),
+            React.createElement(Route, {
                 path: '/coding',
                 element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/coding'] }),
             }),
@@ -132,6 +144,14 @@
             React.createElement(Route, {
                 path: '/analytics',
                 element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/analytics'] }),
+            }),
+            React.createElement(Route, {
+                path: '/career-coach',
+                element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/career-coach'] }),
+            }),
+            React.createElement(Route, {
+                path: '/profile',
+                element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/profile'] }),
             }),
             React.createElement(Route, {
                 path: '*',

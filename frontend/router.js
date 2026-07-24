@@ -126,6 +126,7 @@
                 const path = e?.detail?.path;
                 if (path) {
                     console.log('[ROUTER] navigate event received:', path);
+                    if (path === '/dashboard') console.log('Navigating to dashboard');
                     navigate(path);
                 }
             };

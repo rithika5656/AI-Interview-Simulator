@@ -244,6 +244,14 @@ async function bootstrapAuth() {
         // applyAuthenticatedUser sets authChecked and triggers router update
         console.log('[AUTH] Dispatching navigate-to /dashboard from bootstrap');
         window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
+        try {
+            history.replaceState(null, '', '/dashboard');
+            console.log('[AUTH] Fallback: set location to /dashboard');
+        } catch (e) { }
+        try {
+            history.replaceState(null, '', '/dashboard');
+            console.log('[AUTH] Fallback: set location to /dashboard');
+        } catch (e) { }
     } catch (error) {
         console.error('[AUTH] Error during bootstrap auth:', error);
         clearAuthSession();
@@ -1653,6 +1661,10 @@ async function handleLogin(event) {
         
         console.log('[AUTH] Dispatching navigate-to /dashboard');
         window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
+        try {
+            history.replaceState(null, '', '/dashboard');
+            console.log('[AUTH] Fallback: set location to /dashboard');
+        } catch (e) { }
     } catch (error) {
         console.error('[AUTH] Login error:', error);
         showToast(`Login failed: ${error.message}`, 'error');

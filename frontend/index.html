@@ -18,104 +18,107 @@
     <div id="toastContainer" class="toast-container"></div>
     <div id="routerRoot" hidden></div>
     <section id="authScreen" class="auth-screen" hidden>
-        <div class="auth-shell">
-            <section class="auth-hero glass-panel">
-                <div class="brand-block brand-block-auth">
-                    <div class="brand-mark">HV</div>
-                    <div>
-                        <h1>HireVision</h1>
-                        <p>Professional placement preparation</p>
+        <div class="auth-container">
+            <!-- Left Side: Hero Section -->
+            <div class="auth-hero">
+                <div class="hero-gradient"></div>
+                <div class="hero-content">
+                    <div class="brand-block brand-block-auth">
+                        <div class="brand-mark">HV</div>
+                        <div>
+                            <h1>HireVision</h1>
+                            <p>Professional placement preparation</p>
+                        </div>
+                    </div>
+                    <div class="hero-headline">
+                        <h2>Crack Your Dream Placement</h2>
+                        <p>Master every interview round with AI-powered preparation</p>
+                    </div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                            <span>Resume Analyzer</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span>Technical MCQs</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Coding Assessment</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span>AI Mock Interview</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Placement Analytics</span>
+                        </div>
                     </div>
                 </div>
-                <div class="auth-illustration" aria-hidden="true">
-                    <div class="illustration-orbit illustration-orbit-1"></div>
-                    <div class="illustration-orbit illustration-orbit-2"></div>
-                    <div class="illustration-card illustration-card-main">
-                        <span><i class="fa-solid fa-briefcase"></i></span>
-                        <strong>Placement Ready</strong>
-                        <small>Resume + aptitude + interview prep</small>
-                    </div>
-                    <div class="illustration-card illustration-card-top">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>Secure JWT auth</span>
-                    </div>
-                    <div class="illustration-card illustration-card-bottom">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <span>Track progress across modules</span>
-                    </div>
-                </div>
-                <h2>Prepare Smarter. Ace Every Interview.</h2>
-                <p class="auth-copy">AI-powered placement preparation platform with resume analysis, coding, aptitude, HR interview simulation, analytics and career coaching.</p>
-                <div class="feature-grid">
-                    <article class="feature-card"><i class="fa-solid fa-file-arrow-up"></i><span>Resume Analysis</span></article>
-                    <article class="feature-card"><i class="fa-solid fa-code"></i><span>Coding Assessment</span></article>
-                    <article class="feature-card"><i class="fa-solid fa-comments"></i><span>AI Mock Interviews</span></article>
-                    <article class="feature-card"><i class="fa-solid fa-chart-column"></i><span>Analytics</span></article>
-                    <article class="feature-card"><i class="fa-solid fa-tachograph-digital"></i><span>Placement Dashboard</span></article>
-                </div>
-            </section>
+            </div>
 
-            <section class="auth-card glass-panel">
-                <div class="auth-tabs">
-                    <button id="showLoginBtn" class="auth-tab active" data-auth-tab="login" type="button">Login</button>
-                    <button id="showRegisterBtn" class="auth-tab" data-auth-tab="register" type="button">Register</button>
-                    <button id="showForgotBtn" class="auth-tab" data-auth-tab="forgot" type="button">Forgot Password</button>
-                </div>
-
-                <div class="auth-panel active" data-auth-panel="login">
-                    <h3>Welcome back</h3>
-                    <form id="loginForm" class="stack-form">
-                        <input type="email" id="loginEmail" placeholder="Email address" required>
-                        <input type="password" id="loginPassword" placeholder="Password" required>
-                        <label class="checkbox-row"><input type="checkbox" id="loginRemember"> Remember me</label>
-                        <button type="submit" class="btn btn-primary btn-wide">Login</button>
-                    </form>
-                    <div class="auth-inline-actions">
-                        <button id="showForgotBtnInline" type="button" class="auth-link">Forgot Password?</button>
-                        <button id="showRegisterBtnInline" type="button" class="auth-link">Create a new account</button>
+            <!-- Right Side: Login Card -->
+            <div class="auth-card-wrapper">
+                <div class="auth-card">
+                    <div class="auth-tabs">
+                        <button id="showLoginBtn" class="auth-tab active" data-auth-tab="login" type="button">Login</button>
+                        <button id="showRegisterBtn" class="auth-tab" data-auth-tab="register" type="button">Register</button>
+                        <button id="showForgotBtn" class="auth-tab" data-auth-tab="forgot" type="button">Forgot Password</button>
                     </div>
-                    <div class="auth-social">
-                        <button type="button" class="social-btn" disabled><i class="fa-brands fa-google"></i> Google <span>Coming Soon</span></button>
-                        <button type="button" class="social-btn" disabled><i class="fa-brands fa-github"></i> GitHub <span>Coming Soon</span></button>
+
+                    <div class="auth-panel active" data-auth-panel="login">
+                        <h3>Welcome back</h3>
+                        <form id="loginForm" class="stack-form">
+                            <input type="email" id="loginEmail" placeholder="Email address" required>
+                            <input type="password" id="loginPassword" placeholder="Password" required>
+                            <label class="checkbox-row"><input type="checkbox" id="loginRemember"> Remember me</label>
+                            <button type="submit" class="btn btn-primary btn-wide">Login</button>
+                        </form>
+                        <div class="auth-inline-actions">
+                            <button id="showForgotBtnInline" type="button" class="auth-link">Forgot Password?</button>
+                            <button id="showRegisterBtnInline" type="button" class="auth-link">Create a new account</button>
+                        </div>
+                    </div>
+
+                    <div class="auth-panel" data-auth-panel="register">
+                        <h3>Create your account</h3>
+                        <form id="registerForm" class="stack-form auth-grid-form">
+                            <input type="text" id="registerName" placeholder="Full Name" required>
+                            <input type="email" id="registerEmail" placeholder="Email Address" required>
+                            <input type="password" id="registerPassword" placeholder="Password" required>
+                            <input type="text" id="registerCollege" placeholder="College" required>
+                            <input type="text" id="registerDepartment" placeholder="Department" required>
+                            <input type="text" id="registerYear" placeholder="Year (e.g. 3rd Year)" required>
+                            <input type="text" id="registerPhone" placeholder="Phone" required>
+                            <input type="text" id="registerTargetRole" placeholder="Target Role" value="Software Engineer">
+                            <label class="checkbox-row"><input type="checkbox" id="registerRemember" checked> Remember me</label>
+                            <button type="submit" class="btn btn-primary btn-wide">Register & Sign In</button>
+                        </form>
+                    </div>
+
+                    <div class="auth-panel" data-auth-panel="forgot">
+                        <h3>Reset your password</h3>
+                        <form id="forgotPasswordForm" class="stack-form">
+                            <input type="email" id="forgotEmail" placeholder="Email address" required>
+                            <button type="submit" class="btn btn-secondary btn-wide">Generate Reset Token</button>
+                        </form>
+                        <button id="showResetBtn" type="button" class="auth-link">Already have a reset token?</button>
+                    </div>
+
+                    <div class="auth-panel" data-auth-panel="reset">
+                        <h3>Set a new password</h3>
+                        <form id="resetPasswordForm" class="stack-form">
+                            <input type="email" id="resetEmail" placeholder="Email address" required>
+                            <input type="text" id="resetToken" placeholder="Reset token" required>
+                            <input type="password" id="resetPassword" placeholder="New password" required>
+                            <button type="submit" class="btn btn-primary btn-wide">Update Password</button>
+                        </form>
+                        <button id="backToLoginBtn" type="button" class="auth-link">Back to login</button>
                     </div>
                 </div>
-
-                <div class="auth-panel" data-auth-panel="register">
-                    <h3>Create your account</h3>
-                    <form id="registerForm" class="stack-form auth-grid-form">
-                        <input type="text" id="registerName" placeholder="Full Name" required>
-                        <input type="email" id="registerEmail" placeholder="Email Address" required>
-                        <input type="password" id="registerPassword" placeholder="Password" required>
-                        <input type="text" id="registerCollege" placeholder="College" required>
-                        <input type="text" id="registerDepartment" placeholder="Department" required>
-                        <input type="text" id="registerYear" placeholder="Year (e.g. 3rd Year)" required>
-                        <input type="text" id="registerPhone" placeholder="Phone" required>
-                        <input type="text" id="registerTargetRole" placeholder="Target Role" value="Software Engineer">
-                        <label class="checkbox-row"><input type="checkbox" id="registerRemember" checked> Remember me</label>
-                        <button type="submit" class="btn btn-primary btn-wide">Register & Sign In</button>
-                    </form>
-                </div>
-
-                <div class="auth-panel" data-auth-panel="forgot">
-                    <h3>Reset your password</h3>
-                    <form id="forgotPasswordForm" class="stack-form">
-                        <input type="email" id="forgotEmail" placeholder="Email address" required>
-                        <button type="submit" class="btn btn-secondary btn-wide">Generate Reset Token</button>
-                    </form>
-                    <button id="showResetBtn" type="button" class="auth-link">Already have a reset token?</button>
-                </div>
-
-                <div class="auth-panel" data-auth-panel="reset">
-                    <h3>Set a new password</h3>
-                    <form id="resetPasswordForm" class="stack-form">
-                        <input type="email" id="resetEmail" placeholder="Email address" required>
-                        <input type="text" id="resetToken" placeholder="Reset token" required>
-                        <input type="password" id="resetPassword" placeholder="New password" required>
-                        <button type="submit" class="btn btn-primary btn-wide">Update Password</button>
-                    </form>
-                    <button id="backToLoginBtn" type="button" class="auth-link">Back to login</button>
-                </div>
-            </section>
+            </div>
         </div>
     </section>
 

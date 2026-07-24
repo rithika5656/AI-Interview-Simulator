@@ -227,12 +227,10 @@ async function bootstrapAuth() {
         const response = await apiGet('/auth/me');
         applyAuthenticatedUser(response.user);
         state.authChecked = true;
-        await showAuthenticatedShell();
-        showView('dashboardView');
-        if (backendHealthy && !panelsLoaded) {
-            panelsLoaded = true;
-            loadAllPanels();
-        }
+        // DO NOT load dashboard shell here - let router.js handle it
+        // DO NOT call showAuthenticatedShell() - it causes scrolling bug
+        // Just verify token is valid and set auth state
+        // Router will handle navigation and dashboard loading
         if (window.HireVisionRouteNavigate) {
             window.HireVisionRouteNavigate('/dashboard');
         }
@@ -1619,10 +1617,8 @@ async function handleLogin(event) {
         const response = await apiPost('/auth/login', { email, password, remember_me: rememberMe });
         storeAuthToken(response.token, rememberMe || response.remember_me);
         applyAuthenticatedUser(response.user);
-        await showAuthenticatedShell();
-        if (backendHealthy) {
-            loadAllPanels();
-        }
+        // DO NOT call showAuthenticatedShell() here - let router.js handle it
+        // Just navigate to dashboard, the ProtectedRoute will load the shell
         showToast('Welcome back to HireVision.', 'success');
         if (window.HireVisionRouteNavigate) {
             window.HireVisionRouteNavigate('/dashboard');
@@ -1650,10 +1646,8 @@ async function handleRegister(event) {
         const response = await apiPost('/auth/register', payload);
         storeAuthToken(response.token, response.remember_me);
         applyAuthenticatedUser(response.user);
-        await showAuthenticatedShell();
-        if (backendHealthy) {
-            loadAllPanels();
-        }
+        // DO NOT call showAuthenticatedShell() here - let router.js handle it
+        // Just navigate to dashboard, the ProtectedRoute will load the shell
         showToast('Account created successfully.', 'success');
         if (window.HireVisionRouteNavigate) {
             window.HireVisionRouteNavigate('/dashboard');
@@ -1859,6 +1853,9 @@ window.submitResponse = submitResponse;
 window.endInterview = endInterview;
 window.startNewInterview = startNewInterview;
 window.downloadReport = downloadReport;
+window.mountDashboardShell = mountDashboardShell;
+window.showView = showView;
+window.loadAllPanels = loadAllPanels;
 
 window.showToast = function(message, type = 'info') {
     const container = document.getElementById('toastContainer');

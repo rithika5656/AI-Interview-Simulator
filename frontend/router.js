@@ -55,18 +55,43 @@
             if (!window.state || !window.state.authChecked || !window.state.isAuthenticated) {
                 return;
             }
-            // Ensure app shell is shown and auth screen is hidden
-            const authScreen = document.getElementById('authScreen');
+
+            // First access to protected route - load dashboard shell if not already loaded
             const appShell = document.querySelector('.app-shell');
-            if (authScreen) authScreen.hidden = true;
-            if (appShell) appShell.style.display = 'grid';
-            
-            if (typeof window.showAuthenticatedShell === 'function') {
-                window.showAuthenticatedShell().then(() => {
-                    if (typeof window.showView === 'function') window.showView(viewId);
-                });
-            } else if (typeof window.showView === 'function') {
-                window.showView(viewId);
+            if (!appShell) {
+                // Dashboard shell not loaded yet - load it now
+                if (typeof window.mountDashboardShell === 'function') {
+                    window.mountDashboardShell().then(() => {
+                        const authScreen = document.getElementById('authScreen');
+                        const newAppShell = document.querySelector('.app-shell');
+                        if (authScreen) authScreen.hidden = true;
+                        if (newAppShell) newAppShell.style.display = 'grid';
+                        
+                        // Now show the view
+                        if (typeof window.showView === 'function') {
+                            window.showView(viewId);
+                        }
+                        
+                        // Load panels if backend is healthy
+                        if (window.backendHealthy && !window.panelsLoaded) {
+                            window.panelsLoaded = true;
+                            if (typeof window.loadAllPanels === 'function') {
+                                window.loadAllPanels();
+                            }
+                        }
+                    }).catch(err => {
+                        console.error('Failed to load dashboard shell:', err);
+                    });
+                }
+            } else {
+                // Dashboard shell already loaded - just show it and update view
+                const authScreen = document.getElementById('authScreen');
+                if (authScreen) authScreen.hidden = true;
+                appShell.style.display = 'grid';
+                
+                if (typeof window.showView === 'function') {
+                    window.showView(viewId);
+                }
             }
         }, [viewId]);
 

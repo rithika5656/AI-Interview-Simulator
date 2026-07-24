@@ -31,6 +31,9 @@ let dashboardShellMounted = false;
 let dashboardShellLoadPromise = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+    const routerRoot = document.getElementById('routerRoot');
+    if (routerRoot) routerRoot.hidden = false;
+    
     bindAuthEvents();
     restoreTheme();
     prepareShellForAuth();
@@ -94,6 +97,7 @@ const viewRouteMap = {
     analyticsView: '/analytics',
     coachView: '/career-coach',
     profileView: '/profile',
+    companyView: '/company-wise',
 };
 
 function getStoredAuthToken() {
@@ -700,7 +704,6 @@ async function submitModule(moduleKey) {
                     `).join('')}
                 </div>
             `;
-            result.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         loadAnalytics();
         loadDashboard();

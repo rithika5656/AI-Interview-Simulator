@@ -19,6 +19,7 @@
         '/analytics': 'analyticsView',
         '/career-coach': 'coachView',
         '/profile': 'profileView',
+        '/company-wise': 'companyView',
     };
 
     function authRouteMode(pathname) {
@@ -33,8 +34,13 @@
                 if (window.HireVisionRouteNavigate) window.HireVisionRouteNavigate('/dashboard');
                 return;
             }
+            // Ensure auth screen is shown and app shell is hidden
+            const authScreen = document.getElementById('authScreen');
+            const appShell = document.querySelector('.app-shell');
+            if (authScreen) authScreen.hidden = false;
+            if (appShell) appShell.style.display = 'none';
+            
             if (typeof window.openAuthScreen === 'function') window.openAuthScreen(mode);
-            if (typeof window.prepareShellForAuth === 'function') window.prepareShellForAuth();
         }, [mode]);
 
         if (window.state && window.state.authChecked && window.state.isAuthenticated) {
@@ -49,8 +55,19 @@
             if (!window.state || !window.state.authChecked || !window.state.isAuthenticated) {
                 return;
             }
-            if (typeof window.showAuthenticatedShell === 'function') window.showAuthenticatedShell();
-            if (typeof window.showView === 'function') window.showView(viewId);
+            // Ensure app shell is shown and auth screen is hidden
+            const authScreen = document.getElementById('authScreen');
+            const appShell = document.querySelector('.app-shell');
+            if (authScreen) authScreen.hidden = true;
+            if (appShell) appShell.style.display = 'grid';
+            
+            if (typeof window.showAuthenticatedShell === 'function') {
+                window.showAuthenticatedShell().then(() => {
+                    if (typeof window.showView === 'function') window.showView(viewId);
+                });
+            } else if (typeof window.showView === 'function') {
+                window.showView(viewId);
+            }
         }, [viewId]);
 
         if (window.state && !window.state.authChecked) {
@@ -82,6 +99,11 @@
                 if (window.location.pathname !== '/login' && window.location.pathname !== '/register' && window.location.pathname !== '/forgot-password') {
                     navigate('/login', { replace: true });
                 }
+                // Show auth screen when not authenticated
+                const authScreen = document.getElementById('authScreen');
+                const appShell = document.querySelector('.app-shell');
+                if (authScreen) authScreen.hidden = false;
+                if (appShell) appShell.style.display = 'none';
                 return;
             }
 
@@ -89,6 +111,11 @@
             if (currentPath === '/' || currentPath === '/login' || currentPath === '/register' || currentPath === '/forgot-password') {
                 navigate('/dashboard', { replace: true });
             }
+            // Show app shell when authenticated
+            const authScreen = document.getElementById('authScreen');
+            const appShell = document.querySelector('.app-shell');
+            if (authScreen) authScreen.hidden = true;
+            if (appShell) appShell.style.display = 'grid';
         }, [navigate]);
 
         return React.createElement(Routes, null,
@@ -155,6 +182,10 @@
             React.createElement(Route, {
                 path: '/profile',
                 element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/profile'] }),
+            }),
+            React.createElement(Route, {
+                path: '/company-wise',
+                element: React.createElement(ProtectedRoute, { viewId: protectedViewMap['/company-wise'] }),
             }),
             React.createElement(Route, {
                 path: '*',

@@ -1,842 +1,4202 @@
 [
     {
-        "id": "cdca6586-f834-49da-bdd4-43e44fe22d6a",
-        "difficulty": "easy",
-        "topic": "Profit and Loss",
-        "question": "What is 10% of 10?",
-        "options": [
-            "6",
-            "-4",
-            "1",
-            "11"
-        ],
-        "answer": 2,
-        "explanation": "(10/100) * 10 = 1"
-    },
-    {
-        "id": "16290d9b-890c-4118-b5ca-f65b1f1a36bf",
-        "difficulty": "easy",
-        "topic": "Speed and Distance",
-        "question": "What is 20% of 20?",
-        "options": [
-            "14",
-            "4",
-            "-1",
-            "9"
-        ],
-        "answer": 1,
-        "explanation": "(20/100) * 20 = 4"
-    },
-    {
-        "id": "a6ed5d0e-4b23-47d7-9a77-ac0a7c51408e",
+        "id": "52bf25e1-c815-4534-bdc0-0e9ee6e92bb0",
         "difficulty": "easy",
         "topic": "Percentages",
-        "question": "What is 30% of 30?",
+        "question": "[easy] What is 10% of 40?",
         "options": [
-            "19",
-            "9",
-            "4",
+            "20",
+            "10",
+            "5",
+            "25"
+        ],
+        "answer": 1,
+        "explanation": "10% of 40 = 10"
+    },
+    {
+        "id": "ba204b82-2271-4c6b-b7c6-d5e6d9adac5c",
+        "difficulty": "easy",
+        "topic": "Percentages",
+        "question": "[easy] A value rises from 10 to 22. What is the percentage increase?",
+        "options": [
+            "10",
+            "12",
+            "8",
             "14"
         ],
         "answer": 1,
-        "explanation": "(30/100) * 30 = 9"
+        "explanation": "Increase = 12, so percentage increase is 12/10 x 100."
     },
     {
-        "id": "7ee3f475-f3b5-4f80-948a-d8b50bad9003",
+        "id": "0e1d1ebf-f9e6-4fd3-85df-44a6a93423cb",
         "difficulty": "easy",
-        "topic": "Time and Work",
-        "question": "What is 40% of 40?",
+        "topic": "Percentages",
+        "question": "[easy] If 30 is 20% of a number, what is the number?",
         "options": [
-            "16",
-            "21",
-            "26",
-            "11"
+            "40",
+            "20",
+            "30",
+            "50"
+        ],
+        "answer": 2,
+        "explanation": "Reverse percentage uses value = part x 100 / percentage."
+    },
+    {
+        "id": "706d3f5b-1fd7-4963-a83e-d1724d9cfb32",
+        "difficulty": "easy",
+        "topic": "Percentages",
+        "question": "[easy] A shirt marked at 110 gets a 15% discount. What is the selling price?",
+        "options": [
+            "70",
+            "50",
+            "90",
+            "94"
+        ],
+        "answer": 3,
+        "explanation": "Selling price = marked price - discount."
+    },
+    {
+        "id": "5a9e8234-f150-4d95-b3fe-55ab349ef1e3",
+        "difficulty": "easy",
+        "topic": "Percentages",
+        "question": "[easy] In a class of 60, 0 are boys. What percentage are girls?",
+        "options": [
+            "45.0",
+            "35.5",
+            "100.0",
+            "40.0"
+        ],
+        "answer": 2,
+        "explanation": "Girls percentage = girls/total x 100."
+    },
+    {
+        "id": "ac4ad40d-22e6-4c13-8977-b8b0f4525365",
+        "difficulty": "easy",
+        "topic": "Profit & Loss",
+        "question": "[easy] An article costs 120 and sells for 150. What is the profit?",
+        "options": [
+            "25",
+            "40",
+            "30",
+            "20"
+        ],
+        "answer": 2,
+        "explanation": "Profit = selling price - cost price."
+    },
+    {
+        "id": "e3d40d10-8413-403d-aacb-167920df8eb6",
+        "difficulty": "easy",
+        "topic": "Profit & Loss",
+        "question": "[easy] An article costs 140 and sells for 110. What is the loss?",
+        "options": [
+            "20",
+            "30",
+            "35",
+            "25"
+        ],
+        "answer": 1,
+        "explanation": "Loss = cost price - selling price."
+    },
+    {
+        "id": "9c59f723-6545-4d62-8ad2-4bc65c4728ad",
+        "difficulty": "easy",
+        "topic": "Profit & Loss",
+        "question": "[easy] Marked price 220, discount 11%. Find selling price.",
+        "options": [
+            "180",
+            "196",
+            "200",
+            "190"
+        ],
+        "answer": 1,
+        "explanation": "Selling price = marked price - discount."
+    },
+    {
+        "id": "59013851-91f5-4569-b7ff-2328827a7c8a",
+        "difficulty": "easy",
+        "topic": "Profit & Loss",
+        "question": "[easy] Cost price 100, profit 21%. Find selling price.",
+        "options": [
+            "120",
+            "160",
+            "140",
+            "121"
+        ],
+        "answer": 3,
+        "explanation": "Selling price = CP + profit."
+    },
+    {
+        "id": "f6c1eea2-348a-4c57-a306-7d5704ee4952",
+        "difficulty": "easy",
+        "topic": "Profit & Loss",
+        "question": "[easy] A shopkeeper gives successive discounts of 10% and 20% on 320. What is the final price?",
+        "options": [
+            "230",
+            "230 (2)",
+            "170",
+            "200"
         ],
         "answer": 0,
-        "explanation": "(40/100) * 40 = 16"
+        "explanation": "Successive discounts multiply remaining values."
     },
     {
-        "id": "6a301556-5e54-46f3-8cf2-cc77a7567b7f",
+        "id": "3bc9183b-6053-42b2-ba6a-e515e18e65ff",
         "difficulty": "easy",
-        "topic": "Time and Work",
-        "question": "What is 50% of 50?",
+        "topic": "Ratio",
+        "question": "[easy] Simplify the ratio 42:48.",
+        "options": [
+            "3",
+            "4",
+            "2",
+            "5"
+        ],
+        "answer": 2,
+        "explanation": "Divide both terms by their common factor."
+    },
+    {
+        "id": "0ec29ac5-fd6f-48c4-b874-d7326baa23db",
+        "difficulty": "easy",
+        "topic": "Ratio",
+        "question": "[easy] A and B share money in the ratio 4:5. If total is 80, find A's share.",
+        "options": [
+            "45.71",
+            "40",
+            "60",
+            "50"
+        ],
+        "answer": 0,
+        "explanation": "A's share = total x ratio part / sum of parts."
+    },
+    {
+        "id": "32e9cf7a-fddc-4965-bcbe-d733e8538ded",
+        "difficulty": "easy",
+        "topic": "Ratio",
+        "question": "[easy] The ratio of boys to girls is 5:7. If girls are 50, how many boys are there?",
+        "options": [
+            "55",
+            "45",
+            "65",
+            "35"
+        ],
+        "answer": 3,
+        "explanation": "Use proportion to find the missing part."
+    },
+    {
+        "id": "9d0d7cba-3c33-4da7-9725-55e35b70e9e6",
+        "difficulty": "easy",
+        "topic": "Ratio",
+        "question": "[easy] Two numbers are in the ratio 6:9. Their sum is 100. Find the larger number.",
+        "options": [
+            "69",
+            "70",
+            "80",
+            "60"
+        ],
+        "answer": 0,
+        "explanation": "Total sum is split by ratio parts."
+    },
+    {
+        "id": "cff94cd4-c5cd-4f85-9622-a839851b7e66",
+        "difficulty": "easy",
+        "topic": "Ratio",
+        "question": "[easy] If the ratio x:y is 3:6, what is x/y?",
+        "options": [
+            "0.25",
+            "0.75",
+            "0.5",
+            "0.5 (2)"
+        ],
+        "answer": 2,
+        "explanation": "x/y is simply the ratio as a fraction."
+    },
+    {
+        "id": "b420a2f3-1c69-4c2b-89e5-164b59dd13a9",
+        "difficulty": "easy",
+        "topic": "Time & Work",
+        "question": "[easy] A can finish a job in 16 days. How much work does A do in one day?",
+        "options": [
+            "0.25",
+            "0.2",
+            "0.1",
+            "0.06"
+        ],
+        "answer": 3,
+        "explanation": "Work per day is reciprocal of days."
+    },
+    {
+        "id": "0408de77-5a23-4efc-8d56-44f826eafeef",
+        "difficulty": "easy",
+        "topic": "Time & Work",
+        "question": "[easy] A does a job in 18 days and B in 23 days. Together they finish in how many days?",
+        "options": [
+            "12",
+            "10.1",
+            "16",
+            "14"
+        ],
+        "answer": 1,
+        "explanation": "Add daily work rates."
+    },
+    {
+        "id": "4fe78253-1cd3-4bc5-82cc-aa4079d33acd",
+        "difficulty": "easy",
+        "topic": "Time & Work",
+        "question": "[easy] If A completes 50% of a work in one day, how many days for the full work?",
+        "options": [
+            "4",
+            "2",
+            "3",
+            "2.0"
+        ],
+        "answer": 3,
+        "explanation": "Days = 100 / percent completed per day."
+    },
+    {
+        "id": "585e0f67-8dbb-4a69-9cae-e19e8608a508",
+        "difficulty": "easy",
+        "topic": "Time & Work",
+        "question": "[easy] A and B together complete a work in 14 days. If A alone takes 18 days, how long does B take?",
+        "options": [
+            "22",
+            "20",
+            "63.0",
+            "18"
+        ],
+        "answer": 2,
+        "explanation": "Subtract A's rate from combined rate."
+    },
+    {
+        "id": "f9946e32-a0b0-4924-8271-8b47f1472448",
+        "difficulty": "easy",
+        "topic": "Time & Work",
+        "question": "[easy] Three workers finish a task in 12 days, 16 days and 20 days respectively. Who is fastest?",
+        "options": [
+            "All equal",
+            "First",
+            "Third",
+            "Second"
+        ],
+        "answer": 1,
+        "explanation": "Smaller days mean faster worker."
+    },
+    {
+        "id": "ed3c88ac-785d-449b-a5c7-3ebfee45a8fc",
+        "difficulty": "easy",
+        "topic": "Time-Speed-Distance",
+        "question": "[easy] A car covers 110 km in 6 hours. What is the speed?",
+        "options": [
+            "50",
+            "30",
+            "18.33",
+            "40"
+        ],
+        "answer": 2,
+        "explanation": "Speed = distance / time."
+    },
+    {
+        "id": "740088b7-1e37-4232-9c4f-1e23754176e4",
+        "difficulty": "easy",
+        "topic": "Time-Speed-Distance",
+        "question": "[easy] A train moves at 55 km/h for 7 hours. Distance covered?",
+        "options": [
+            "60",
+            "80",
+            "385",
+            "70"
+        ],
+        "answer": 2,
+        "explanation": "Distance = speed x time."
+    },
+    {
+        "id": "00562096-4277-4637-ae3a-eb290d7616a5",
+        "difficulty": "easy",
+        "topic": "Time-Speed-Distance",
+        "question": "[easy] A runner travels 70 meters in 8 seconds. Find speed in m/s.",
+        "options": [
+            "7",
+            "8.75",
+            "5",
+            "6"
+        ],
+        "answer": 1,
+        "explanation": "Speed = distance / time."
+    },
+    {
+        "id": "af5bae3f-6a89-460d-8b03-442e99776dc7",
+        "difficulty": "easy",
+        "topic": "Time-Speed-Distance",
+        "question": "[easy] A boat covers upstream 90 km in 8 hours. Which factor mainly reduces speed?",
+        "options": [
+            "Fuel",
+            "Current",
+            "Wind",
+            "Gradient"
+        ],
+        "answer": 1,
+        "explanation": "Upstream motion is opposed by current."
+    },
+    {
+        "id": "c26aae6c-973b-49ed-8370-540d4626a217",
+        "difficulty": "easy",
+        "topic": "Time-Speed-Distance",
+        "question": "[easy] Two trains of lengths 150 m and 170 m cross each other at relative speed. What key quantity is used?",
+        "options": [
+            "Relative speed",
+            "Acceleration",
+            "Momentum",
+            "Average speed"
+        ],
+        "answer": 0,
+        "explanation": "Crossing time uses relative speed."
+    },
+    {
+        "id": "e045ced6-0884-4998-b263-f651f75fa77e",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "[easy] A fair coin is tossed once. Probability of heads?",
+        "options": [
+            "0.25",
+            "0.5",
+            "0.75",
+            "1.0"
+        ],
+        "answer": 1,
+        "explanation": "A fair coin has two equally likely outcomes."
+    },
+    {
+        "id": "811bc22a-d195-4ee5-b4ba-3f2e09161bf3",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "[easy] A die is rolled once. Probability of getting an even number?",
+        "options": [
+            "0.3333333333333333",
+            "0.16666666666666666",
+            "0.5",
+            "0.6666666666666666"
+        ],
+        "answer": 2,
+        "explanation": "Even outcomes are 2, 4, 6."
+    },
+    {
+        "id": "9ddf2a88-0b45-41e0-b1a9-bb28a0c0c0e4",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "[easy] A bag has 8 red and 10 blue balls. Probability of red?",
+        "options": [
+            "0.75",
+            "0.5",
+            "0.25",
+            "0.62"
+        ],
+        "answer": 3,
+        "explanation": "Probability = favorable / total."
+    },
+    {
+        "id": "4cf09d90-09ba-4d44-acb2-988b2623439c",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "[easy] Two coins are tossed. Probability of exactly one head?",
+        "options": [
+            "1.0",
+            "0.25",
+            "0.75",
+            "0.5"
+        ],
+        "answer": 3,
+        "explanation": "Outcomes HT and TH."
+    },
+    {
+        "id": "5c9d4a76-d95d-45cc-9a47-f06c15282803",
+        "difficulty": "easy",
+        "topic": "Probability",
+        "question": "[easy] One card is drawn from a standard deck. Probability of a face card?",
+        "options": [
+            "0.25",
+            "0.23",
+            "0.5",
+            "0.07692307692307693"
+        ],
+        "answer": 1,
+        "explanation": "Face cards are J, Q, K in each suit."
+    },
+    {
+        "id": "13284fe7-a6c5-4c1e-9053-f2966a719552",
+        "difficulty": "easy",
+        "topic": "Permutation & Combination",
+        "question": "[easy] How many ways can 9 distinct books be arranged on a shelf?",
+        "options": [
+            "24",
+            "6",
+            "12",
+            "18"
+        ],
+        "answer": 1,
+        "explanation": "Arrangements use factorial values."
+    },
+    {
+        "id": "e217d00a-0fb9-400a-8de4-7e5051c6cc4c",
+        "difficulty": "easy",
+        "topic": "Permutation & Combination",
+        "question": "[easy] How many ways can 2 students be selected from 11 students?",
+        "options": [
+            "55",
+            "10",
+            "20",
+            "15"
+        ],
+        "answer": 0,
+        "explanation": "Selection uses combinations."
+    },
+    {
+        "id": "39c2f921-7317-41f4-86ce-da7a53d660f3",
+        "difficulty": "easy",
+        "topic": "Permutation & Combination",
+        "question": "[easy] How many 3-digit numbers can be formed using digits 1, 2, 3, 4 without repetition?",
+        "options": [
+            "12",
+            "24",
+            "30",
+            "18"
+        ],
+        "answer": 1,
+        "explanation": "3 positions without repetition = 4P3."
+    },
+    {
+        "id": "6415f924-e572-4d32-8732-749528a9299b",
+        "difficulty": "easy",
+        "topic": "Permutation & Combination",
+        "question": "[easy] How many committees of 8 can be made from a group of 12?",
+        "options": [
+            "12",
+            "66",
+            "8",
+            "10"
+        ],
+        "answer": 1,
+        "explanation": "Committees use combinations."
+    },
+    {
+        "id": "b345bf3d-d52a-47a6-a70e-34a291f8110f",
+        "difficulty": "easy",
+        "topic": "Permutation & Combination",
+        "question": "[easy] If 10 people sit in a line, how many arrangements are possible?",
+        "options": [
+            "24",
+            "30",
+            "12",
+            "18"
+        ],
+        "answer": 0,
+        "explanation": "Line arrangements are factorial."
+    },
+    {
+        "id": "4bd62354-ab7d-4281-bf87-a2d6fda0015d",
+        "difficulty": "easy",
+        "topic": "Simple Interest",
+        "question": "[easy] Find the simple interest on 1080 at 12% for 2 years.",
+        "options": [
+            "100",
+            "259.2",
+            "120",
+            "140"
+        ],
+        "answer": 1,
+        "explanation": "SI = P x R x T / 100."
+    },
+    {
+        "id": "bae30028-00e7-45c0-af8d-b35dc5e61e01",
+        "difficulty": "easy",
+        "topic": "Simple Interest",
+        "question": "[easy] A sum of 580 earns 12% per annum for 3 years. Interest?",
+        "options": [
+            "130",
+            "90",
+            "208.8",
+            "110"
+        ],
+        "answer": 2,
+        "explanation": "Apply the SI formula."
+    },
+    {
+        "id": "2be4070b-8a82-4606-853d-68e0dbad5cb3",
+        "difficulty": "easy",
+        "topic": "Simple Interest",
+        "question": "[easy] If SI on a principal at 14% for 4 years is 120, what is the principal?",
+        "options": [
+            "900",
+            "500",
+            "214.29",
+            "700"
+        ],
+        "answer": 2,
+        "explanation": "Rearrange the SI formula to find principal."
+    },
+    {
+        "id": "36c00ea2-4732-4f89-93b8-9e4e6b80c616",
+        "difficulty": "easy",
+        "topic": "Simple Interest",
+        "question": "[easy] A loan of 880 is borrowed at 11% for 1 year. Total amount?",
+        "options": [
+            "1100",
+            "900",
+            "1000",
+            "976.8"
+        ],
+        "answer": 3,
+        "explanation": "Amount = principal + SI."
+    },
+    {
+        "id": "16955eee-0765-4e8e-bfed-6258dd6615c2",
+        "difficulty": "easy",
+        "topic": "Simple Interest",
+        "question": "[easy] At what rate will 980 yield 40 interest in 2 years?",
+        "options": [
+            "9",
+            "7",
+            "5",
+            "2.04"
+        ],
+        "answer": 3,
+        "explanation": "Rearrange the SI formula for rate."
+    },
+    {
+        "id": "133d5075-0bc5-4e83-955e-288821c65976",
+        "difficulty": "easy",
+        "topic": "Compound Interest",
+        "question": "[easy] Find the amount on 1090 at 13% compound interest for 2 years.",
+        "options": [
+            "1390",
+            "1490",
+            "1290",
+            "1391.82"
+        ],
+        "answer": 3,
+        "explanation": "CI amount = P(1+r/100)^n."
+    },
+    {
+        "id": "c6578bfc-b01c-4e8d-996a-fe1fc1a7e210",
+        "difficulty": "easy",
+        "topic": "Compound Interest",
+        "question": "[easy] What is the compound interest on 890 at 14% for 1 year?",
+        "options": [
+            "70",
+            "50",
+            "60",
+            "124.6"
+        ],
+        "answer": 3,
+        "explanation": "For 1 year, CI equals simple interest."
+    },
+    {
+        "id": "65d686e8-e04a-4c30-a53e-5c2a409e0e85",
+        "difficulty": "easy",
+        "topic": "Compound Interest",
+        "question": "[easy] The difference between CI and SI for 2 years is mainly due to what?",
+        "options": [
+            "Interest on interest",
+            "Tax",
+            "Discount",
+            "Principal"
+        ],
+        "answer": 0,
+        "explanation": "CI compounds the previous interest."
+    },
+    {
+        "id": "b316a61b-795f-40b9-b374-47a3db787785",
+        "difficulty": "easy",
+        "topic": "Compound Interest",
+        "question": "[easy] A principal doubles in 10 years at compound interest. What does this indicate about the rate?",
+        "options": [
+            "The rate is zero",
+            "The rate is infinite",
+            "The rate is negative",
+            "The effective rate is moderate"
+        ],
+        "answer": 3,
+        "explanation": "Doubling time is governed by the compounding rate."
+    },
+    {
+        "id": "c27877d4-547d-4286-be98-ca6b988a32bb",
+        "difficulty": "easy",
+        "topic": "Compound Interest",
+        "question": "[easy] If an amount becomes 1690 from 1090 in 2 years, what is the growth factor?",
+        "options": [
+            "1.55",
+            "1.1",
+            "1.2",
+            "1.3"
+        ],
+        "answer": 0,
+        "explanation": "Growth factor = final / initial."
+    },
+    {
+        "id": "f9025ff5-369f-4d3f-9586-6eccd739e067",
+        "difficulty": "easy",
+        "topic": "Average",
+        "question": "[easy] Find the average of 110, 120, and 130.",
+        "options": [
+            "122",
+            "118",
+            "120",
+            "124"
+        ],
+        "answer": 2,
+        "explanation": "Average = sum / count."
+    },
+    {
+        "id": "c0499a9c-7876-46dd-96e2-abc8ee0df8cf",
+        "difficulty": "easy",
+        "topic": "Average",
+        "question": "[easy] If the average of 5 numbers is 115, what is their total?",
+        "options": [
+            "150",
+            "170",
+            "160",
+            "575"
+        ],
+        "answer": 3,
+        "explanation": "Total = average x number of items."
+    },
+    {
+        "id": "7f5cdebf-65f4-4615-a639-137423d86444",
+        "difficulty": "easy",
+        "topic": "Average",
+        "question": "[easy] A class average of 125 is calculated over 4 students. One more student joins with score 135. New average?",
+        "options": [
+            "127",
+            "126",
+            "128",
+            "127.0"
+        ],
+        "answer": 3,
+        "explanation": "Recompute using total scores."
+    },
+    {
+        "id": "356faea3-dc02-46e8-85a7-f741e137a9f7",
+        "difficulty": "easy",
+        "topic": "Average",
+        "question": "[easy] The average speed over equal distances of 140 km/h and 160 km/h is?",
+        "options": [
+            "50",
+            "149.33",
+            "60",
+            "55"
+        ],
+        "answer": 1,
+        "explanation": "Average speed over equal distances uses harmonic mean."
+    },
+    {
+        "id": "5f40244e-5eb3-47a0-aa5f-d23db39a0e7b",
+        "difficulty": "easy",
+        "topic": "Average",
+        "question": "[easy] The average of first 4 consecutive numbers starting at 110 is?",
+        "options": [
+            "111",
+            "113",
+            "112",
+            "111.5"
+        ],
+        "answer": 3,
+        "explanation": "Average of consecutive numbers lies midway."
+    },
+    {
+        "id": "e6f14785-c3a5-4cee-9b94-afa7f7805eda",
+        "difficulty": "easy",
+        "topic": "Mixtures",
+        "question": "[easy] A mixture contains 12 parts milk and 13 parts water. What is the ratio of milk to total?",
+        "options": [
+            "0.75",
+            "0.5",
+            "0.25",
+            "0.8"
+        ],
+        "answer": 3,
+        "explanation": "Milk/total uses the first part over total parts."
+    },
+    {
+        "id": "02c4fe05-5414-4dad-ab1c-1d7c7ff1bcea",
+        "difficulty": "easy",
+        "topic": "Mixtures",
+        "question": "[easy] If 160 liters of a solution has 14% acid, how much acid is present?",
+        "options": [
+            "10",
+            "22.4",
+            "14",
+            "12"
+        ],
+        "answer": 1,
+        "explanation": "Acid amount = concentration x volume."
+    },
+    {
+        "id": "8e7f286e-fe6e-450e-b32f-6bd19da6665b",
+        "difficulty": "easy",
+        "topic": "Mixtures",
+        "question": "[easy] A 130 liter mixture is diluted by adding water. Which property changes?",
+        "options": [
+            "Density only",
+            "Concentration",
+            "Color",
+            "Volume only"
+        ],
+        "answer": 1,
+        "explanation": "Dilution changes concentration."
+    },
+    {
+        "id": "f6450cbd-3d11-4d4f-bc12-864cedd7e107",
+        "difficulty": "easy",
+        "topic": "Mixtures",
+        "question": "[easy] Milk and water are mixed in the ratio 13:11. What fraction is water?",
+        "options": [
+            "0.4",
+            "0.2",
+            "0.3",
+            "0.79"
+        ],
+        "answer": 3,
+        "explanation": "Water fraction = water parts / total parts."
+    },
+    {
+        "id": "d31bc29b-37a6-4f65-a29c-1b25ae333058",
+        "difficulty": "easy",
+        "topic": "Mixtures",
+        "question": "[easy] A solution of 170 liters is reduced by 15% through evaporation. Remaining volume?",
+        "options": [
+            "160",
+            "150",
+            "144.5",
+            "140"
+        ],
+        "answer": 2,
+        "explanation": "Remaining = original x (1 - loss%)."
+    },
+    {
+        "id": "62a37f4c-fc11-4a93-84bf-581fc205dab1",
+        "difficulty": "easy",
+        "topic": "Pipes",
+        "question": "[easy] Pipe A fills a tank in 17 hours. Its 1-hour work is?",
+        "options": [
+            "0.2",
+            "0.1",
+            "0.25",
+            "0.06"
+        ],
+        "answer": 3,
+        "explanation": "Work rate is reciprocal of time."
+    },
+    {
+        "id": "812a23dd-9230-4dc6-af36-e976e452193c",
+        "difficulty": "easy",
+        "topic": "Pipes",
+        "question": "[easy] Two pipes fill a tank in 15 and 19 hours. Combined time?",
+        "options": [
+            "8.38",
+            "3",
+            "2",
+            "4"
+        ],
+        "answer": 0,
+        "explanation": "Add rates, then invert."
+    },
+    {
+        "id": "b381edbd-5cce-4590-99ba-c5ba0082880f",
+        "difficulty": "easy",
+        "topic": "Pipes",
+        "question": "[easy] A leak empties a tank in 21 hours. What is its work rate?",
+        "options": [
+            "0.05",
+            "0.05 (2)",
+            "0.2",
+            "0.1"
+        ],
+        "answer": 0,
+        "explanation": "Emptying rate is reciprocal of time."
+    },
+    {
+        "id": "6213e0a4-76b7-407a-b17e-aecd5a7b791e",
+        "difficulty": "easy",
+        "topic": "Pipes",
+        "question": "[easy] An inlet fills a tank in 16 hours and an outlet empties it in 23 hours. What happens when both are open?",
+        "options": [
+            "It fills instantly",
+            "No change",
+            "Filling is slower",
+            "It empties instantly"
+        ],
+        "answer": 2,
+        "explanation": "Net rate is inlet minus outlet."
+    },
+    {
+        "id": "889627e6-bcdc-47ad-9b44-9457c89d34e0",
+        "difficulty": "easy",
+        "topic": "Pipes",
+        "question": "[easy] If a pipe fills half a tank in 13 hours, how long for the full tank?",
+        "options": [
+            "26",
+            "12",
+            "10",
+            "8"
+        ],
+        "answer": 0,
+        "explanation": "Double the time for double the work."
+    },
+    {
+        "id": "44d73ad4-841a-4dc3-bdea-49b4bae28bee",
+        "difficulty": "easy",
+        "topic": "Clocks",
+        "question": "[easy] What is the angle between the hands at 15:00?",
+        "options": [
+            "450",
+            "90",
+            "150",
+            "120"
+        ],
+        "answer": 0,
+        "explanation": "Each hour mark is 30 degrees."
+    },
+    {
+        "id": "6ea471a2-0819-46de-b091-cd9231dcb5d0",
+        "difficulty": "easy",
+        "topic": "Clocks",
+        "question": "[easy] At 3:00, the minute hand points to which number?",
+        "options": [
+            "9",
+            "3",
+            "12",
+            "6"
+        ],
+        "answer": 2,
+        "explanation": "Minute hand at 3:00 is at 12."
+    },
+    {
+        "id": "41974492-ad5e-4b7d-9722-451a5426071b",
+        "difficulty": "easy",
+        "topic": "Clocks",
+        "question": "[easy] How many times do the hour and minute hands coincide in 12 hours?",
+        "options": [
+            "13",
+            "11",
+            "10",
+            "12"
+        ],
+        "answer": 1,
+        "explanation": "They coincide 11 times in 12 hours."
+    },
+    {
+        "id": "e71bdc5c-dd75-4124-8fd7-51ae73bacdb9",
+        "difficulty": "easy",
+        "topic": "Clocks",
+        "question": "[easy] A mirror image of 4:20 appears as what?",
+        "options": [
+            "8:40",
+            "7:20",
+            "8:20",
+            "7:40"
+        ],
+        "answer": 3,
+        "explanation": "Mirror time is 11:60 - given time."
+    },
+    {
+        "id": "800b9dfb-678b-42be-9981-f2cf44c324a1",
+        "difficulty": "easy",
+        "topic": "Clocks",
+        "question": "[easy] If a clock is 5 minutes fast every hour, how many minutes fast in 4 hours?",
+        "options": [
+            "10",
+            "15",
+            "25",
+            "20"
+        ],
+        "answer": 3,
+        "explanation": "Multiply drift by hours."
+    },
+    {
+        "id": "acff6fff-48fb-4ed9-bf7f-27a291383b33",
+        "difficulty": "easy",
+        "topic": "Calendars",
+        "question": "[easy] A leap year has how many days?",
+        "options": [
+            "366",
+            "367",
+            "365",
+            "364"
+        ],
+        "answer": 0,
+        "explanation": "Leap years add one day."
+    },
+    {
+        "id": "ca19713f-6dce-4d67-b6b9-81f665de7353",
+        "difficulty": "easy",
+        "topic": "Calendars",
+        "question": "[easy] How many odd days are there in a normal year?",
+        "options": [
+            "2",
+            "0",
+            "1",
+            "3"
+        ],
+        "answer": 2,
+        "explanation": "365 days leave 1 odd day."
+    },
+    {
+        "id": "8215eaf9-aec4-4e46-aca9-1bf62ae54a1b",
+        "difficulty": "easy",
+        "topic": "Calendars",
+        "question": "[easy] How many odd days are there in a leap year?",
+        "options": [
+            "3",
+            "2",
+            "1",
+            "4"
+        ],
+        "answer": 1,
+        "explanation": "366 days leave 2 odd days."
+    },
+    {
+        "id": "fbbed1cd-e054-4e6d-860d-d749e4858d71",
+        "difficulty": "easy",
+        "topic": "Calendars",
+        "question": "[easy] Which month has 30 days?",
+        "options": [
+            "July",
+            "January",
+            "May",
+            "April"
+        ],
+        "answer": 3,
+        "explanation": "April is a 30-day month."
+    },
+    {
+        "id": "628f4ee2-bef1-43a3-abdf-daaf943aa9df",
+        "difficulty": "easy",
+        "topic": "Calendars",
+        "question": "[easy] A calendar repeats after how many years in common cases?",
+        "options": [
+            "7",
+            "28",
+            "21",
+            "14"
+        ],
+        "answer": 1,
+        "explanation": "Weekday-date patterns repeat every 28 years in the Gregorian cycle."
+    },
+    {
+        "id": "f1882ccd-1521-4b43-8263-eb528ec18913",
+        "difficulty": "easy",
+        "topic": "Data Interpretation",
+        "question": "[easy] A table shows sales of 250, 270, and 290. What is the total?",
+        "options": [
+            "810",
+            "350",
+            "390",
+            "370"
+        ],
+        "answer": 0,
+        "explanation": "Add the values in the table."
+    },
+    {
+        "id": "775700fc-c005-4b78-bfba-566dcb437ada",
+        "difficulty": "easy",
+        "topic": "Data Interpretation",
+        "question": "[easy] If revenue rises from 230 to 250, what is the increase?",
+        "options": [
+            "15",
+            "30",
+            "20",
+            "25"
+        ],
+        "answer": 2,
+        "explanation": "Increase is final minus initial."
+    },
+    {
+        "id": "fb1f51fb-ce78-4376-aa6a-7e729e5dc55d",
+        "difficulty": "easy",
+        "topic": "Data Interpretation",
+        "question": "[easy] A bar chart has values 180, 200, and 220. Which is highest?",
+        "options": [
+            "180",
+            "220",
+            "210",
+            "200"
+        ],
+        "answer": 1,
+        "explanation": "Compare the three bars."
+    },
+    {
+        "id": "2615a918-6320-4350-b840-e01f20b2a97f",
+        "difficulty": "easy",
+        "topic": "Data Interpretation",
+        "question": "[easy] If a pie chart segment is 18% of the total 350, how large is the segment?",
+        "options": [
+            "20",
+            "63.0",
+            "40",
+            "30"
+        ],
+        "answer": 1,
+        "explanation": "Segment value = percentage x total / 100."
+    },
+    {
+        "id": "27e9555b-2a67-44e2-b131-55781b616441",
+        "difficulty": "easy",
+        "topic": "Data Interpretation",
+        "question": "[easy] The average of values 160, 170, 180, 190 is?",
+        "options": [
+            "180",
+            "175",
+            "185",
+            "170"
+        ],
+        "answer": 1,
+        "explanation": "Average = total / 4."
+    },
+    {
+        "id": "d34c090b-912a-4db1-80c6-0abf2cc2f732",
+        "difficulty": "easy",
+        "topic": "Number System",
+        "question": "[easy] What is the units digit of 172 x 173?",
+        "options": [
+            "2",
+            "6",
+            "6 (2)",
+            "4"
+        ],
+        "answer": 1,
+        "explanation": "Units digit comes from multiplying units digits."
+    },
+    {
+        "id": "44840355-e764-4c33-a3b3-cbfc3f472169",
+        "difficulty": "easy",
+        "topic": "Number System",
+        "question": "[easy] A number is divisible by 3 if its digit sum is divisible by?",
+        "options": [
+            "4",
+            "2",
+            "3",
+            "5"
+        ],
+        "answer": 2,
+        "explanation": "Divisibility by 3 uses digit sum."
+    },
+    {
+        "id": "0819bde8-4435-4de2-972f-1a98617960ed",
+        "difficulty": "easy",
+        "topic": "Number System",
+        "question": "[easy] What is the remainder when 260 is divided by 5?",
+        "options": [
+            "2",
+            "3",
+            "1",
+            "0"
+        ],
+        "answer": 3,
+        "explanation": "Use modulo arithmetic."
+    },
+    {
+        "id": "e66e3f28-6a2b-48d0-b0cf-bfd422c177f9",
+        "difficulty": "easy",
+        "topic": "Number System",
+        "question": "[easy] Which is a prime number?",
+        "options": [
+            "108",
+            "112",
+            "110",
+            "106"
+        ],
+        "answer": 1,
+        "explanation": "Prime numbers have exactly two factors."
+    },
+    {
+        "id": "847d0076-ff8e-4ece-965c-282791392ee4",
+        "difficulty": "easy",
+        "topic": "Number System",
+        "question": "[easy] The highest power of 2 dividing 224 is found by what method?",
+        "options": [
+            "Estimation",
+            "Addition",
+            "Prime factorization",
+            "Averaging"
+        ],
+        "answer": 2,
+        "explanation": "Factorization reveals prime powers."
+    },
+    {
+        "id": "a4f337a0-8770-4727-88dc-c1713087f172",
+        "difficulty": "easy",
+        "topic": "HCF",
+        "question": "[easy] The HCF of 188 and 194 is?",
+        "options": [
+            "8",
+            "12",
+            "6",
+            "4"
+        ],
+        "answer": 2,
+        "explanation": "HCF is the greatest common divisor."
+    },
+    {
+        "id": "14fedc89-1827-4e7f-8cd5-22777127a535",
+        "difficulty": "easy",
+        "topic": "HCF",
+        "question": "[easy] If two numbers are co-prime, their HCF is?",
+        "options": [
+            "5",
+            "1",
+            "2",
+            "0"
+        ],
+        "answer": 1,
+        "explanation": "Co-prime numbers share no common factor except 1."
+    },
+    {
+        "id": "defa020f-aed5-4f70-a63a-5d9ca00f3945",
+        "difficulty": "easy",
+        "topic": "HCF",
+        "question": "[easy] A number divisible by 18 and 20 has HCF with the other number equal to?",
+        "options": [
+            "18",
+            "2",
+            "1",
+            "3"
+        ],
+        "answer": 0,
+        "explanation": "Common factor depends on both numbers."
+    },
+    {
+        "id": "bbc62af4-4ca0-4820-b36b-1246684874dc",
+        "difficulty": "easy",
+        "topic": "HCF",
+        "question": "[easy] Which algorithm is commonly used to find HCF?",
+        "options": [
+            "Bubble sort",
+            "Binary search",
+            "DFS",
+            "Euclid's algorithm"
+        ],
+        "answer": 3,
+        "explanation": "Euclid's algorithm is standard for HCF."
+    },
+    {
+        "id": "61b85d21-b133-466c-b7d7-c3cec0698da8",
+        "difficulty": "easy",
+        "topic": "HCF",
+        "question": "[easy] The HCF of 12, 18 and 24 is?",
+        "options": [
+            "6",
+            "4",
+            "8",
+            "3"
+        ],
+        "answer": 0,
+        "explanation": "Find the common greatest factor."
+    },
+    {
+        "id": "62bc47b7-26a7-4665-91b1-a03d87b19eb6",
+        "difficulty": "easy",
+        "topic": "LCM",
+        "question": "[easy] The LCM of 20 and 23 is?",
+        "options": [
+            "15",
+            "18",
+            "12",
+            "40"
+        ],
+        "answer": 3,
+        "explanation": "LCM is the least common multiple."
+    },
+    {
+        "id": "d9f5389b-d9b6-47cf-b83d-9f1e01b4d98e",
+        "difficulty": "easy",
+        "topic": "LCM",
+        "question": "[easy] If two tasks repeat every 4 and 6 days, after how many days do they coincide?",
+        "options": [
+            "8",
+            "14",
+            "10",
+            "12"
+        ],
+        "answer": 3,
+        "explanation": "Use LCM to find common repetition."
+    },
+    {
+        "id": "0bfc93b3-2536-4013-8f23-996ad7af82fb",
+        "difficulty": "easy",
+        "topic": "LCM",
+        "question": "[easy] The LCM of 8 and 12 is?",
+        "options": [
+            "20",
+            "18",
+            "24",
+            "16"
+        ],
+        "answer": 2,
+        "explanation": "Find the smallest shared multiple."
+    },
+    {
+        "id": "01363176-67d7-43bf-bf89-30b16ceafafb",
+        "difficulty": "easy",
+        "topic": "LCM",
+        "question": "[easy] Which relationship is true for two numbers?",
+        "options": [
+            "LCM x HCF = product",
+            "HCF = difference",
+            "LCM = quotient",
+            "LCM = sum"
+        ],
+        "answer": 0,
+        "explanation": "For two numbers, LCM times HCF equals product."
+    },
+    {
+        "id": "6491f8e0-b8e0-4566-9ada-d08b97caadbf",
+        "difficulty": "easy",
+        "topic": "LCM",
+        "question": "[easy] The least common multiple of 5, 10, and 20 is?",
+        "options": [
+            "15",
+            "20",
+            "25",
+            "10"
+        ],
+        "answer": 1,
+        "explanation": "Use shared multiples."
+    },
+    {
+        "id": "7882705b-54ed-4aa2-a74e-156b523d6f42",
+        "difficulty": "easy",
+        "topic": "Geometry",
+        "question": "[easy] The sum of angles in a triangle is?",
+        "options": [
+            "90",
+            "270",
+            "180",
+            "360"
+        ],
+        "answer": 2,
+        "explanation": "Triangle angle sum is 180 degrees."
+    },
+    {
+        "id": "48efa3fa-b8c3-47e3-ba13-f12d4f1487aa",
+        "difficulty": "easy",
+        "topic": "Geometry",
+        "question": "[easy] A circle has how many degrees?",
+        "options": [
+            "300",
+            "270",
+            "180",
+            "360"
+        ],
+        "answer": 3,
+        "explanation": "Full rotation is 360 degrees."
+    },
+    {
+        "id": "002bf998-f671-422e-9f39-b977328fa591",
+        "difficulty": "easy",
+        "topic": "Geometry",
+        "question": "[easy] An isosceles triangle has how many equal sides?",
+        "options": [
+            "2",
+            "4",
+            "3",
+            "1"
+        ],
+        "answer": 0,
+        "explanation": "Isosceles means two equal sides."
+    },
+    {
+        "id": "c8bf12c6-b0b1-4722-bd45-77df123f10cf",
+        "difficulty": "easy",
+        "topic": "Geometry",
+        "question": "[easy] If two angles on a straight line are adjacent, their sum is?",
+        "options": [
+            "180",
+            "270",
+            "120",
+            "90"
+        ],
+        "answer": 0,
+        "explanation": "Angles on a straight line sum to 180 degrees."
+    },
+    {
+        "id": "b63cdf7b-4a58-45dc-8670-78bdec111411",
+        "difficulty": "easy",
+        "topic": "Geometry",
+        "question": "[easy] The perimeter of a square with side 22 is?",
+        "options": [
+            "88",
+            "20",
+            "12",
+            "16"
+        ],
+        "answer": 0,
+        "explanation": "Perimeter = 4 x side."
+    },
+    {
+        "id": "b4f05b5e-74ba-43a3-96cf-2e9d1fc83e3a",
+        "difficulty": "easy",
+        "topic": "Mensuration",
+        "question": "[easy] Area of a rectangle with length 24 and breadth 22?",
+        "options": [
+            "15",
+            "12",
+            "528",
+            "18"
+        ],
+        "answer": 2,
+        "explanation": "Area = length x breadth."
+    },
+    {
+        "id": "63c6e49e-33e6-4e97-89a0-ac40011a57dd",
+        "difficulty": "easy",
+        "topic": "Mensuration",
+        "question": "[easy] Circumference of a circle with radius 22?",
+        "options": [
+            "25.12",
+            "31.42",
+            "138.23",
+            "18.85"
+        ],
+        "answer": 2,
+        "explanation": "Circumference = 2πr."
+    },
+    {
+        "id": "5e627f90-5fd0-4cd0-9909-c8fce27d8e7a",
+        "difficulty": "easy",
+        "topic": "Mensuration",
+        "question": "[easy] Area of a triangle with base 25 and height 23?",
+        "options": [
+            "16",
+            "12",
+            "14",
+            "287.5"
+        ],
+        "answer": 3,
+        "explanation": "Area = 1/2 x base x height."
+    },
+    {
+        "id": "256d2942-3363-464a-96a5-b43dd51d6913",
+        "difficulty": "easy",
+        "topic": "Mensuration",
+        "question": "[easy] Volume of a cube with side 21?",
+        "options": [
+            "16",
+            "8",
+            "27",
+            "9261"
+        ],
+        "answer": 3,
+        "explanation": "Volume of cube = side^3."
+    },
+    {
+        "id": "76b73218-f3bb-4e7d-8905-74cccf523836",
+        "difficulty": "easy",
+        "topic": "Mensuration",
+        "question": "[easy] Surface area of a cube with side 21?",
+        "options": [
+            "36",
+            "48",
+            "2646",
+            "24"
+        ],
+        "answer": 2,
+        "explanation": "Surface area of cube = 6a^2."
+    },
+    {
+        "id": "08ca4ad1-d200-41ec-8cd8-7859330750cc",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "[medium] What is 10% of 55?",
+        "options": [
+            "40",
+            "25",
+            "35",
+            "20"
+        ],
+        "answer": 1,
+        "explanation": "10% of 55 = 25"
+    },
+    {
+        "id": "fde95909-792d-4cdb-9f2d-971de8df97f8",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "[medium] A value rises from 25 to 37. What is the percentage increase?",
+        "options": [
+            "12",
+            "10",
+            "8",
+            "14"
+        ],
+        "answer": 0,
+        "explanation": "Increase = 12, so percentage increase is 12/25 x 100."
+    },
+    {
+        "id": "1039a18b-534e-4128-9d9c-9180d2ae8e00",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "[medium] If 45 is 20% of a number, what is the number?",
+        "options": [
+            "55",
+            "35",
+            "45",
+            "65"
+        ],
+        "answer": 2,
+        "explanation": "Reverse percentage uses value = part x 100 / percentage."
+    },
+    {
+        "id": "5bfef96f-ad48-49b6-993e-5d611d14f12d",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "[medium] A shirt marked at 125 gets a 15% discount. What is the selling price?",
+        "options": [
+            "105",
+            "85",
+            "107",
+            "65"
+        ],
+        "answer": 2,
+        "explanation": "Selling price = marked price - discount."
+    },
+    {
+        "id": "01e93ee9-63f2-4475-a053-91a9a6c0721a",
+        "difficulty": "medium",
+        "topic": "Percentages",
+        "question": "[medium] In a class of 75, 15 are boys. What percentage are girls?",
+        "options": [
+            "40.0",
+            "45.0",
+            "35.5",
+            "80.0"
+        ],
+        "answer": 3,
+        "explanation": "Girls percentage = girls/total x 100."
+    },
+    {
+        "id": "c1fe2ca3-50f9-4f05-bd82-9db5fd4a768f",
+        "difficulty": "medium",
+        "topic": "Profit & Loss",
+        "question": "[medium] An article costs 150 and sells for 180. What is the profit?",
+        "options": [
+            "25",
+            "30",
+            "40",
+            "20"
+        ],
+        "answer": 1,
+        "explanation": "Profit = selling price - cost price."
+    },
+    {
+        "id": "5b73cc90-f009-4967-a0df-2a46f9cf99c5",
+        "difficulty": "medium",
+        "topic": "Profit & Loss",
+        "question": "[medium] An article costs 170 and sells for 140. What is the loss?",
+        "options": [
+            "25",
+            "20",
+            "35",
+            "30"
+        ],
+        "answer": 3,
+        "explanation": "Loss = cost price - selling price."
+    },
+    {
+        "id": "a598894e-f6af-4b98-859e-4aca51d2045d",
+        "difficulty": "medium",
+        "topic": "Profit & Loss",
+        "question": "[medium] Marked price 250, discount 11%. Find selling price.",
+        "options": [
+            "220",
+            "223",
+            "210",
+            "230"
+        ],
+        "answer": 1,
+        "explanation": "Selling price = marked price - discount."
+    },
+    {
+        "id": "f821dcba-6c6d-4906-86ea-09e11207681b",
+        "difficulty": "medium",
+        "topic": "Profit & Loss",
+        "question": "[medium] Cost price 130, profit 21%. Find selling price.",
+        "options": [
+            "157",
+            "150",
+            "170",
+            "190"
+        ],
+        "answer": 0,
+        "explanation": "Selling price = CP + profit."
+    },
+    {
+        "id": "7d353c3b-b169-48bb-a337-76ab4f8b4f99",
+        "difficulty": "medium",
+        "topic": "Profit & Loss",
+        "question": "[medium] A shopkeeper gives successive discounts of 10% and 20% on 350. What is the final price?",
+        "options": [
+            "252",
+            "260",
+            "200",
+            "230"
+        ],
+        "answer": 0,
+        "explanation": "Successive discounts multiply remaining values."
+    },
+    {
+        "id": "703f94d6-1503-4944-a5fb-e4bc9166bd91",
+        "difficulty": "medium",
+        "topic": "Ratio",
+        "question": "[medium] Simplify the ratio 87:93.",
+        "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+        ],
+        "answer": 0,
+        "explanation": "Divide both terms by their common factor."
+    },
+    {
+        "id": "c8d04243-c082-40d2-920c-bc683bbe4705",
+        "difficulty": "medium",
+        "topic": "Ratio",
+        "question": "[medium] A and B share money in the ratio 4:5. If total is 125, find A's share.",
+        "options": [
+            "71.43",
+            "105",
+            "85",
+            "95"
+        ],
+        "answer": 0,
+        "explanation": "A's share = total x ratio part / sum of parts."
+    },
+    {
+        "id": "d0bdaa3b-3253-43ab-8b69-d456a4f8ae2c",
+        "difficulty": "medium",
+        "topic": "Ratio",
+        "question": "[medium] The ratio of boys to girls is 5:7. If girls are 95, how many boys are there?",
+        "options": [
+            "110",
+            "67",
+            "100",
+            "90"
+        ],
+        "answer": 1,
+        "explanation": "Use proportion to find the missing part."
+    },
+    {
+        "id": "2ac8348f-84f4-4afc-8a38-4b2647757c3f",
+        "difficulty": "medium",
+        "topic": "Ratio",
+        "question": "[medium] Two numbers are in the ratio 6:9. Their sum is 145. Find the larger number.",
+        "options": [
+            "100",
+            "105",
+            "115",
+            "125"
+        ],
+        "answer": 0,
+        "explanation": "Total sum is split by ratio parts."
+    },
+    {
+        "id": "942ec7aa-f7a8-4282-a515-4afa37af278b",
+        "difficulty": "medium",
+        "topic": "Ratio",
+        "question": "[medium] If the ratio x:y is 3:6, what is x/y?",
+        "options": [
+            "0.5",
+            "0.5 (2)",
+            "0.25",
+            "0.75"
+        ],
+        "answer": 0,
+        "explanation": "x/y is simply the ratio as a fraction."
+    },
+    {
+        "id": "55a320c0-4a09-4f08-ac00-4fbd2fb0992e",
+        "difficulty": "medium",
+        "topic": "Time & Work",
+        "question": "[medium] A can finish a job in 28 days. How much work does A do in one day?",
+        "options": [
+            "0.2",
+            "0.1",
+            "0.25",
+            "0.04"
+        ],
+        "answer": 3,
+        "explanation": "Work per day is reciprocal of days."
+    },
+    {
+        "id": "d4e561fd-d7c4-4776-a291-a0428f22b7da",
+        "difficulty": "medium",
+        "topic": "Time & Work",
+        "question": "[medium] A does a job in 30 days and B in 35 days. Together they finish in how many days?",
+        "options": [
+            "16.15",
+            "12",
+            "14",
+            "16"
+        ],
+        "answer": 0,
+        "explanation": "Add daily work rates."
+    },
+    {
+        "id": "5fa1ca70-4675-4f4b-9aa1-cf523a260962",
+        "difficulty": "medium",
+        "topic": "Time & Work",
+        "question": "[medium] If A completes 110% of a work in one day, how many days for the full work?",
+        "options": [
+            "2",
+            "4",
+            "0.91",
+            "3"
+        ],
+        "answer": 2,
+        "explanation": "Days = 100 / percent completed per day."
+    },
+    {
+        "id": "bb2e6bb7-b47d-4a8e-85f5-6d6993372131",
+        "difficulty": "medium",
+        "topic": "Time & Work",
+        "question": "[medium] A and B together complete a work in 26 days. If A alone takes 30 days, how long does B take?",
+        "options": [
+            "22",
+            "20",
+            "18",
+            "195.0"
+        ],
+        "answer": 3,
+        "explanation": "Subtract A's rate from combined rate."
+    },
+    {
+        "id": "e237b059-7983-4e97-8578-6d9be6f3beda",
+        "difficulty": "medium",
+        "topic": "Time & Work",
+        "question": "[medium] Three workers finish a task in 24 days, 28 days and 32 days respectively. Who is fastest?",
+        "options": [
+            "Third",
+            "First",
+            "Second",
+            "All equal"
+        ],
+        "answer": 1,
+        "explanation": "Smaller days mean faster worker."
+    },
+    {
+        "id": "78b6c215-f567-421e-a860-a4227038adab",
+        "difficulty": "medium",
+        "topic": "Time-Speed-Distance",
+        "question": "[medium] A car covers 185 km in 6 hours. What is the speed?",
+        "options": [
+            "50",
+            "30",
+            "40",
+            "30.83"
+        ],
+        "answer": 3,
+        "explanation": "Speed = distance / time."
+    },
+    {
+        "id": "d439c930-61c1-40f5-93c9-852d2c76b395",
+        "difficulty": "medium",
+        "topic": "Time-Speed-Distance",
+        "question": "[medium] A train moves at 92 km/h for 7 hours. Distance covered?",
+        "options": [
+            "135",
+            "155",
+            "644",
+            "145"
+        ],
+        "answer": 2,
+        "explanation": "Distance = speed x time."
+    },
+    {
+        "id": "d739f907-2bc9-4db9-86e0-828b2bc2d9eb",
+        "difficulty": "medium",
+        "topic": "Time-Speed-Distance",
+        "question": "[medium] A runner travels 145 meters in 8 seconds. Find speed in m/s.",
+        "options": [
+            "6",
+            "7",
+            "5",
+            "18.12"
+        ],
+        "answer": 3,
+        "explanation": "Speed = distance / time."
+    },
+    {
+        "id": "cfccd857-e32f-4ef8-bf6c-679d9309169b",
+        "difficulty": "medium",
+        "topic": "Time-Speed-Distance",
+        "question": "[medium] A boat covers upstream 165 km in 8 hours. Which factor mainly reduces speed?",
+        "options": [
+            "Current",
+            "Wind",
+            "Fuel",
+            "Gradient"
+        ],
+        "answer": 0,
+        "explanation": "Upstream motion is opposed by current."
+    },
+    {
+        "id": "29b33f1f-3777-4e40-b45b-eebfe58d9406",
+        "difficulty": "medium",
+        "topic": "Time-Speed-Distance",
+        "question": "[medium] Two trains of lengths 225 m and 245 m cross each other at relative speed. What key quantity is used?",
+        "options": [
+            "Relative speed",
+            "Acceleration",
+            "Average speed",
+            "Momentum"
+        ],
+        "answer": 0,
+        "explanation": "Crossing time uses relative speed."
+    },
+    {
+        "id": "8ae9b1e5-43c2-44cc-9b1d-2361d5a91544",
+        "difficulty": "medium",
+        "topic": "Probability",
+        "question": "[medium] A fair coin is tossed once. Probability of heads?",
+        "options": [
+            "0.75",
+            "1.0",
+            "0.25",
+            "0.5"
+        ],
+        "answer": 3,
+        "explanation": "A fair coin has two equally likely outcomes."
+    },
+    {
+        "id": "a2829bc7-10a7-4297-b45f-fc358f6316d7",
+        "difficulty": "medium",
+        "topic": "Probability",
+        "question": "[medium] A die is rolled once. Probability of getting an even number?",
+        "options": [
+            "0.5",
+            "0.16666666666666666",
+            "0.3333333333333333",
+            "0.6666666666666666"
+        ],
+        "answer": 0,
+        "explanation": "Even outcomes are 2, 4, 6."
+    },
+    {
+        "id": "a8023445-409f-4546-99a8-05e828dd09ae",
+        "difficulty": "medium",
+        "topic": "Probability",
+        "question": "[medium] A bag has 8 red and 10 blue balls. Probability of red?",
+        "options": [
+            "0.75",
+            "0.25",
+            "0.62",
+            "0.5"
+        ],
+        "answer": 2,
+        "explanation": "Probability = favorable / total."
+    },
+    {
+        "id": "e61d8f8e-6171-4063-97d5-d81c5d9118eb",
+        "difficulty": "medium",
+        "topic": "Probability",
+        "question": "[medium] Two coins are tossed. Probability of exactly one head?",
+        "options": [
+            "1.0",
+            "0.75",
+            "0.25",
+            "0.5"
+        ],
+        "answer": 3,
+        "explanation": "Outcomes HT and TH."
+    },
+    {
+        "id": "e52ae7b5-8b2a-4d2e-a7c9-4797b1b6e44b",
+        "difficulty": "medium",
+        "topic": "Probability",
+        "question": "[medium] One card is drawn from a standard deck. Probability of a face card?",
+        "options": [
+            "0.07692307692307693",
+            "0.5",
+            "0.25",
+            "0.23"
+        ],
+        "answer": 3,
+        "explanation": "Face cards are J, Q, K in each suit."
+    },
+    {
+        "id": "4b5efd7a-9535-47f9-a949-c04f83dea717",
+        "difficulty": "medium",
+        "topic": "Permutation & Combination",
+        "question": "[medium] How many ways can 9 distinct books be arranged on a shelf?",
+        "options": [
+            "12",
+            "24",
+            "18",
+            "6"
+        ],
+        "answer": 3,
+        "explanation": "Arrangements use factorial values."
+    },
+    {
+        "id": "279bf782-9d24-4692-af3d-e593e3454e7e",
+        "difficulty": "medium",
+        "topic": "Permutation & Combination",
+        "question": "[medium] How many ways can 2 students be selected from 11 students?",
+        "options": [
+            "20",
+            "10",
+            "55",
+            "15"
+        ],
+        "answer": 2,
+        "explanation": "Selection uses combinations."
+    },
+    {
+        "id": "f26b0295-6c6a-47c1-aa2a-2bd9993ee10b",
+        "difficulty": "medium",
+        "topic": "Permutation & Combination",
+        "question": "[medium] How many 3-digit numbers can be formed using digits 1, 2, 3, 4 without repetition?",
+        "options": [
+            "24",
+            "30",
+            "18",
+            "12"
+        ],
+        "answer": 0,
+        "explanation": "3 positions without repetition = 4P3."
+    },
+    {
+        "id": "7fa21a84-f97a-4b40-9fb1-f9bb4655ca9e",
+        "difficulty": "medium",
+        "topic": "Permutation & Combination",
+        "question": "[medium] How many committees of 8 can be made from a group of 12?",
+        "options": [
+            "10",
+            "12",
+            "66",
+            "8"
+        ],
+        "answer": 2,
+        "explanation": "Committees use combinations."
+    },
+    {
+        "id": "d81e943e-07a8-4547-89e5-737acaa0b110",
+        "difficulty": "medium",
+        "topic": "Permutation & Combination",
+        "question": "[medium] If 10 people sit in a line, how many arrangements are possible?",
+        "options": [
+            "24",
+            "30",
+            "12",
+            "18"
+        ],
+        "answer": 0,
+        "explanation": "Line arrangements are factorial."
+    },
+    {
+        "id": "607cddee-0068-4fa1-91cc-e1796142dba2",
+        "difficulty": "medium",
+        "topic": "Simple Interest",
+        "question": "[medium] Find the simple interest on 1200 at 12% for 2 years.",
+        "options": [
+            "288.0",
+            "100",
+            "120",
+            "140"
+        ],
+        "answer": 0,
+        "explanation": "SI = P x R x T / 100."
+    },
+    {
+        "id": "5dd79c87-19fd-4380-aee1-6d051d6113c0",
+        "difficulty": "medium",
+        "topic": "Simple Interest",
+        "question": "[medium] A sum of 700 earns 12% per annum for 3 years. Interest?",
+        "options": [
+            "110",
+            "90",
+            "130",
+            "252.0"
+        ],
+        "answer": 3,
+        "explanation": "Apply the SI formula."
+    },
+    {
+        "id": "c2d7f059-42c3-44fd-ae44-09fef2495c35",
+        "difficulty": "medium",
+        "topic": "Simple Interest",
+        "question": "[medium] If SI on a principal at 14% for 4 years is 240, what is the principal?",
+        "options": [
+            "428.57",
+            "500",
+            "900",
+            "700"
+        ],
+        "answer": 0,
+        "explanation": "Rearrange the SI formula to find principal."
+    },
+    {
+        "id": "288e75a4-22ac-4fbd-ba83-80e469606aeb",
+        "difficulty": "medium",
+        "topic": "Simple Interest",
+        "question": "[medium] A loan of 1000 is borrowed at 11% for 1 year. Total amount?",
+        "options": [
+            "900",
+            "1100",
+            "1110.0",
+            "1000"
+        ],
+        "answer": 2,
+        "explanation": "Amount = principal + SI."
+    },
+    {
+        "id": "72bb2be9-ba96-4297-b7ed-363e5212b944",
+        "difficulty": "medium",
+        "topic": "Simple Interest",
+        "question": "[medium] At what rate will 1100 yield 100 interest in 2 years?",
+        "options": [
+            "7",
+            "9",
+            "4.55",
+            "5"
+        ],
+        "answer": 2,
+        "explanation": "Rearrange the SI formula for rate."
+    },
+    {
+        "id": "3b0781bb-af06-4852-9896-a4b0a03a3466",
+        "difficulty": "medium",
+        "topic": "Compound Interest",
+        "question": "[medium] Find the amount on 1225 at 13% compound interest for 2 years.",
+        "options": [
+            "1425",
+            "1564.2",
+            "1625",
+            "1525"
+        ],
+        "answer": 1,
+        "explanation": "CI amount = P(1+r/100)^n."
+    },
+    {
+        "id": "5606fdc2-b2dd-4aab-bc71-6821514c468d",
+        "difficulty": "medium",
+        "topic": "Compound Interest",
+        "question": "[medium] What is the compound interest on 1025 at 14% for 1 year?",
+        "options": [
+            "50",
+            "143.5",
+            "60",
+            "70"
+        ],
+        "answer": 1,
+        "explanation": "For 1 year, CI equals simple interest."
+    },
+    {
+        "id": "aeb2483d-34b1-4ac5-8c69-86fb715d472f",
+        "difficulty": "medium",
+        "topic": "Compound Interest",
+        "question": "[medium] The difference between CI and SI for 2 years is mainly due to what?",
+        "options": [
+            "Tax",
+            "Discount",
+            "Interest on interest",
+            "Principal"
+        ],
+        "answer": 2,
+        "explanation": "CI compounds the previous interest."
+    },
+    {
+        "id": "745a487f-fc43-4fd8-a204-adc56a7c7854",
+        "difficulty": "medium",
+        "topic": "Compound Interest",
+        "question": "[medium] A principal doubles in 10 years at compound interest. What does this indicate about the rate?",
+        "options": [
+            "The effective rate is moderate",
+            "The rate is zero",
+            "The rate is infinite",
+            "The rate is negative"
+        ],
+        "answer": 0,
+        "explanation": "Doubling time is governed by the compounding rate."
+    },
+    {
+        "id": "c8869d58-acfe-4e66-835d-82ddd89fc8eb",
+        "difficulty": "medium",
+        "topic": "Compound Interest",
+        "question": "[medium] If an amount becomes 1825 from 1225 in 2 years, what is the growth factor?",
+        "options": [
+            "1.2",
+            "1.1",
+            "1.49",
+            "1.3"
+        ],
+        "answer": 2,
+        "explanation": "Growth factor = final / initial."
+    },
+    {
+        "id": "ef148421-8f01-42c0-b6b6-31f42f6fc46f",
+        "difficulty": "medium",
+        "topic": "Average",
+        "question": "[medium] Find the average of 260, 270, and 280.",
+        "options": [
+            "270",
+            "274",
+            "268",
+            "272"
+        ],
+        "answer": 0,
+        "explanation": "Average = sum / count."
+    },
+    {
+        "id": "74932f71-b812-41f7-b4b8-fe426501f71c",
+        "difficulty": "medium",
+        "topic": "Average",
+        "question": "[medium] If the average of 5 numbers is 265, what is their total?",
+        "options": [
+            "1325",
+            "310",
+            "300",
+            "320"
+        ],
+        "answer": 0,
+        "explanation": "Total = average x number of items."
+    },
+    {
+        "id": "f36982e4-5c9c-461b-a4cc-df3d970b1c29",
+        "difficulty": "medium",
+        "topic": "Average",
+        "question": "[medium] A class average of 275 is calculated over 4 students. One more student joins with score 285. New average?",
+        "options": [
+            "277.0",
+            "278",
+            "276",
+            "277"
+        ],
+        "answer": 0,
+        "explanation": "Recompute using total scores."
+    },
+    {
+        "id": "dba2fed6-a5ab-42ea-9e22-43867d2607ae",
+        "difficulty": "medium",
+        "topic": "Average",
+        "question": "[medium] The average speed over equal distances of 290 km/h and 310 km/h is?",
+        "options": [
+            "50",
+            "55",
+            "299.67",
+            "60"
+        ],
+        "answer": 2,
+        "explanation": "Average speed over equal distances uses harmonic mean."
+    },
+    {
+        "id": "b9cd3cfb-24e7-4791-91ad-3f60d4d2fe8c",
+        "difficulty": "medium",
+        "topic": "Average",
+        "question": "[medium] The average of first 4 consecutive numbers starting at 260 is?",
+        "options": [
+            "261",
+            "262",
+            "261.5",
+            "263"
+        ],
+        "answer": 2,
+        "explanation": "Average of consecutive numbers lies midway."
+    },
+    {
+        "id": "37dde3b5-c6e9-4876-8abc-4b90a47a0275",
+        "difficulty": "medium",
+        "topic": "Mixtures",
+        "question": "[medium] A mixture contains 12 parts milk and 13 parts water. What is the ratio of milk to total?",
+        "options": [
+            "0.75",
+            "0.8",
+            "0.5",
+            "0.25"
+        ],
+        "answer": 1,
+        "explanation": "Milk/total uses the first part over total parts."
+    },
+    {
+        "id": "0938c7ba-5e4c-4f7b-93a6-e0f2e452bf40",
+        "difficulty": "medium",
+        "topic": "Mixtures",
+        "question": "[medium] If 325 liters of a solution has 14% acid, how much acid is present?",
+        "options": [
+            "14",
+            "12",
+            "10",
+            "45.5"
+        ],
+        "answer": 3,
+        "explanation": "Acid amount = concentration x volume."
+    },
+    {
+        "id": "8475d8b1-665f-4d27-b72d-2fc54a35ac58",
+        "difficulty": "medium",
+        "topic": "Mixtures",
+        "question": "[medium] A 295 liter mixture is diluted by adding water. Which property changes?",
+        "options": [
+            "Volume only",
+            "Concentration",
+            "Color",
+            "Density only"
+        ],
+        "answer": 1,
+        "explanation": "Dilution changes concentration."
+    },
+    {
+        "id": "8d5b2047-5fab-48af-86d8-296d88981eab",
+        "difficulty": "medium",
+        "topic": "Mixtures",
+        "question": "[medium] Milk and water are mixed in the ratio 13:11. What fraction is water?",
+        "options": [
+            "0.2",
+            "0.79",
+            "0.4",
+            "0.3"
+        ],
+        "answer": 1,
+        "explanation": "Water fraction = water parts / total parts."
+    },
+    {
+        "id": "800a6d9c-e0cd-4a2e-b08a-787603fa0412",
+        "difficulty": "medium",
+        "topic": "Mixtures",
+        "question": "[medium] A solution of 335 liters is reduced by 15% through evaporation. Remaining volume?",
+        "options": [
+            "305",
+            "284.75",
+            "325",
+            "315"
+        ],
+        "answer": 1,
+        "explanation": "Remaining = original x (1 - loss%)."
+    },
+    {
+        "id": "386e7eca-30fa-4003-b33e-474f2f347630",
+        "difficulty": "medium",
+        "topic": "Pipes",
+        "question": "[medium] Pipe A fills a tank in 17 hours. Its 1-hour work is?",
+        "options": [
+            "0.06",
+            "0.25",
+            "0.2",
+            "0.1"
+        ],
+        "answer": 0,
+        "explanation": "Work rate is reciprocal of time."
+    },
+    {
+        "id": "bfa7bbf2-dd07-4e63-991f-28ead3f6df70",
+        "difficulty": "medium",
+        "topic": "Pipes",
+        "question": "[medium] Two pipes fill a tank in 15 and 19 hours. Combined time?",
+        "options": [
+            "3",
+            "4",
+            "8.38",
+            "2"
+        ],
+        "answer": 2,
+        "explanation": "Add rates, then invert."
+    },
+    {
+        "id": "0f549877-d69c-4588-8324-fef746bc2fb0",
+        "difficulty": "medium",
+        "topic": "Pipes",
+        "question": "[medium] A leak empties a tank in 21 hours. What is its work rate?",
+        "options": [
+            "0.1",
+            "0.05",
+            "0.2",
+            "0.05 (2)"
+        ],
+        "answer": 1,
+        "explanation": "Emptying rate is reciprocal of time."
+    },
+    {
+        "id": "34a193a0-0691-44c3-b0f4-3f1fe4791867",
+        "difficulty": "medium",
+        "topic": "Pipes",
+        "question": "[medium] An inlet fills a tank in 16 hours and an outlet empties it in 23 hours. What happens when both are open?",
+        "options": [
+            "No change",
+            "It empties instantly",
+            "Filling is slower",
+            "It fills instantly"
+        ],
+        "answer": 2,
+        "explanation": "Net rate is inlet minus outlet."
+    },
+    {
+        "id": "1bb5a524-df71-4f3e-bb00-4db19885327e",
+        "difficulty": "medium",
+        "topic": "Pipes",
+        "question": "[medium] If a pipe fills half a tank in 13 hours, how long for the full tank?",
+        "options": [
+            "12",
+            "26",
+            "10",
+            "8"
+        ],
+        "answer": 1,
+        "explanation": "Double the time for double the work."
+    },
+    {
+        "id": "9e8fdaba-6d3c-4200-b76b-180b0ead151b",
+        "difficulty": "medium",
+        "topic": "Clocks",
+        "question": "[medium] What is the angle between the hands at 15:00?",
+        "options": [
+            "120",
+            "150",
+            "450",
+            "90"
+        ],
+        "answer": 2,
+        "explanation": "Each hour mark is 30 degrees."
+    },
+    {
+        "id": "3adb653c-ee92-42a4-8b3e-1bb0f59cf8dd",
+        "difficulty": "medium",
+        "topic": "Clocks",
+        "question": "[medium] At 3:00, the minute hand points to which number?",
+        "options": [
+            "6",
+            "3",
+            "9",
+            "12"
+        ],
+        "answer": 3,
+        "explanation": "Minute hand at 3:00 is at 12."
+    },
+    {
+        "id": "90d997b8-5a5e-4aeb-8927-3d51d853da9d",
+        "difficulty": "medium",
+        "topic": "Clocks",
+        "question": "[medium] How many times do the hour and minute hands coincide in 12 hours?",
+        "options": [
+            "10",
+            "12",
+            "11",
+            "13"
+        ],
+        "answer": 2,
+        "explanation": "They coincide 11 times in 12 hours."
+    },
+    {
+        "id": "1a669803-8ef1-4f60-97e9-80a57c6e4722",
+        "difficulty": "medium",
+        "topic": "Clocks",
+        "question": "[medium] A mirror image of 4:20 appears as what?",
+        "options": [
+            "7:20",
+            "8:20",
+            "8:40",
+            "7:40"
+        ],
+        "answer": 3,
+        "explanation": "Mirror time is 11:60 - given time."
+    },
+    {
+        "id": "bcd84200-6bc8-4c08-9c48-6ecb94bf1ace",
+        "difficulty": "medium",
+        "topic": "Clocks",
+        "question": "[medium] If a clock is 5 minutes fast every hour, how many minutes fast in 4 hours?",
+        "options": [
+            "25",
+            "10",
+            "20",
+            "15"
+        ],
+        "answer": 2,
+        "explanation": "Multiply drift by hours."
+    },
+    {
+        "id": "5290a544-2b08-4669-88e0-a9ccd3129292",
+        "difficulty": "medium",
+        "topic": "Calendars",
+        "question": "[medium] A leap year has how many days?",
+        "options": [
+            "367",
+            "366",
+            "364",
+            "365"
+        ],
+        "answer": 1,
+        "explanation": "Leap years add one day."
+    },
+    {
+        "id": "73b3e97a-4892-43a4-a2d5-d0fa303ce984",
+        "difficulty": "medium",
+        "topic": "Calendars",
+        "question": "[medium] How many odd days are there in a normal year?",
+        "options": [
+            "0",
+            "2",
+            "3",
+            "1"
+        ],
+        "answer": 3,
+        "explanation": "365 days leave 1 odd day."
+    },
+    {
+        "id": "0c01dd5f-8610-43bc-bfb6-33a1903de70e",
+        "difficulty": "medium",
+        "topic": "Calendars",
+        "question": "[medium] How many odd days are there in a leap year?",
+        "options": [
+            "4",
+            "1",
+            "3",
+            "2"
+        ],
+        "answer": 3,
+        "explanation": "366 days leave 2 odd days."
+    },
+    {
+        "id": "9634098f-0c49-4618-bd35-77eaa92509da",
+        "difficulty": "medium",
+        "topic": "Calendars",
+        "question": "[medium] Which month has 30 days?",
+        "options": [
+            "January",
+            "April",
+            "July",
+            "May"
+        ],
+        "answer": 1,
+        "explanation": "April is a 30-day month."
+    },
+    {
+        "id": "589df9a9-fb9a-429c-8bdf-51f1fb9157ae",
+        "difficulty": "medium",
+        "topic": "Calendars",
+        "question": "[medium] A calendar repeats after how many years in common cases?",
+        "options": [
+            "14",
+            "7",
+            "28",
+            "21"
+        ],
+        "answer": 2,
+        "explanation": "Weekday-date patterns repeat every 28 years in the Gregorian cycle."
+    },
+    {
+        "id": "d598a412-56ca-465d-9988-4286d50aca4a",
+        "difficulty": "medium",
+        "topic": "Data Interpretation",
+        "question": "[medium] A table shows sales of 475, 495, and 515. What is the total?",
+        "options": [
+            "575",
+            "1485",
+            "595",
+            "615"
+        ],
+        "answer": 1,
+        "explanation": "Add the values in the table."
+    },
+    {
+        "id": "b4a8d18f-9e4e-43cd-9eaf-8e60eff39ad4",
+        "difficulty": "medium",
+        "topic": "Data Interpretation",
+        "question": "[medium] If revenue rises from 455 to 475, what is the increase?",
+        "options": [
+            "25",
+            "15",
+            "20",
+            "30"
+        ],
+        "answer": 2,
+        "explanation": "Increase is final minus initial."
+    },
+    {
+        "id": "7152142f-193c-4b12-bd45-d15cd7ba47da",
+        "difficulty": "medium",
+        "topic": "Data Interpretation",
+        "question": "[medium] A bar chart has values 405, 425, and 445. Which is highest?",
+        "options": [
+            "405",
+            "425",
+            "435",
+            "445"
+        ],
+        "answer": 3,
+        "explanation": "Compare the three bars."
+    },
+    {
+        "id": "1e11299d-9fa8-41e2-8638-27f7cc86548f",
+        "difficulty": "medium",
+        "topic": "Data Interpretation",
+        "question": "[medium] If a pie chart segment is 18% of the total 575, how large is the segment?",
+        "options": [
+            "103.5",
+            "30",
+            "20",
+            "40"
+        ],
+        "answer": 0,
+        "explanation": "Segment value = percentage x total / 100."
+    },
+    {
+        "id": "c18abaf8-4020-4100-988f-55bc6b5deaca",
+        "difficulty": "medium",
+        "topic": "Data Interpretation",
+        "question": "[medium] The average of values 385, 395, 405, 415 is?",
+        "options": [
+            "405",
+            "400",
+            "395",
+            "410"
+        ],
+        "answer": 1,
+        "explanation": "Average = total / 4."
+    },
+    {
+        "id": "0d444d69-af8b-4866-93bc-d815692dd8cd",
+        "difficulty": "medium",
+        "topic": "Number System",
+        "question": "[medium] What is the units digit of 412 x 413?",
+        "options": [
+            "6",
+            "4",
+            "6 (2)",
+            "2"
+        ],
+        "answer": 0,
+        "explanation": "Units digit comes from multiplying units digits."
+    },
+    {
+        "id": "975a8886-5d50-4a37-9046-889c9d96cfca",
+        "difficulty": "medium",
+        "topic": "Number System",
+        "question": "[medium] A number is divisible by 3 if its digit sum is divisible by?",
+        "options": [
+            "5",
+            "3",
+            "2",
+            "4"
+        ],
+        "answer": 1,
+        "explanation": "Divisibility by 3 uses digit sum."
+    },
+    {
+        "id": "b58c9e81-5398-4bab-bc19-c825d70be886",
+        "difficulty": "medium",
+        "topic": "Number System",
+        "question": "[medium] What is the remainder when 500 is divided by 5?",
+        "options": [
+            "2",
+            "0",
+            "3",
+            "1"
+        ],
+        "answer": 1,
+        "explanation": "Use modulo arithmetic."
+    },
+    {
+        "id": "b609a862-3b9b-4ada-b6af-732b28a20040",
+        "difficulty": "medium",
+        "topic": "Number System",
+        "question": "[medium] Which is a prime number?",
+        "options": [
+            "112",
+            "106",
+            "110",
+            "108"
+        ],
+        "answer": 0,
+        "explanation": "Prime numbers have exactly two factors."
+    },
+    {
+        "id": "e17992af-23f0-4faa-bc8b-ea10664e8aba",
+        "difficulty": "medium",
+        "topic": "Number System",
+        "question": "[medium] The highest power of 2 dividing 464 is found by what method?",
+        "options": [
+            "Prime factorization",
+            "Averaging",
+            "Addition",
+            "Estimation"
+        ],
+        "answer": 0,
+        "explanation": "Factorization reveals prime powers."
+    },
+    {
+        "id": "218d26ca-53fb-4ed1-95f9-31a202364a46",
+        "difficulty": "medium",
+        "topic": "HCF",
+        "question": "[medium] The HCF of 443 and 449 is?",
+        "options": [
+            "8",
+            "6",
+            "4",
+            "12"
+        ],
+        "answer": 1,
+        "explanation": "HCF is the greatest common divisor."
+    },
+    {
+        "id": "e07f39c8-c397-4f5e-a6c6-2c27cdf77568",
+        "difficulty": "medium",
+        "topic": "HCF",
+        "question": "[medium] If two numbers are co-prime, their HCF is?",
+        "options": [
+            "1",
+            "5",
+            "2",
+            "0"
+        ],
+        "answer": 0,
+        "explanation": "Co-prime numbers share no common factor except 1."
+    },
+    {
+        "id": "9503f39a-7d16-4c9b-8164-861a8581a9bf",
+        "difficulty": "medium",
+        "topic": "HCF",
+        "question": "[medium] A number divisible by 18 and 20 has HCF with the other number equal to?",
+        "options": [
+            "1",
+            "3",
+            "2",
+            "18"
+        ],
+        "answer": 3,
+        "explanation": "Common factor depends on both numbers."
+    },
+    {
+        "id": "76d36068-1f0b-470c-b01e-168d12d2fffb",
+        "difficulty": "medium",
+        "topic": "HCF",
+        "question": "[medium] Which algorithm is commonly used to find HCF?",
+        "options": [
+            "Bubble sort",
+            "Euclid's algorithm",
+            "DFS",
+            "Binary search"
+        ],
+        "answer": 1,
+        "explanation": "Euclid's algorithm is standard for HCF."
+    },
+    {
+        "id": "7ea5a581-f924-4411-ab77-87304fd7d5a8",
+        "difficulty": "medium",
+        "topic": "HCF",
+        "question": "[medium] The HCF of 12, 18 and 24 is?",
+        "options": [
+            "4",
+            "6",
+            "3",
+            "8"
+        ],
+        "answer": 1,
+        "explanation": "Find the common greatest factor."
+    },
+    {
+        "id": "43c8144e-0bef-4b90-bbb5-7a875b32af8c",
+        "difficulty": "medium",
+        "topic": "LCM",
+        "question": "[medium] The LCM of 20 and 23 is?",
+        "options": [
+            "40",
+            "12",
+            "15",
+            "18"
+        ],
+        "answer": 0,
+        "explanation": "LCM is the least common multiple."
+    },
+    {
+        "id": "00323ca7-b3d1-481b-acf9-0ea331605844",
+        "difficulty": "medium",
+        "topic": "LCM",
+        "question": "[medium] If two tasks repeat every 4 and 6 days, after how many days do they coincide?",
+        "options": [
+            "14",
+            "8",
+            "12",
+            "10"
+        ],
+        "answer": 2,
+        "explanation": "Use LCM to find common repetition."
+    },
+    {
+        "id": "0bd985b0-9268-461c-9713-a5c2665042d0",
+        "difficulty": "medium",
+        "topic": "LCM",
+        "question": "[medium] The LCM of 8 and 12 is?",
+        "options": [
+            "18",
+            "20",
+            "16",
+            "24"
+        ],
+        "answer": 3,
+        "explanation": "Find the smallest shared multiple."
+    },
+    {
+        "id": "cc467694-7447-4373-aff4-717c23677a9e",
+        "difficulty": "medium",
+        "topic": "LCM",
+        "question": "[medium] Which relationship is true for two numbers?",
+        "options": [
+            "HCF = difference",
+            "LCM = sum",
+            "LCM = quotient",
+            "LCM x HCF = product"
+        ],
+        "answer": 3,
+        "explanation": "For two numbers, LCM times HCF equals product."
+    },
+    {
+        "id": "9d8f50be-81c8-4b76-8ca6-224c5764c8ec",
+        "difficulty": "medium",
+        "topic": "LCM",
+        "question": "[medium] The least common multiple of 5, 10, and 20 is?",
+        "options": [
+            "15",
+            "10",
+            "20",
+            "25"
+        ],
+        "answer": 2,
+        "explanation": "Use shared multiples."
+    },
+    {
+        "id": "9ec09612-0e3a-451e-a677-4d52149cd808",
+        "difficulty": "medium",
+        "topic": "Geometry",
+        "question": "[medium] The sum of angles in a triangle is?",
+        "options": [
+            "360",
+            "270",
+            "90",
+            "180"
+        ],
+        "answer": 3,
+        "explanation": "Triangle angle sum is 180 degrees."
+    },
+    {
+        "id": "f7d4cc13-a474-4fa0-85e4-4d7db0f47e10",
+        "difficulty": "medium",
+        "topic": "Geometry",
+        "question": "[medium] A circle has how many degrees?",
+        "options": [
+            "360",
+            "270",
+            "180",
+            "300"
+        ],
+        "answer": 0,
+        "explanation": "Full rotation is 360 degrees."
+    },
+    {
+        "id": "d02c4446-a81c-41c2-8d97-5c971e4d65a0",
+        "difficulty": "medium",
+        "topic": "Geometry",
+        "question": "[medium] An isosceles triangle has how many equal sides?",
+        "options": [
+            "2",
+            "4",
+            "1",
+            "3"
+        ],
+        "answer": 0,
+        "explanation": "Isosceles means two equal sides."
+    },
+    {
+        "id": "3cb0d163-b9f0-4f46-97fe-8dab0c714524",
+        "difficulty": "medium",
+        "topic": "Geometry",
+        "question": "[medium] If two angles on a straight line are adjacent, their sum is?",
+        "options": [
+            "180",
+            "90",
+            "270",
+            "120"
+        ],
+        "answer": 0,
+        "explanation": "Angles on a straight line sum to 180 degrees."
+    },
+    {
+        "id": "8fed13d3-468f-4d5d-b4fd-de1f8c5142a1",
+        "difficulty": "medium",
+        "topic": "Geometry",
+        "question": "[medium] The perimeter of a square with side 22 is?",
+        "options": [
+            "88",
+            "20",
+            "16",
+            "12"
+        ],
+        "answer": 0,
+        "explanation": "Perimeter = 4 x side."
+    },
+    {
+        "id": "7fe44347-5ae8-4416-a3f3-9f33f447726f",
+        "difficulty": "medium",
+        "topic": "Mensuration",
+        "question": "[medium] Area of a rectangle with length 24 and breadth 22?",
+        "options": [
+            "528",
+            "18",
+            "15",
+            "12"
+        ],
+        "answer": 0,
+        "explanation": "Area = length x breadth."
+    },
+    {
+        "id": "d59459e8-d510-46ac-b21c-2b8788e402ac",
+        "difficulty": "medium",
+        "topic": "Mensuration",
+        "question": "[medium] Circumference of a circle with radius 22?",
+        "options": [
+            "138.23",
+            "25.12",
+            "18.85",
+            "31.42"
+        ],
+        "answer": 0,
+        "explanation": "Circumference = 2πr."
+    },
+    {
+        "id": "71b4127f-c416-4785-a76f-cfe69c402993",
+        "difficulty": "medium",
+        "topic": "Mensuration",
+        "question": "[medium] Area of a triangle with base 25 and height 23?",
+        "options": [
+            "16",
+            "12",
+            "14",
+            "287.5"
+        ],
+        "answer": 3,
+        "explanation": "Area = 1/2 x base x height."
+    },
+    {
+        "id": "d9f7dcd9-af94-4a42-8603-07c6faf88ea1",
+        "difficulty": "medium",
+        "topic": "Mensuration",
+        "question": "[medium] Volume of a cube with side 21?",
+        "options": [
+            "16",
+            "9261",
+            "8",
+            "27"
+        ],
+        "answer": 1,
+        "explanation": "Volume of cube = side^3."
+    },
+    {
+        "id": "9f709185-246d-4fb7-8040-5c5f0835c67c",
+        "difficulty": "medium",
+        "topic": "Mensuration",
+        "question": "[medium] Surface area of a cube with side 21?",
+        "options": [
+            "36",
+            "2646",
+            "24",
+            "48"
+        ],
+        "answer": 1,
+        "explanation": "Surface area of cube = 6a^2."
+    },
+    {
+        "id": "a364c617-a135-416e-bced-13ea811d28d3",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "[hard] What is 10% of 70?",
+        "options": [
+            "50",
+            "35",
+            "55",
+            "40"
+        ],
+        "answer": 3,
+        "explanation": "10% of 70 = 40"
+    },
+    {
+        "id": "4be5e2ee-ec5b-4ba2-8482-3392aa12fc11",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "[hard] A value rises from 40 to 52. What is the percentage increase?",
+        "options": [
+            "14",
+            "12",
+            "10",
+            "8"
+        ],
+        "answer": 1,
+        "explanation": "Increase = 12, so percentage increase is 12/40 x 100."
+    },
+    {
+        "id": "04893d00-5e67-411e-82ef-816e95b81fa8",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "[hard] If 60 is 20% of a number, what is the number?",
+        "options": [
+            "50",
+            "80",
+            "70",
+            "60"
+        ],
+        "answer": 3,
+        "explanation": "Reverse percentage uses value = part x 100 / percentage."
+    },
+    {
+        "id": "0580a79f-6140-44ba-807e-4579c0a75113",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "[hard] A shirt marked at 140 gets a 15% discount. What is the selling price?",
+        "options": [
+            "119",
+            "100",
+            "120",
+            "80"
+        ],
+        "answer": 0,
+        "explanation": "Selling price = marked price - discount."
+    },
+    {
+        "id": "5b40dc72-e2d8-4cdf-8329-168db8712cf2",
+        "difficulty": "hard",
+        "topic": "Percentages",
+        "question": "[hard] In a class of 90, 30 are boys. What percentage are girls?",
+        "options": [
+            "45.0",
+            "66.67",
+            "40.0",
+            "35.5"
+        ],
+        "answer": 1,
+        "explanation": "Girls percentage = girls/total x 100."
+    },
+    {
+        "id": "2daa5590-2e2d-4bac-a042-798628c1460a",
+        "difficulty": "hard",
+        "topic": "Profit & Loss",
+        "question": "[hard] An article costs 180 and sells for 210. What is the profit?",
+        "options": [
+            "40",
+            "20",
+            "25",
+            "30"
+        ],
+        "answer": 3,
+        "explanation": "Profit = selling price - cost price."
+    },
+    {
+        "id": "f3585cf5-dfcb-4de9-a54a-a7763de965a8",
+        "difficulty": "hard",
+        "topic": "Profit & Loss",
+        "question": "[hard] An article costs 200 and sells for 170. What is the loss?",
         "options": [
             "35",
             "20",
             "30",
             "25"
         ],
-        "answer": 3,
-        "explanation": "(50/100) * 50 = 25"
+        "answer": 2,
+        "explanation": "Loss = cost price - selling price."
     },
     {
-        "id": "40a04765-9573-4602-b989-1e71eb8a61e7",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 10% of 60?",
+        "id": "24131f8e-e6f5-4e4c-9804-e3c96a7a6d25",
+        "difficulty": "hard",
+        "topic": "Profit & Loss",
+        "question": "[hard] Marked price 280, discount 11%. Find selling price.",
         "options": [
-            "11",
-            "1",
-            "6",
-            "16"
+            "250",
+            "260",
+            "250 (2)",
+            "240"
+        ],
+        "answer": 0,
+        "explanation": "Selling price = marked price - discount."
+    },
+    {
+        "id": "39a5ae02-ad27-420b-8edf-cc8e91078514",
+        "difficulty": "hard",
+        "topic": "Profit & Loss",
+        "question": "[hard] Cost price 160, profit 21%. Find selling price.",
+        "options": [
+            "220",
+            "193",
+            "200",
+            "180"
+        ],
+        "answer": 1,
+        "explanation": "Selling price = CP + profit."
+    },
+    {
+        "id": "c16412a7-9c82-4fb7-82db-83f195f9c4d9",
+        "difficulty": "hard",
+        "topic": "Profit & Loss",
+        "question": "[hard] A shopkeeper gives successive discounts of 10% and 20% on 380. What is the final price?",
+        "options": [
+            "290",
+            "273",
+            "230",
+            "260"
+        ],
+        "answer": 1,
+        "explanation": "Successive discounts multiply remaining values."
+    },
+    {
+        "id": "82b5ebc2-d064-4664-8cea-f7593a685af9",
+        "difficulty": "hard",
+        "topic": "Ratio",
+        "question": "[hard] Simplify the ratio 132:138.",
+        "options": [
+            "2",
+            "5",
+            "4",
+            "3"
+        ],
+        "answer": 0,
+        "explanation": "Divide both terms by their common factor."
+    },
+    {
+        "id": "e225f609-6ae1-4dc5-8bf9-928ebd6378f6",
+        "difficulty": "hard",
+        "topic": "Ratio",
+        "question": "[hard] A and B share money in the ratio 4:5. If total is 170, find A's share.",
+        "options": [
+            "150",
+            "140",
+            "130",
+            "97.14"
+        ],
+        "answer": 3,
+        "explanation": "A's share = total x ratio part / sum of parts."
+    },
+    {
+        "id": "6896630a-f894-47fb-944d-0012911a9227",
+        "difficulty": "hard",
+        "topic": "Ratio",
+        "question": "[hard] The ratio of boys to girls is 5:7. If girls are 140, how many boys are there?",
+        "options": [
+            "145",
+            "135",
+            "155",
+            "100"
+        ],
+        "answer": 3,
+        "explanation": "Use proportion to find the missing part."
+    },
+    {
+        "id": "97fb8198-0c7c-49d1-908b-3a7158d761d5",
+        "difficulty": "hard",
+        "topic": "Ratio",
+        "question": "[hard] Two numbers are in the ratio 6:9. Their sum is 190. Find the larger number.",
+        "options": [
+            "170",
+            "160",
+            "150",
+            "131"
+        ],
+        "answer": 3,
+        "explanation": "Total sum is split by ratio parts."
+    },
+    {
+        "id": "b2a4a31d-457f-4e34-95ba-b1e503c75272",
+        "difficulty": "hard",
+        "topic": "Ratio",
+        "question": "[hard] If the ratio x:y is 3:6, what is x/y?",
+        "options": [
+            "0.5",
+            "0.75",
+            "0.25",
+            "0.5 (2)"
+        ],
+        "answer": 0,
+        "explanation": "x/y is simply the ratio as a fraction."
+    },
+    {
+        "id": "04e74885-11c4-469e-8302-b3010831e2a9",
+        "difficulty": "hard",
+        "topic": "Time & Work",
+        "question": "[hard] A can finish a job in 40 days. How much work does A do in one day?",
+        "options": [
+            "0.1",
+            "0.2",
+            "0.25",
+            "0.03"
+        ],
+        "answer": 3,
+        "explanation": "Work per day is reciprocal of days."
+    },
+    {
+        "id": "87a898c4-4bd0-4732-a647-2a2eada3ab1b",
+        "difficulty": "hard",
+        "topic": "Time & Work",
+        "question": "[hard] A does a job in 42 days and B in 47 days. Together they finish in how many days?",
+        "options": [
+            "12",
+            "22.18",
+            "16",
+            "14"
+        ],
+        "answer": 1,
+        "explanation": "Add daily work rates."
+    },
+    {
+        "id": "91cf8cf2-f8ad-4163-ac34-7a1ee0f5422b",
+        "difficulty": "hard",
+        "topic": "Time & Work",
+        "question": "[hard] If A completes 170% of a work in one day, how many days for the full work?",
+        "options": [
+            "4",
+            "3",
+            "2",
+            "0.59"
+        ],
+        "answer": 3,
+        "explanation": "Days = 100 / percent completed per day."
+    },
+    {
+        "id": "32babf97-c319-4105-82e5-2a12307a47bd",
+        "difficulty": "hard",
+        "topic": "Time & Work",
+        "question": "[hard] A and B together complete a work in 38 days. If A alone takes 42 days, how long does B take?",
+        "options": [
+            "22",
+            "20",
+            "399.0",
+            "18"
         ],
         "answer": 2,
-        "explanation": "(10/100) * 60 = 6"
+        "explanation": "Subtract A's rate from combined rate."
     },
     {
-        "id": "cec74217-dd76-4556-8768-976ed41b1f1c",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 20% of 70?",
+        "id": "5c668946-fbbd-4d4e-b57a-abe58ac9d965",
+        "difficulty": "hard",
+        "topic": "Time & Work",
+        "question": "[hard] Three workers finish a task in 36 days, 40 days and 44 days respectively. Who is fastest?",
         "options": [
-            "19",
-            "9",
-            "14",
+            "Second",
+            "First",
+            "All equal",
+            "Third"
+        ],
+        "answer": 1,
+        "explanation": "Smaller days mean faster worker."
+    },
+    {
+        "id": "d2e9ef3f-0551-414d-baef-9c06796687ed",
+        "difficulty": "hard",
+        "topic": "Time-Speed-Distance",
+        "question": "[hard] A car covers 260 km in 6 hours. What is the speed?",
+        "options": [
+            "40",
+            "30",
+            "50",
+            "43.33"
+        ],
+        "answer": 3,
+        "explanation": "Speed = distance / time."
+    },
+    {
+        "id": "ac613d3e-bfbc-462c-890e-0e9530986c6f",
+        "difficulty": "hard",
+        "topic": "Time-Speed-Distance",
+        "question": "[hard] A train moves at 130 km/h for 7 hours. Distance covered?",
+        "options": [
+            "210",
+            "910",
+            "230",
+            "220"
+        ],
+        "answer": 1,
+        "explanation": "Distance = speed x time."
+    },
+    {
+        "id": "0bdb35cf-ad13-437d-835e-99599285a661",
+        "difficulty": "hard",
+        "topic": "Time-Speed-Distance",
+        "question": "[hard] A runner travels 220 meters in 8 seconds. Find speed in m/s.",
+        "options": [
+            "5",
+            "27.5",
+            "7",
+            "6"
+        ],
+        "answer": 1,
+        "explanation": "Speed = distance / time."
+    },
+    {
+        "id": "d5921389-4363-4823-992d-02eaacb8d2f3",
+        "difficulty": "hard",
+        "topic": "Time-Speed-Distance",
+        "question": "[hard] A boat covers upstream 240 km in 8 hours. Which factor mainly reduces speed?",
+        "options": [
+            "Fuel",
+            "Gradient",
+            "Current",
+            "Wind"
+        ],
+        "answer": 2,
+        "explanation": "Upstream motion is opposed by current."
+    },
+    {
+        "id": "e25538a2-da09-4e0d-b387-64e4b3874544",
+        "difficulty": "hard",
+        "topic": "Time-Speed-Distance",
+        "question": "[hard] Two trains of lengths 300 m and 320 m cross each other at relative speed. What key quantity is used?",
+        "options": [
+            "Average speed",
+            "Acceleration",
+            "Momentum",
+            "Relative speed"
+        ],
+        "answer": 3,
+        "explanation": "Crossing time uses relative speed."
+    },
+    {
+        "id": "e30090fa-3797-40c7-af3e-8a35336c6e13",
+        "difficulty": "hard",
+        "topic": "Probability",
+        "question": "[hard] A fair coin is tossed once. Probability of heads?",
+        "options": [
+            "1.0",
+            "0.25",
+            "0.5",
+            "0.75"
+        ],
+        "answer": 2,
+        "explanation": "A fair coin has two equally likely outcomes."
+    },
+    {
+        "id": "ff7ca881-a160-4361-bacd-b65c20f2a332",
+        "difficulty": "hard",
+        "topic": "Probability",
+        "question": "[hard] A die is rolled once. Probability of getting an even number?",
+        "options": [
+            "0.3333333333333333",
+            "0.6666666666666666",
+            "0.16666666666666666",
+            "0.5"
+        ],
+        "answer": 3,
+        "explanation": "Even outcomes are 2, 4, 6."
+    },
+    {
+        "id": "060e7968-addd-4e2d-82fd-7d5bd8f24a72",
+        "difficulty": "hard",
+        "topic": "Probability",
+        "question": "[hard] A bag has 8 red and 10 blue balls. Probability of red?",
+        "options": [
+            "0.75",
+            "0.62",
+            "0.25",
+            "0.5"
+        ],
+        "answer": 1,
+        "explanation": "Probability = favorable / total."
+    },
+    {
+        "id": "3148dd99-f9d1-4f13-8ac2-ef2f72f157ae",
+        "difficulty": "hard",
+        "topic": "Probability",
+        "question": "[hard] Two coins are tossed. Probability of exactly one head?",
+        "options": [
+            "0.5",
+            "0.75",
+            "1.0",
+            "0.25"
+        ],
+        "answer": 0,
+        "explanation": "Outcomes HT and TH."
+    },
+    {
+        "id": "ac40486e-b185-43b1-99dc-6e1ef416f298",
+        "difficulty": "hard",
+        "topic": "Probability",
+        "question": "[hard] One card is drawn from a standard deck. Probability of a face card?",
+        "options": [
+            "0.25",
+            "0.07692307692307693",
+            "0.23",
+            "0.5"
+        ],
+        "answer": 2,
+        "explanation": "Face cards are J, Q, K in each suit."
+    },
+    {
+        "id": "1cef0fcc-f052-418e-a110-7ad9fbd64d8a",
+        "difficulty": "hard",
+        "topic": "Permutation & Combination",
+        "question": "[hard] How many ways can 9 distinct books be arranged on a shelf?",
+        "options": [
+            "18",
+            "24",
+            "12",
+            "6"
+        ],
+        "answer": 3,
+        "explanation": "Arrangements use factorial values."
+    },
+    {
+        "id": "39309d79-f466-409d-b3f5-a4c17b8a7b57",
+        "difficulty": "hard",
+        "topic": "Permutation & Combination",
+        "question": "[hard] How many ways can 2 students be selected from 11 students?",
+        "options": [
+            "55",
+            "10",
+            "15",
+            "20"
+        ],
+        "answer": 0,
+        "explanation": "Selection uses combinations."
+    },
+    {
+        "id": "c16d7bb4-9ca6-422a-9df1-3f6c75a2b3c6",
+        "difficulty": "hard",
+        "topic": "Permutation & Combination",
+        "question": "[hard] How many 3-digit numbers can be formed using digits 1, 2, 3, 4 without repetition?",
+        "options": [
+            "18",
+            "30",
+            "12",
             "24"
         ],
-        "answer": 2,
-        "explanation": "(20/100) * 70 = 14"
+        "answer": 3,
+        "explanation": "3 positions without repetition = 4P3."
     },
     {
-        "id": "6e261f76-1a95-4abf-a629-61004bc84e5c",
-        "difficulty": "easy",
-        "topic": "Percentages",
-        "question": "What is 30% of 80?",
+        "id": "c0f1c5eb-1478-4cbf-b776-10316172c1dc",
+        "difficulty": "hard",
+        "topic": "Permutation & Combination",
+        "question": "[hard] How many committees of 8 can be made from a group of 12?",
         "options": [
-            "24",
-            "34",
-            "29",
-            "19"
-        ],
-        "answer": 0,
-        "explanation": "(30/100) * 80 = 24"
-    },
-    {
-        "id": "febfec27-dcd1-41a8-863f-fc46bcc004fe",
-        "difficulty": "easy",
-        "topic": "Profit and Loss",
-        "question": "What is 40% of 90?",
-        "options": [
-            "36",
-            "41",
-            "31",
-            "46"
-        ],
-        "answer": 0,
-        "explanation": "(40/100) * 90 = 36"
-    },
-    {
-        "id": "4fe96df0-7e07-4484-99bb-40dd0da4c246",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 50% of 100?",
-        "options": [
-            "60",
-            "50",
-            "55",
-            "45"
-        ],
-        "answer": 1,
-        "explanation": "(50/100) * 100 = 50"
-    },
-    {
-        "id": "9acd6e7d-423b-4816-a2f1-a17f68a649d9",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 10% of 110?",
-        "options": [
-            "11",
-            "21",
-            "6",
-            "16"
-        ],
-        "answer": 0,
-        "explanation": "(10/100) * 110 = 11"
-    },
-    {
-        "id": "60409c98-268a-424d-a8e6-c58ef4277d6b",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 20% of 120?",
-        "options": [
-            "24",
-            "19",
-            "29",
-            "34"
-        ],
-        "answer": 0,
-        "explanation": "(20/100) * 120 = 24"
-    },
-    {
-        "id": "9530bf80-d6db-4e59-85f8-715b6e42257a",
-        "difficulty": "easy",
-        "topic": "Profit and Loss",
-        "question": "What is 30% of 130?",
-        "options": [
-            "34",
-            "49",
-            "39",
-            "44"
-        ],
-        "answer": 2,
-        "explanation": "(30/100) * 130 = 39"
-    },
-    {
-        "id": "c2239a3b-e168-43d7-8bbb-df8dfa3f9c0c",
-        "difficulty": "easy",
-        "topic": "Profit and Loss",
-        "question": "What is 40% of 140?",
-        "options": [
-            "61",
-            "51",
             "66",
-            "56"
+            "8",
+            "12",
+            "10"
+        ],
+        "answer": 0,
+        "explanation": "Committees use combinations."
+    },
+    {
+        "id": "238edc98-fc08-4b61-89c3-42cb83f279cd",
+        "difficulty": "hard",
+        "topic": "Permutation & Combination",
+        "question": "[hard] If 10 people sit in a line, how many arrangements are possible?",
+        "options": [
+            "18",
+            "30",
+            "12",
+            "24"
         ],
         "answer": 3,
-        "explanation": "(40/100) * 140 = 56"
+        "explanation": "Line arrangements are factorial."
     },
     {
-        "id": "55735e44-461d-4c25-bc8d-441d44bf82d4",
-        "difficulty": "easy",
-        "topic": "Percentages",
-        "question": "What is 50% of 150?",
-        "options": [
-            "80",
-            "85",
-            "75",
-            "70"
-        ],
-        "answer": 2,
-        "explanation": "(50/100) * 150 = 75"
-    },
-    {
-        "id": "39b4270e-3c66-4dcb-aad3-fcde790b35fb",
-        "difficulty": "easy",
-        "topic": "Time and Work",
-        "question": "What is 10% of 160?",
-        "options": [
-            "26",
-            "21",
-            "16",
-            "11"
-        ],
-        "answer": 2,
-        "explanation": "(10/100) * 160 = 16"
-    },
-    {
-        "id": "57f7e986-44f2-454e-94ed-769ab9fb59a7",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 20% of 170?",
-        "options": [
-            "44",
-            "39",
-            "29",
-            "34"
-        ],
-        "answer": 3,
-        "explanation": "(20/100) * 170 = 34"
-    },
-    {
-        "id": "917b6451-cf4f-4be7-a35b-4725093ec5e4",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 30% of 180?",
-        "options": [
-            "64",
-            "49",
-            "54",
-            "59"
-        ],
-        "answer": 2,
-        "explanation": "(30/100) * 180 = 54"
-    },
-    {
-        "id": "d9c49cf8-0ccb-4129-9159-b9b03762fbb1",
-        "difficulty": "easy",
-        "topic": "Percentages",
-        "question": "What is 40% of 190?",
-        "options": [
-            "71",
-            "86",
-            "76",
-            "81"
-        ],
-        "answer": 2,
-        "explanation": "(40/100) * 190 = 76"
-    },
-    {
-        "id": "dde495e6-dea5-4a08-b31e-8e6c35cbebb8",
-        "difficulty": "easy",
-        "topic": "Probability",
-        "question": "What is 50% of 200?",
+        "id": "f2ba15a5-b662-4759-9265-2cc4839b701e",
+        "difficulty": "hard",
+        "topic": "Simple Interest",
+        "question": "[hard] Find the simple interest on 1320 at 12% for 2 years.",
         "options": [
             "100",
-            "105",
-            "95",
-            "110"
+            "316.8",
+            "120",
+            "140"
         ],
-        "answer": 0,
-        "explanation": "(50/100) * 200 = 100"
+        "answer": 1,
+        "explanation": "SI = P x R x T / 100."
     },
     {
-        "id": "62023931-3f8b-47dc-9d28-36cc52f6d7ee",
-        "difficulty": "medium",
-        "topic": "Speed and Distance",
-        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
+        "id": "7ca111cd-14bb-45a4-ab1a-624aee493aea",
+        "difficulty": "hard",
+        "topic": "Simple Interest",
+        "question": "[hard] A sum of 820 earns 12% per annum for 3 years. Interest?",
         "options": [
-            "6.0",
-            "5.0",
+            "110",
+            "295.2",
+            "90",
+            "130"
+        ],
+        "answer": 1,
+        "explanation": "Apply the SI formula."
+    },
+    {
+        "id": "1c01781e-02dd-4f1a-94dd-0c5ffaf030e0",
+        "difficulty": "hard",
+        "topic": "Simple Interest",
+        "question": "[hard] If SI on a principal at 14% for 4 years is 360, what is the principal?",
+        "options": [
+            "900",
+            "642.86",
+            "700",
+            "500"
+        ],
+        "answer": 1,
+        "explanation": "Rearrange the SI formula to find principal."
+    },
+    {
+        "id": "f378b509-cd2a-467b-a3b6-7fc4f297e442",
+        "difficulty": "hard",
+        "topic": "Simple Interest",
+        "question": "[hard] A loan of 1120 is borrowed at 11% for 1 year. Total amount?",
+        "options": [
+            "1000",
+            "1100",
+            "900",
+            "1243.2"
+        ],
+        "answer": 3,
+        "explanation": "Amount = principal + SI."
+    },
+    {
+        "id": "b7f013d0-0a12-465f-9b86-a9cc34f5a304",
+        "difficulty": "hard",
+        "topic": "Simple Interest",
+        "question": "[hard] At what rate will 1220 yield 160 interest in 2 years?",
+        "options": [
+            "9",
+            "5",
+            "6.56",
+            "7"
+        ],
+        "answer": 2,
+        "explanation": "Rearrange the SI formula for rate."
+    },
+    {
+        "id": "3f75f7d7-7059-49b0-893a-493002acf308",
+        "difficulty": "hard",
+        "topic": "Compound Interest",
+        "question": "[hard] Find the amount on 1360 at 13% compound interest for 2 years.",
+        "options": [
+            "1660",
+            "1736.58",
+            "1760",
+            "1560"
+        ],
+        "answer": 1,
+        "explanation": "CI amount = P(1+r/100)^n."
+    },
+    {
+        "id": "f9c5faab-41e0-4a64-bf87-61b602630924",
+        "difficulty": "hard",
+        "topic": "Compound Interest",
+        "question": "[hard] What is the compound interest on 1160 at 14% for 1 year?",
+        "options": [
+            "60",
+            "70",
+            "162.4",
+            "50"
+        ],
+        "answer": 2,
+        "explanation": "For 1 year, CI equals simple interest."
+    },
+    {
+        "id": "ccb6a8a7-1230-4c41-b5b9-04ed8fda6024",
+        "difficulty": "hard",
+        "topic": "Compound Interest",
+        "question": "[hard] The difference between CI and SI for 2 years is mainly due to what?",
+        "options": [
+            "Interest on interest",
+            "Principal",
+            "Discount",
+            "Tax"
+        ],
+        "answer": 0,
+        "explanation": "CI compounds the previous interest."
+    },
+    {
+        "id": "474ec5f3-d772-4f43-8036-c752e314a3bc",
+        "difficulty": "hard",
+        "topic": "Compound Interest",
+        "question": "[hard] A principal doubles in 10 years at compound interest. What does this indicate about the rate?",
+        "options": [
+            "The rate is zero",
+            "The rate is infinite",
+            "The rate is negative",
+            "The effective rate is moderate"
+        ],
+        "answer": 3,
+        "explanation": "Doubling time is governed by the compounding rate."
+    },
+    {
+        "id": "f9cb6d94-b165-42af-a282-1d6271c1c09b",
+        "difficulty": "hard",
+        "topic": "Compound Interest",
+        "question": "[hard] If an amount becomes 1960 from 1360 in 2 years, what is the growth factor?",
+        "options": [
+            "1.3",
+            "1.44",
+            "1.1",
+            "1.2"
+        ],
+        "answer": 1,
+        "explanation": "Growth factor = final / initial."
+    },
+    {
+        "id": "0536d102-2094-4b8f-9d34-520186f7f156",
+        "difficulty": "hard",
+        "topic": "Average",
+        "question": "[hard] Find the average of 410, 420, and 430.",
+        "options": [
+            "420",
+            "418",
+            "422",
+            "424"
+        ],
+        "answer": 0,
+        "explanation": "Average = sum / count."
+    },
+    {
+        "id": "3ff239f9-1c97-4f44-b26e-6f8b06943ede",
+        "difficulty": "hard",
+        "topic": "Average",
+        "question": "[hard] If the average of 5 numbers is 415, what is their total?",
+        "options": [
+            "450",
+            "2075",
+            "470",
+            "460"
+        ],
+        "answer": 1,
+        "explanation": "Total = average x number of items."
+    },
+    {
+        "id": "207b1805-0044-4438-a3b5-472d50becc39",
+        "difficulty": "hard",
+        "topic": "Average",
+        "question": "[hard] A class average of 425 is calculated over 4 students. One more student joins with score 435. New average?",
+        "options": [
+            "428",
+            "427",
+            "427.0",
+            "426"
+        ],
+        "answer": 2,
+        "explanation": "Recompute using total scores."
+    },
+    {
+        "id": "917ef6ab-5b17-4348-ad9d-486803b91efc",
+        "difficulty": "hard",
+        "topic": "Average",
+        "question": "[hard] The average speed over equal distances of 440 km/h and 460 km/h is?",
+        "options": [
+            "50",
+            "55",
+            "449.78",
+            "60"
+        ],
+        "answer": 2,
+        "explanation": "Average speed over equal distances uses harmonic mean."
+    },
+    {
+        "id": "cc201ec7-0636-44bd-89ad-d0b313daea6b",
+        "difficulty": "hard",
+        "topic": "Average",
+        "question": "[hard] The average of first 4 consecutive numbers starting at 410 is?",
+        "options": [
+            "411",
+            "413",
+            "411.5",
+            "412"
+        ],
+        "answer": 2,
+        "explanation": "Average of consecutive numbers lies midway."
+    },
+    {
+        "id": "e0c6caa3-977d-4e5a-a9e8-b2018ba0ca22",
+        "difficulty": "hard",
+        "topic": "Mixtures",
+        "question": "[hard] A mixture contains 12 parts milk and 13 parts water. What is the ratio of milk to total?",
+        "options": [
+            "0.8",
+            "0.75",
+            "0.5",
+            "0.25"
+        ],
+        "answer": 0,
+        "explanation": "Milk/total uses the first part over total parts."
+    },
+    {
+        "id": "ffa653cd-fa49-4fb1-8235-26b9c4b40bc3",
+        "difficulty": "hard",
+        "topic": "Mixtures",
+        "question": "[hard] If 490 liters of a solution has 14% acid, how much acid is present?",
+        "options": [
+            "14",
+            "68.6",
+            "10",
+            "12"
+        ],
+        "answer": 1,
+        "explanation": "Acid amount = concentration x volume."
+    },
+    {
+        "id": "6d8b1f75-363c-4574-b738-5161bca74b4b",
+        "difficulty": "hard",
+        "topic": "Mixtures",
+        "question": "[hard] A 460 liter mixture is diluted by adding water. Which property changes?",
+        "options": [
+            "Volume only",
+            "Density only",
+            "Concentration",
+            "Color"
+        ],
+        "answer": 2,
+        "explanation": "Dilution changes concentration."
+    },
+    {
+        "id": "9d37381c-66de-4cfb-b104-91d5b0a3cf4a",
+        "difficulty": "hard",
+        "topic": "Mixtures",
+        "question": "[hard] Milk and water are mixed in the ratio 13:11. What fraction is water?",
+        "options": [
+            "0.79",
+            "0.2",
+            "0.3",
+            "0.4"
+        ],
+        "answer": 0,
+        "explanation": "Water fraction = water parts / total parts."
+    },
+    {
+        "id": "4b47064f-d0b2-43ec-ad79-0a4dadbeb323",
+        "difficulty": "hard",
+        "topic": "Mixtures",
+        "question": "[hard] A solution of 500 liters is reduced by 15% through evaporation. Remaining volume?",
+        "options": [
+            "470",
+            "490",
+            "480",
+            "425.0"
+        ],
+        "answer": 3,
+        "explanation": "Remaining = original x (1 - loss%)."
+    },
+    {
+        "id": "8581cec1-1279-48f4-ade0-ae922bc4acbf",
+        "difficulty": "hard",
+        "topic": "Pipes",
+        "question": "[hard] Pipe A fills a tank in 17 hours. Its 1-hour work is?",
+        "options": [
+            "0.06",
+            "0.1",
+            "0.25",
+            "0.2"
+        ],
+        "answer": 0,
+        "explanation": "Work rate is reciprocal of time."
+    },
+    {
+        "id": "adecdcf5-df41-4154-b6ca-386838a1a65f",
+        "difficulty": "hard",
+        "topic": "Pipes",
+        "question": "[hard] Two pipes fill a tank in 15 and 19 hours. Combined time?",
+        "options": [
+            "2",
+            "3",
+            "4",
+            "8.38"
+        ],
+        "answer": 3,
+        "explanation": "Add rates, then invert."
+    },
+    {
+        "id": "6b8b00a6-2021-4a80-aa20-216d6b8f24ae",
+        "difficulty": "hard",
+        "topic": "Pipes",
+        "question": "[hard] A leak empties a tank in 21 hours. What is its work rate?",
+        "options": [
+            "0.05",
+            "0.1",
+            "0.2",
+            "0.05 (2)"
+        ],
+        "answer": 0,
+        "explanation": "Emptying rate is reciprocal of time."
+    },
+    {
+        "id": "d731335b-9c79-43d8-b059-9178800245bf",
+        "difficulty": "hard",
+        "topic": "Pipes",
+        "question": "[hard] An inlet fills a tank in 16 hours and an outlet empties it in 23 hours. What happens when both are open?",
+        "options": [
+            "It empties instantly",
+            "No change",
+            "Filling is slower",
+            "It fills instantly"
+        ],
+        "answer": 2,
+        "explanation": "Net rate is inlet minus outlet."
+    },
+    {
+        "id": "68b36667-d7cf-4cb3-ab37-894c51a11f38",
+        "difficulty": "hard",
+        "topic": "Pipes",
+        "question": "[hard] If a pipe fills half a tank in 13 hours, how long for the full tank?",
+        "options": [
+            "10",
+            "12",
+            "26",
+            "8"
+        ],
+        "answer": 2,
+        "explanation": "Double the time for double the work."
+    },
+    {
+        "id": "054afc4a-6a0b-4423-948a-f330b47c8c31",
+        "difficulty": "hard",
+        "topic": "Clocks",
+        "question": "[hard] What is the angle between the hands at 15:00?",
+        "options": [
+            "150",
+            "450",
+            "120",
+            "90"
+        ],
+        "answer": 1,
+        "explanation": "Each hour mark is 30 degrees."
+    },
+    {
+        "id": "debd0e13-4c5d-4b0c-a678-318d120dc49d",
+        "difficulty": "hard",
+        "topic": "Clocks",
+        "question": "[hard] At 3:00, the minute hand points to which number?",
+        "options": [
+            "9",
+            "3",
+            "6",
+            "12"
+        ],
+        "answer": 3,
+        "explanation": "Minute hand at 3:00 is at 12."
+    },
+    {
+        "id": "b482bead-f5a1-4d65-b8a3-3d4286f11e4e",
+        "difficulty": "hard",
+        "topic": "Clocks",
+        "question": "[hard] How many times do the hour and minute hands coincide in 12 hours?",
+        "options": [
+            "10",
+            "12",
+            "13",
+            "11"
+        ],
+        "answer": 3,
+        "explanation": "They coincide 11 times in 12 hours."
+    },
+    {
+        "id": "ba925ce7-f843-44c1-a616-0e457f599da7",
+        "difficulty": "hard",
+        "topic": "Clocks",
+        "question": "[hard] A mirror image of 4:20 appears as what?",
+        "options": [
+            "7:40",
+            "8:20",
+            "8:40",
+            "7:20"
+        ],
+        "answer": 0,
+        "explanation": "Mirror time is 11:60 - given time."
+    },
+    {
+        "id": "e190abd4-290c-4516-a35e-d6d74b8a527f",
+        "difficulty": "hard",
+        "topic": "Clocks",
+        "question": "[hard] If a clock is 5 minutes fast every hour, how many minutes fast in 4 hours?",
+        "options": [
+            "10",
             "25",
-            "8.0"
+            "20",
+            "15"
         ],
-        "answer": 0,
-        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
+        "answer": 2,
+        "explanation": "Multiply drift by hours."
     },
     {
-        "id": "c768d9e1-6a12-4427-b920-7935238c1797",
-        "difficulty": "medium",
-        "topic": "Percentages",
-        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
+        "id": "e0c4fe56-d261-4f3d-a591-b6a4a7ef79ca",
+        "difficulty": "hard",
+        "topic": "Calendars",
+        "question": "[hard] A leap year has how many days?",
         "options": [
-            "6.52",
+            "366",
+            "364",
+            "367",
+            "365"
+        ],
+        "answer": 0,
+        "explanation": "Leap years add one day."
+    },
+    {
+        "id": "3370cb5e-ced3-4828-84dd-284a1aaa9a61",
+        "difficulty": "hard",
+        "topic": "Calendars",
+        "question": "[hard] How many odd days are there in a normal year?",
+        "options": [
+            "3",
+            "0",
+            "2",
+            "1"
+        ],
+        "answer": 3,
+        "explanation": "365 days leave 1 odd day."
+    },
+    {
+        "id": "96661600-2889-4ebe-b984-e5ac37567abb",
+        "difficulty": "hard",
+        "topic": "Calendars",
+        "question": "[hard] How many odd days are there in a leap year?",
+        "options": [
+            "1",
+            "3",
+            "4",
+            "2"
+        ],
+        "answer": 3,
+        "explanation": "366 days leave 2 odd days."
+    },
+    {
+        "id": "389a4fe3-065d-44a8-a18e-9a8f582b0195",
+        "difficulty": "hard",
+        "topic": "Calendars",
+        "question": "[hard] Which month has 30 days?",
+        "options": [
+            "April",
+            "January",
+            "July",
+            "May"
+        ],
+        "answer": 0,
+        "explanation": "April is a 30-day month."
+    },
+    {
+        "id": "4b5ab375-76f9-45e2-965b-afe09126429d",
+        "difficulty": "hard",
+        "topic": "Calendars",
+        "question": "[hard] A calendar repeats after how many years in common cases?",
+        "options": [
+            "7",
+            "14",
+            "28",
+            "21"
+        ],
+        "answer": 2,
+        "explanation": "Weekday-date patterns repeat every 28 years in the Gregorian cycle."
+    },
+    {
+        "id": "0e672e64-2c00-4f36-92fc-2d6182794e52",
+        "difficulty": "hard",
+        "topic": "Data Interpretation",
+        "question": "[hard] A table shows sales of 700, 720, and 740. What is the total?",
+        "options": [
+            "2160",
+            "820",
+            "840",
+            "800"
+        ],
+        "answer": 0,
+        "explanation": "Add the values in the table."
+    },
+    {
+        "id": "5b7d1df9-5179-4f94-a4db-79ca2021d0cc",
+        "difficulty": "hard",
+        "topic": "Data Interpretation",
+        "question": "[hard] If revenue rises from 680 to 700, what is the increase?",
+        "options": [
+            "15",
+            "20",
+            "25",
+            "30"
+        ],
+        "answer": 1,
+        "explanation": "Increase is final minus initial."
+    },
+    {
+        "id": "f386a03e-3792-457c-8581-ca85ef0bb055",
+        "difficulty": "hard",
+        "topic": "Data Interpretation",
+        "question": "[hard] A bar chart has values 630, 650, and 670. Which is highest?",
+        "options": [
+            "660",
+            "630",
+            "650",
+            "670"
+        ],
+        "answer": 3,
+        "explanation": "Compare the three bars."
+    },
+    {
+        "id": "04b2e2c9-891b-4ccc-b8f8-c3e76207b50f",
+        "difficulty": "hard",
+        "topic": "Data Interpretation",
+        "question": "[hard] If a pie chart segment is 18% of the total 800, how large is the segment?",
+        "options": [
+            "144.0",
+            "30",
+            "40",
+            "20"
+        ],
+        "answer": 0,
+        "explanation": "Segment value = percentage x total / 100."
+    },
+    {
+        "id": "e00ec685-032a-4e1c-89e6-1dcd6cab6e79",
+        "difficulty": "hard",
+        "topic": "Data Interpretation",
+        "question": "[hard] The average of values 610, 620, 630, 640 is?",
+        "options": [
+            "620",
+            "630",
+            "635",
+            "625"
+        ],
+        "answer": 3,
+        "explanation": "Average = total / 4."
+    },
+    {
+        "id": "46256301-f321-442f-8b2a-5a8abaa85e86",
+        "difficulty": "hard",
+        "topic": "Number System",
+        "question": "[hard] What is the units digit of 652 x 653?",
+        "options": [
+            "6",
+            "6 (2)",
+            "4",
+            "2"
+        ],
+        "answer": 0,
+        "explanation": "Units digit comes from multiplying units digits."
+    },
+    {
+        "id": "917e731a-520e-4849-ac2a-12bb300d3eb3",
+        "difficulty": "hard",
+        "topic": "Number System",
+        "question": "[hard] A number is divisible by 3 if its digit sum is divisible by?",
+        "options": [
+            "5",
+            "2",
+            "4",
+            "3"
+        ],
+        "answer": 3,
+        "explanation": "Divisibility by 3 uses digit sum."
+    },
+    {
+        "id": "fc817388-0a49-4af3-935a-28a03b2be867",
+        "difficulty": "hard",
+        "topic": "Number System",
+        "question": "[hard] What is the remainder when 740 is divided by 5?",
+        "options": [
+            "0",
+            "3",
+            "2",
+            "1"
+        ],
+        "answer": 0,
+        "explanation": "Use modulo arithmetic."
+    },
+    {
+        "id": "472765c9-7a96-417f-acd5-981b95ac6a9b",
+        "difficulty": "hard",
+        "topic": "Number System",
+        "question": "[hard] Which is a prime number?",
+        "options": [
+            "108",
+            "110",
+            "112",
+            "106"
+        ],
+        "answer": 2,
+        "explanation": "Prime numbers have exactly two factors."
+    },
+    {
+        "id": "e13cab32-36ce-47df-b019-ab74c33dd736",
+        "difficulty": "hard",
+        "topic": "Number System",
+        "question": "[hard] The highest power of 2 dividing 704 is found by what method?",
+        "options": [
+            "Addition",
+            "Prime factorization",
+            "Averaging",
+            "Estimation"
+        ],
+        "answer": 1,
+        "explanation": "Factorization reveals prime powers."
+    },
+    {
+        "id": "d063dd13-2b0a-44d3-a41d-2b5b037b82e5",
+        "difficulty": "hard",
+        "topic": "HCF",
+        "question": "[hard] The HCF of 698 and 704 is?",
+        "options": [
+            "12",
+            "6",
+            "4",
+            "8"
+        ],
+        "answer": 1,
+        "explanation": "HCF is the greatest common divisor."
+    },
+    {
+        "id": "257afe5c-a667-41a3-af80-1deb24f9eb90",
+        "difficulty": "hard",
+        "topic": "HCF",
+        "question": "[hard] If two numbers are co-prime, their HCF is?",
+        "options": [
+            "0",
+            "2",
+            "5",
+            "1"
+        ],
+        "answer": 3,
+        "explanation": "Co-prime numbers share no common factor except 1."
+    },
+    {
+        "id": "0e2d9523-c3a7-40b8-996b-e1f60da3a236",
+        "difficulty": "hard",
+        "topic": "HCF",
+        "question": "[hard] A number divisible by 18 and 20 has HCF with the other number equal to?",
+        "options": [
+            "2",
+            "18",
+            "3",
+            "1"
+        ],
+        "answer": 1,
+        "explanation": "Common factor depends on both numbers."
+    },
+    {
+        "id": "a7f2bc5f-0c4a-4c58-a18d-55b284e84374",
+        "difficulty": "hard",
+        "topic": "HCF",
+        "question": "[hard] Which algorithm is commonly used to find HCF?",
+        "options": [
+            "Bubble sort",
+            "Binary search",
+            "DFS",
+            "Euclid's algorithm"
+        ],
+        "answer": 3,
+        "explanation": "Euclid's algorithm is standard for HCF."
+    },
+    {
+        "id": "873b9b61-a8f8-482c-ada1-352fbe4c77db",
+        "difficulty": "hard",
+        "topic": "HCF",
+        "question": "[hard] The HCF of 12, 18 and 24 is?",
+        "options": [
+            "8",
+            "3",
+            "4",
+            "6"
+        ],
+        "answer": 3,
+        "explanation": "Find the common greatest factor."
+    },
+    {
+        "id": "669d4857-6f96-4aee-844f-1c406c5b8e78",
+        "difficulty": "hard",
+        "topic": "LCM",
+        "question": "[hard] The LCM of 20 and 23 is?",
+        "options": [
+            "40",
+            "15",
+            "12",
+            "18"
+        ],
+        "answer": 0,
+        "explanation": "LCM is the least common multiple."
+    },
+    {
+        "id": "3ef2968c-df8c-4a49-ad0d-f1bbf9ad1744",
+        "difficulty": "hard",
+        "topic": "LCM",
+        "question": "[hard] If two tasks repeat every 4 and 6 days, after how many days do they coincide?",
+        "options": [
+            "12",
+            "10",
+            "14",
+            "8"
+        ],
+        "answer": 0,
+        "explanation": "Use LCM to find common repetition."
+    },
+    {
+        "id": "abe8456c-3c68-4b68-8daa-56d1d61964fc",
+        "difficulty": "hard",
+        "topic": "LCM",
+        "question": "[hard] The LCM of 8 and 12 is?",
+        "options": [
+            "20",
+            "24",
+            "16",
+            "18"
+        ],
+        "answer": 1,
+        "explanation": "Find the smallest shared multiple."
+    },
+    {
+        "id": "927c2b03-c914-4676-9d00-6526fc89ef7d",
+        "difficulty": "hard",
+        "topic": "LCM",
+        "question": "[hard] Which relationship is true for two numbers?",
+        "options": [
+            "LCM = sum",
+            "LCM = quotient",
+            "HCF = difference",
+            "LCM x HCF = product"
+        ],
+        "answer": 3,
+        "explanation": "For two numbers, LCM times HCF equals product."
+    },
+    {
+        "id": "4ed5048a-9bd0-4a3d-802e-6f16d57e2973",
+        "difficulty": "hard",
+        "topic": "LCM",
+        "question": "[hard] The least common multiple of 5, 10, and 20 is?",
+        "options": [
+            "15",
+            "20",
+            "10",
+            "25"
+        ],
+        "answer": 1,
+        "explanation": "Use shared multiples."
+    },
+    {
+        "id": "7ed16a1f-59ef-43fe-9f8b-7f636558add1",
+        "difficulty": "hard",
+        "topic": "Geometry",
+        "question": "[hard] The sum of angles in a triangle is?",
+        "options": [
+            "270",
+            "180",
+            "360",
+            "90"
+        ],
+        "answer": 1,
+        "explanation": "Triangle angle sum is 180 degrees."
+    },
+    {
+        "id": "bcab09b8-c000-41a9-b3f1-11600ba9f9a4",
+        "difficulty": "hard",
+        "topic": "Geometry",
+        "question": "[hard] A circle has how many degrees?",
+        "options": [
+            "270",
+            "300",
+            "360",
+            "180"
+        ],
+        "answer": 2,
+        "explanation": "Full rotation is 360 degrees."
+    },
+    {
+        "id": "237f29a0-7859-48ad-a600-9f7cbc8409df",
+        "difficulty": "hard",
+        "topic": "Geometry",
+        "question": "[hard] An isosceles triangle has how many equal sides?",
+        "options": [
+            "3",
+            "1",
+            "4",
+            "2"
+        ],
+        "answer": 3,
+        "explanation": "Isosceles means two equal sides."
+    },
+    {
+        "id": "ee958653-7fea-4bc0-92cd-b280fd4ff742",
+        "difficulty": "hard",
+        "topic": "Geometry",
+        "question": "[hard] If two angles on a straight line are adjacent, their sum is?",
+        "options": [
+            "90",
+            "270",
+            "120",
+            "180"
+        ],
+        "answer": 3,
+        "explanation": "Angles on a straight line sum to 180 degrees."
+    },
+    {
+        "id": "aa8d088e-7d11-4537-93a3-fcbca30eb214",
+        "difficulty": "hard",
+        "topic": "Geometry",
+        "question": "[hard] The perimeter of a square with side 22 is?",
+        "options": [
+            "16",
+            "12",
+            "88",
+            "20"
+        ],
+        "answer": 2,
+        "explanation": "Perimeter = 4 x side."
+    },
+    {
+        "id": "44c64655-6d31-465a-aa1e-206dbaa65d46",
+        "difficulty": "hard",
+        "topic": "Mensuration",
+        "question": "[hard] Area of a rectangle with length 24 and breadth 22?",
+        "options": [
+            "18",
+            "15",
+            "528",
+            "12"
+        ],
+        "answer": 2,
+        "explanation": "Area = length x breadth."
+    },
+    {
+        "id": "e32c2314-0215-4bfa-a20b-d3e93d10df82",
+        "difficulty": "hard",
+        "topic": "Mensuration",
+        "question": "[hard] Circumference of a circle with radius 22?",
+        "options": [
+            "138.23",
+            "25.12",
+            "31.42",
+            "18.85"
+        ],
+        "answer": 0,
+        "explanation": "Circumference = 2πr."
+    },
+    {
+        "id": "006bb124-1549-45a7-a38a-c8e98058e14a",
+        "difficulty": "hard",
+        "topic": "Mensuration",
+        "question": "[hard] Area of a triangle with base 25 and height 23?",
+        "options": [
+            "16",
+            "287.5",
+            "12",
+            "14"
+        ],
+        "answer": 1,
+        "explanation": "Area = 1/2 x base x height."
+    },
+    {
+        "id": "859656c2-5658-4ddf-a4db-a6d7c0b8807c",
+        "difficulty": "hard",
+        "topic": "Mensuration",
+        "question": "[hard] Volume of a cube with side 21?",
+        "options": [
+            "16",
             "27",
-            "8.52",
-            "5.52"
-        ],
-        "answer": 0,
-        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
-    },
-    {
-        "id": "9307a0d9-f7b6-4b11-b21b-8493dc389798",
-        "difficulty": "medium",
-        "topic": "Profit and Loss",
-        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
-        "options": [
-            "6.03",
-            "9.030000000000001",
-            "29",
-            "7.03"
+            "8",
+            "9261"
         ],
         "answer": 3,
-        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
+        "explanation": "Volume of cube = side^3."
     },
     {
-        "id": "6c1bf5f2-c8f9-4867-ae63-4025403333ec",
-        "difficulty": "medium",
-        "topic": "Probability",
-        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
+        "id": "6fe9ea5c-4888-47cb-a77d-f4b89cb824b0",
+        "difficulty": "hard",
+        "topic": "Mensuration",
+        "question": "[hard] Surface area of a cube with side 21?",
         "options": [
-            "7.55",
-            "31",
-            "6.55",
-            "9.55"
-        ],
-        "answer": 0,
-        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
-    },
-    {
-        "id": "c6bbe2cc-d746-45cf-9e72-c4e5dc0b1555",
-        "difficulty": "medium",
-        "topic": "Probability",
-        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
-        "options": [
-            "10.06",
-            "33",
-            "7.0600000000000005",
-            "8.06"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
-    },
-    {
-        "id": "0a9504e2-c3d2-4722-8328-358121b54b73",
-        "difficulty": "medium",
-        "topic": "Time and Work",
-        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
-        "options": [
-            "5.0",
-            "25",
-            "8.0",
-            "6.0"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
-    },
-    {
-        "id": "3c4bebd4-0e0b-4626-a7d9-c81c40ffff49",
-        "difficulty": "medium",
-        "topic": "Percentages",
-        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
-        "options": [
-            "8.52",
-            "6.52",
-            "5.52",
-            "27"
+            "36",
+            "2646",
+            "48",
+            "24"
         ],
         "answer": 1,
-        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
-    },
-    {
-        "id": "2b038662-ed30-4616-831f-8a5c6b6323f9",
-        "difficulty": "medium",
-        "topic": "Speed and Distance",
-        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
-        "options": [
-            "9.030000000000001",
-            "7.03",
-            "29",
-            "6.03"
-        ],
-        "answer": 1,
-        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
-    },
-    {
-        "id": "3f6ee743-6397-418c-bae1-89de345a0bd1",
-        "difficulty": "medium",
-        "topic": "Profit and Loss",
-        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
-        "options": [
-            "6.55",
-            "31",
-            "9.55",
-            "7.55"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
-    },
-    {
-        "id": "fc995cb8-1376-4844-ad9c-9e4da53e1d86",
-        "difficulty": "medium",
-        "topic": "Speed and Distance",
-        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
-        "options": [
-            "33",
-            "10.06",
-            "8.06",
-            "7.0600000000000005"
-        ],
-        "answer": 2,
-        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
-    },
-    {
-        "id": "7bf0f7b1-8cd0-41fd-a9e1-5354cc8e5a8b",
-        "difficulty": "medium",
-        "topic": "Percentages",
-        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
-        "options": [
-            "25",
-            "8.0",
-            "5.0",
-            "6.0"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
-    },
-    {
-        "id": "ef00383b-db67-4164-b856-180f74846fbd",
-        "difficulty": "medium",
-        "topic": "Percentages",
-        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
-        "options": [
-            "27",
-            "5.52",
-            "8.52",
-            "6.52"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
-    },
-    {
-        "id": "e05f898a-b93a-492b-bfaf-a1fd5d1ae51c",
-        "difficulty": "medium",
-        "topic": "Profit and Loss",
-        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
-        "options": [
-            "29",
-            "6.03",
-            "9.030000000000001",
-            "7.03"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
-    },
-    {
-        "id": "5e191c1b-a022-4ff1-b83f-76dc258395a4",
-        "difficulty": "medium",
-        "topic": "Percentages",
-        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
-        "options": [
-            "6.55",
-            "9.55",
-            "31",
-            "7.55"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
-    },
-    {
-        "id": "34509bfb-3ff7-4a69-ab48-5151d2614ca4",
-        "difficulty": "medium",
-        "topic": "Profit and Loss",
-        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
-        "options": [
-            "33",
-            "7.0600000000000005",
-            "8.06",
-            "10.06"
-        ],
-        "answer": 2,
-        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
-    },
-    {
-        "id": "48d9c16c-9f8d-4eeb-abba-8a73f2deba3c",
-        "difficulty": "medium",
-        "topic": "Percentages",
-        "question": "A can do a work in 10 days, B can do it in 15 days. How many days if they work together?",
-        "options": [
-            "5.0",
-            "25",
-            "8.0",
-            "6.0"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (10*15)/(10+15) = 6.0"
-    },
-    {
-        "id": "b3f33483-b48a-4741-a90a-1ecf62edb453",
-        "difficulty": "medium",
-        "topic": "Speed and Distance",
-        "question": "A can do a work in 11 days, B can do it in 16 days. How many days if they work together?",
-        "options": [
-            "27",
-            "5.52",
-            "8.52",
-            "6.52"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (11*16)/(11+16) = 6.52"
-    },
-    {
-        "id": "7e42b032-8a75-40c4-b061-c79999af5c78",
-        "difficulty": "medium",
-        "topic": "Time and Work",
-        "question": "A can do a work in 12 days, B can do it in 17 days. How many days if they work together?",
-        "options": [
-            "29",
-            "6.03",
-            "9.030000000000001",
-            "7.03"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (12*17)/(12+17) = 7.03"
-    },
-    {
-        "id": "1e73258f-a9b3-4012-a09d-32347d43a9cc",
-        "difficulty": "medium",
-        "topic": "Time and Work",
-        "question": "A can do a work in 13 days, B can do it in 18 days. How many days if they work together?",
-        "options": [
-            "7.55",
-            "6.55",
-            "31",
-            "9.55"
-        ],
-        "answer": 0,
-        "explanation": "(A*B)/(A+B) = (13*18)/(13+18) = 7.55"
-    },
-    {
-        "id": "0369ab87-b910-453c-8137-169eec2687ba",
-        "difficulty": "medium",
-        "topic": "Speed and Distance",
-        "question": "A can do a work in 14 days, B can do it in 19 days. How many days if they work together?",
-        "options": [
-            "33",
-            "10.06",
-            "7.0600000000000005",
-            "8.06"
-        ],
-        "answer": 3,
-        "explanation": "(A*B)/(A+B) = (14*19)/(14+19) = 8.06"
-    },
-    {
-        "id": "c8530c0b-1478-4246-aa19-117d9e55d889",
-        "difficulty": "hard",
-        "topic": "Percentages",
-        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "3/7",
-            "12/42",
-            "4/7",
-            "6/42"
-        ],
-        "answer": 3,
-        "explanation": "(3/7) * (2/6) = 6/42"
-    },
-    {
-        "id": "fdb680e5-bc17-495e-a41a-e6ad9d430e6a",
-        "difficulty": "hard",
-        "topic": "Time and Work",
-        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "4/9",
-            "5/9",
-            "12/72",
-            "20/72"
-        ],
-        "answer": 2,
-        "explanation": "(4/9) * (3/8) = 12/72"
-    },
-    {
-        "id": "c04fb0c4-b91d-4f66-a429-7193ef77ae66",
-        "difficulty": "hard",
-        "topic": "Percentages",
-        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "20/110",
-            "5/11",
-            "6/11",
-            "30/110"
-        ],
-        "answer": 0,
-        "explanation": "(5/11) * (4/10) = 20/110"
-    },
-    {
-        "id": "f38f784f-2f05-4874-bd3f-9240b862ac4a",
-        "difficulty": "hard",
-        "topic": "Percentages",
-        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "7/13",
-            "6/13",
-            "30/156",
-            "42/156"
-        ],
-        "answer": 2,
-        "explanation": "(6/13) * (5/12) = 30/156"
-    },
-    {
-        "id": "45bdcd2d-63aa-4958-b26a-a130feb97030",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "12/42",
-            "3/7",
-            "6/42",
-            "4/7"
-        ],
-        "answer": 2,
-        "explanation": "(3/7) * (2/6) = 6/42"
-    },
-    {
-        "id": "0dfab41b-cdc7-4a67-b5f0-1c9114906f99",
-        "difficulty": "hard",
-        "topic": "Time and Work",
-        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "12/72",
-            "20/72",
-            "4/9",
-            "5/9"
-        ],
-        "answer": 0,
-        "explanation": "(4/9) * (3/8) = 12/72"
-    },
-    {
-        "id": "d6e75b3f-5f62-4aaa-9649-89b62b436f69",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "30/110",
-            "6/11",
-            "20/110",
-            "5/11"
-        ],
-        "answer": 2,
-        "explanation": "(5/11) * (4/10) = 20/110"
-    },
-    {
-        "id": "b3ab115c-a4c4-4b04-bd55-7b4152c403cc",
-        "difficulty": "hard",
-        "topic": "Percentages",
-        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "6/13",
-            "30/156",
-            "42/156",
-            "7/13"
-        ],
-        "answer": 1,
-        "explanation": "(6/13) * (5/12) = 30/156"
-    },
-    {
-        "id": "d0e1e776-719b-4761-9cce-0908fc2e4fa5",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "4/7",
-            "12/42",
-            "6/42",
-            "3/7"
-        ],
-        "answer": 2,
-        "explanation": "(3/7) * (2/6) = 6/42"
-    },
-    {
-        "id": "a79ee153-b32b-465e-a280-ffda8bf2e38f",
-        "difficulty": "hard",
-        "topic": "Probability",
-        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "12/72",
-            "4/9",
-            "20/72",
-            "5/9"
-        ],
-        "answer": 0,
-        "explanation": "(4/9) * (3/8) = 12/72"
-    },
-    {
-        "id": "78a2bc30-0c24-496f-81af-8f9b1b7db610",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "30/110",
-            "6/11",
-            "20/110",
-            "5/11"
-        ],
-        "answer": 2,
-        "explanation": "(5/11) * (4/10) = 20/110"
-    },
-    {
-        "id": "0a961b7a-e307-44db-acc9-042d7ad738a3",
-        "difficulty": "hard",
-        "topic": "Speed and Distance",
-        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "6/13",
-            "7/13",
-            "42/156",
-            "30/156"
-        ],
-        "answer": 3,
-        "explanation": "(6/13) * (5/12) = 30/156"
-    },
-    {
-        "id": "dddf7375-8218-40f2-bb33-84d119c50d79",
-        "difficulty": "hard",
-        "topic": "Time and Work",
-        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "4/7",
-            "3/7",
-            "6/42",
-            "12/42"
-        ],
-        "answer": 2,
-        "explanation": "(3/7) * (2/6) = 6/42"
-    },
-    {
-        "id": "29979df7-d884-4d9d-8434-8c4e7960c087",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "12/72",
-            "5/9",
-            "20/72",
-            "4/9"
-        ],
-        "answer": 0,
-        "explanation": "(4/9) * (3/8) = 12/72"
-    },
-    {
-        "id": "850a0a81-d354-47b7-9547-35e5a32bf739",
-        "difficulty": "hard",
-        "topic": "Percentages",
-        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "30/110",
-            "20/110",
-            "6/11",
-            "5/11"
-        ],
-        "answer": 1,
-        "explanation": "(5/11) * (4/10) = 20/110"
-    },
-    {
-        "id": "13d1c42f-83b6-42c5-8429-157eebd4bdc2",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "42/156",
-            "7/13",
-            "30/156",
-            "6/13"
-        ],
-        "answer": 2,
-        "explanation": "(6/13) * (5/12) = 30/156"
-    },
-    {
-        "id": "a81661ec-ddab-4eb8-87c1-6154452d6374",
-        "difficulty": "hard",
-        "topic": "Probability",
-        "question": "Bag contains 3 red and 4 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "12/42",
-            "6/42",
-            "3/7",
-            "4/7"
-        ],
-        "answer": 1,
-        "explanation": "(3/7) * (2/6) = 6/42"
-    },
-    {
-        "id": "62ed77b7-ca76-4846-9f65-ad76fe821374",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 4 red and 5 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "20/72",
-            "4/9",
-            "5/9",
-            "12/72"
-        ],
-        "answer": 3,
-        "explanation": "(4/9) * (3/8) = 12/72"
-    },
-    {
-        "id": "cde94de5-4ae0-40af-8aee-b94cc422e3fd",
-        "difficulty": "hard",
-        "topic": "Speed and Distance",
-        "question": "Bag contains 5 red and 6 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "5/11",
-            "30/110",
-            "6/11",
-            "20/110"
-        ],
-        "answer": 3,
-        "explanation": "(5/11) * (4/10) = 20/110"
-    },
-    {
-        "id": "698894ff-5f41-4611-8019-d5cce4c94860",
-        "difficulty": "hard",
-        "topic": "Profit and Loss",
-        "question": "Bag contains 6 red and 7 blue balls. Probability of drawing 2 red balls without replacement?",
-        "options": [
-            "30/156",
-            "42/156",
-            "7/13",
-            "6/13"
-        ],
-        "answer": 0,
-        "explanation": "(6/13) * (5/12) = 30/156"
+        "explanation": "Surface area of cube = 6a^2."
     }
 ]

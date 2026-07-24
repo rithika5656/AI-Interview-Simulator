@@ -1,842 +1,5042 @@
 [
     {
-        "id": "c268fb20-b7de-4ae0-8d63-03fc2e8e138e",
+        "id": "24686762-5228-4b8e-a335-385c13386470",
         "difficulty": "easy",
         "topic": "Synonyms",
-        "question": "What is the synonym of Abundant?",
+        "question": "[Synonyms][easy] Abundant",
         "options": [
-            "Deceitful",
             "Rare",
+            "Empty",
             "Plentiful",
-            "Long"
+            "Scarce"
         ],
         "answer": 2,
-        "explanation": "Plentiful means Abundant"
+        "explanation": "Plentiful is a synonym of abundant."
     },
     {
-        "id": "e5bd99d9-6bee-47fb-b07d-3268027a3a46",
-        "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Brief?",
-        "options": [
-            "Long",
-            "Rare",
-            "Deceitful",
-            "Short"
-        ],
-        "answer": 3,
-        "explanation": "Short means Brief"
-    },
-    {
-        "id": "21ecd9cd-04cb-4180-8bb8-ebc9c539a109",
+        "id": "28aa4c03-b1af-4312-b1de-95c80afd8799",
         "difficulty": "easy",
         "topic": "Synonyms",
-        "question": "What is the synonym of Candid?",
+        "question": "[Synonyms][easy] Abundant - alternate wording",
         "options": [
-            "Honest",
-            "Deceitful",
-            "Long",
-            "Rare"
+            "Plentiful",
+            "Scarce",
+            "Rare",
+            "Empty"
         ],
         "answer": 0,
-        "explanation": "Honest means Candid"
+        "explanation": "Plentiful is a synonym of abundant."
     },
     {
-        "id": "9d5e2171-46e3-4305-bf07-068bd4e07c05",
+        "id": "6a6560f6-6158-453f-8c05-e172c8aa9cdb",
         "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Abundant?",
+        "topic": "Synonyms",
+        "question": "[Synonyms][easy] Brief",
         "options": [
-            "Deceitful",
-            "Plentiful",
+            "Large",
             "Long",
-            "Rare"
-        ],
-        "answer": 1,
-        "explanation": "Plentiful means Abundant"
-    },
-    {
-        "id": "bdbf8a90-ffb6-4895-a9fc-1d95e8209eec",
-        "difficulty": "easy",
-        "topic": "Para Jumbles",
-        "question": "What is the synonym of Brief?",
-        "options": [
-            "Deceitful",
-            "Long",
-            "Rare",
-            "Short"
-        ],
-        "answer": 3,
-        "explanation": "Short means Brief"
-    },
-    {
-        "id": "45c2a3a8-50f5-4c2e-99a9-8a6730c70405",
-        "difficulty": "easy",
-        "topic": "Para Jumbles",
-        "question": "What is the synonym of Candid?",
-        "options": [
-            "Rare",
-            "Long",
-            "Honest",
-            "Deceitful"
-        ],
-        "answer": 2,
-        "explanation": "Honest means Candid"
-    },
-    {
-        "id": "08aa0abd-e01e-4c1f-bb35-17021b6f9b20",
-        "difficulty": "easy",
-        "topic": "Para Jumbles",
-        "question": "What is the synonym of Abundant?",
-        "options": [
-            "Rare",
-            "Deceitful",
-            "Plentiful",
-            "Long"
-        ],
-        "answer": 2,
-        "explanation": "Plentiful means Abundant"
-    },
-    {
-        "id": "6b1d70f8-c2dc-4ab5-8934-dd980b2f6f1c",
-        "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Brief?",
-        "options": [
             "Short",
-            "Rare",
+            "Broad"
+        ],
+        "answer": 2,
+        "explanation": "Short matches brief."
+    },
+    {
+        "id": "f0108c87-ac90-4468-a722-c52588a54070",
+        "difficulty": "easy",
+        "topic": "Synonyms",
+        "question": "[Synonyms][easy] Brief - alternate wording",
+        "options": [
             "Long",
-            "Deceitful"
+            "Broad",
+            "Short",
+            "Large"
+        ],
+        "answer": 2,
+        "explanation": "Short matches brief."
+    },
+    {
+        "id": "9c4a7a89-75c0-4c6f-8501-3c4c9ea7f2dd",
+        "difficulty": "easy",
+        "topic": "Synonyms",
+        "question": "[Synonyms][easy] Candid",
+        "options": [
+            "Hidden",
+            "False",
+            "Honest",
+            "Crafty"
+        ],
+        "answer": 2,
+        "explanation": "Honest matches candid."
+    },
+    {
+        "id": "d405aa78-841c-4079-a960-fcf00a14439a",
+        "difficulty": "easy",
+        "topic": "Synonyms",
+        "question": "[Synonyms][easy] Candid - alternate wording",
+        "options": [
+            "Honest",
+            "Hidden",
+            "Crafty",
+            "False"
         ],
         "answer": 0,
-        "explanation": "Short means Brief"
+        "explanation": "Honest matches candid."
     },
     {
-        "id": "b0a00553-4cd7-4a33-a0c8-ebfa7153ec7c",
+        "id": "a47a8a88-9f61-49ef-9dd2-721cef3cffe1",
         "difficulty": "easy",
         "topic": "Synonyms",
-        "question": "What is the synonym of Candid?",
+        "question": "[Synonyms][easy] Expand",
         "options": [
-            "Rare",
-            "Long",
-            "Deceitful",
-            "Honest"
+            "Enlarge",
+            "Shrink",
+            "Break",
+            "Fold"
         ],
-        "answer": 3,
-        "explanation": "Honest means Candid"
+        "answer": 0,
+        "explanation": "Enlarge is close in meaning."
     },
     {
-        "id": "b07cf963-7b2f-4562-b326-0877c42a49d9",
+        "id": "7a0756d6-1f1c-4137-b610-e58922ab06f4",
         "difficulty": "easy",
         "topic": "Synonyms",
-        "question": "What is the synonym of Abundant?",
+        "question": "[Synonyms][easy] Expand - alternate wording",
         "options": [
-            "Long",
-            "Plentiful",
-            "Deceitful",
-            "Rare"
-        ],
-        "answer": 1,
-        "explanation": "Plentiful means Abundant"
-    },
-    {
-        "id": "63041c72-6902-408f-8e14-f522d1a0ea30",
-        "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Brief?",
-        "options": [
-            "Rare",
-            "Long",
-            "Short",
-            "Deceitful"
+            "Shrink",
+            "Break",
+            "Enlarge",
+            "Fold"
         ],
         "answer": 2,
-        "explanation": "Short means Brief"
+        "explanation": "Enlarge is close in meaning."
     },
     {
-        "id": "c467cc48-c172-4e71-9910-19ae3d7849ff",
+        "id": "06b9b782-0922-4bbc-b164-0ee0dca75898",
         "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Candid?",
+        "topic": "Synonyms",
+        "question": "[Synonyms][easy] Rapid",
         "options": [
-            "Rare",
-            "Honest",
-            "Long",
-            "Deceitful"
+            "Dull",
+            "Slow",
+            "Late",
+            "Fast"
+        ],
+        "answer": 3,
+        "explanation": "Fast is synonymous with rapid."
+    },
+    {
+        "id": "509a5ce3-60b5-4493-85e2-4632b1d3689a",
+        "difficulty": "easy",
+        "topic": "Synonyms",
+        "question": "[Synonyms][easy] Rapid - alternate wording",
+        "options": [
+            "Slow",
+            "Fast",
+            "Dull",
+            "Late"
         ],
         "answer": 1,
-        "explanation": "Honest means Candid"
+        "explanation": "Fast is synonymous with rapid."
     },
     {
-        "id": "7c4120bd-8730-4163-ad8a-6e8eb24d5c27",
+        "id": "c390489f-af2c-4bf1-b47f-6e4bba00057d",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Ancient",
+        "options": [
+            "Past",
+            "Early",
+            "Modern",
+            "Old"
+        ],
+        "answer": 2,
+        "explanation": "Modern is opposite to ancient."
+    },
+    {
+        "id": "70c990bd-9cb4-4bd6-8a98-f9c42173d08f",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Ancient - alternate wording",
+        "options": [
+            "Modern",
+            "Early",
+            "Old",
+            "Past"
+        ],
+        "answer": 0,
+        "explanation": "Modern is opposite to ancient."
+    },
+    {
+        "id": "280c8523-d5c5-43b0-aaed-c65e31d1d317",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Brave",
+        "options": [
+            "Sharp",
+            "Strong",
+            "Bold",
+            "Cowardly"
+        ],
+        "answer": 3,
+        "explanation": "Cowardly is the antonym."
+    },
+    {
+        "id": "28d62770-c968-420f-b079-0ed3915d9344",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Brave - alternate wording",
+        "options": [
+            "Cowardly",
+            "Bold",
+            "Strong",
+            "Sharp"
+        ],
+        "answer": 0,
+        "explanation": "Cowardly is the antonym."
+    },
+    {
+        "id": "9f1b5c9a-b855-4dfd-94b3-9368e15f9591",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Generous",
+        "options": [
+            "Kind",
+            "Stingy",
+            "Open",
+            "Friendly"
+        ],
+        "answer": 1,
+        "explanation": "Stingy is opposite to generous."
+    },
+    {
+        "id": "6ebb0fb9-2852-41fc-af76-e325f1fc0c3f",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Generous - alternate wording",
+        "options": [
+            "Friendly",
+            "Stingy",
+            "Kind",
+            "Open"
+        ],
+        "answer": 1,
+        "explanation": "Stingy is opposite to generous."
+    },
+    {
+        "id": "4df8ab6b-bb1d-46ce-811e-05d652ea5d30",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Expand",
+        "options": [
+            "Grow",
+            "Stretch",
+            "Open",
+            "Contract"
+        ],
+        "answer": 3,
+        "explanation": "Contract is the opposite."
+    },
+    {
+        "id": "2e831fbd-f296-4ba5-a3d5-930e2e51ceae",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Expand - alternate wording",
+        "options": [
+            "Contract",
+            "Open",
+            "Stretch",
+            "Grow"
+        ],
+        "answer": 0,
+        "explanation": "Contract is the opposite."
+    },
+    {
+        "id": "d8bb7a2f-ec5c-4a3e-9463-a2348eb5b256",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Visible",
+        "options": [
+            "Invisible",
+            "Bright",
+            "Clear",
+            "Near"
+        ],
+        "answer": 0,
+        "explanation": "Invisible is opposite to visible."
+    },
+    {
+        "id": "8dedb94b-335d-4973-8743-c52a01b7771e",
+        "difficulty": "easy",
+        "topic": "Antonyms",
+        "question": "[Antonyms][easy] Visible - alternate wording",
+        "options": [
+            "Invisible",
+            "Clear",
+            "Near",
+            "Bright"
+        ],
+        "answer": 0,
+        "explanation": "Invisible is opposite to visible."
+    },
+    {
+        "id": "707e821c-85b4-431d-99fb-1372235bad34",
         "difficulty": "easy",
         "topic": "Grammar",
-        "question": "What is the synonym of Abundant?",
+        "question": "[Grammar][easy] The committee ___ its report.",
+        "options": [
+            "have",
+            "are",
+            "has",
+            "were"
+        ],
+        "answer": 2,
+        "explanation": "Committee is singular in this sentence."
+    },
+    {
+        "id": "c1995d7f-c2ad-46b7-b854-4c9fd1276b79",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] The committee ___ its report. - alternate wording",
+        "options": [
+            "were",
+            "has",
+            "have",
+            "are"
+        ],
+        "answer": 1,
+        "explanation": "Committee is singular in this sentence."
+    },
+    {
+        "id": "ec207088-0c5c-47e4-be27-4b26e9299ebd",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] Each of the players ___ a medal.",
+        "options": [
+            "gets",
+            "getting",
+            "got",
+            "get"
+        ],
+        "answer": 0,
+        "explanation": "Each takes a singular verb."
+    },
+    {
+        "id": "90aae68e-cf13-4943-9434-46f7117483d8",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] Each of the players ___ a medal. - alternate wording",
+        "options": [
+            "got",
+            "getting",
+            "get",
+            "gets"
+        ],
+        "answer": 3,
+        "explanation": "Each takes a singular verb."
+    },
+    {
+        "id": "335b0a5b-a519-4318-b932-c611e8705a64",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] Neither the teacher nor the students ___ present.",
+        "options": [
+            "are",
+            "is",
+            "has",
+            "was"
+        ],
+        "answer": 0,
+        "explanation": "The verb agrees with the nearer subject, students."
+    },
+    {
+        "id": "bf2fe59b-c08d-4967-8855-2ac56602aedc",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] Neither the teacher nor the students ___ present. - alternate wording",
+        "options": [
+            "is",
+            "was",
+            "are",
+            "has"
+        ],
+        "answer": 2,
+        "explanation": "The verb agrees with the nearer subject, students."
+    },
+    {
+        "id": "7244728c-8da3-41c1-a212-8f1182b0944a",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] If I ___ enough time, I will finish it.",
+        "options": [
+            "have",
+            "has",
+            "had",
+            "having"
+        ],
+        "answer": 0,
+        "explanation": "First conditional uses present tense in the if-clause."
+    },
+    {
+        "id": "e606e31c-404d-408f-8eea-30b741a2cd32",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] If I ___ enough time, I will finish it. - alternate wording",
+        "options": [
+            "having",
+            "had",
+            "has",
+            "have"
+        ],
+        "answer": 3,
+        "explanation": "First conditional uses present tense in the if-clause."
+    },
+    {
+        "id": "715d5e68-5947-4d93-a273-0eb826a483cb",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] She is better ___ me at chess.",
+        "options": [
+            "from",
+            "then",
+            "than",
+            "to"
+        ],
+        "answer": 2,
+        "explanation": "Comparison uses than."
+    },
+    {
+        "id": "253920b6-94ed-4d5e-9b19-1dee11bdb9b2",
+        "difficulty": "easy",
+        "topic": "Grammar",
+        "question": "[Grammar][easy] She herself is better ___ me at chess.",
+        "options": [
+            "then",
+            "than",
+            "to",
+            "from"
+        ],
+        "answer": 1,
+        "explanation": "Comparison uses than."
+    },
+    {
+        "id": "c61de4ad-28f7-4424-8775-9c15685352fa",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A short passage about renewable energy says solar panels reduce electricity bills. What is one benefit?",
+        "options": [
+            "Higher fuel use",
+            "More smoke",
+            "Less sunlight",
+            "Lower electricity bills"
+        ],
+        "answer": 3,
+        "explanation": "The passage explicitly states the benefit."
+    },
+    {
+        "id": "1c66c18e-7f22-43d6-b5d9-494d49a284c6",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A short passage about renewable energy says solar panels reduce electricity bills. Which is one benefit?",
+        "options": [
+            "Higher fuel use",
+            "Less sunlight",
+            "More smoke",
+            "Lower electricity bills"
+        ],
+        "answer": 3,
+        "explanation": "The passage explicitly states the benefit."
+    },
+    {
+        "id": "d2d04bc5-e21c-4b18-96e0-67afb21f3d85",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage about remote work mentions flexibility and time savings. What is a key idea?",
+        "options": [
+            "Flexibility",
+            "Longer commute",
+            "Less productivity",
+            "More expenses"
+        ],
+        "answer": 0,
+        "explanation": "Flexibility is stated as an advantage."
+    },
+    {
+        "id": "4738db24-7bbc-4d86-9994-d5e7c97da9be",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage about remote work mentions flexibility and time savings. What is a key idea? - alternate wording",
+        "options": [
+            "More expenses",
+            "Flexibility",
+            "Longer commute",
+            "Less productivity"
+        ],
+        "answer": 1,
+        "explanation": "Flexibility is stated as an advantage."
+    },
+    {
+        "id": "6e0cae64-2d07-4fe8-a903-c6eb888871e7",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage on healthy eating recommends fruits and vegetables. What is the main message?",
+        "options": [
+            "Balanced diet",
+            "Skipping meals",
+            "Sugar only",
+            "Fast food"
+        ],
+        "answer": 0,
+        "explanation": "Healthy food choices are encouraged."
+    },
+    {
+        "id": "ea50780a-b68b-45fe-9f1a-457b890c7aae",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage on healthy eating recommends fruits and vegetables. Which is the main message?",
+        "options": [
+            "Skipping meals",
+            "Sugar only",
+            "Fast food",
+            "Balanced diet"
+        ],
+        "answer": 3,
+        "explanation": "Healthy food choices are encouraged."
+    },
+    {
+        "id": "80dfcfb0-633c-4206-858f-3ce7e7a8aa3e",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage on urban transport supports buses and trains. What does it favor?",
+        "options": [
+            "Public transport",
+            "Walking only",
+            "No travel",
+            "Private jets"
+        ],
+        "answer": 0,
+        "explanation": "Public transport is the focus."
+    },
+    {
+        "id": "f8d777ce-47cc-4fab-a0c3-cdf833538fc9",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage on urban transport supports buses and trains. What does it favor? - alternate wording",
+        "options": [
+            "Walking only",
+            "No travel",
+            "Private jets",
+            "Public transport"
+        ],
+        "answer": 3,
+        "explanation": "Public transport is the focus."
+    },
+    {
+        "id": "9f3d7652-59fe-42a9-9dd3-751fc26726a6",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage on teamwork highlights cooperation. What is emphasized?",
+        "options": [
+            "Isolation",
+            "Competition only",
+            "Collaboration",
+            "Silence"
+        ],
+        "answer": 2,
+        "explanation": "Teamwork and cooperation are the theme."
+    },
+    {
+        "id": "41dc8a48-07ab-440d-8b12-cc3522be3556",
+        "difficulty": "easy",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][easy] A passage on teamwork highlights cooperation. Which is emphasized?",
+        "options": [
+            "Isolation",
+            "Collaboration",
+            "Silence",
+            "Competition only"
+        ],
+        "answer": 1,
+        "explanation": "Teamwork and cooperation are the theme."
+    },
+    {
+        "id": "1bd19ba7-f176-4885-872c-a6fc7999b404",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] She don't like coffee.",
+        "options": [
+            "coffee",
+            "She",
+            "don't",
+            "like"
+        ],
+        "answer": 2,
+        "explanation": "'Doesn't' is correct for third-person singular."
+    },
+    {
+        "id": "e1a0adef-be88-44e5-a57f-b5452b51bd40",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] She herself don't like coffee.",
+        "options": [
+            "don't",
+            "like",
+            "coffee",
+            "She"
+        ],
+        "answer": 0,
+        "explanation": "'Doesn't' is correct for third-person singular."
+    },
+    {
+        "id": "93bcd69c-1106-41ba-a2e8-32b68c9382cd",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] He go to office daily.",
+        "options": [
+            "to",
+            "go",
+            "daily",
+            "He"
+        ],
+        "answer": 1,
+        "explanation": "'Goes' is required."
+    },
+    {
+        "id": "95698e19-84dc-4d28-8a28-4097c52668c1",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] He go to office daily. - alternate wording",
+        "options": [
+            "daily",
+            "He",
+            "to",
+            "go"
+        ],
+        "answer": 3,
+        "explanation": "'Goes' is required."
+    },
+    {
+        "id": "58ac2f64-6bdd-4be3-92df-52a09214b96a",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] They was waiting for us.",
+        "options": [
+            "for",
+            "was",
+            "waiting",
+            "They"
+        ],
+        "answer": 1,
+        "explanation": "Plural subject takes 'were'."
+    },
+    {
+        "id": "ea3323c9-aa18-4599-912f-5838464ff00f",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] They was waiting for us. - alternate wording",
+        "options": [
+            "for",
+            "They",
+            "waiting",
+            "was"
+        ],
+        "answer": 3,
+        "explanation": "Plural subject takes 'were'."
+    },
+    {
+        "id": "f15a760a-d3de-4cb0-9aa9-d732f6ebd64e",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] The list of items are on the table.",
+        "options": [
+            "list",
+            "items",
+            "are",
+            "table"
+        ],
+        "answer": 2,
+        "explanation": "The subject is singular: list."
+    },
+    {
+        "id": "4630a6a6-2052-452b-9c04-ac39cdd9bffd",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] The list of items are on the table. - alternate wording",
+        "options": [
+            "items",
+            "table",
+            "are",
+            "list"
+        ],
+        "answer": 2,
+        "explanation": "The subject is singular: list."
+    },
+    {
+        "id": "61997de1-54fe-4016-97f3-0d27b01e26ac",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] I have saw that movie.",
+        "options": [
+            "I",
+            "saw",
+            "have",
+            "movie"
+        ],
+        "answer": 1,
+        "explanation": "Present perfect uses 'have seen'."
+    },
+    {
+        "id": "f6cde3c3-007f-4800-9b45-304efc76a3b2",
+        "difficulty": "easy",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][easy] I have saw that movie. - alternate wording",
+        "options": [
+            "have",
+            "saw",
+            "movie",
+            "I"
+        ],
+        "answer": 1,
+        "explanation": "Present perfect uses 'have seen'."
+    },
+    {
+        "id": "fb01d62f-f6b9-4ec3-b496-7fb058fcdcaf",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] He is more taller than his brother.",
+        "options": [
+            "He is most taller than his brother.",
+            "He is more tall than his brother.",
+            "He is taller than his brother.",
+            "He is tall than his brother."
+        ],
+        "answer": 2,
+        "explanation": "Use one comparative form only."
+    },
+    {
+        "id": "4a983f0d-3769-4a06-a5df-784f4eade43f",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] He is more taller than his brother. - alternate wording",
+        "options": [
+            "He is more tall than his brother.",
+            "He is most taller than his brother.",
+            "He is tall than his brother.",
+            "He is taller than his brother."
+        ],
+        "answer": 3,
+        "explanation": "Use one comparative form only."
+    },
+    {
+        "id": "31980778-c74d-42cc-abb4-b837c7a63793",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] She did not knew the answer.",
+        "options": [
+            "She not know the answer.",
+            "She did not know the answer.",
+            "She did not knows the answer.",
+            "She do not know the answer."
+        ],
+        "answer": 1,
+        "explanation": "Use base verb after did not."
+    },
+    {
+        "id": "c737779b-f9ee-41c2-89a6-71ffda2e3bb2",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] She did not knew the answer. - alternate wording",
+        "options": [
+            "She do not know the answer.",
+            "She not know the answer.",
+            "She did not knows the answer.",
+            "She did not know the answer."
+        ],
+        "answer": 3,
+        "explanation": "Use base verb after did not."
+    },
+    {
+        "id": "84f25591-17bc-47d7-a595-cf75681943d3",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] The train arrived late than expected.",
+        "options": [
+            "The train arrives late than expected.",
+            "The train arrived later than expected.",
+            "The train arrived more late than expected.",
+            "The train arrived latest than expected."
+        ],
+        "answer": 1,
+        "explanation": "Use comparative adverb later."
+    },
+    {
+        "id": "0cffd743-8bf4-47d4-a48b-5c71f1ba1482",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] The train arrived late than expected. - alternate wording",
+        "options": [
+            "The train arrived later than expected.",
+            "The train arrives late than expected.",
+            "The train arrived latest than expected.",
+            "The train arrived more late than expected."
+        ],
+        "answer": 0,
+        "explanation": "Use comparative adverb later."
+    },
+    {
+        "id": "8374073c-5460-4cc9-ac9c-29f17f6e531d",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] Each of the boys have a book.",
+        "options": [
+            "Each of the boys having a book.",
+            "Each of the boys has a book.",
+            "Each of the boys had a book.",
+            "Each of the boys are a book."
+        ],
+        "answer": 1,
+        "explanation": "Each is singular."
+    },
+    {
+        "id": "a4e0f7a5-6bfa-452f-880e-22eb2d562edd",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] Each of the boys have a book. - alternate wording",
+        "options": [
+            "Each of the boys are a book.",
+            "Each of the boys had a book.",
+            "Each of the boys has a book.",
+            "Each of the boys having a book."
+        ],
+        "answer": 2,
+        "explanation": "Each is singular."
+    },
+    {
+        "id": "7d0dab16-15a2-4965-a0b6-1365c41b6063",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] The solution is consist of two parts.",
+        "options": [
+            "The solution consist on two parts.",
+            "The solution consists of two parts.",
+            "The solution is consisting of two parts.",
+            "The solution has consist of two parts."
+        ],
+        "answer": 1,
+        "explanation": "Use the correct verb form."
+    },
+    {
+        "id": "2d1b72bf-6d57-4665-8361-ff66ee028f99",
+        "difficulty": "easy",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][easy] The solution is consist of two parts. - alternate wording",
+        "options": [
+            "The solution has consist of two parts.",
+            "The solution consists of two parts.",
+            "The solution consist on two parts.",
+            "The solution is consisting of two parts."
+        ],
+        "answer": 1,
+        "explanation": "Use the correct verb form."
+    },
+    {
+        "id": "944fe0e6-415d-4668-94cf-bc34093a23d5",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. He opened the door. B. John heard a knock. C. A visitor stood outside.",
+        "options": [
+            "CAB",
+            "ABC",
+            "BCA",
+            "BAC"
+        ],
+        "answer": 2,
+        "explanation": "Knock first, visitor second, opening last."
+    },
+    {
+        "id": "1ee0dc85-995f-479c-8374-a423988471d9",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. He opened the door. B. John heard a knock. C. A visitor stood outside. - alternate wording",
+        "options": [
+            "CAB",
+            "BCA",
+            "ABC",
+            "BAC"
+        ],
+        "answer": 1,
+        "explanation": "Knock first, visitor second, opening last."
+    },
+    {
+        "id": "d2060ecc-43b3-4ebd-876a-f9c24723fe43",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. It started to rain. B. The picnic ended. C. They packed their bags.",
+        "options": [
+            "BAC",
+            "ACB",
+            "ABC",
+            "CBA"
+        ],
+        "answer": 1,
+        "explanation": "Rain triggers packing then ending."
+    },
+    {
+        "id": "1638d37d-02c0-4ece-beb1-ad10971c2fa9",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. It started to rain. B. The picnic ended. C. They packed their bags. - alternate wording",
+        "options": [
+            "ABC",
+            "CBA",
+            "BAC",
+            "ACB"
+        ],
+        "answer": 3,
+        "explanation": "Rain triggers packing then ending."
+    },
+    {
+        "id": "9b407427-bc05-4b53-855b-74ecf153593c",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. The alarm rang. B. She woke up. C. She got ready for school.",
+        "options": [
+            "CAB",
+            "BCA",
+            "BAC",
+            "ABC"
+        ],
+        "answer": 3,
+        "explanation": "Alarm, wake, then prepare."
+    },
+    {
+        "id": "112b5bc1-18d8-45d5-af0f-a065bfe9c38f",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. The alarm rang. B. She herself woke up. C. She herself got ready for school.",
+        "options": [
+            "ABC",
+            "CAB",
+            "BCA",
+            "BAC"
+        ],
+        "answer": 0,
+        "explanation": "Alarm, wake, then prepare."
+    },
+    {
+        "id": "1bb6fb4a-2e63-4894-b003-b7bb4e8df9fd",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. The report was submitted. B. The team reviewed it. C. The manager approved it.",
+        "options": [
+            "CBA",
+            "BCA",
+            "ABC",
+            "ACB"
+        ],
+        "answer": 1,
+        "explanation": "Review, approval, submission sequence."
+    },
+    {
+        "id": "567191ea-fe31-40ad-a4e4-fc69e7442a98",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. The report was submitted. B. The team reviewed it. C. The manager approved it. - alternate wording",
+        "options": [
+            "CBA",
+            "ACB",
+            "BCA",
+            "ABC"
+        ],
+        "answer": 2,
+        "explanation": "Review, approval, submission sequence."
+    },
+    {
+        "id": "5ca5088b-9140-4dbd-b242-db1bddff9b25",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. He studied hard. B. He passed the exam. C. He celebrated with friends.",
+        "options": [
+            "BAC",
+            "ACB",
+            "ABC",
+            "CBA"
+        ],
+        "answer": 2,
+        "explanation": "Study, pass, celebrate."
+    },
+    {
+        "id": "bd481a0a-117a-4f8b-8ce1-385d1eb0ebf0",
+        "difficulty": "easy",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][easy] Arrange: A. He studied hard. B. He passed the exam. C. He celebrated with friends. - alternate wording",
+        "options": [
+            "ABC",
+            "CBA",
+            "BAC",
+            "ACB"
+        ],
+        "answer": 0,
+        "explanation": "Study, pass, celebrate."
+    },
+    {
+        "id": "4639848f-f80c-44c1-b997-39e8ed88bc27",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Break the ice' means?",
+        "options": [
+            "To become silent",
+            "To repair something",
+            "To end a meeting",
+            "To start a conversation"
+        ],
+        "answer": 3,
+        "explanation": "It means to ease tension."
+    },
+    {
+        "id": "f9af233a-77ae-4ff1-921b-439dfad01492",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Break the ice' means? - alternate wording",
+        "options": [
+            "To become silent",
+            "To end a meeting",
+            "To start a conversation",
+            "To repair something"
+        ],
+        "answer": 2,
+        "explanation": "It means to ease tension."
+    },
+    {
+        "id": "f80b66d9-bf42-4e00-9564-e63528b7165c",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Once in a blue moon' means?",
+        "options": [
+            "At noon",
+            "At night",
+            "Very rarely",
+            "Every day"
+        ],
+        "answer": 2,
+        "explanation": "It refers to rare events."
+    },
+    {
+        "id": "979980b1-61b1-400c-896a-7b3bb26a84d5",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Once in a blue moon' best means?",
+        "options": [
+            "At noon",
+            "Very rarely",
+            "Every day",
+            "At night"
+        ],
+        "answer": 1,
+        "explanation": "It refers to rare events."
+    },
+    {
+        "id": "d963986b-513a-43af-9e31-587e9c9a9440",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Hit the nail on the head' means?",
+        "options": [
+            "Avoid the issue",
+            "Make a mistake",
+            "Work slowly",
+            "Say exactly the right thing"
+        ],
+        "answer": 3,
+        "explanation": "It means being exactly right."
+    },
+    {
+        "id": "c600c7a4-c00a-4def-ba4f-fca2137cb157",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Hit the nail on the head' means? - alternate wording",
+        "options": [
+            "Work slowly",
+            "Avoid the issue",
+            "Make a mistake",
+            "Say exactly the right thing"
+        ],
+        "answer": 3,
+        "explanation": "It means being exactly right."
+    },
+    {
+        "id": "6d473486-4afb-401b-aa66-d1552702bf17",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Spill the beans' means?",
+        "options": [
+            "Stay quiet",
+            "Waste time",
+            "Cook quickly",
+            "Reveal a secret"
+        ],
+        "answer": 3,
+        "explanation": "It means to disclose information."
+    },
+    {
+        "id": "030af00a-d2f4-4977-88aa-7add9fa261fc",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'Spill the beans' best means?",
+        "options": [
+            "Cook quickly",
+            "Waste time",
+            "Stay quiet",
+            "Reveal a secret"
+        ],
+        "answer": 3,
+        "explanation": "It means to disclose information."
+    },
+    {
+        "id": "8f3bde42-f093-432d-96e3-f3c208d7ad67",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'A piece of cake' means?",
+        "options": [
+            "Very expensive",
+            "Very old",
+            "Very difficult",
+            "Very easy"
+        ],
+        "answer": 3,
+        "explanation": "It means something easy."
+    },
+    {
+        "id": "b6f39a45-8a8e-4d77-8f31-50da8e831a08",
+        "difficulty": "easy",
+        "topic": "Idioms",
+        "question": "[Idioms][easy] 'A piece of cake' means? - alternate wording",
+        "options": [
+            "Very easy",
+            "Very difficult",
+            "Very expensive",
+            "Very old"
+        ],
+        "answer": 0,
+        "explanation": "It means something easy."
+    },
+    {
+        "id": "622a5ccd-5591-408c-9aa5-45126460655a",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A person who loves books",
+        "options": [
+            "Bibliophile",
+            "Biologist",
+            "Photographer",
+            "Linguist"
+        ],
+        "answer": 0,
+        "explanation": "Bibliophile is a book lover."
+    },
+    {
+        "id": "f750ef51-da21-4b9d-b220-90522b1fb2d7",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A person who loves books - alternate wording",
+        "options": [
+            "Photographer",
+            "Linguist",
+            "Bibliophile",
+            "Biologist"
+        ],
+        "answer": 2,
+        "explanation": "Bibliophile is a book lover."
+    },
+    {
+        "id": "223db3f1-f727-4ce4-9236-33c22393e731",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A government by the people",
+        "options": [
+            "Democracy",
+            "Dictatorship",
+            "Monarchy",
+            "Aristocracy"
+        ],
+        "answer": 0,
+        "explanation": "Democracy means rule by the people."
+    },
+    {
+        "id": "419586c8-a3b3-46e9-a6f0-a313e5bab04d",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A government by the people - alternate wording",
+        "options": [
+            "Aristocracy",
+            "Monarchy",
+            "Dictatorship",
+            "Democracy"
+        ],
+        "answer": 3,
+        "explanation": "Democracy means rule by the people."
+    },
+    {
+        "id": "4095a606-b5e6-4a32-bb0f-a52315754861",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A place where animals are kept",
+        "options": [
+            "Zoo",
+            "Museum",
+            "Library",
+            "Airport"
+        ],
+        "answer": 0,
+        "explanation": "Zoo houses animals."
+    },
+    {
+        "id": "3ee37140-f490-425a-8d0b-e70b9abb4bcd",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A place where animals are kept - alternate wording",
+        "options": [
+            "Museum",
+            "Airport",
+            "Library",
+            "Zoo"
+        ],
+        "answer": 3,
+        "explanation": "Zoo houses animals."
+    },
+    {
+        "id": "8a6f204e-729b-4a97-b54f-83f335e550d4",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A fear of heights",
+        "options": [
+            "Hydrophobia",
+            "Claustrophobia",
+            "Acrophobia",
+            "Anthropology"
+        ],
+        "answer": 2,
+        "explanation": "Acrophobia is fear of heights."
+    },
+    {
+        "id": "049517bd-84c7-48a2-9c00-dbeb9d2afa4f",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] A fear of heights - alternate wording",
+        "options": [
+            "Acrophobia",
+            "Claustrophobia",
+            "Anthropology",
+            "Hydrophobia"
+        ],
+        "answer": 0,
+        "explanation": "Acrophobia is fear of heights."
+    },
+    {
+        "id": "0b690c4a-5ef0-4d39-8a36-7200c814df54",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] One who speaks many languages",
+        "options": [
+            "Pilot",
+            "Polyglot",
+            "Monk",
+            "Poet"
+        ],
+        "answer": 1,
+        "explanation": "Polyglot means a multilingual person."
+    },
+    {
+        "id": "1fe72e12-0f1a-497c-87fe-8c26018d156c",
+        "difficulty": "easy",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][easy] One who speaks many languages - alternate wording",
+        "options": [
+            "Pilot",
+            "Polyglot",
+            "Poet",
+            "Monk"
+        ],
+        "answer": 1,
+        "explanation": "Polyglot means a multilingual person."
+    },
+    {
+        "id": "e647f850-c667-427a-9aeb-a1d63c75a708",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] She is interested ___ music.",
+        "options": [
+            "in",
+            "on",
+            "for",
+            "at"
+        ],
+        "answer": 0,
+        "explanation": "The correct preposition is 'in'."
+    },
+    {
+        "id": "5c8b35f3-7974-47d1-a973-7aed07fb7a45",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] She herself is interested ___ music.",
+        "options": [
+            "on",
+            "in",
+            "at",
+            "for"
+        ],
+        "answer": 1,
+        "explanation": "The correct preposition is 'in'."
+    },
+    {
+        "id": "69685035-6df4-409a-af44-d58039026c36",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] I look forward ___ meeting you.",
+        "options": [
+            "to",
+            "at",
+            "in",
+            "for"
+        ],
+        "answer": 0,
+        "explanation": "'Look forward to' is the fixed phrase."
+    },
+    {
+        "id": "a561d5d1-a989-4253-99d3-d6f0c6ee51cc",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] I look forward ___ meeting you. - alternate wording",
+        "options": [
+            "at",
+            "in",
+            "for",
+            "to"
+        ],
+        "answer": 3,
+        "explanation": "'Look forward to' is the fixed phrase."
+    },
+    {
+        "id": "91266b70-9553-49c1-8a18-3a225931da4c",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] The room was filled ___ smoke.",
+        "options": [
+            "in",
+            "with",
+            "at",
+            "by"
+        ],
+        "answer": 1,
+        "explanation": "'Filled with' is standard."
+    },
+    {
+        "id": "9a48bea0-48af-4e8e-974a-cd3d05c18fa6",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] The room was filled ___ smoke. - alternate wording",
+        "options": [
+            "in",
+            "by",
+            "with",
+            "at"
+        ],
+        "answer": 2,
+        "explanation": "'Filled with' is standard."
+    },
+    {
+        "id": "6288cd5d-eb7f-4847-aed5-2123cd09ae53",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] He insisted ___ paying the bill.",
+        "options": [
+            "on",
+            "to",
+            "in",
+            "at"
+        ],
+        "answer": 0,
+        "explanation": "The verb insists on."
+    },
+    {
+        "id": "270847b4-9564-4687-a402-c975d2175c14",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] He insisted ___ paying the bill. - alternate wording",
+        "options": [
+            "at",
+            "on",
+            "to",
+            "in"
+        ],
+        "answer": 1,
+        "explanation": "The verb insists on."
+    },
+    {
+        "id": "5c7a4290-b30a-46e8-888f-a1040adceb71",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] We were surprised ___ the results.",
+        "options": [
+            "by",
+            "with",
+            "at",
+            "to"
+        ],
+        "answer": 0,
+        "explanation": "Surprised by is correct here."
+    },
+    {
+        "id": "05218a6b-d46a-43c2-9605-2f67482a4d85",
+        "difficulty": "easy",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][easy] We were surprised ___ the results. - alternate wording",
+        "options": [
+            "with",
+            "at",
+            "to",
+            "by"
+        ],
+        "answer": 3,
+        "explanation": "Surprised by is correct here."
+    },
+    {
+        "id": "9c9948b6-5460-4745-9e5d-3c73f7103465",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: She writes a letter. Passive?",
+        "options": [
+            "A letter is written by her.",
+            "A letter was written by her.",
+            "She is written by a letter.",
+            "A letter writes her."
+        ],
+        "answer": 0,
+        "explanation": "Present simple passive uses is/are + past participle."
+    },
+    {
+        "id": "079030e5-f08c-45ea-853c-96fd536f9602",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: She herself writes a letter. Passive?",
+        "options": [
+            "She is written by a letter.",
+            "A letter was written by her.",
+            "A letter writes her.",
+            "A letter is written by her."
+        ],
+        "answer": 3,
+        "explanation": "Present simple passive uses is/are + past participle."
+    },
+    {
+        "id": "10340d9e-6682-475b-b5d9-d57a9e064e26",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: They are cleaning the hall. Passive?",
+        "options": [
+            "The hall cleans them.",
+            "The hall is being cleaned by them.",
+            "The hall was cleaned by them.",
+            "The hall is clean by them."
+        ],
+        "answer": 1,
+        "explanation": "Present continuous passive uses is being."
+    },
+    {
+        "id": "0d03fa1f-4696-4d5a-9b87-feb51e4c08e2",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: They are cleaning the hall. Passive? - alternate wording",
+        "options": [
+            "The hall is being cleaned by them.",
+            "The hall was cleaned by them.",
+            "The hall is clean by them.",
+            "The hall cleans them."
+        ],
+        "answer": 0,
+        "explanation": "Present continuous passive uses is being."
+    },
+    {
+        "id": "be2b29d9-9d07-4156-8900-1b9294bcdeab",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: He completed the task. Passive?",
+        "options": [
+            "The task was completing by him.",
+            "The task completes him.",
+            "The task is completed by him.",
+            "The task was completed by him."
+        ],
+        "answer": 3,
+        "explanation": "Past simple passive uses was/were + past participle."
+    },
+    {
+        "id": "8ffe75cd-c78e-47f1-b607-3ba3883e4c8b",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: He completed the task. Passive? - alternate wording",
+        "options": [
+            "The task was completing by him.",
+            "The task completes him.",
+            "The task is completed by him.",
+            "The task was completed by him."
+        ],
+        "answer": 3,
+        "explanation": "Past simple passive uses was/were + past participle."
+    },
+    {
+        "id": "e7befaae-9cd1-4ab3-a605-83baaa51fd81",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: The teacher will announce the result. Passive?",
+        "options": [
+            "The result will be announced by the teacher.",
+            "The result was announced by the teacher.",
+            "The result is announced by the teacher.",
+            "The result announced the teacher."
+        ],
+        "answer": 0,
+        "explanation": "Future passive uses will be."
+    },
+    {
+        "id": "75cfc10f-f406-40d5-8e8f-d2f277b6771f",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: The teacher will announce the result. Passive? - alternate wording",
+        "options": [
+            "The result was announced by the teacher.",
+            "The result will be announced by the teacher.",
+            "The result is announced by the teacher.",
+            "The result announced the teacher."
+        ],
+        "answer": 1,
+        "explanation": "Future passive uses will be."
+    },
+    {
+        "id": "25713be4-5a57-4b34-a909-17538c451b7f",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: Someone has stolen my bike. Passive?",
+        "options": [
+            "My bike have been stolen.",
+            "My bike was stolen by someone has.",
+            "My bike is stolen.",
+            "My bike has been stolen."
+        ],
+        "answer": 3,
+        "explanation": "Present perfect passive uses has/have been."
+    },
+    {
+        "id": "9f2c8146-0503-4bfa-a90e-0c64a5ae4772",
+        "difficulty": "easy",
+        "topic": "Voice",
+        "question": "[Voice][easy] Active: Someone has stolen my bike. Passive? - alternate wording",
+        "options": [
+            "My bike was stolen by someone has.",
+            "My bike has been stolen.",
+            "My bike have been stolen.",
+            "My bike is stolen."
+        ],
+        "answer": 1,
+        "explanation": "Present perfect passive uses has/have been."
+    },
+    {
+        "id": "f4f38d03-6fe8-474a-b690-75a199894bb6",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: He said, 'I am busy.'",
+        "options": [
+            "He said he am busy.",
+            "He says that he is busy.",
+            "He said that he was busy.",
+            "He said that I was busy."
+        ],
+        "answer": 2,
+        "explanation": "Backshift is needed in indirect speech."
+    },
+    {
+        "id": "140a19fe-b6c0-46be-91af-280bf37fc1dd",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: He said, 'I am busy.' - alternate wording",
+        "options": [
+            "He said he am busy.",
+            "He said that he was busy.",
+            "He said that I was busy.",
+            "He says that he is busy."
+        ],
+        "answer": 1,
+        "explanation": "Backshift is needed in indirect speech."
+    },
+    {
+        "id": "4acdb028-4e79-4c7b-9f82-64794f5e3934",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: She asked, 'Where do you live?'",
+        "options": [
+            "She asked where I lived.",
+            "She asked where did I live.",
+            "She asked where do I live.",
+            "She asked where I live."
+        ],
+        "answer": 0,
+        "explanation": "Question word plus statement form in indirect speech."
+    },
+    {
+        "id": "8c188f70-bd7d-4717-aa3e-b4d29460028c",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: She asked, 'Where do you live?' - alternate wording",
+        "options": [
+            "She asked where I live.",
+            "She asked where I lived.",
+            "She asked where did I live.",
+            "She asked where do I live."
+        ],
+        "answer": 1,
+        "explanation": "Question word plus statement form in indirect speech."
+    },
+    {
+        "id": "b8cdb2f3-7e9d-43bc-be24-c74f59903090",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: The teacher said, 'Study hard.'",
+        "options": [
+            "The teacher advised us to study hard.",
+            "The teacher said us study hard.",
+            "The teacher ordered us to studies hard.",
+            "The teacher asked us study hard."
+        ],
+        "answer": 0,
+        "explanation": "Imperatives often become advised/to ordered."
+    },
+    {
+        "id": "35de07e7-9b4d-4446-be1e-9567cc803436",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: The teacher said, 'Study hard.' - alternate wording",
+        "options": [
+            "The teacher ordered us to studies hard.",
+            "The teacher asked us study hard.",
+            "The teacher advised us to study hard.",
+            "The teacher said us study hard."
+        ],
+        "answer": 2,
+        "explanation": "Imperatives often become advised/to ordered."
+    },
+    {
+        "id": "8a08221a-ba0b-4284-8220-b88d858aed1d",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: He said, 'I will come tomorrow.'",
+        "options": [
+            "He said that he will come tomorrow.",
+            "He said that he would come the next day.",
+            "He said that he would came tomorrow.",
+            "He said that he come tomorrow."
+        ],
+        "answer": 1,
+        "explanation": "Future shifts to would and tomorrow to next day."
+    },
+    {
+        "id": "6d86309a-ff1c-44c8-a4a8-d5f6e0021f1a",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: He said, 'I will come tomorrow.' - alternate wording",
+        "options": [
+            "He said that he come tomorrow.",
+            "He said that he will come tomorrow.",
+            "He said that he would come the next day.",
+            "He said that he would came tomorrow."
+        ],
+        "answer": 2,
+        "explanation": "Future shifts to would and tomorrow to next day."
+    },
+    {
+        "id": "61f63ddb-9a7c-4d31-87d2-bed6399c2e96",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: They said, 'We have finished.'",
+        "options": [
+            "They said that we had finished.",
+            "They said that they have finished.",
+            "They said that they had finished.",
+            "They said that they has finished."
+        ],
+        "answer": 2,
+        "explanation": "Present perfect changes to past perfect."
+    },
+    {
+        "id": "56980be8-2ac3-484d-b4a0-f168ea24a453",
+        "difficulty": "easy",
+        "topic": "Narration",
+        "question": "[Narration][easy] Direct: They said, 'We have finished.' - alternate wording",
+        "options": [
+            "They said that we had finished.",
+            "They said that they have finished.",
+            "They said that they had finished.",
+            "They said that they has finished."
+        ],
+        "answer": 2,
+        "explanation": "Present perfect changes to past perfect."
+    },
+    {
+        "id": "000a1a50-9d7c-4ea2-a250-ee9e7a3746d1",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Abundant [medium]",
         "options": [
             "Rare",
-            "Deceitful",
-            "Long",
+            "Plentiful",
+            "Empty",
+            "Scarce"
+        ],
+        "answer": 1,
+        "explanation": "Plentiful is a synonym of abundant."
+    },
+    {
+        "id": "feb57e0a-6bd8-4f42-8bbf-9d8b20db62a4",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Abundant [medium] - alternate wording",
+        "options": [
+            "Empty",
+            "Rare",
+            "Scarce",
             "Plentiful"
         ],
         "answer": 3,
-        "explanation": "Plentiful means Abundant"
+        "explanation": "Plentiful is a synonym of abundant."
     },
     {
-        "id": "921cc3c6-bf1b-4c31-968f-6fe7d5f1adbb",
-        "difficulty": "easy",
+        "id": "d711d2f5-dcf0-4d7b-b532-00d32037d786",
+        "difficulty": "medium",
         "topic": "Synonyms",
-        "question": "What is the synonym of Brief?",
+        "question": "[Synonyms][medium] Brief [medium]",
         "options": [
-            "Rare",
-            "Deceitful",
-            "Short",
-            "Long"
-        ],
-        "answer": 2,
-        "explanation": "Short means Brief"
-    },
-    {
-        "id": "fa1c5625-5aac-4136-9296-66f6e4e3f03d",
-        "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Candid?",
-        "options": [
-            "Rare",
-            "Honest",
-            "Long",
-            "Deceitful"
-        ],
-        "answer": 1,
-        "explanation": "Honest means Candid"
-    },
-    {
-        "id": "09def26b-26e1-49aa-b348-07f703770d75",
-        "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Abundant?",
-        "options": [
-            "Rare",
-            "Plentiful",
-            "Deceitful",
-            "Long"
-        ],
-        "answer": 1,
-        "explanation": "Plentiful means Abundant"
-    },
-    {
-        "id": "fb10808f-b8d6-4ad5-ac2d-b632de1d71ae",
-        "difficulty": "easy",
-        "topic": "Grammar",
-        "question": "What is the synonym of Brief?",
-        "options": [
-            "Rare",
-            "Deceitful",
+            "Broad",
+            "Large",
             "Long",
             "Short"
         ],
         "answer": 3,
-        "explanation": "Short means Brief"
+        "explanation": "Short matches brief."
     },
     {
-        "id": "e479f937-b1ee-4d6d-8700-af4e9d37e6d6",
-        "difficulty": "easy",
-        "topic": "Para Jumbles",
-        "question": "What is the synonym of Candid?",
+        "id": "90794ce0-6632-49f6-b221-3b65c46de7b4",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Brief [medium] - alternate wording",
         "options": [
-            "Long",
-            "Deceitful",
+            "Large",
+            "Broad",
+            "Short",
+            "Long"
+        ],
+        "answer": 2,
+        "explanation": "Short matches brief."
+    },
+    {
+        "id": "8751e591-c772-4b1c-9598-91898862eb7d",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Candid [medium]",
+        "options": [
             "Honest",
+            "False",
+            "Hidden",
+            "Crafty"
+        ],
+        "answer": 0,
+        "explanation": "Honest matches candid."
+    },
+    {
+        "id": "dec494fe-2a2e-46d0-9b3c-544e97ab34c8",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Candid [medium] - alternate wording",
+        "options": [
+            "Honest",
+            "Crafty",
+            "False",
+            "Hidden"
+        ],
+        "answer": 0,
+        "explanation": "Honest matches candid."
+    },
+    {
+        "id": "b490cf55-5f1b-4db8-8ea0-82a9e9161561",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Expand [medium]",
+        "options": [
+            "Enlarge",
+            "Break",
+            "Shrink",
+            "Fold"
+        ],
+        "answer": 0,
+        "explanation": "Enlarge is close in meaning."
+    },
+    {
+        "id": "4c02b2ba-0a1f-425c-85c7-fa4b8543db6c",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Expand [medium] - alternate wording",
+        "options": [
+            "Enlarge",
+            "Break",
+            "Fold",
+            "Shrink"
+        ],
+        "answer": 0,
+        "explanation": "Enlarge is close in meaning."
+    },
+    {
+        "id": "f114a9e1-47e5-4b85-a1a9-aa26346b0947",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Rapid [medium]",
+        "options": [
+            "Dull",
+            "Late",
+            "Slow",
+            "Fast"
+        ],
+        "answer": 3,
+        "explanation": "Fast is synonymous with rapid."
+    },
+    {
+        "id": "ceb2fe86-d7df-4589-a567-4ad4d434ca19",
+        "difficulty": "medium",
+        "topic": "Synonyms",
+        "question": "[Synonyms][medium] Rapid [medium] - alternate wording",
+        "options": [
+            "Late",
+            "Dull",
+            "Fast",
+            "Slow"
+        ],
+        "answer": 2,
+        "explanation": "Fast is synonymous with rapid."
+    },
+    {
+        "id": "ca3e733c-9295-4dc2-b8de-e08e06d5452c",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Ancient [medium]",
+        "options": [
+            "Modern",
+            "Past",
+            "Early",
+            "Old"
+        ],
+        "answer": 0,
+        "explanation": "Modern is opposite to ancient."
+    },
+    {
+        "id": "10ce9b8f-2b12-406a-a0c5-a5917fc1503a",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Ancient [medium] - alternate wording",
+        "options": [
+            "Old",
+            "Past",
+            "Modern",
+            "Early"
+        ],
+        "answer": 2,
+        "explanation": "Modern is opposite to ancient."
+    },
+    {
+        "id": "d9d7b350-ea0c-4f6a-b6c9-3356b59a6675",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Brave [medium]",
+        "options": [
+            "Strong",
+            "Bold",
+            "Sharp",
+            "Cowardly"
+        ],
+        "answer": 3,
+        "explanation": "Cowardly is the antonym."
+    },
+    {
+        "id": "2382902a-a3a2-4082-9174-206aec2688b4",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Brave [medium] - alternate wording",
+        "options": [
+            "Sharp",
+            "Cowardly",
+            "Bold",
+            "Strong"
+        ],
+        "answer": 1,
+        "explanation": "Cowardly is the antonym."
+    },
+    {
+        "id": "7d0d83cf-a1f9-45f2-80ca-a47f4b3a9fff",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Generous [medium]",
+        "options": [
+            "Friendly",
+            "Open",
+            "Kind",
+            "Stingy"
+        ],
+        "answer": 3,
+        "explanation": "Stingy is opposite to generous."
+    },
+    {
+        "id": "7ad410be-58a9-4a41-b84e-e9fe56bb57ba",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Generous [medium] - alternate wording",
+        "options": [
+            "Friendly",
+            "Open",
+            "Kind",
+            "Stingy"
+        ],
+        "answer": 3,
+        "explanation": "Stingy is opposite to generous."
+    },
+    {
+        "id": "75b01d3b-3ab6-41f9-b930-4665dfebd2c8",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Expand [medium]",
+        "options": [
+            "Contract",
+            "Grow",
+            "Stretch",
+            "Open"
+        ],
+        "answer": 0,
+        "explanation": "Contract is the opposite."
+    },
+    {
+        "id": "9dadd977-eb10-4a0f-92c8-197fe456b15b",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Expand [medium] - alternate wording",
+        "options": [
+            "Grow",
+            "Contract",
+            "Stretch",
+            "Open"
+        ],
+        "answer": 1,
+        "explanation": "Contract is the opposite."
+    },
+    {
+        "id": "655efd66-65ab-4ddf-863f-f2cb1bbc02ed",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Visible [medium]",
+        "options": [
+            "Bright",
+            "Invisible",
+            "Near",
+            "Clear"
+        ],
+        "answer": 1,
+        "explanation": "Invisible is opposite to visible."
+    },
+    {
+        "id": "a889446a-a4e4-451c-9618-2f799901825b",
+        "difficulty": "medium",
+        "topic": "Antonyms",
+        "question": "[Antonyms][medium] Visible [medium] - alternate wording",
+        "options": [
+            "Invisible",
+            "Near",
+            "Clear",
+            "Bright"
+        ],
+        "answer": 0,
+        "explanation": "Invisible is opposite to visible."
+    },
+    {
+        "id": "fb046bda-7cbf-4802-8c59-2845d4e44c8e",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] The committee ___ its report. [medium]",
+        "options": [
+            "has",
+            "were",
+            "are",
+            "have"
+        ],
+        "answer": 0,
+        "explanation": "Committee is singular in this sentence."
+    },
+    {
+        "id": "fd7f73ed-9417-4c8f-a40c-c4d6cca0b423",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] The committee ___ its report. [medium] - alternate wording",
+        "options": [
+            "are",
+            "were",
+            "has",
+            "have"
+        ],
+        "answer": 2,
+        "explanation": "Committee is singular in this sentence."
+    },
+    {
+        "id": "b2849777-73cf-4235-8bea-b4d718bcb848",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] Each of the players ___ a medal. [medium]",
+        "options": [
+            "gets",
+            "got",
+            "getting",
+            "get"
+        ],
+        "answer": 0,
+        "explanation": "Each takes a singular verb."
+    },
+    {
+        "id": "03581f30-6c2b-41b6-8d78-2076e2dd82b5",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] Each of the players ___ a medal. [medium] - alternate wording",
+        "options": [
+            "gets",
+            "getting",
+            "got",
+            "get"
+        ],
+        "answer": 0,
+        "explanation": "Each takes a singular verb."
+    },
+    {
+        "id": "8cf7a271-d16f-4a7b-9a32-203a79b74284",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] Neither the teacher nor the students ___ present. [medium]",
+        "options": [
+            "are",
+            "is",
+            "has",
+            "was"
+        ],
+        "answer": 0,
+        "explanation": "The verb agrees with the nearer subject, students."
+    },
+    {
+        "id": "b1c014c7-892a-418f-92a8-4554969c372d",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] Neither the teacher nor the students ___ present. [medium] - alternate wording",
+        "options": [
+            "has",
+            "are",
+            "is",
+            "was"
+        ],
+        "answer": 1,
+        "explanation": "The verb agrees with the nearer subject, students."
+    },
+    {
+        "id": "4d30d065-6412-423e-ace8-1096eb009565",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] If I ___ enough time, I will finish it. [medium]",
+        "options": [
+            "having",
+            "has",
+            "had",
+            "have"
+        ],
+        "answer": 3,
+        "explanation": "First conditional uses present tense in the if-clause."
+    },
+    {
+        "id": "597e608a-a106-4c5a-9e2c-fe57a0788d25",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] If I ___ enough time, I will finish it. [medium] - alternate wording",
+        "options": [
+            "has",
+            "have",
+            "having",
+            "had"
+        ],
+        "answer": 1,
+        "explanation": "First conditional uses present tense in the if-clause."
+    },
+    {
+        "id": "cf21bf97-8244-4d3c-bf25-ef6ce6b8b23a",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] She is better ___ me at chess. [medium]",
+        "options": [
+            "then",
+            "to",
+            "than",
+            "from"
+        ],
+        "answer": 2,
+        "explanation": "Comparison uses than."
+    },
+    {
+        "id": "6dff3d37-e9fa-4963-aabe-ea60b8726cc2",
+        "difficulty": "medium",
+        "topic": "Grammar",
+        "question": "[Grammar][medium] She herself is better ___ me at chess. [medium]",
+        "options": [
+            "then",
+            "than",
+            "to",
+            "from"
+        ],
+        "answer": 1,
+        "explanation": "Comparison uses than."
+    },
+    {
+        "id": "c3fbfcb2-c559-4c0a-ad0e-14169c98e723",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A short passage about renewable energy says solar panels reduce electricity bills. What is one benefit? [medium]",
+        "options": [
+            "Less sunlight",
+            "Higher fuel use",
+            "Lower electricity bills",
+            "More smoke"
+        ],
+        "answer": 2,
+        "explanation": "The passage explicitly states the benefit."
+    },
+    {
+        "id": "a9ffa68f-c4be-4bef-bed2-9da4c63c2bd1",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A short passage about renewable energy says solar panels reduce electricity bills. Which is one benefit? [medium]",
+        "options": [
+            "Lower electricity bills",
+            "Higher fuel use",
+            "More smoke",
+            "Less sunlight"
+        ],
+        "answer": 0,
+        "explanation": "The passage explicitly states the benefit."
+    },
+    {
+        "id": "5399edf8-6413-4f04-bc5e-3b94cc9bf2a4",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage about remote work mentions flexibility and time savings. What is a key idea? [medium]",
+        "options": [
+            "Flexibility",
+            "More expenses",
+            "Less productivity",
+            "Longer commute"
+        ],
+        "answer": 0,
+        "explanation": "Flexibility is stated as an advantage."
+    },
+    {
+        "id": "424de692-dee3-4674-8237-92eab48cb0ed",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage about remote work mentions flexibility and time savings. What is a key idea? [medium] - alternate wording",
+        "options": [
+            "Longer commute",
+            "Flexibility",
+            "More expenses",
+            "Less productivity"
+        ],
+        "answer": 1,
+        "explanation": "Flexibility is stated as an advantage."
+    },
+    {
+        "id": "690cc6c9-946d-4b11-9907-59514b9dab39",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage on healthy eating recommends fruits and vegetables. What is the main message? [medium]",
+        "options": [
+            "Sugar only",
+            "Fast food",
+            "Skipping meals",
+            "Balanced diet"
+        ],
+        "answer": 3,
+        "explanation": "Healthy food choices are encouraged."
+    },
+    {
+        "id": "41d97799-a6ea-466e-844b-2018ccf0a5e1",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage on healthy eating recommends fruits and vegetables. Which is the main message? [medium]",
+        "options": [
+            "Balanced diet",
+            "Fast food",
+            "Skipping meals",
+            "Sugar only"
+        ],
+        "answer": 0,
+        "explanation": "Healthy food choices are encouraged."
+    },
+    {
+        "id": "442e86df-f360-4479-ad18-bc0d6193f8f1",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage on urban transport supports buses and trains. What does it favor? [medium]",
+        "options": [
+            "Private jets",
+            "No travel",
+            "Walking only",
+            "Public transport"
+        ],
+        "answer": 3,
+        "explanation": "Public transport is the focus."
+    },
+    {
+        "id": "919bc936-f6e9-492c-8ca2-41ff2faf4f07",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage on urban transport supports buses and trains. What does it favor? [medium] - alternate wording",
+        "options": [
+            "Private jets",
+            "No travel",
+            "Walking only",
+            "Public transport"
+        ],
+        "answer": 3,
+        "explanation": "Public transport is the focus."
+    },
+    {
+        "id": "d763344f-aad1-414f-8614-7323b2710816",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage on teamwork highlights cooperation. What is emphasized? [medium]",
+        "options": [
+            "Isolation",
+            "Collaboration",
+            "Silence",
+            "Competition only"
+        ],
+        "answer": 1,
+        "explanation": "Teamwork and cooperation are the theme."
+    },
+    {
+        "id": "ae7eec94-893b-46db-8e47-bdabb5c1b034",
+        "difficulty": "medium",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][medium] A passage on teamwork highlights cooperation. Which is emphasized? [medium]",
+        "options": [
+            "Isolation",
+            "Silence",
+            "Competition only",
+            "Collaboration"
+        ],
+        "answer": 3,
+        "explanation": "Teamwork and cooperation are the theme."
+    },
+    {
+        "id": "9c01c23b-9e19-4ce8-a3f0-d4d86de49672",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] She don't like coffee. [medium]",
+        "options": [
+            "like",
+            "coffee",
+            "don't",
+            "She"
+        ],
+        "answer": 2,
+        "explanation": "'Doesn't' is correct for third-person singular."
+    },
+    {
+        "id": "fb9be187-24a8-44a8-a56e-781fd05fb510",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] She herself don't like coffee. [medium]",
+        "options": [
+            "like",
+            "coffee",
+            "She",
+            "don't"
+        ],
+        "answer": 3,
+        "explanation": "'Doesn't' is correct for third-person singular."
+    },
+    {
+        "id": "0dc350c2-a183-4391-8c7c-41e8ab09f470",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] He go to office daily. [medium]",
+        "options": [
+            "He",
+            "go",
+            "daily",
+            "to"
+        ],
+        "answer": 1,
+        "explanation": "'Goes' is required."
+    },
+    {
+        "id": "2d33ddc6-c208-4f0e-bb34-0c8554e2a44a",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] He go to office daily. [medium] - alternate wording",
+        "options": [
+            "daily",
+            "go",
+            "to",
+            "He"
+        ],
+        "answer": 1,
+        "explanation": "'Goes' is required."
+    },
+    {
+        "id": "0f56591d-a011-45e1-9ca6-842bef389907",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] They was waiting for us. [medium]",
+        "options": [
+            "waiting",
+            "was",
+            "for",
+            "They"
+        ],
+        "answer": 1,
+        "explanation": "Plural subject takes 'were'."
+    },
+    {
+        "id": "568fdb1c-5c9d-4b6a-b3a8-ccf34ae3491f",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] They was waiting for us. [medium] - alternate wording",
+        "options": [
+            "They",
+            "for",
+            "was",
+            "waiting"
+        ],
+        "answer": 2,
+        "explanation": "Plural subject takes 'were'."
+    },
+    {
+        "id": "317b24d3-f04a-47e5-a686-c1af77d56b7b",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] The list of items are on the table. [medium]",
+        "options": [
+            "are",
+            "items",
+            "list",
+            "table"
+        ],
+        "answer": 0,
+        "explanation": "The subject is singular: list."
+    },
+    {
+        "id": "01c7c6cc-074e-4ff2-ba70-3cb03687b83e",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] The list of items are on the table. [medium] - alternate wording",
+        "options": [
+            "are",
+            "list",
+            "items",
+            "table"
+        ],
+        "answer": 0,
+        "explanation": "The subject is singular: list."
+    },
+    {
+        "id": "0c8ddf08-8141-446b-be62-3cf0aaab349c",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] I have saw that movie. [medium]",
+        "options": [
+            "I",
+            "have",
+            "saw",
+            "movie"
+        ],
+        "answer": 2,
+        "explanation": "Present perfect uses 'have seen'."
+    },
+    {
+        "id": "db4baf0e-a01a-4e91-9a3f-3c59f9fdf23e",
+        "difficulty": "medium",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][medium] I have saw that movie. [medium] - alternate wording",
+        "options": [
+            "movie",
+            "have",
+            "saw",
+            "I"
+        ],
+        "answer": 2,
+        "explanation": "Present perfect uses 'have seen'."
+    },
+    {
+        "id": "736b2be4-071e-415a-989a-f9a9cfc0bab7",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] He is more taller than his brother. [medium]",
+        "options": [
+            "He is most taller than his brother.",
+            "He is taller than his brother.",
+            "He is tall than his brother.",
+            "He is more tall than his brother."
+        ],
+        "answer": 1,
+        "explanation": "Use one comparative form only."
+    },
+    {
+        "id": "83959220-8e0f-48ee-998f-58650d5ba630",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] He is more taller than his brother. [medium] - alternate wording",
+        "options": [
+            "He is taller than his brother.",
+            "He is more tall than his brother.",
+            "He is most taller than his brother.",
+            "He is tall than his brother."
+        ],
+        "answer": 0,
+        "explanation": "Use one comparative form only."
+    },
+    {
+        "id": "6cedef31-f26c-447f-9a15-bbaa87cb3c96",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] She did not knew the answer. [medium]",
+        "options": [
+            "She do not know the answer.",
+            "She did not knows the answer.",
+            "She did not know the answer.",
+            "She not know the answer."
+        ],
+        "answer": 2,
+        "explanation": "Use base verb after did not."
+    },
+    {
+        "id": "46f7d58c-f342-4369-bacf-ef042daade9e",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] She did not knew the answer. [medium] - alternate wording",
+        "options": [
+            "She did not knows the answer.",
+            "She did not know the answer.",
+            "She do not know the answer.",
+            "She not know the answer."
+        ],
+        "answer": 1,
+        "explanation": "Use base verb after did not."
+    },
+    {
+        "id": "f06c99fb-dd9b-4421-8ac6-0d2db9a0f7f6",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] The train arrived late than expected. [medium]",
+        "options": [
+            "The train arrived later than expected.",
+            "The train arrived latest than expected.",
+            "The train arrives late than expected.",
+            "The train arrived more late than expected."
+        ],
+        "answer": 0,
+        "explanation": "Use comparative adverb later."
+    },
+    {
+        "id": "9d64b093-1b99-4413-9320-782bc45f4ee2",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] The train arrived late than expected. [medium] - alternate wording",
+        "options": [
+            "The train arrived more late than expected.",
+            "The train arrives late than expected.",
+            "The train arrived latest than expected.",
+            "The train arrived later than expected."
+        ],
+        "answer": 3,
+        "explanation": "Use comparative adverb later."
+    },
+    {
+        "id": "9abd5e04-dbae-4691-9f6a-c40a774e7435",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] Each of the boys have a book. [medium]",
+        "options": [
+            "Each of the boys had a book.",
+            "Each of the boys are a book.",
+            "Each of the boys has a book.",
+            "Each of the boys having a book."
+        ],
+        "answer": 2,
+        "explanation": "Each is singular."
+    },
+    {
+        "id": "18a538a8-4d90-4037-b233-9b3447d88166",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] Each of the boys have a book. [medium] - alternate wording",
+        "options": [
+            "Each of the boys had a book.",
+            "Each of the boys are a book.",
+            "Each of the boys has a book.",
+            "Each of the boys having a book."
+        ],
+        "answer": 2,
+        "explanation": "Each is singular."
+    },
+    {
+        "id": "27ef2b72-fb44-4c2c-b7bc-f0f144ed3ebe",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] The solution is consist of two parts. [medium]",
+        "options": [
+            "The solution has consist of two parts.",
+            "The solution consists of two parts.",
+            "The solution is consisting of two parts.",
+            "The solution consist on two parts."
+        ],
+        "answer": 1,
+        "explanation": "Use the correct verb form."
+    },
+    {
+        "id": "86761b2a-a6f7-4a31-ace4-1ea3cd2e0c0d",
+        "difficulty": "medium",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][medium] The solution is consist of two parts. [medium] - alternate wording",
+        "options": [
+            "The solution is consisting of two parts.",
+            "The solution consist on two parts.",
+            "The solution consists of two parts.",
+            "The solution has consist of two parts."
+        ],
+        "answer": 2,
+        "explanation": "Use the correct verb form."
+    },
+    {
+        "id": "d115a824-f2e6-46f1-a592-096096574262",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. He opened the door. B. John heard a knock. C. A visitor stood outside. [medium]",
+        "options": [
+            "CAB",
+            "ABC",
+            "BAC",
+            "BCA"
+        ],
+        "answer": 3,
+        "explanation": "Knock first, visitor second, opening last."
+    },
+    {
+        "id": "1a6e4afa-6e44-4ad8-a6cc-fe85b7c1bb51",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. He opened the door. B. John heard a knock. C. A visitor stood outside. [medium] - alternate wording",
+        "options": [
+            "ABC",
+            "CAB",
+            "BCA",
+            "BAC"
+        ],
+        "answer": 2,
+        "explanation": "Knock first, visitor second, opening last."
+    },
+    {
+        "id": "7eaf3f08-037d-4bcf-95ac-60a92cf4d864",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. It started to rain. B. The picnic ended. C. They packed their bags. [medium]",
+        "options": [
+            "BAC",
+            "ABC",
+            "CBA",
+            "ACB"
+        ],
+        "answer": 3,
+        "explanation": "Rain triggers packing then ending."
+    },
+    {
+        "id": "df95f158-eee0-430a-b106-a87a58553e99",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. It started to rain. B. The picnic ended. C. They packed their bags. [medium] - alternate wording",
+        "options": [
+            "ABC",
+            "BAC",
+            "ACB",
+            "CBA"
+        ],
+        "answer": 2,
+        "explanation": "Rain triggers packing then ending."
+    },
+    {
+        "id": "8a62d598-8a74-4a02-bbc1-1ca40e698809",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. The alarm rang. B. She woke up. C. She got ready for school. [medium]",
+        "options": [
+            "ABC",
+            "BCA",
+            "CAB",
+            "BAC"
+        ],
+        "answer": 0,
+        "explanation": "Alarm, wake, then prepare."
+    },
+    {
+        "id": "f09a4959-dba4-4d85-a96f-2acc1c48d9a1",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. The alarm rang. B. She herself woke up. C. She herself got ready for school. [medium]",
+        "options": [
+            "CAB",
+            "BAC",
+            "BCA",
+            "ABC"
+        ],
+        "answer": 3,
+        "explanation": "Alarm, wake, then prepare."
+    },
+    {
+        "id": "00aa9d5a-e114-48c7-8994-4259e744416a",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. The report was submitted. B. The team reviewed it. C. The manager approved it. [medium]",
+        "options": [
+            "CBA",
+            "ABC",
+            "BCA",
+            "ACB"
+        ],
+        "answer": 2,
+        "explanation": "Review, approval, submission sequence."
+    },
+    {
+        "id": "d37fb268-48ea-42f3-a940-01809817c29d",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. The report was submitted. B. The team reviewed it. C. The manager approved it. [medium] - alternate wording",
+        "options": [
+            "BCA",
+            "CBA",
+            "ACB",
+            "ABC"
+        ],
+        "answer": 0,
+        "explanation": "Review, approval, submission sequence."
+    },
+    {
+        "id": "c7ec4ba3-c7c0-4c03-9f2e-347e8cf35795",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. He studied hard. B. He passed the exam. C. He celebrated with friends. [medium]",
+        "options": [
+            "BAC",
+            "CBA",
+            "ACB",
+            "ABC"
+        ],
+        "answer": 3,
+        "explanation": "Study, pass, celebrate."
+    },
+    {
+        "id": "09e3d39b-c42d-40e5-b03b-cc8048b72c54",
+        "difficulty": "medium",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][medium] Arrange: A. He studied hard. B. He passed the exam. C. He celebrated with friends. [medium] - alternate wording",
+        "options": [
+            "ACB",
+            "BAC",
+            "ABC",
+            "CBA"
+        ],
+        "answer": 2,
+        "explanation": "Study, pass, celebrate."
+    },
+    {
+        "id": "78aaff98-ba39-4986-96cf-5fadd7ad06e0",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Break the ice' means? [medium]",
+        "options": [
+            "To become silent",
+            "To end a meeting",
+            "To start a conversation",
+            "To repair something"
+        ],
+        "answer": 2,
+        "explanation": "It means to ease tension."
+    },
+    {
+        "id": "3ef39749-d3af-4488-b6b0-8a828266bb95",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Break the ice' means? [medium] - alternate wording",
+        "options": [
+            "To become silent",
+            "To end a meeting",
+            "To start a conversation",
+            "To repair something"
+        ],
+        "answer": 2,
+        "explanation": "It means to ease tension."
+    },
+    {
+        "id": "6b6743ab-b984-4c71-8613-df974f19a4ad",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Once in a blue moon' means? [medium]",
+        "options": [
+            "At night",
+            "Every day",
+            "Very rarely",
+            "At noon"
+        ],
+        "answer": 2,
+        "explanation": "It refers to rare events."
+    },
+    {
+        "id": "de9f574a-ccba-4cff-8fc9-6ac4d76fadf4",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Once in a blue moon' best means? [medium]",
+        "options": [
+            "Very rarely",
+            "At noon",
+            "At night",
+            "Every day"
+        ],
+        "answer": 0,
+        "explanation": "It refers to rare events."
+    },
+    {
+        "id": "099e0a18-f98a-427b-b987-fdd4f1da3b08",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Hit the nail on the head' means? [medium]",
+        "options": [
+            "Work slowly",
+            "Make a mistake",
+            "Avoid the issue",
+            "Say exactly the right thing"
+        ],
+        "answer": 3,
+        "explanation": "It means being exactly right."
+    },
+    {
+        "id": "7daa1fff-b328-436b-983e-b79eb6440fc0",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Hit the nail on the head' means? [medium] - alternate wording",
+        "options": [
+            "Avoid the issue",
+            "Make a mistake",
+            "Work slowly",
+            "Say exactly the right thing"
+        ],
+        "answer": 3,
+        "explanation": "It means being exactly right."
+    },
+    {
+        "id": "219cad9b-991f-4edb-ac99-638397593401",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Spill the beans' means? [medium]",
+        "options": [
+            "Waste time",
+            "Stay quiet",
+            "Reveal a secret",
+            "Cook quickly"
+        ],
+        "answer": 2,
+        "explanation": "It means to disclose information."
+    },
+    {
+        "id": "d5e80896-faea-4132-bd33-09c24bbc4e99",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'Spill the beans' best means? [medium]",
+        "options": [
+            "Waste time",
+            "Reveal a secret",
+            "Stay quiet",
+            "Cook quickly"
+        ],
+        "answer": 1,
+        "explanation": "It means to disclose information."
+    },
+    {
+        "id": "351ab8bd-6df2-4c7b-ab8a-6233cdba6368",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'A piece of cake' means? [medium]",
+        "options": [
+            "Very expensive",
+            "Very old",
+            "Very easy",
+            "Very difficult"
+        ],
+        "answer": 2,
+        "explanation": "It means something easy."
+    },
+    {
+        "id": "43eff094-9430-44cd-9f33-47e5c4907d82",
+        "difficulty": "medium",
+        "topic": "Idioms",
+        "question": "[Idioms][medium] 'A piece of cake' means? [medium] - alternate wording",
+        "options": [
+            "Very difficult",
+            "Very expensive",
+            "Very old",
+            "Very easy"
+        ],
+        "answer": 3,
+        "explanation": "It means something easy."
+    },
+    {
+        "id": "6293338d-e464-433f-ba61-b7ed561f30e1",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A person who loves books [medium]",
+        "options": [
+            "Biologist",
+            "Photographer",
+            "Bibliophile",
+            "Linguist"
+        ],
+        "answer": 2,
+        "explanation": "Bibliophile is a book lover."
+    },
+    {
+        "id": "565edf67-f22c-4e36-86d0-440d5383de77",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A person who loves books [medium] - alternate wording",
+        "options": [
+            "Bibliophile",
+            "Linguist",
+            "Photographer",
+            "Biologist"
+        ],
+        "answer": 0,
+        "explanation": "Bibliophile is a book lover."
+    },
+    {
+        "id": "aada2fcd-c60a-43cc-a3b3-6b3bc0cf6815",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A government by the people [medium]",
+        "options": [
+            "Dictatorship",
+            "Monarchy",
+            "Aristocracy",
+            "Democracy"
+        ],
+        "answer": 3,
+        "explanation": "Democracy means rule by the people."
+    },
+    {
+        "id": "dc9fa6cb-01d9-4bc2-b7a5-4607f738c29a",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A government by the people [medium] - alternate wording",
+        "options": [
+            "Monarchy",
+            "Aristocracy",
+            "Dictatorship",
+            "Democracy"
+        ],
+        "answer": 3,
+        "explanation": "Democracy means rule by the people."
+    },
+    {
+        "id": "f650c2ca-a063-408c-b15a-9a4b61e0195d",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A place where animals are kept [medium]",
+        "options": [
+            "Museum",
+            "Zoo",
+            "Airport",
+            "Library"
+        ],
+        "answer": 1,
+        "explanation": "Zoo houses animals."
+    },
+    {
+        "id": "8efa500b-4564-43fc-9c29-24c5b806b7d5",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A place where animals are kept [medium] - alternate wording",
+        "options": [
+            "Zoo",
+            "Museum",
+            "Airport",
+            "Library"
+        ],
+        "answer": 0,
+        "explanation": "Zoo houses animals."
+    },
+    {
+        "id": "8928d4db-d499-4791-8728-01e6f6cd726e",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A fear of heights [medium]",
+        "options": [
+            "Claustrophobia",
+            "Hydrophobia",
+            "Anthropology",
+            "Acrophobia"
+        ],
+        "answer": 3,
+        "explanation": "Acrophobia is fear of heights."
+    },
+    {
+        "id": "dd7c2124-3ba4-4129-b6bd-cf632227dd06",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] A fear of heights [medium] - alternate wording",
+        "options": [
+            "Claustrophobia",
+            "Hydrophobia",
+            "Acrophobia",
+            "Anthropology"
+        ],
+        "answer": 2,
+        "explanation": "Acrophobia is fear of heights."
+    },
+    {
+        "id": "3833d727-156b-41ff-b30b-1f117ecba9c0",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] One who speaks many languages [medium]",
+        "options": [
+            "Pilot",
+            "Monk",
+            "Poet",
+            "Polyglot"
+        ],
+        "answer": 3,
+        "explanation": "Polyglot means a multilingual person."
+    },
+    {
+        "id": "dc433168-223a-496d-b008-6d347fb7e6d3",
+        "difficulty": "medium",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][medium] One who speaks many languages [medium] - alternate wording",
+        "options": [
+            "Monk",
+            "Polyglot",
+            "Poet",
+            "Pilot"
+        ],
+        "answer": 1,
+        "explanation": "Polyglot means a multilingual person."
+    },
+    {
+        "id": "bb21b959-aac3-4b77-8350-e4c74b6cf32c",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] She is interested ___ music. [medium]",
+        "options": [
+            "for",
+            "on",
+            "at",
+            "in"
+        ],
+        "answer": 3,
+        "explanation": "The correct preposition is 'in'."
+    },
+    {
+        "id": "bdd1ac1c-9a84-4c1a-9b6a-9b8e2bf677fc",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] She herself is interested ___ music. [medium]",
+        "options": [
+            "on",
+            "at",
+            "for",
+            "in"
+        ],
+        "answer": 3,
+        "explanation": "The correct preposition is 'in'."
+    },
+    {
+        "id": "5570214f-6eef-4468-b5e5-072dfecedda0",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] I look forward ___ meeting you. [medium]",
+        "options": [
+            "to",
+            "at",
+            "for",
+            "in"
+        ],
+        "answer": 0,
+        "explanation": "'Look forward to' is the fixed phrase."
+    },
+    {
+        "id": "9e6ccab8-94ba-49b0-90c6-0ad0c514189a",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] I look forward ___ meeting you. [medium] - alternate wording",
+        "options": [
+            "in",
+            "to",
+            "at",
+            "for"
+        ],
+        "answer": 1,
+        "explanation": "'Look forward to' is the fixed phrase."
+    },
+    {
+        "id": "023bbe02-ff80-4951-b371-8029d80e9583",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] The room was filled ___ smoke. [medium]",
+        "options": [
+            "at",
+            "by",
+            "in",
+            "with"
+        ],
+        "answer": 3,
+        "explanation": "'Filled with' is standard."
+    },
+    {
+        "id": "9ca8baac-1c12-4edd-b350-edbcf85de6c3",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] The room was filled ___ smoke. [medium] - alternate wording",
+        "options": [
+            "by",
+            "at",
+            "with",
+            "in"
+        ],
+        "answer": 2,
+        "explanation": "'Filled with' is standard."
+    },
+    {
+        "id": "1ca44f2b-67b2-4bc3-a555-218c651cb7c5",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] He insisted ___ paying the bill. [medium]",
+        "options": [
+            "to",
+            "in",
+            "at",
+            "on"
+        ],
+        "answer": 3,
+        "explanation": "The verb insists on."
+    },
+    {
+        "id": "b0b44556-2814-4aec-bb3c-32c74d58da1b",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] He insisted ___ paying the bill. [medium] - alternate wording",
+        "options": [
+            "in",
+            "on",
+            "to",
+            "at"
+        ],
+        "answer": 1,
+        "explanation": "The verb insists on."
+    },
+    {
+        "id": "594eda15-a04c-42de-9b1e-4bab3c0d1c7c",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] We were surprised ___ the results. [medium]",
+        "options": [
+            "at",
+            "with",
+            "by",
+            "to"
+        ],
+        "answer": 2,
+        "explanation": "Surprised by is correct here."
+    },
+    {
+        "id": "bbb810d0-06d2-42a8-839f-812024ff2397",
+        "difficulty": "medium",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][medium] We were surprised ___ the results. [medium] - alternate wording",
+        "options": [
+            "by",
+            "with",
+            "to",
+            "at"
+        ],
+        "answer": 0,
+        "explanation": "Surprised by is correct here."
+    },
+    {
+        "id": "637cd8de-bbaa-4581-ad2f-d19c3aa44755",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: She writes a letter. Passive? [medium]",
+        "options": [
+            "A letter is written by her.",
+            "A letter writes her.",
+            "A letter was written by her.",
+            "She is written by a letter."
+        ],
+        "answer": 0,
+        "explanation": "Present simple passive uses is/are + past participle."
+    },
+    {
+        "id": "0f6fe51a-4d06-47b0-be74-d0b62fad4fae",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: She herself writes a letter. Passive? [medium]",
+        "options": [
+            "She is written by a letter.",
+            "A letter is written by her.",
+            "A letter was written by her.",
+            "A letter writes her."
+        ],
+        "answer": 1,
+        "explanation": "Present simple passive uses is/are + past participle."
+    },
+    {
+        "id": "b387e554-b562-4acf-88b1-658c8a79ad6c",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: They are cleaning the hall. Passive? [medium]",
+        "options": [
+            "The hall cleans them.",
+            "The hall was cleaned by them.",
+            "The hall is clean by them.",
+            "The hall is being cleaned by them."
+        ],
+        "answer": 3,
+        "explanation": "Present continuous passive uses is being."
+    },
+    {
+        "id": "f34e9a9a-5da7-4d15-8f41-146bc8d717b0",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: They are cleaning the hall. Passive? [medium] - alternate wording",
+        "options": [
+            "The hall is being cleaned by them.",
+            "The hall was cleaned by them.",
+            "The hall cleans them.",
+            "The hall is clean by them."
+        ],
+        "answer": 0,
+        "explanation": "Present continuous passive uses is being."
+    },
+    {
+        "id": "a3dd9a13-e3ee-4009-9ab0-cc2f2cfcd127",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: He completed the task. Passive? [medium]",
+        "options": [
+            "The task completes him.",
+            "The task was completed by him.",
+            "The task is completed by him.",
+            "The task was completing by him."
+        ],
+        "answer": 1,
+        "explanation": "Past simple passive uses was/were + past participle."
+    },
+    {
+        "id": "6a1f7a2c-bed1-4e77-8002-4752c5178bfc",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: He completed the task. Passive? [medium] - alternate wording",
+        "options": [
+            "The task was completing by him.",
+            "The task is completed by him.",
+            "The task was completed by him.",
+            "The task completes him."
+        ],
+        "answer": 2,
+        "explanation": "Past simple passive uses was/were + past participle."
+    },
+    {
+        "id": "6f359c72-d403-4402-ab12-fe231cbb2eee",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: The teacher will announce the result. Passive? [medium]",
+        "options": [
+            "The result announced the teacher.",
+            "The result was announced by the teacher.",
+            "The result is announced by the teacher.",
+            "The result will be announced by the teacher."
+        ],
+        "answer": 3,
+        "explanation": "Future passive uses will be."
+    },
+    {
+        "id": "17413c44-d39d-4cef-abe8-53f89016f3c4",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: The teacher will announce the result. Passive? [medium] - alternate wording",
+        "options": [
+            "The result announced the teacher.",
+            "The result is announced by the teacher.",
+            "The result was announced by the teacher.",
+            "The result will be announced by the teacher."
+        ],
+        "answer": 3,
+        "explanation": "Future passive uses will be."
+    },
+    {
+        "id": "dce361a0-caf9-4903-bebe-21ef1d017fc2",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: Someone has stolen my bike. Passive? [medium]",
+        "options": [
+            "My bike was stolen by someone has.",
+            "My bike has been stolen.",
+            "My bike is stolen.",
+            "My bike have been stolen."
+        ],
+        "answer": 1,
+        "explanation": "Present perfect passive uses has/have been."
+    },
+    {
+        "id": "bbc38c02-f76d-43ce-847e-8c292a0802db",
+        "difficulty": "medium",
+        "topic": "Voice",
+        "question": "[Voice][medium] Active: Someone has stolen my bike. Passive? [medium] - alternate wording",
+        "options": [
+            "My bike was stolen by someone has.",
+            "My bike is stolen.",
+            "My bike has been stolen.",
+            "My bike have been stolen."
+        ],
+        "answer": 2,
+        "explanation": "Present perfect passive uses has/have been."
+    },
+    {
+        "id": "500f585c-9ebf-4bc0-9c08-a80bc2701db7",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: He said, 'I am busy.' [medium]",
+        "options": [
+            "He said that he was busy.",
+            "He said he am busy.",
+            "He says that he is busy.",
+            "He said that I was busy."
+        ],
+        "answer": 0,
+        "explanation": "Backshift is needed in indirect speech."
+    },
+    {
+        "id": "92fd9598-e647-4202-b360-0c6168a70df5",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: He said, 'I am busy.' [medium] - alternate wording",
+        "options": [
+            "He said he am busy.",
+            "He says that he is busy.",
+            "He said that I was busy.",
+            "He said that he was busy."
+        ],
+        "answer": 3,
+        "explanation": "Backshift is needed in indirect speech."
+    },
+    {
+        "id": "fa353ba6-2713-426a-9d8c-1583edcbb630",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: She asked, 'Where do you live?' [medium]",
+        "options": [
+            "She asked where I lived.",
+            "She asked where did I live.",
+            "She asked where do I live.",
+            "She asked where I live."
+        ],
+        "answer": 0,
+        "explanation": "Question word plus statement form in indirect speech."
+    },
+    {
+        "id": "a419c963-1f00-44ca-837a-0b2a28107b16",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: She asked, 'Where do you live?' [medium] - alternate wording",
+        "options": [
+            "She asked where I live.",
+            "She asked where did I live.",
+            "She asked where I lived.",
+            "She asked where do I live."
+        ],
+        "answer": 2,
+        "explanation": "Question word plus statement form in indirect speech."
+    },
+    {
+        "id": "9a98ad06-977a-4ed8-b553-e5103ca7af8b",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: The teacher said, 'Study hard.' [medium]",
+        "options": [
+            "The teacher advised us to study hard.",
+            "The teacher ordered us to studies hard.",
+            "The teacher said us study hard.",
+            "The teacher asked us study hard."
+        ],
+        "answer": 0,
+        "explanation": "Imperatives often become advised/to ordered."
+    },
+    {
+        "id": "17344a43-cf5e-4d1b-b0c7-fe329e2eb685",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: The teacher said, 'Study hard.' [medium] - alternate wording",
+        "options": [
+            "The teacher said us study hard.",
+            "The teacher asked us study hard.",
+            "The teacher ordered us to studies hard.",
+            "The teacher advised us to study hard."
+        ],
+        "answer": 3,
+        "explanation": "Imperatives often become advised/to ordered."
+    },
+    {
+        "id": "631ee7e1-7960-4994-bdb4-c5bc0ef4d503",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: He said, 'I will come tomorrow.' [medium]",
+        "options": [
+            "He said that he would came tomorrow.",
+            "He said that he would come the next day.",
+            "He said that he will come tomorrow.",
+            "He said that he come tomorrow."
+        ],
+        "answer": 1,
+        "explanation": "Future shifts to would and tomorrow to next day."
+    },
+    {
+        "id": "31d2231a-254a-4dc0-980c-90879390a09a",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: He said, 'I will come tomorrow.' [medium] - alternate wording",
+        "options": [
+            "He said that he come tomorrow.",
+            "He said that he would come the next day.",
+            "He said that he would came tomorrow.",
+            "He said that he will come tomorrow."
+        ],
+        "answer": 1,
+        "explanation": "Future shifts to would and tomorrow to next day."
+    },
+    {
+        "id": "e38798f8-e583-49c4-96bb-2a66d82899df",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: They said, 'We have finished.' [medium]",
+        "options": [
+            "They said that we had finished.",
+            "They said that they have finished.",
+            "They said that they has finished.",
+            "They said that they had finished."
+        ],
+        "answer": 3,
+        "explanation": "Present perfect changes to past perfect."
+    },
+    {
+        "id": "e7e6c425-96ab-4063-b08f-bd9b8db9cc1a",
+        "difficulty": "medium",
+        "topic": "Narration",
+        "question": "[Narration][medium] Direct: They said, 'We have finished.' [medium] - alternate wording",
+        "options": [
+            "They said that they have finished.",
+            "They said that they has finished.",
+            "They said that we had finished.",
+            "They said that they had finished."
+        ],
+        "answer": 3,
+        "explanation": "Present perfect changes to past perfect."
+    },
+    {
+        "id": "1c5d6df5-b110-4285-9d7b-484866d28125",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Abundant [hard]",
+        "options": [
+            "Empty",
+            "Plentiful",
+            "Rare",
+            "Scarce"
+        ],
+        "answer": 1,
+        "explanation": "Plentiful is a synonym of abundant."
+    },
+    {
+        "id": "6f1c6adc-d3b5-4d3a-9be7-a4b80471399b",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Abundant [hard] - alternate wording",
+        "options": [
+            "Plentiful",
+            "Empty",
+            "Scarce",
             "Rare"
         ],
-        "answer": 2,
-        "explanation": "Honest means Candid"
+        "answer": 0,
+        "explanation": "Plentiful is a synonym of abundant."
     },
     {
-        "id": "37f86ad6-e5ae-42e6-8c21-1a294bc56696",
-        "difficulty": "easy",
-        "topic": "Para Jumbles",
-        "question": "What is the synonym of Abundant?",
+        "id": "9e8b9ee5-c99e-44f9-8c89-454c2891cdfa",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Brief [hard]",
         "options": [
-            "Rare",
             "Long",
-            "Plentiful",
-            "Deceitful"
-        ],
-        "answer": 2,
-        "explanation": "Plentiful means Abundant"
-    },
-    {
-        "id": "2ab7fdc2-d9c1-43b6-861a-1f21412a048b",
-        "difficulty": "easy",
-        "topic": "Para Jumbles",
-        "question": "What is the synonym of Brief?",
-        "options": [
-            "Rare",
             "Short",
+            "Large",
+            "Broad"
+        ],
+        "answer": 1,
+        "explanation": "Short matches brief."
+    },
+    {
+        "id": "bb46b491-42c8-4108-a512-54125d226a23",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Brief [hard] - alternate wording",
+        "options": [
+            "Short",
+            "Large",
             "Long",
-            "Deceitful"
+            "Broad"
         ],
-        "answer": 1,
-        "explanation": "Short means Brief"
+        "answer": 0,
+        "explanation": "Short matches brief."
     },
     {
-        "id": "712a9122-9d34-436a-bd9d-1ff5e71921f6",
-        "difficulty": "medium",
-        "topic": "Reading Comprehension",
-        "question": "The committee ___ submitted its report.",
+        "id": "c8c0f46e-e217-4058-b657-ab302cf48d03",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Candid [hard]",
         "options": [
+            "Hidden",
+            "False",
+            "Honest",
+            "Crafty"
+        ],
+        "answer": 2,
+        "explanation": "Honest matches candid."
+    },
+    {
+        "id": "c90f0ed0-ec73-42ff-8634-3844a0084f86",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Candid [hard] - alternate wording",
+        "options": [
+            "Honest",
+            "Hidden",
+            "Crafty",
+            "False"
+        ],
+        "answer": 0,
+        "explanation": "Honest matches candid."
+    },
+    {
+        "id": "ea42643b-98d8-4098-b784-e71125f71af4",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Expand [hard]",
+        "options": [
+            "Shrink",
+            "Fold",
+            "Enlarge",
+            "Break"
+        ],
+        "answer": 2,
+        "explanation": "Enlarge is close in meaning."
+    },
+    {
+        "id": "63b3ff55-2028-453f-b1bc-d84b54530cc6",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Expand [hard] - alternate wording",
+        "options": [
+            "Shrink",
+            "Fold",
+            "Break",
+            "Enlarge"
+        ],
+        "answer": 3,
+        "explanation": "Enlarge is close in meaning."
+    },
+    {
+        "id": "04f69b8c-4746-47e0-a2f3-e1412d0def0e",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Rapid [hard]",
+        "options": [
+            "Dull",
+            "Fast",
+            "Slow",
+            "Late"
+        ],
+        "answer": 1,
+        "explanation": "Fast is synonymous with rapid."
+    },
+    {
+        "id": "e6c0b35a-1b57-45ad-b074-aea5e6275cb1",
+        "difficulty": "hard",
+        "topic": "Synonyms",
+        "question": "[Synonyms][hard] Rapid [hard] - alternate wording",
+        "options": [
+            "Slow",
+            "Fast",
+            "Late",
+            "Dull"
+        ],
+        "answer": 1,
+        "explanation": "Fast is synonymous with rapid."
+    },
+    {
+        "id": "a95a7d9f-1a1d-4be0-a764-f43ccd81e280",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Ancient [hard]",
+        "options": [
+            "Old",
+            "Early",
+            "Past",
+            "Modern"
+        ],
+        "answer": 3,
+        "explanation": "Modern is opposite to ancient."
+    },
+    {
+        "id": "2663758e-7943-49d8-ae58-ffbe97221449",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Ancient [hard] - alternate wording",
+        "options": [
+            "Past",
+            "Modern",
+            "Early",
+            "Old"
+        ],
+        "answer": 1,
+        "explanation": "Modern is opposite to ancient."
+    },
+    {
+        "id": "b5a62460-d332-48ac-be84-2e0fe18c1a70",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Brave [hard]",
+        "options": [
+            "Bold",
+            "Sharp",
+            "Cowardly",
+            "Strong"
+        ],
+        "answer": 2,
+        "explanation": "Cowardly is the antonym."
+    },
+    {
+        "id": "186e9543-83f7-4e19-9144-2fbf41089993",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Brave [hard] - alternate wording",
+        "options": [
+            "Bold",
+            "Cowardly",
+            "Sharp",
+            "Strong"
+        ],
+        "answer": 1,
+        "explanation": "Cowardly is the antonym."
+    },
+    {
+        "id": "8a84d8c6-6979-4269-ba4c-35f7e31c7f0d",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Generous [hard]",
+        "options": [
+            "Open",
+            "Friendly",
+            "Kind",
+            "Stingy"
+        ],
+        "answer": 3,
+        "explanation": "Stingy is opposite to generous."
+    },
+    {
+        "id": "b3049164-849f-4445-8cee-f93b671eb6d3",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Generous [hard] - alternate wording",
+        "options": [
+            "Stingy",
+            "Friendly",
+            "Open",
+            "Kind"
+        ],
+        "answer": 0,
+        "explanation": "Stingy is opposite to generous."
+    },
+    {
+        "id": "d18ee0d0-f95e-4693-8933-f68eee78cb36",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Expand [hard]",
+        "options": [
+            "Grow",
+            "Stretch",
+            "Contract",
+            "Open"
+        ],
+        "answer": 2,
+        "explanation": "Contract is the opposite."
+    },
+    {
+        "id": "619e32dc-729a-4cd5-afce-bc42cbcab9b5",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Expand [hard] - alternate wording",
+        "options": [
+            "Contract",
+            "Stretch",
+            "Grow",
+            "Open"
+        ],
+        "answer": 0,
+        "explanation": "Contract is the opposite."
+    },
+    {
+        "id": "19752dfc-bac9-4b54-bd30-a0d7f7b86fdd",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Visible [hard]",
+        "options": [
+            "Bright",
+            "Clear",
+            "Near",
+            "Invisible"
+        ],
+        "answer": 3,
+        "explanation": "Invisible is opposite to visible."
+    },
+    {
+        "id": "62b2a99f-bb90-4edd-9560-a71894afd9b7",
+        "difficulty": "hard",
+        "topic": "Antonyms",
+        "question": "[Antonyms][hard] Visible [hard] - alternate wording",
+        "options": [
+            "Near",
+            "Clear",
+            "Invisible",
+            "Bright"
+        ],
+        "answer": 2,
+        "explanation": "Invisible is opposite to visible."
+    },
+    {
+        "id": "cdfc9f86-170f-4d6a-910d-ae9ce7462811",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] The committee ___ its report. [hard]",
+        "options": [
+            "were",
             "are",
+            "has",
+            "have"
+        ],
+        "answer": 2,
+        "explanation": "Committee is singular in this sentence."
+    },
+    {
+        "id": "1027d179-d192-476c-b2e3-dcc134a4fff6",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] The committee ___ its report. [hard] - alternate wording",
+        "options": [
             "have",
+            "are",
             "were",
             "has"
         ],
         "answer": 3,
-        "explanation": "Committee is singular here."
+        "explanation": "Committee is singular in this sentence."
     },
     {
-        "id": "ed41b579-bb2d-47a7-8cb7-1559079b441b",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
+        "id": "ffc89bde-145e-45c8-98a6-2035789dab46",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] Each of the players ___ a medal. [hard]",
         "options": [
-            "are",
-            "has",
-            "have",
-            "were"
+            "gets",
+            "getting",
+            "get",
+            "got"
         ],
-        "answer": 1,
-        "explanation": "Committee is singular here."
+        "answer": 0,
+        "explanation": "Each takes a singular verb."
     },
     {
-        "id": "03a52107-ed12-4ac5-ad79-75cd03028bf3",
-        "difficulty": "medium",
-        "topic": "Synonyms",
-        "question": "The committee ___ submitted its report.",
+        "id": "ab96d75a-0db7-43b2-8150-023950db035e",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] Each of the players ___ a medal. [hard] - alternate wording",
         "options": [
-            "have",
+            "got",
+            "get",
+            "getting",
+            "gets"
+        ],
+        "answer": 3,
+        "explanation": "Each takes a singular verb."
+    },
+    {
+        "id": "7a587ee2-c550-46b0-a8a5-9dccd31d41ee",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] Neither the teacher nor the students ___ present. [hard]",
+        "options": [
+            "is",
+            "was",
             "has",
-            "were",
             "are"
         ],
-        "answer": 1,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "2083840c-ea49-475e-90e8-2b64ec1e9cbd",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "are",
-            "were",
-            "has",
-            "have"
-        ],
-        "answer": 2,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "bc251156-f3fd-463b-ac5c-c04fd856396b",
-        "difficulty": "medium",
-        "topic": "Synonyms",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "have",
-            "has",
-            "are",
-            "were"
-        ],
-        "answer": 1,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "5b4c805b-27d7-46bf-9d54-e1b3ce790303",
-        "difficulty": "medium",
-        "topic": "Synonyms",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "have",
-            "has",
-            "were",
-            "are"
-        ],
-        "answer": 1,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "b4d59628-8ff5-4e2e-b4f9-8a2a708a7d6a",
-        "difficulty": "medium",
-        "topic": "Grammar",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "were",
-            "are",
-            "have",
-            "has"
-        ],
         "answer": 3,
-        "explanation": "Committee is singular here."
+        "explanation": "The verb agrees with the nearer subject, students."
     },
     {
-        "id": "5d24f0fb-b3b5-479f-89b6-0cc155e64c4e",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
+        "id": "227508ca-8382-4d77-b0cc-9b5b59728b34",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] Neither the teacher nor the students ___ present. [hard] - alternate wording",
         "options": [
-            "has",
-            "have",
-            "are",
-            "were"
-        ],
-        "answer": 0,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "8d71f13a-0cc7-4a38-8583-b9640166062f",
-        "difficulty": "medium",
-        "topic": "Synonyms",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "has",
-            "are",
-            "were",
-            "have"
-        ],
-        "answer": 0,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "14df1de8-54f5-4e15-9ea7-945b9516f8aa",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "have",
-            "were",
+            "was",
+            "is",
             "are",
             "has"
         ],
-        "answer": 3,
-        "explanation": "Committee is singular here."
+        "answer": 2,
+        "explanation": "The verb agrees with the nearer subject, students."
     },
     {
-        "id": "b67de6e2-9cda-4f25-950f-c70d31053a5a",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
+        "id": "59d04ee8-e3ec-4eab-855b-e9d6b1a0d3cd",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] If I ___ enough time, I will finish it. [hard]",
         "options": [
-            "were",
+            "have",
+            "had",
             "has",
+            "having"
+        ],
+        "answer": 0,
+        "explanation": "First conditional uses present tense in the if-clause."
+    },
+    {
+        "id": "b0885280-b038-4db9-8f85-950a4d8e7c15",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] If I ___ enough time, I will finish it. [hard] - alternate wording",
+        "options": [
+            "had",
+            "has",
+            "have",
+            "having"
+        ],
+        "answer": 2,
+        "explanation": "First conditional uses present tense in the if-clause."
+    },
+    {
+        "id": "315848e1-c6fc-4955-945c-214dfb5cac1f",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] She is better ___ me at chess. [hard]",
+        "options": [
+            "to",
+            "from",
+            "then",
+            "than"
+        ],
+        "answer": 3,
+        "explanation": "Comparison uses than."
+    },
+    {
+        "id": "f23b4264-3e99-4641-864e-e51277100162",
+        "difficulty": "hard",
+        "topic": "Grammar",
+        "question": "[Grammar][hard] She herself is better ___ me at chess. [hard]",
+        "options": [
+            "then",
+            "than",
+            "to",
+            "from"
+        ],
+        "answer": 1,
+        "explanation": "Comparison uses than."
+    },
+    {
+        "id": "d48b9071-6022-4874-959b-f9b33f17aa30",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A short passage about renewable energy says solar panels reduce electricity bills. What is one benefit? [hard]",
+        "options": [
+            "Higher fuel use",
+            "Less sunlight",
+            "Lower electricity bills",
+            "More smoke"
+        ],
+        "answer": 2,
+        "explanation": "The passage explicitly states the benefit."
+    },
+    {
+        "id": "e559a7df-a0fa-4831-bc50-1f32f2eeb0a5",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A short passage about renewable energy says solar panels reduce electricity bills. Which is one benefit? [hard]",
+        "options": [
+            "Less sunlight",
+            "Higher fuel use",
+            "Lower electricity bills",
+            "More smoke"
+        ],
+        "answer": 2,
+        "explanation": "The passage explicitly states the benefit."
+    },
+    {
+        "id": "d7d2ae3b-789a-4c95-aa3e-fc4adfa0bbdc",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage about remote work mentions flexibility and time savings. What is a key idea? [hard]",
+        "options": [
+            "More expenses",
+            "Flexibility",
+            "Less productivity",
+            "Longer commute"
+        ],
+        "answer": 1,
+        "explanation": "Flexibility is stated as an advantage."
+    },
+    {
+        "id": "42e9bd31-db1b-4e38-9496-bd7c3463175e",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage about remote work mentions flexibility and time savings. What is a key idea? [hard] - alternate wording",
+        "options": [
+            "Longer commute",
+            "More expenses",
+            "Flexibility",
+            "Less productivity"
+        ],
+        "answer": 2,
+        "explanation": "Flexibility is stated as an advantage."
+    },
+    {
+        "id": "49a3166b-06ce-4812-9d98-0818ddf29dae",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage on healthy eating recommends fruits and vegetables. What is the main message? [hard]",
+        "options": [
+            "Skipping meals",
+            "Balanced diet",
+            "Fast food",
+            "Sugar only"
+        ],
+        "answer": 1,
+        "explanation": "Healthy food choices are encouraged."
+    },
+    {
+        "id": "349b69c3-7b65-48e8-8dc6-970c3dfc6b71",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage on healthy eating recommends fruits and vegetables. Which is the main message? [hard]",
+        "options": [
+            "Sugar only",
+            "Fast food",
+            "Balanced diet",
+            "Skipping meals"
+        ],
+        "answer": 2,
+        "explanation": "Healthy food choices are encouraged."
+    },
+    {
+        "id": "4ab7946d-4bde-4227-a2ca-dd3d1b995e42",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage on urban transport supports buses and trains. What does it favor? [hard]",
+        "options": [
+            "Public transport",
+            "Walking only",
+            "No travel",
+            "Private jets"
+        ],
+        "answer": 0,
+        "explanation": "Public transport is the focus."
+    },
+    {
+        "id": "d88a8246-e28f-42d2-8c43-b0e8f4e69e45",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage on urban transport supports buses and trains. What does it favor? [hard] - alternate wording",
+        "options": [
+            "No travel",
+            "Public transport",
+            "Walking only",
+            "Private jets"
+        ],
+        "answer": 1,
+        "explanation": "Public transport is the focus."
+    },
+    {
+        "id": "03de8c26-ef69-43dc-ae8f-5333bf5259ed",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage on teamwork highlights cooperation. What is emphasized? [hard]",
+        "options": [
+            "Silence",
+            "Isolation",
+            "Competition only",
+            "Collaboration"
+        ],
+        "answer": 3,
+        "explanation": "Teamwork and cooperation are the theme."
+    },
+    {
+        "id": "cabefe65-d1e9-4e63-b8c4-6a682979f36f",
+        "difficulty": "hard",
+        "topic": "Reading Comprehension",
+        "question": "[Reading Comprehension][hard] A passage on teamwork highlights cooperation. Which is emphasized? [hard]",
+        "options": [
+            "Competition only",
+            "Silence",
+            "Collaboration",
+            "Isolation"
+        ],
+        "answer": 2,
+        "explanation": "Teamwork and cooperation are the theme."
+    },
+    {
+        "id": "ff69f292-3722-4c87-bfa8-bdc8d1a534fa",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] She don't like coffee. [hard]",
+        "options": [
+            "like",
+            "don't",
+            "She",
+            "coffee"
+        ],
+        "answer": 1,
+        "explanation": "'Doesn't' is correct for third-person singular."
+    },
+    {
+        "id": "06702234-17d9-4853-bff0-92da62447c39",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] She herself don't like coffee. [hard]",
+        "options": [
+            "coffee",
+            "like",
+            "She",
+            "don't"
+        ],
+        "answer": 3,
+        "explanation": "'Doesn't' is correct for third-person singular."
+    },
+    {
+        "id": "0d56c926-98b4-4dff-b9a5-8ebd2c6d1b99",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] He go to office daily. [hard]",
+        "options": [
+            "He",
+            "daily",
+            "to",
+            "go"
+        ],
+        "answer": 3,
+        "explanation": "'Goes' is required."
+    },
+    {
+        "id": "e56d67ff-7c7d-4c57-953b-64fbf09533fa",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] He go to office daily. [hard] - alternate wording",
+        "options": [
+            "to",
+            "He",
+            "daily",
+            "go"
+        ],
+        "answer": 3,
+        "explanation": "'Goes' is required."
+    },
+    {
+        "id": "52dc5ad7-9bfc-4508-a72f-016e99d40afb",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] They was waiting for us. [hard]",
+        "options": [
+            "They",
+            "for",
+            "waiting",
+            "was"
+        ],
+        "answer": 3,
+        "explanation": "Plural subject takes 'were'."
+    },
+    {
+        "id": "73c3181d-5430-445d-b2be-fc277df16433",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] They was waiting for us. [hard] - alternate wording",
+        "options": [
+            "waiting",
+            "for",
+            "was",
+            "They"
+        ],
+        "answer": 2,
+        "explanation": "Plural subject takes 'were'."
+    },
+    {
+        "id": "180ababe-c776-43eb-a658-18a0596ed673",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] The list of items are on the table. [hard]",
+        "options": [
+            "list",
             "are",
+            "items",
+            "table"
+        ],
+        "answer": 1,
+        "explanation": "The subject is singular: list."
+    },
+    {
+        "id": "37719047-927f-4dad-bd72-180fb9619a7d",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] The list of items are on the table. [hard] - alternate wording",
+        "options": [
+            "table",
+            "items",
+            "are",
+            "list"
+        ],
+        "answer": 2,
+        "explanation": "The subject is singular: list."
+    },
+    {
+        "id": "9e687847-7ad7-417e-92d1-f88b71dcc581",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] I have saw that movie. [hard]",
+        "options": [
+            "movie",
+            "have",
+            "saw",
+            "I"
+        ],
+        "answer": 2,
+        "explanation": "Present perfect uses 'have seen'."
+    },
+    {
+        "id": "70f5a06f-af65-4bc4-8313-f4e37b274222",
+        "difficulty": "hard",
+        "topic": "Error Spotting",
+        "question": "[Error Spotting][hard] I have saw that movie. [hard] - alternate wording",
+        "options": [
+            "saw",
+            "I",
+            "movie",
             "have"
         ],
-        "answer": 1,
-        "explanation": "Committee is singular here."
+        "answer": 0,
+        "explanation": "Present perfect uses 'have seen'."
     },
     {
-        "id": "2c41c0bf-7f86-47ae-b159-b4043ce70ea0",
-        "difficulty": "medium",
-        "topic": "Synonyms",
-        "question": "The committee ___ submitted its report.",
+        "id": "7fa924be-af17-4c8a-bc9d-751752a9d4cb",
+        "difficulty": "hard",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] He is more taller than his brother. [hard]",
         "options": [
-            "has",
-            "were",
-            "have",
-            "are"
+            "He is taller than his brother.",
+            "He is more tall than his brother.",
+            "He is most taller than his brother.",
+            "He is tall than his brother."
         ],
         "answer": 0,
-        "explanation": "Committee is singular here."
+        "explanation": "Use one comparative form only."
     },
     {
-        "id": "cd950b08-bc43-4cd6-9d08-775c101fb8ba",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
+        "id": "bbf34b01-c2fe-4e42-b4dc-3cf447175471",
+        "difficulty": "hard",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] He is more taller than his brother. [hard] - alternate wording",
         "options": [
-            "were",
-            "have",
-            "are",
-            "has"
-        ],
-        "answer": 3,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "e53e7d5c-ab5b-4ffb-a29a-ed2922f5f617",
-        "difficulty": "medium",
-        "topic": "Grammar",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "has",
-            "were",
-            "are",
-            "have"
-        ],
-        "answer": 0,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "afd44db6-6a4d-4a7e-9c57-288928a3409c",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "has",
-            "were",
-            "are",
-            "have"
-        ],
-        "answer": 0,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "8fd96968-6f22-404d-b097-60ff944cf24c",
-        "difficulty": "medium",
-        "topic": "Reading Comprehension",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "has",
-            "are",
-            "have",
-            "were"
-        ],
-        "answer": 0,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "398645b8-adb9-428c-9bed-a94f73697a71",
-        "difficulty": "medium",
-        "topic": "Para Jumbles",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "has",
-            "were",
-            "are",
-            "have"
-        ],
-        "answer": 0,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "794de7da-b753-43a7-a7d9-0bdb61fe4522",
-        "difficulty": "medium",
-        "topic": "Grammar",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "are",
-            "has",
-            "have",
-            "were"
+            "He is most taller than his brother.",
+            "He is taller than his brother.",
+            "He is tall than his brother.",
+            "He is more tall than his brother."
         ],
         "answer": 1,
-        "explanation": "Committee is singular here."
+        "explanation": "Use one comparative form only."
     },
     {
-        "id": "6d2a77ce-8c0d-4e88-bda9-8c47164e07d6",
-        "difficulty": "medium",
-        "topic": "Reading Comprehension",
-        "question": "The committee ___ submitted its report.",
+        "id": "09f230f7-2761-4067-a635-bf2f3f6d6125",
+        "difficulty": "hard",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] She did not knew the answer. [hard]",
         "options": [
-            "are",
-            "have",
-            "were",
-            "has"
-        ],
-        "answer": 3,
-        "explanation": "Committee is singular here."
-    },
-    {
-        "id": "b98f43e6-53b1-45c7-89cf-a4c2ad1702f8",
-        "difficulty": "medium",
-        "topic": "Reading Comprehension",
-        "question": "The committee ___ submitted its report.",
-        "options": [
-            "are",
-            "have",
-            "has",
-            "were"
+            "She not know the answer.",
+            "She did not knows the answer.",
+            "She did not know the answer.",
+            "She do not know the answer."
         ],
         "answer": 2,
-        "explanation": "Committee is singular here."
+        "explanation": "Use base verb after did not."
     },
     {
-        "id": "c33ae7ec-54cb-4805-9e0f-d169ff2ebc2b",
+        "id": "675d70cd-4099-4400-8564-183b8a97d5ed",
         "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] She did not knew the answer. [hard] - alternate wording",
         "options": [
-            "PQRS",
-            "SPQR",
-            "QPRS",
-            "PRSQ"
-        ],
-        "answer": 0,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "052cb741-7240-4e32-a4e8-083204a6a1f3",
-        "difficulty": "hard",
-        "topic": "Grammar",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "QPRS",
-            "PQRS",
-            "SPQR",
-            "PRSQ"
-        ],
-        "answer": 1,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "ae9ac9a8-ee7e-4e0a-8afe-8e13e403bbf4",
-        "difficulty": "hard",
-        "topic": "Grammar",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "SPQR",
-            "PQRS",
-            "QPRS",
-            "PRSQ"
-        ],
-        "answer": 1,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "46a1770e-7190-4af0-8760-f44569d9c463",
-        "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "PRSQ",
-            "SPQR",
-            "QPRS",
-            "PQRS"
+            "She not know the answer.",
+            "She did not knows the answer.",
+            "She do not know the answer.",
+            "She did not know the answer."
         ],
         "answer": 3,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Use base verb after did not."
     },
     {
-        "id": "b55f2fac-c6f8-4e41-89ae-c5b3f3c56f3f",
+        "id": "fba14f17-9d74-4650-ae61-80acca8835a3",
         "difficulty": "hard",
-        "topic": "Grammar",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] The train arrived late than expected. [hard]",
         "options": [
-            "PQRS",
-            "SPQR",
-            "PRSQ",
-            "QPRS"
+            "The train arrived more late than expected.",
+            "The train arrives late than expected.",
+            "The train arrived latest than expected.",
+            "The train arrived later than expected."
+        ],
+        "answer": 3,
+        "explanation": "Use comparative adverb later."
+    },
+    {
+        "id": "caa66aef-a497-40d8-9470-f8c69bd54063",
+        "difficulty": "hard",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] The train arrived late than expected. [hard] - alternate wording",
+        "options": [
+            "The train arrived later than expected.",
+            "The train arrived latest than expected.",
+            "The train arrives late than expected.",
+            "The train arrived more late than expected."
         ],
         "answer": 0,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Use comparative adverb later."
     },
     {
-        "id": "c93fcb0b-7986-4c33-aa14-8404d1555961",
+        "id": "afa17d92-42d5-4aa4-b902-89f73d5d2b74",
         "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] Each of the boys have a book. [hard]",
         "options": [
-            "PQRS",
-            "SPQR",
-            "PRSQ",
-            "QPRS"
-        ],
-        "answer": 0,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "336612ab-0fdc-4824-a20c-458a3efea262",
-        "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "QPRS",
-            "PRSQ",
-            "PQRS",
-            "SPQR"
+            "Each of the boys had a book.",
+            "Each of the boys are a book.",
+            "Each of the boys has a book.",
+            "Each of the boys having a book."
         ],
         "answer": 2,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Each is singular."
     },
     {
-        "id": "7c285dec-fde3-4100-b97e-d1bde657c85b",
+        "id": "47230aae-07fb-4109-8e0d-ef1d68bf34d4",
         "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] Each of the boys have a book. [hard] - alternate wording",
         "options": [
-            "SPQR",
-            "QPRS",
-            "PQRS",
-            "PRSQ"
+            "Each of the boys are a book.",
+            "Each of the boys having a book.",
+            "Each of the boys had a book.",
+            "Each of the boys has a book."
+        ],
+        "answer": 3,
+        "explanation": "Each is singular."
+    },
+    {
+        "id": "fd8453cd-ed93-40fe-a607-e6775fcf0fbe",
+        "difficulty": "hard",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] The solution is consist of two parts. [hard]",
+        "options": [
+            "The solution consist on two parts.",
+            "The solution has consist of two parts.",
+            "The solution consists of two parts.",
+            "The solution is consisting of two parts."
         ],
         "answer": 2,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Use the correct verb form."
     },
     {
-        "id": "67134192-0099-4f42-9775-216e4bcf38cc",
+        "id": "36ff96ab-0e32-4638-a748-b9e8c084451e",
+        "difficulty": "hard",
+        "topic": "Sentence Improvement",
+        "question": "[Sentence Improvement][hard] The solution is consist of two parts. [hard] - alternate wording",
+        "options": [
+            "The solution has consist of two parts.",
+            "The solution is consisting of two parts.",
+            "The solution consists of two parts.",
+            "The solution consist on two parts."
+        ],
+        "answer": 2,
+        "explanation": "Use the correct verb form."
+    },
+    {
+        "id": "ba224e7d-8156-4991-95ab-5e811ebff48c",
         "difficulty": "hard",
         "topic": "Para Jumbles",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "question": "[Para Jumbles][hard] Arrange: A. He opened the door. B. John heard a knock. C. A visitor stood outside. [hard]",
         "options": [
-            "PRSQ",
-            "QPRS",
-            "PQRS",
-            "SPQR"
+            "ABC",
+            "BCA",
+            "CAB",
+            "BAC"
         ],
-        "answer": 2,
-        "explanation": "Chronological grammar dictates PQRS."
+        "answer": 1,
+        "explanation": "Knock first, visitor second, opening last."
     },
     {
-        "id": "080ba9ff-3af5-4889-91a9-b14ce845042e",
+        "id": "27984e53-4ae9-482e-a2d3-d5674d1fe823",
         "difficulty": "hard",
-        "topic": "Grammar",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. He opened the door. B. John heard a knock. C. A visitor stood outside. [hard] - alternate wording",
         "options": [
-            "PRSQ",
-            "QPRS",
-            "SPQR",
-            "PQRS"
+            "ABC",
+            "BCA",
+            "CAB",
+            "BAC"
+        ],
+        "answer": 1,
+        "explanation": "Knock first, visitor second, opening last."
+    },
+    {
+        "id": "e7256124-b1a5-462b-9396-54eaaeab9906",
+        "difficulty": "hard",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. It started to rain. B. The picnic ended. C. They packed their bags. [hard]",
+        "options": [
+            "CBA",
+            "ABC",
+            "BAC",
+            "ACB"
         ],
         "answer": 3,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Rain triggers packing then ending."
     },
     {
-        "id": "4e8012bd-121a-46bf-afb6-4361214d92b4",
+        "id": "1ab7e0a3-9125-49df-8070-0267e5758966",
         "difficulty": "hard",
-        "topic": "Reading Comprehension",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. It started to rain. B. The picnic ended. C. They packed their bags. [hard] - alternate wording",
         "options": [
-            "QPRS",
-            "PQRS",
-            "SPQR",
-            "PRSQ"
-        ],
-        "answer": 1,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "5eb8cb5b-2dfe-4f3f-a9d0-6e37bd6dc374",
-        "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "PRSQ",
-            "PQRS",
-            "SPQR",
-            "QPRS"
-        ],
-        "answer": 1,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "2ab4fa03-4a3e-484f-b590-f9dc5cc817ab",
-        "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "SPQR",
-            "QPRS",
-            "PQRS",
-            "PRSQ"
-        ],
-        "answer": 2,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "3279323d-8b92-4fd3-9bee-e38881131cbf",
-        "difficulty": "hard",
-        "topic": "Synonyms",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "SPQR",
-            "PQRS",
-            "PRSQ",
-            "QPRS"
-        ],
-        "answer": 1,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "ad2eefd2-6bb8-4ca0-8723-60e04a961cc2",
-        "difficulty": "hard",
-        "topic": "Reading Comprehension",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "SPQR",
-            "PRSQ",
-            "QPRS",
-            "PQRS"
+            "ABC",
+            "BAC",
+            "CBA",
+            "ACB"
         ],
         "answer": 3,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Rain triggers packing then ending."
     },
     {
-        "id": "10e7d3ee-4fd3-4704-b98d-d080ca6931a1",
+        "id": "8bc01d4b-efba-4e1b-a1de-f658d1867822",
         "difficulty": "hard",
-        "topic": "Grammar",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. The alarm rang. B. She woke up. C. She got ready for school. [hard]",
         "options": [
-            "SPQR",
-            "PRSQ",
-            "PQRS",
-            "QPRS"
-        ],
-        "answer": 2,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "64114129-7d5b-4550-be72-36913234a2e3",
-        "difficulty": "hard",
-        "topic": "Reading Comprehension",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "PRSQ",
-            "PQRS",
-            "QPRS",
-            "SPQR"
+            "BCA",
+            "ABC",
+            "BAC",
+            "CAB"
         ],
         "answer": 1,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Alarm, wake, then prepare."
     },
     {
-        "id": "a51c18d3-4342-4eed-8a64-4fd469e68f97",
+        "id": "f15a1826-b60a-4c56-aef9-c6eb45f2af1e",
         "difficulty": "hard",
-        "topic": "Reading Comprehension",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. The alarm rang. B. She herself woke up. C. She herself got ready for school. [hard]",
         "options": [
-            "PQRS",
-            "QPRS",
-            "PRSQ",
-            "SPQR"
+            "ABC",
+            "BCA",
+            "CAB",
+            "BAC"
         ],
         "answer": 0,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Alarm, wake, then prepare."
     },
     {
-        "id": "c2613756-d436-4784-b56a-6d5348520691",
+        "id": "46144274-2319-4ead-a840-52193a158f75",
         "difficulty": "hard",
-        "topic": "Reading Comprehension",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. The report was submitted. B. The team reviewed it. C. The manager approved it. [hard]",
         "options": [
-            "PRSQ",
-            "SPQR",
-            "QPRS",
-            "PQRS"
-        ],
-        "answer": 3,
-        "explanation": "Chronological grammar dictates PQRS."
-    },
-    {
-        "id": "2e54d0d5-698c-4fb2-a626-a4d932c94107",
-        "difficulty": "hard",
-        "topic": "Reading Comprehension",
-        "question": "Rearrange: P: I went, Q: to the store, R: yesterday, S: morning",
-        "options": [
-            "PQRS",
-            "SPQR",
-            "PRSQ",
-            "QPRS"
+            "BCA",
+            "ABC",
+            "ACB",
+            "CBA"
         ],
         "answer": 0,
-        "explanation": "Chronological grammar dictates PQRS."
+        "explanation": "Review, approval, submission sequence."
+    },
+    {
+        "id": "5aaed93b-a712-49cc-b43b-ae0bb9974a95",
+        "difficulty": "hard",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. The report was submitted. B. The team reviewed it. C. The manager approved it. [hard] - alternate wording",
+        "options": [
+            "BCA",
+            "CBA",
+            "ACB",
+            "ABC"
+        ],
+        "answer": 0,
+        "explanation": "Review, approval, submission sequence."
+    },
+    {
+        "id": "8b14cadb-ebca-48e8-aaf9-f18a3d09035a",
+        "difficulty": "hard",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. He studied hard. B. He passed the exam. C. He celebrated with friends. [hard]",
+        "options": [
+            "ABC",
+            "BAC",
+            "CBA",
+            "ACB"
+        ],
+        "answer": 0,
+        "explanation": "Study, pass, celebrate."
+    },
+    {
+        "id": "f93e1220-fa16-4ba3-82d1-ff079c7837ac",
+        "difficulty": "hard",
+        "topic": "Para Jumbles",
+        "question": "[Para Jumbles][hard] Arrange: A. He studied hard. B. He passed the exam. C. He celebrated with friends. [hard] - alternate wording",
+        "options": [
+            "ACB",
+            "ABC",
+            "CBA",
+            "BAC"
+        ],
+        "answer": 1,
+        "explanation": "Study, pass, celebrate."
+    },
+    {
+        "id": "b416c177-9b6f-456f-824a-097f0a4b2329",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Break the ice' means? [hard]",
+        "options": [
+            "To end a meeting",
+            "To become silent",
+            "To repair something",
+            "To start a conversation"
+        ],
+        "answer": 3,
+        "explanation": "It means to ease tension."
+    },
+    {
+        "id": "78520bee-3f63-41f5-833b-445bb563bad4",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Break the ice' means? [hard] - alternate wording",
+        "options": [
+            "To become silent",
+            "To start a conversation",
+            "To repair something",
+            "To end a meeting"
+        ],
+        "answer": 1,
+        "explanation": "It means to ease tension."
+    },
+    {
+        "id": "a369225f-0610-494b-9083-d68bb496c04b",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Once in a blue moon' means? [hard]",
+        "options": [
+            "Very rarely",
+            "Every day",
+            "At noon",
+            "At night"
+        ],
+        "answer": 0,
+        "explanation": "It refers to rare events."
+    },
+    {
+        "id": "c85cb196-660b-4a75-be2d-f2f890368556",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Once in a blue moon' best means? [hard]",
+        "options": [
+            "Very rarely",
+            "Every day",
+            "At noon",
+            "At night"
+        ],
+        "answer": 0,
+        "explanation": "It refers to rare events."
+    },
+    {
+        "id": "877c9a20-f512-47c4-8ac0-46ce2dbac039",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Hit the nail on the head' means? [hard]",
+        "options": [
+            "Avoid the issue",
+            "Make a mistake",
+            "Work slowly",
+            "Say exactly the right thing"
+        ],
+        "answer": 3,
+        "explanation": "It means being exactly right."
+    },
+    {
+        "id": "3444cebd-e44e-4f0d-a371-b858f7c379e7",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Hit the nail on the head' means? [hard] - alternate wording",
+        "options": [
+            "Say exactly the right thing",
+            "Avoid the issue",
+            "Work slowly",
+            "Make a mistake"
+        ],
+        "answer": 0,
+        "explanation": "It means being exactly right."
+    },
+    {
+        "id": "20e41714-db57-4bff-b3ea-03dcb107f2b1",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Spill the beans' means? [hard]",
+        "options": [
+            "Reveal a secret",
+            "Stay quiet",
+            "Waste time",
+            "Cook quickly"
+        ],
+        "answer": 0,
+        "explanation": "It means to disclose information."
+    },
+    {
+        "id": "94bda20d-d685-4ed7-b792-8e3c49985e6d",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'Spill the beans' best means? [hard]",
+        "options": [
+            "Waste time",
+            "Cook quickly",
+            "Stay quiet",
+            "Reveal a secret"
+        ],
+        "answer": 3,
+        "explanation": "It means to disclose information."
+    },
+    {
+        "id": "b5b815db-3515-4f71-96c6-fa5abe54731a",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'A piece of cake' means? [hard]",
+        "options": [
+            "Very difficult",
+            "Very old",
+            "Very easy",
+            "Very expensive"
+        ],
+        "answer": 2,
+        "explanation": "It means something easy."
+    },
+    {
+        "id": "79dc69e9-7736-400f-b93f-b4fc4e8eb1c1",
+        "difficulty": "hard",
+        "topic": "Idioms",
+        "question": "[Idioms][hard] 'A piece of cake' means? [hard] - alternate wording",
+        "options": [
+            "Very easy",
+            "Very difficult",
+            "Very expensive",
+            "Very old"
+        ],
+        "answer": 0,
+        "explanation": "It means something easy."
+    },
+    {
+        "id": "4b81541c-0fff-4866-82b1-dd6481899547",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A person who loves books [hard]",
+        "options": [
+            "Bibliophile",
+            "Linguist",
+            "Biologist",
+            "Photographer"
+        ],
+        "answer": 0,
+        "explanation": "Bibliophile is a book lover."
+    },
+    {
+        "id": "fcbe3695-6b19-448d-9591-f11246c6ad20",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A person who loves books [hard] - alternate wording",
+        "options": [
+            "Biologist",
+            "Photographer",
+            "Linguist",
+            "Bibliophile"
+        ],
+        "answer": 3,
+        "explanation": "Bibliophile is a book lover."
+    },
+    {
+        "id": "67d7e595-560c-4c7f-b6f3-5c7fc5b48959",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A government by the people [hard]",
+        "options": [
+            "Aristocracy",
+            "Monarchy",
+            "Democracy",
+            "Dictatorship"
+        ],
+        "answer": 2,
+        "explanation": "Democracy means rule by the people."
+    },
+    {
+        "id": "cd880d02-be0d-4e07-842b-de35556d086f",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A government by the people [hard] - alternate wording",
+        "options": [
+            "Aristocracy",
+            "Democracy",
+            "Dictatorship",
+            "Monarchy"
+        ],
+        "answer": 1,
+        "explanation": "Democracy means rule by the people."
+    },
+    {
+        "id": "d6a5bce3-7284-4129-a9d5-8f012b9061e5",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A place where animals are kept [hard]",
+        "options": [
+            "Airport",
+            "Museum",
+            "Library",
+            "Zoo"
+        ],
+        "answer": 3,
+        "explanation": "Zoo houses animals."
+    },
+    {
+        "id": "9f21e8c1-0aff-49ea-a8a3-45efd855b231",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A place where animals are kept [hard] - alternate wording",
+        "options": [
+            "Airport",
+            "Library",
+            "Museum",
+            "Zoo"
+        ],
+        "answer": 3,
+        "explanation": "Zoo houses animals."
+    },
+    {
+        "id": "9a74d31b-c12b-4125-988f-f99a31248b57",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A fear of heights [hard]",
+        "options": [
+            "Hydrophobia",
+            "Claustrophobia",
+            "Acrophobia",
+            "Anthropology"
+        ],
+        "answer": 2,
+        "explanation": "Acrophobia is fear of heights."
+    },
+    {
+        "id": "20ab96e0-7fd2-42be-9085-b314c7a76bb3",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] A fear of heights [hard] - alternate wording",
+        "options": [
+            "Claustrophobia",
+            "Hydrophobia",
+            "Acrophobia",
+            "Anthropology"
+        ],
+        "answer": 2,
+        "explanation": "Acrophobia is fear of heights."
+    },
+    {
+        "id": "f3ab0ce5-0bd3-41a2-9053-47aa293a7395",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] One who speaks many languages [hard]",
+        "options": [
+            "Polyglot",
+            "Monk",
+            "Poet",
+            "Pilot"
+        ],
+        "answer": 0,
+        "explanation": "Polyglot means a multilingual person."
+    },
+    {
+        "id": "713c82e1-ccc7-4bd8-a83f-7595b72d9f5d",
+        "difficulty": "hard",
+        "topic": "One-word Substitution",
+        "question": "[One-word Substitution][hard] One who speaks many languages [hard] - alternate wording",
+        "options": [
+            "Pilot",
+            "Polyglot",
+            "Poet",
+            "Monk"
+        ],
+        "answer": 1,
+        "explanation": "Polyglot means a multilingual person."
+    },
+    {
+        "id": "d0ab6621-95ea-4b44-a684-acfa0b36ded3",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] She is interested ___ music. [hard]",
+        "options": [
+            "for",
+            "on",
+            "at",
+            "in"
+        ],
+        "answer": 3,
+        "explanation": "The correct preposition is 'in'."
+    },
+    {
+        "id": "93099a70-c55c-42f7-8866-d54d139a7bb3",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] She herself is interested ___ music. [hard]",
+        "options": [
+            "on",
+            "for",
+            "at",
+            "in"
+        ],
+        "answer": 3,
+        "explanation": "The correct preposition is 'in'."
+    },
+    {
+        "id": "34b97d24-2ec9-48fb-81b3-d7448fb17542",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] I look forward ___ meeting you. [hard]",
+        "options": [
+            "to",
+            "at",
+            "in",
+            "for"
+        ],
+        "answer": 0,
+        "explanation": "'Look forward to' is the fixed phrase."
+    },
+    {
+        "id": "ede635e0-6998-4c83-bc61-5e836b3ba27c",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] I look forward ___ meeting you. [hard] - alternate wording",
+        "options": [
+            "in",
+            "at",
+            "for",
+            "to"
+        ],
+        "answer": 3,
+        "explanation": "'Look forward to' is the fixed phrase."
+    },
+    {
+        "id": "7b4fe39a-114a-4c00-ad00-43a446d5d70f",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] The room was filled ___ smoke. [hard]",
+        "options": [
+            "in",
+            "at",
+            "with",
+            "by"
+        ],
+        "answer": 2,
+        "explanation": "'Filled with' is standard."
+    },
+    {
+        "id": "97960c05-7485-4e59-81fa-2af49258f7e8",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] The room was filled ___ smoke. [hard] - alternate wording",
+        "options": [
+            "with",
+            "at",
+            "by",
+            "in"
+        ],
+        "answer": 0,
+        "explanation": "'Filled with' is standard."
+    },
+    {
+        "id": "d59f5030-55ea-423c-bd17-2c347352a49f",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] He insisted ___ paying the bill. [hard]",
+        "options": [
+            "to",
+            "on",
+            "in",
+            "at"
+        ],
+        "answer": 1,
+        "explanation": "The verb insists on."
+    },
+    {
+        "id": "6c144315-94f2-4989-8919-674aeb119b9b",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] He insisted ___ paying the bill. [hard] - alternate wording",
+        "options": [
+            "in",
+            "on",
+            "to",
+            "at"
+        ],
+        "answer": 1,
+        "explanation": "The verb insists on."
+    },
+    {
+        "id": "330a6423-f167-4ae7-910f-6e81bba1b8cd",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] We were surprised ___ the results. [hard]",
+        "options": [
+            "by",
+            "to",
+            "with",
+            "at"
+        ],
+        "answer": 0,
+        "explanation": "Surprised by is correct here."
+    },
+    {
+        "id": "568cdf26-c737-4de5-8e3e-84d2b43d76a5",
+        "difficulty": "hard",
+        "topic": "Fill in the Blanks",
+        "question": "[Fill in the Blanks][hard] We were surprised ___ the results. [hard] - alternate wording",
+        "options": [
+            "at",
+            "by",
+            "with",
+            "to"
+        ],
+        "answer": 1,
+        "explanation": "Surprised by is correct here."
+    },
+    {
+        "id": "d170c56c-8f50-42cd-9121-3be2392916e4",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: She writes a letter. Passive? [hard]",
+        "options": [
+            "A letter was written by her.",
+            "A letter writes her.",
+            "A letter is written by her.",
+            "She is written by a letter."
+        ],
+        "answer": 2,
+        "explanation": "Present simple passive uses is/are + past participle."
+    },
+    {
+        "id": "499dfb8a-1725-4e42-acfe-a6ca5d426bdf",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: She herself writes a letter. Passive? [hard]",
+        "options": [
+            "A letter writes her.",
+            "A letter is written by her.",
+            "She is written by a letter.",
+            "A letter was written by her."
+        ],
+        "answer": 1,
+        "explanation": "Present simple passive uses is/are + past participle."
+    },
+    {
+        "id": "709bf670-390a-4e2c-a0d9-ee74c994d923",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: They are cleaning the hall. Passive? [hard]",
+        "options": [
+            "The hall cleans them.",
+            "The hall was cleaned by them.",
+            "The hall is clean by them.",
+            "The hall is being cleaned by them."
+        ],
+        "answer": 3,
+        "explanation": "Present continuous passive uses is being."
+    },
+    {
+        "id": "8a1dc8b2-7c13-4c07-ad34-35d64afb8e7a",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: They are cleaning the hall. Passive? [hard] - alternate wording",
+        "options": [
+            "The hall cleans them.",
+            "The hall is clean by them.",
+            "The hall is being cleaned by them.",
+            "The hall was cleaned by them."
+        ],
+        "answer": 2,
+        "explanation": "Present continuous passive uses is being."
+    },
+    {
+        "id": "d4343edd-59ac-49bf-b7c5-83f2cecad0b6",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: He completed the task. Passive? [hard]",
+        "options": [
+            "The task completes him.",
+            "The task was completing by him.",
+            "The task was completed by him.",
+            "The task is completed by him."
+        ],
+        "answer": 2,
+        "explanation": "Past simple passive uses was/were + past participle."
+    },
+    {
+        "id": "af9c7407-71ff-4754-a6b5-8d5accd2fb01",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: He completed the task. Passive? [hard] - alternate wording",
+        "options": [
+            "The task completes him.",
+            "The task was completing by him.",
+            "The task was completed by him.",
+            "The task is completed by him."
+        ],
+        "answer": 2,
+        "explanation": "Past simple passive uses was/were + past participle."
+    },
+    {
+        "id": "637f238e-717e-49ed-8e2d-7006b68960d4",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: The teacher will announce the result. Passive? [hard]",
+        "options": [
+            "The result was announced by the teacher.",
+            "The result will be announced by the teacher.",
+            "The result is announced by the teacher.",
+            "The result announced the teacher."
+        ],
+        "answer": 1,
+        "explanation": "Future passive uses will be."
+    },
+    {
+        "id": "334fdabc-c4c7-4da5-a28f-ca3fb3f2ad31",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: The teacher will announce the result. Passive? [hard] - alternate wording",
+        "options": [
+            "The result will be announced by the teacher.",
+            "The result was announced by the teacher.",
+            "The result is announced by the teacher.",
+            "The result announced the teacher."
+        ],
+        "answer": 0,
+        "explanation": "Future passive uses will be."
+    },
+    {
+        "id": "a2dda341-85b9-4bf5-8091-d7eb0fa9e118",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: Someone has stolen my bike. Passive? [hard]",
+        "options": [
+            "My bike is stolen.",
+            "My bike have been stolen.",
+            "My bike has been stolen.",
+            "My bike was stolen by someone has."
+        ],
+        "answer": 2,
+        "explanation": "Present perfect passive uses has/have been."
+    },
+    {
+        "id": "f86fb719-f17c-42fb-9c34-3c49efd09937",
+        "difficulty": "hard",
+        "topic": "Voice",
+        "question": "[Voice][hard] Active: Someone has stolen my bike. Passive? [hard] - alternate wording",
+        "options": [
+            "My bike has been stolen.",
+            "My bike was stolen by someone has.",
+            "My bike is stolen.",
+            "My bike have been stolen."
+        ],
+        "answer": 0,
+        "explanation": "Present perfect passive uses has/have been."
+    },
+    {
+        "id": "e0413fe5-5a86-4233-801b-785662e917e1",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: He said, 'I am busy.' [hard]",
+        "options": [
+            "He said he am busy.",
+            "He said that he was busy.",
+            "He says that he is busy.",
+            "He said that I was busy."
+        ],
+        "answer": 1,
+        "explanation": "Backshift is needed in indirect speech."
+    },
+    {
+        "id": "26254e31-ee21-4712-b2a4-9cdce87d9ffa",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: He said, 'I am busy.' [hard] - alternate wording",
+        "options": [
+            "He said he am busy.",
+            "He said that I was busy.",
+            "He says that he is busy.",
+            "He said that he was busy."
+        ],
+        "answer": 3,
+        "explanation": "Backshift is needed in indirect speech."
+    },
+    {
+        "id": "4865458a-017d-45d4-b5a3-3b24474cd592",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: She asked, 'Where do you live?' [hard]",
+        "options": [
+            "She asked where I live.",
+            "She asked where I lived.",
+            "She asked where do I live.",
+            "She asked where did I live."
+        ],
+        "answer": 1,
+        "explanation": "Question word plus statement form in indirect speech."
+    },
+    {
+        "id": "9e1d4cc2-e643-4391-8d6a-40af2fd972ec",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: She asked, 'Where do you live?' [hard] - alternate wording",
+        "options": [
+            "She asked where I live.",
+            "She asked where did I live.",
+            "She asked where I lived.",
+            "She asked where do I live."
+        ],
+        "answer": 2,
+        "explanation": "Question word plus statement form in indirect speech."
+    },
+    {
+        "id": "2c7925d4-cc07-4d8d-a87a-8c64d41dcc36",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: The teacher said, 'Study hard.' [hard]",
+        "options": [
+            "The teacher asked us study hard.",
+            "The teacher advised us to study hard.",
+            "The teacher ordered us to studies hard.",
+            "The teacher said us study hard."
+        ],
+        "answer": 1,
+        "explanation": "Imperatives often become advised/to ordered."
+    },
+    {
+        "id": "4ff09d51-8b65-4199-ae5b-c4236fd75c27",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: The teacher said, 'Study hard.' [hard] - alternate wording",
+        "options": [
+            "The teacher advised us to study hard.",
+            "The teacher asked us study hard.",
+            "The teacher said us study hard.",
+            "The teacher ordered us to studies hard."
+        ],
+        "answer": 0,
+        "explanation": "Imperatives often become advised/to ordered."
+    },
+    {
+        "id": "bcfc1106-f448-48af-99ed-66641146892c",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: He said, 'I will come tomorrow.' [hard]",
+        "options": [
+            "He said that he would come the next day.",
+            "He said that he come tomorrow.",
+            "He said that he would came tomorrow.",
+            "He said that he will come tomorrow."
+        ],
+        "answer": 0,
+        "explanation": "Future shifts to would and tomorrow to next day."
+    },
+    {
+        "id": "1a55287e-fcc4-40b8-9c1c-c67a457b8c72",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: He said, 'I will come tomorrow.' [hard] - alternate wording",
+        "options": [
+            "He said that he come tomorrow.",
+            "He said that he will come tomorrow.",
+            "He said that he would come the next day.",
+            "He said that he would came tomorrow."
+        ],
+        "answer": 2,
+        "explanation": "Future shifts to would and tomorrow to next day."
+    },
+    {
+        "id": "24dc7959-67ec-4bc0-827f-aa0e2f814478",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: They said, 'We have finished.' [hard]",
+        "options": [
+            "They said that they has finished.",
+            "They said that they have finished.",
+            "They said that we had finished.",
+            "They said that they had finished."
+        ],
+        "answer": 3,
+        "explanation": "Present perfect changes to past perfect."
+    },
+    {
+        "id": "e29d15ad-332b-4df2-acb8-a772ffcaeb85",
+        "difficulty": "hard",
+        "topic": "Narration",
+        "question": "[Narration][hard] Direct: They said, 'We have finished.' [hard] - alternate wording",
+        "options": [
+            "They said that they had finished.",
+            "They said that they has finished.",
+            "They said that they have finished.",
+            "They said that we had finished."
+        ],
+        "answer": 0,
+        "explanation": "Present perfect changes to past perfect."
     }
 ]

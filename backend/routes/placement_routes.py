@@ -21,8 +21,15 @@ import uuid
 import json
 from database.mongo_store import save_record
 from datetime import datetime
+from utils.auth_utils import auth_identity, require_auth
 
 placement_bp = Blueprint("placement", __name__, url_prefix="/api")
+
+
+@placement_bp.before_request
+@require_auth
+def _require_authenticated_placement_routes():
+    return None
 
 
 def _now():
@@ -235,14 +242,18 @@ def profile(user_id: str):
 @placement_bp.route("/profile/save", methods=["POST"])
 def profile_save():
     payload = request.get_json(silent=True) or {}
-    user_id = payload.get("user_id")
+    user_id = auth_identity() or payload.get("user_id")
     if not user_id:
         return jsonify({"error": "User ID is required"}), 400
     
-    name = payload.get("name", "Student")
+    name = payload.get("name") or payload.get("full_name") or "Student"
     email = payload.get("email")
     role = payload.get("role", "student")
     target_role = payload.get("target_role", "Software Engineer")
+    college = payload.get("college")
+    department = payload.get("department")
+    year = payload.get("year")
+    phone = payload.get("phone")
     skills = payload.get("skills", [])
     achievements = payload.get("achievements", [])
     
@@ -255,6 +266,15 @@ def profile_save():
         target_role=target_role,
         skills_json=json.dumps(skills),
         achievements_json=json.dumps(achievements)
+        ,
+        extra_fields={
+            "full_name": name,
+            "college": college,
+            "department": department,
+            "year": year,
+            "phone": phone,
+            "updated_at": _now(),
+        }
     )
     
     return jsonify({"success": True, "message": "Profile updated successfully"})

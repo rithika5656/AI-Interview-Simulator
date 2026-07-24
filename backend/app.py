@@ -40,6 +40,8 @@ from utils.sentiment_analyzer import analyze_sentiment
 from utils.feedback_generator import generate_report
 from database.mongo_store import init_db
 from routes.placement_routes import placement_bp
+from routes.auth_routes import auth_bp
+from utils.auth_utils import auth_identity, require_auth
 
 load_dotenv()
 
@@ -57,6 +59,7 @@ CORS(
 )
 socketio = SocketIO(app, cors_allowed_origins=frontend_origins, async_mode="threading")
 app.register_blueprint(placement_bp)
+app.register_blueprint(auth_bp)
 
 init_db()
 
@@ -87,12 +90,13 @@ def handle_unexpected_exception(error):
     }), 500
 
 @app.route('/api/start-interview', methods=['POST'])
+@require_auth
 def start_interview():
     """Initialize a new interview session"""
     data = request.json
     interview_id = data.get('interview_id')
     job_role = data.get('job_role', 'Software Engineer')
-    user_id = data.get('user_id')
+    user_id = auth_identity() or data.get('user_id')
     
     interview_sessions[interview_id] = {
         'user_id': user_id,
@@ -117,6 +121,7 @@ def start_interview():
     }), 200
 
 @app.route('/api/submit-response', methods=['POST'])
+@require_auth
 def submit_response():
     """Process user response and generate feedback"""
     try:
@@ -191,6 +196,7 @@ def submit_response():
     }), 200
 
 @app.route('/api/end-interview', methods=['POST'])
+@require_auth
 def end_interview():
     """Generate final report and end interview"""
     import json

@@ -3,8 +3,13 @@ const API_URL = (typeof process !== 'undefined' && process.env.API_URL) ? proces
 const SOCKET_URL = (typeof process !== 'undefined' && process.env.SOCKET_URL) ? process.env.SOCKET_URL : (window.HireVisionConfig?.socketUrl || window.__APP_CONFIG__?.SOCKET_URL || 'https://ai-interview-simulator-12.onrender.com');
 const socket = window.io ? io(SOCKET_URL, { secure: true, reconnection: true, transports: ['websocket', 'polling'] }) : null;
 
+const AUTH_STORAGE_KEY = 'hirevisionAuthToken';
+const AUTH_SESSION_KEY = 'hirevisionAuthTokenSession';
+
 const state = {
-    userId: localStorage.getItem('hirevisionUserId') || 'demo_student',
+    userId: null,
+    authUser: null,
+    isAuthenticated: false,
     currentInterviewId: null,
     questionCount: 0,
     mediaRecorder: null,
@@ -30,13 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     bindProfileEdit();
     hydrateSelectors();
     restoreTheme();
-    updateActiveUserProfileUI();
-    showView('dashboardView');
+    prepareShellForAuth();
     // Show "not connected" placeholders immediately
     showOfflinePlaceholders();
     // Check backend health - panels load only after successful connection
     checkBackendHealth();
     setTimeout(initMonacoEditor, 500); // Load Monaco Editor
+    bootstrapAuth();
 });
 
 function $(selector, root = document) {
@@ -76,6 +81,89 @@ function showView(viewId) {
     
     // Lazy load panels
     triggerPanelLoad(viewId);
+}
+
+function getStoredAuthToken() {
+    return sessionStorage.getItem(AUTH_SESSION_KEY) || localStorage.getItem(AUTH_STORAGE_KEY);
+}
+
+function storeAuthToken(token, rememberMe) {
+    sessionStorage.removeItem(AUTH_SESSION_KEY);
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+    if (!token) return;
+    if (rememberMe) {
+        localStorage.setItem(AUTH_STORAGE_KEY, token);
+    } else {
+        sessionStorage.setItem(AUTH_SESSION_KEY, token);
+    }
+}
+
+function clearAuthSession() {
+    sessionStorage.removeItem(AUTH_SESSION_KEY);
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+    localStorage.removeItem('hirevisionUserId');
+    localStorage.removeItem('hirevisionUserName');
+    localStorage.removeItem('hirevisionUserEmail');
+    localStorage.removeItem('hirevisionUserRole');
+    localStorage.removeItem('hirevisionUserTargetRole');
+}
+
+function prepareShellForAuth() {
+    const authScreen = $('#authScreen');
+    const appShell = $('.app-shell');
+    if (authScreen) authScreen.hidden = false;
+    if (appShell) appShell.style.display = 'none';
+}
+
+function showAuthenticatedShell() {
+    const authScreen = $('#authScreen');
+    const appShell = $('.app-shell');
+    if (authScreen) authScreen.hidden = true;
+    if (appShell) appShell.style.display = 'grid';
+}
+
+function applyAuthenticatedUser(user) {
+    if (!user) return;
+    state.authUser = user;
+    state.isAuthenticated = true;
+    state.userId = user.id;
+    localStorage.setItem('hirevisionUserId', user.id || '');
+    localStorage.setItem('hirevisionUserName', user.full_name || user.name || 'Student');
+    localStorage.setItem('hirevisionUserEmail', user.email || '');
+    localStorage.setItem('hirevisionUserRole', user.role || 'student');
+    localStorage.setItem('hirevisionUserTargetRole', user.target_role || 'Software Engineer');
+    updateActiveUserProfileUI();
+    const interviewName = $('#interviewName');
+    const resumeName = $('#resumeName');
+    if (interviewName) interviewName.value = user.full_name || user.name || '';
+    if (resumeName) resumeName.value = user.full_name || user.name || '';
+}
+
+async function bootstrapAuth() {
+    const token = getStoredAuthToken();
+    if (!token) {
+        state.isAuthenticated = false;
+        prepareShellForAuth();
+        return;
+    }
+
+    try {
+        const response = await apiGet('/auth/me');
+        applyAuthenticatedUser(response.user);
+        showAuthenticatedShell();
+        showView('dashboardView');
+        if (backendHealthy && !panelsLoaded) {
+            panelsLoaded = true;
+            loadAllPanels();
+        }
+    } catch (error) {
+        clearAuthSession();
+        state.authUser = null;
+        state.isAuthenticated = false;
+        state.userId = null;
+        prepareShellForAuth();
+        showToast('Session expired. Please sign in again.', 'warning');
+    }
 }
 
 const loadedPanels = new Set();
@@ -203,9 +291,9 @@ function hydrateSelectors() {
 async function apiGet(path) {
     if (!API_URL) throw new Error('Backend not connected. Enter your backend URL in the banner above.');
     if (window.HireVisionApiClient?.get) {
-        return window.HireVisionApiClient.get(path);
+        return window.HireVisionApiClient.get(path, { headers: getAuthHeaders() });
     }
-    const response = await fetch(`${API_URL}${path}`);
+    const response = await fetch(`${API_URL}${path}`, { headers: getAuthHeaders() });
     const body = await safeJson(response);
     if (!response.ok) throw new Error(body.error || `Server error ${response.status}`);
     return body;
@@ -215,19 +303,25 @@ async function apiPost(path, payload, options = {}) {
     if (!API_URL) throw new Error('Backend not connected. Enter your backend URL in the banner above.');
     if (window.HireVisionApiClient?.post) {
         if (options.body instanceof FormData) {
-            return window.HireVisionApiClient.post(path, options.body, { headers: options.headers });
+            return window.HireVisionApiClient.post(path, options.body, { headers: { ...getAuthHeaders(), ...(options.headers || {}) } });
         }
-        return window.HireVisionApiClient.post(path, payload, { headers: options.headers });
+        return window.HireVisionApiClient.post(path, payload, { headers: { ...getAuthHeaders(), ...(options.headers || {}) } });
     }
     const isFormData = payload instanceof FormData || options.body instanceof FormData;
+    const headers = { ...getAuthHeaders(), ...(options.headers || {}) };
     const response = await fetch(`${API_URL}${path}`, {
         method: 'POST',
-        headers: options.headers || (isFormData ? undefined : { 'Content-Type': 'application/json' }),
+        headers: isFormData ? headers : { 'Content-Type': 'application/json', ...headers },
         body: options.body || (isFormData ? payload : JSON.stringify(payload || {})),
     });
     const body = await safeJson(response);
     if (!response.ok) throw new Error(body.error || `Server error ${response.status}`);
     return body;
+}
+
+function getAuthHeaders() {
+    const token = getStoredAuthToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
 async function safeJson(response) {
@@ -259,6 +353,7 @@ function showOfflinePlaceholders() {
 }
 
 async function loadAllPanels() {
+    if (!state.isAuthenticated) return;
     loadedPanels.clear();
     const activeView = $('.view.active');
     if (activeView) {
@@ -690,11 +785,19 @@ async function loadProfile() {
         // Populate edit profile fields
         const profileName = $('#profileName');
         const profileEmail = $('#profileEmail');
+        const profileCollege = $('#profileCollege');
+        const profileDepartment = $('#profileDepartment');
+        const profileYear = $('#profileYear');
+        const profilePhone = $('#profilePhone');
         const profileTargetRole = $('#profileTargetRole');
         const profileSkills = $('#profileSkills');
         const profileAchievements = $('#profileAchievements');
         if (profileName) profileName.value = data.name || '';
         if (profileEmail) profileEmail.value = data.email || '';
+        if (profileCollege) profileCollege.value = data.college || '';
+        if (profileDepartment) profileDepartment.value = data.department || '';
+        if (profileYear) profileYear.value = data.year || '';
+        if (profilePhone) profilePhone.value = data.phone || '';
         if (profileTargetRole) profileTargetRole.value = data.target_role || '';
         if (profileSkills) profileSkills.value = (data.skills || []).join(', ');
         if (profileAchievements) profileAchievements.value = (data.achievements || []).join(', ');
@@ -703,9 +806,14 @@ async function loadProfile() {
             <div class="analysis-card success">
                 <h3>Student Profile: ${data.name || 'Practice Student'}</h3>
                 <p><strong>Email:</strong> ${data.email || 'N/A'}</p>
+                <p><strong>College:</strong> ${data.college || 'N/A'}</p>
+                <p><strong>Department:</strong> ${data.department || 'N/A'}</p>
+                <p><strong>Year:</strong> ${data.year || 'N/A'}</p>
+                <p><strong>Phone:</strong> ${data.phone || 'N/A'}</p>
                 <p><strong>Target Role:</strong> ${data.target_role || 'N/A'}</p>
                 <p><strong>Skills:</strong> ${(data.skills || []).join(', ') || 'None added yet'}</p>
                 <p><strong>Achievements:</strong> ${(data.achievements || []).join(', ') || 'None added yet'}</p>
+                <p><strong>Joined:</strong> ${data.created_at || 'N/A'}</p>
                 <p><strong>Placement Score:</strong> ${Number(data.placement_score || 0).toFixed(1)}%</p>
                 <p><strong>Resume:</strong> ${data.resume?.filename || 'Not uploaded yet'}</p>
                 <p><strong>Interview Practice Sessions:</strong> ${data.interview_history?.length || 0}</p>
@@ -745,7 +853,7 @@ function humanize(value) {
 
 async function startInterview() {
     const jobRole = $('#jobRole')?.value || 'Software Engineer';
-    const interviewName = $('#interviewName')?.value || 'Demo Student';
+    const interviewName = $('#interviewName')?.value || state.authUser?.full_name || state.authUser?.name || 'HireVision User';
 
     state.currentInterviewId = `interview_${Date.now()}`;
     state.questionCount = 1;
@@ -1335,76 +1443,175 @@ async function runCoding() {
     }
 }
 
-// User Authentication Modal UI and Switch Profile
+// Authentication and profile management
 function bindAuthEvents() {
-    const modal = $('#authModal');
     const switchBtn = $('#switchUserBtn');
-    const closeBtn = $('#closeAuthBtn');
-    const form = $('#authForm');
-    
+    const logoutBtn = $('#logoutBtn');
+    const loginForm = $('#loginForm');
+    const registerForm = $('#registerForm');
+    const forgotForm = $('#forgotPasswordForm');
+    const resetForm = $('#resetPasswordForm');
+    const showRegisterBtn = $('#showRegisterBtn');
+    const showLoginBtn = $('#showLoginBtn');
+    const showForgotBtn = $('#showForgotBtn');
+    const showResetBtn = $('#showResetBtn');
+    const cancelAuthBtn = $('#backToLoginBtn');
+
     if (switchBtn) {
         switchBtn.addEventListener('click', () => {
-            $('#authName').value = localStorage.getItem('hirevisionUserName') || '';
-            $('#authEmail').value = localStorage.getItem('hirevisionUserEmail') || '';
-            $('#authRole').value = localStorage.getItem('hirevisionUserRole') || 'student';
-            $('#authTargetRole').value = localStorage.getItem('hirevisionUserTargetRole') || 'Software Engineer';
-            modal.classList.add('active');
-        });
-    }
-    
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-    }
-    
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = $('#authName').value.trim();
-            const email = $('#authEmail').value.trim();
-            const role = $('#authRole').value;
-            const targetRole = $('#authTargetRole').value.trim();
-            const userId = 'user_' + email.replace(/[^a-zA-Z0-9]/g, '_');
-            
-            try {
-                // Save user on backend
-                await apiPost('/profile/save', {
-                    user_id: userId,
-                    name,
-                    email,
-                    role,
-                    target_role: targetRole,
-                    skills: [],
-                    achievements: []
-                });
-                
-                // Save locally
-                localStorage.setItem('hirevisionUserId', userId);
-                localStorage.setItem('hirevisionUserName', name);
-                localStorage.setItem('hirevisionUserEmail', email);
-                localStorage.setItem('hirevisionUserRole', role);
-                localStorage.setItem('hirevisionUserTargetRole', targetRole);
-                
-                state.userId = userId;
-                updateActiveUserProfileUI();
-                modal.classList.remove('active');
-                showToast('Profile switched successfully!', 'success');
-                
-                // Reload dashboard/profile datasets
-                loadAllPanels();
-            } catch (error) {
-                showToast(`Failed to register profile: ${error.message}`, 'error');
+            if (state.isAuthenticated) {
+                logout();
+            } else {
+                openAuthScreen('login');
             }
         });
     }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+    }
+
+    if (showRegisterBtn) showRegisterBtn.addEventListener('click', () => openAuthScreen('register'));
+    if (showLoginBtn) showLoginBtn.addEventListener('click', () => openAuthScreen('login'));
+    if (showForgotBtn) showForgotBtn.addEventListener('click', () => openAuthScreen('forgot'));
+    if (showResetBtn) showResetBtn.addEventListener('click', () => openAuthScreen('reset'));
+    if (cancelAuthBtn) cancelAuthBtn.addEventListener('click', () => openAuthScreen('login'));
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+    if (registerForm) {
+        registerForm.addEventListener('submit', handleRegister);
+    }
+    if (forgotForm) {
+        forgotForm.addEventListener('submit', handleForgotPassword);
+    }
+    if (resetForm) {
+        resetForm.addEventListener('submit', handleResetPassword);
+    }
+}
+
+function openAuthScreen(mode = 'login') {
+    const authScreen = $('#authScreen');
+    const appShell = $('.app-shell');
+    if (authScreen) authScreen.hidden = false;
+    if (appShell) appShell.style.display = 'none';
+
+    $all('[data-auth-panel]').forEach((panel) => {
+        panel.classList.toggle('active', panel.dataset.authPanel === mode);
+    });
+    $all('[data-auth-tab]').forEach((tab) => {
+        tab.classList.toggle('active', tab.dataset.authTab === mode);
+    });
 }
 
 function updateActiveUserProfileUI() {
-    const name = localStorage.getItem('hirevisionUserName') || 'Demo Student';
-    const role = localStorage.getItem('hirevisionUserRole') || 'student';
+    const name = state.authUser?.full_name || state.authUser?.name || localStorage.getItem('hirevisionUserName') || 'Sign in to continue';
+    const role = state.authUser?.target_role || localStorage.getItem('hirevisionUserTargetRole') || 'student';
     if ($('#activeUserName')) $('#activeUserName').textContent = name;
     if ($('#activeUserRole')) $('#activeUserRole').textContent = role;
+    if ($('#switchUserBtn')) {
+        $('#switchUserBtn').title = state.isAuthenticated ? 'Logout' : 'Sign In';
+    }
+}
+
+async function handleLogin(event) {
+    event.preventDefault();
+    const email = $('#loginEmail')?.value.trim();
+    const password = $('#loginPassword')?.value || '';
+    const rememberMe = Boolean($('#loginRemember')?.checked);
+
+    try {
+        const response = await apiPost('/auth/login', { email, password, remember_me: rememberMe });
+        storeAuthToken(response.token, rememberMe || response.remember_me);
+        applyAuthenticatedUser(response.user);
+        showAuthenticatedShell();
+        showView('dashboardView');
+        if (backendHealthy) {
+            loadAllPanels();
+        }
+        showToast('Welcome back to HireVision.', 'success');
+    } catch (error) {
+        showToast(`Login failed: ${error.message}`, 'error');
+    }
+}
+
+async function handleRegister(event) {
+    event.preventDefault();
+    const payload = {
+        full_name: $('#registerName')?.value.trim(),
+        email: $('#registerEmail')?.value.trim(),
+        password: $('#registerPassword')?.value || '',
+        college: $('#registerCollege')?.value.trim(),
+        department: $('#registerDepartment')?.value.trim(),
+        year: $('#registerYear')?.value.trim(),
+        phone: $('#registerPhone')?.value.trim(),
+        target_role: $('#registerTargetRole')?.value.trim(),
+        remember_me: Boolean($('#registerRemember')?.checked),
+    };
+
+    try {
+        const response = await apiPost('/auth/register', payload);
+        storeAuthToken(response.token, response.remember_me);
+        applyAuthenticatedUser(response.user);
+        showAuthenticatedShell();
+        showView('dashboardView');
+        if (backendHealthy) {
+            loadAllPanels();
+        }
+        showToast('Account created successfully.', 'success');
+    } catch (error) {
+        showToast(`Registration failed: ${error.message}`, 'error');
+    }
+}
+
+async function handleForgotPassword(event) {
+    event.preventDefault();
+    const email = $('#forgotEmail')?.value.trim();
+
+    try {
+        const response = await apiPost('/auth/forgot-password', { email });
+        const resetToken = $('#resetToken');
+        if (resetToken && response.reset_token) {
+            resetToken.value = response.reset_token;
+        }
+        openAuthScreen('reset');
+        showToast('Reset token generated. Use it to set a new password.', 'success');
+    } catch (error) {
+        showToast(`Password reset request failed: ${error.message}`, 'error');
+    }
+}
+
+async function handleResetPassword(event) {
+    event.preventDefault();
+    const email = $('#resetEmail')?.value.trim();
+    const resetToken = $('#resetToken')?.value.trim();
+    const password = $('#resetPassword')?.value || '';
+
+    try {
+        await apiPost('/auth/reset-password', { email, reset_token: resetToken, password });
+        showToast('Password updated. Please sign in.', 'success');
+        openAuthScreen('login');
+    } catch (error) {
+        showToast(`Password reset failed: ${error.message}`, 'error');
+    }
+}
+
+async function logout() {
+    try {
+        await apiPost('/auth/logout', {});
+    } catch (error) {
+        console.warn('Logout request failed:', error.message);
+    }
+
+    clearAuthSession();
+    state.authUser = null;
+    state.isAuthenticated = false;
+    state.userId = null;
+    updateActiveUserProfileUI();
+    prepareShellForAuth();
+    openAuthScreen('login');
+    showToast('You have been logged out.', 'info');
 }
 
 // Edit Profile Form Submit
@@ -1415,27 +1622,40 @@ function bindProfileEdit() {
         e.preventDefault();
         const name = $('#profileName').value.trim();
         const email = $('#profileEmail').value.trim();
+        const college = $('#profileCollege').value.trim();
+        const department = $('#profileDepartment').value.trim();
+        const year = $('#profileYear').value.trim();
+        const phone = $('#profilePhone').value.trim();
         const targetRole = $('#profileTargetRole').value.trim();
         const skills = $('#profileSkills').value.split(',').map(s => s.trim()).filter(Boolean);
         const achievements = $('#profileAchievements').value.split(',').map(s => s.trim()).filter(Boolean);
-        
+
         try {
             await apiPost('/profile/save', {
                 user_id: state.userId,
+                full_name: name,
                 name,
                 email,
+                college,
+                department,
+                year,
+                phone,
                 role: localStorage.getItem('hirevisionUserRole') || 'student',
                 target_role: targetRole,
                 skills,
                 achievements
             });
-            
+
             localStorage.setItem('hirevisionUserName', name);
             localStorage.setItem('hirevisionUserEmail', email);
             localStorage.setItem('hirevisionUserTargetRole', targetRole);
-            
+
+            if (state.authUser) {
+                state.authUser = { ...state.authUser, full_name: name, name, email, college, department, year, phone, target_role: targetRole };
+            }
+
             updateActiveUserProfileUI();
-            showToast('Student profile updated successfully!', 'success');
+            showToast('Profile updated successfully!', 'success');
             loadProfile();
             loadDashboard();
         } catch (error) {
@@ -1448,6 +1668,7 @@ function bindProfileEdit() {
 let healthCheckInterval = null;
 let connectionAttempts = 0;
 let panelsLoaded = false;
+let backendHealthy = false;
 
 function showBackendConnectForm(reason) {
     // Deliberately removed as per user request to remove "Connect Your Backend" banner.
@@ -1468,12 +1689,13 @@ async function checkBackendHealth() {
         if (!response.ok) throw new Error(`Status ${response.status}`);
 
         // SUCCESS - Backend is online
+        backendHealthy = true;
         connectionAttempts = 0;
         clearInterval(healthCheckInterval);
         healthCheckInterval = null;
 
         // Load all panels now that backend is confirmed available
-        if (!panelsLoaded) {
+        if (state.isAuthenticated && !panelsLoaded) {
             panelsLoaded = true;
             loadAllPanels();
         }

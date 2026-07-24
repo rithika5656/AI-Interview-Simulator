@@ -16,7 +16,82 @@
 </head>
 <body class="theme-dark">
     <div id="toastContainer" class="toast-container"></div>
-    <div class="app-shell">
+    <section id="authScreen" class="auth-screen" hidden>
+        <div class="auth-shell">
+            <section class="auth-hero glass-panel">
+                <div class="brand-block brand-block-auth">
+                    <div class="brand-mark">HV</div>
+                    <div>
+                        <h1>HireVision</h1>
+                        <p>Professional placement preparation</p>
+                    </div>
+                </div>
+                <h2>Build interview momentum with a secure, personalized workspace.</h2>
+                <p class="auth-copy">Log in to continue your assessments, track scores across modules, and keep your profile synced to MongoDB with JWT protection.</p>
+                <ul class="auth-bullets">
+                    <li>Resume, aptitude, verbal, logical, technical, coding, GD, and HR practice in one place.</li>
+                    <li>JWT sign-in, remember-me sessions, logout, and password reset flow.</li>
+                    <li>Glassmorphism UI that matches the existing HireVision dark theme.</li>
+                </ul>
+            </section>
+
+            <section class="auth-card glass-panel">
+                <div class="auth-tabs">
+                    <button id="showLoginBtn" class="auth-tab active" data-auth-tab="login" type="button">Login</button>
+                    <button id="showRegisterBtn" class="auth-tab" data-auth-tab="register" type="button">Register</button>
+                    <button id="showForgotBtn" class="auth-tab" data-auth-tab="forgot" type="button">Forgot Password</button>
+                </div>
+
+                <div class="auth-panel active" data-auth-panel="login">
+                    <h3>Welcome back</h3>
+                    <form id="loginForm" class="stack-form">
+                        <input type="email" id="loginEmail" placeholder="Email address" required>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <label class="checkbox-row"><input type="checkbox" id="loginRemember"> Remember me</label>
+                        <button type="submit" class="btn btn-primary btn-wide">Login</button>
+                    </form>
+                </div>
+
+                <div class="auth-panel" data-auth-panel="register">
+                    <h3>Create your account</h3>
+                    <form id="registerForm" class="stack-form auth-grid-form">
+                        <input type="text" id="registerName" placeholder="Full Name" required>
+                        <input type="email" id="registerEmail" placeholder="Email Address" required>
+                        <input type="password" id="registerPassword" placeholder="Password" required>
+                        <input type="text" id="registerCollege" placeholder="College" required>
+                        <input type="text" id="registerDepartment" placeholder="Department" required>
+                        <input type="text" id="registerYear" placeholder="Year (e.g. 3rd Year)" required>
+                        <input type="text" id="registerPhone" placeholder="Phone" required>
+                        <input type="text" id="registerTargetRole" placeholder="Target Role" value="Software Engineer">
+                        <label class="checkbox-row"><input type="checkbox" id="registerRemember" checked> Remember me</label>
+                        <button type="submit" class="btn btn-primary btn-wide">Register & Sign In</button>
+                    </form>
+                </div>
+
+                <div class="auth-panel" data-auth-panel="forgot">
+                    <h3>Reset your password</h3>
+                    <form id="forgotPasswordForm" class="stack-form">
+                        <input type="email" id="forgotEmail" placeholder="Email address" required>
+                        <button type="submit" class="btn btn-secondary btn-wide">Generate Reset Token</button>
+                    </form>
+                    <button id="showResetBtn" type="button" class="auth-link">Already have a reset token?</button>
+                </div>
+
+                <div class="auth-panel" data-auth-panel="reset">
+                    <h3>Set a new password</h3>
+                    <form id="resetPasswordForm" class="stack-form">
+                        <input type="email" id="resetEmail" placeholder="Email address" required>
+                        <input type="text" id="resetToken" placeholder="Reset token" required>
+                        <input type="password" id="resetPassword" placeholder="New password" required>
+                        <button type="submit" class="btn btn-primary btn-wide">Update Password</button>
+                    </form>
+                    <button id="backToLoginBtn" type="button" class="auth-link">Back to login</button>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <div class="app-shell" style="display:none;">
         <aside class="sidebar">
             <div class="brand-block">
                 <div class="brand-mark">HV</div>
@@ -421,6 +496,14 @@
                             <input type="text" id="profileName" required>
                             <label>Email Address</label>
                             <input type="email" id="profileEmail" required>
+                            <label>College</label>
+                            <input type="text" id="profileCollege" placeholder="e.g. National Institute of Technology" required>
+                            <label>Department</label>
+                            <input type="text" id="profileDepartment" placeholder="e.g. Computer Science" required>
+                            <label>Year</label>
+                            <input type="text" id="profileYear" placeholder="e.g. 3rd Year" required>
+                            <label>Phone</label>
+                            <input type="text" id="profilePhone" placeholder="e.g. +91 9876543210" required>
                             <label>Target Job Role</label>
                             <input type="text" id="profileTargetRole" placeholder="e.g. Software Engineer">
                             <label>Key Skills (comma-separated)</label>
@@ -433,27 +516,6 @@
                 </div>
             </section>
         </main>
-    </div>
-
-    <!-- Simple Registration / Sign-In Modal -->
-    <div id="authModal" class="modal">
-        <div class="modal-content">
-            <h3>Sign In / Create Profile</h3>
-            <p>Create or load a custom student profile to save your resume score, test histories, and dashboard metrics.</p>
-            <form id="authForm" class="stack-form">
-                <input type="text" id="authName" placeholder="Full Name" required>
-                <input type="email" id="authEmail" placeholder="Email Address" required>
-                <select id="authRole">
-                    <option value="student" selected>Student</option>
-                    <option value="administrator">Administrator</option>
-                </select>
-                <input type="text" id="authTargetRole" placeholder="Target Job Role (e.g. Software Engineer)">
-                <div class="modal-buttons">
-                    <button type="submit" class="btn btn-primary">Save & Sign In</button>
-                    <button type="button" id="closeAuthBtn" class="btn btn-secondary">Use Default</button>
-                </div>
-            </form>
-        </div>
     </div>
 
     <script src="config.js"></script>

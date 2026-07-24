@@ -27,13 +27,24 @@ def init_db() -> None:
     # MongoDB creates collections dynamically, but we can ensure indices if needed
     db = get_db()
     db.users.create_index("id", unique=True)
+    db.users.create_index("email", unique=True, sparse=True)
+    db.users.create_index("reset_token_hash", sparse=True)
     db.resumes.create_index([("user_id", 1), ("created_at", -1)])
     
 def seed_demo_data() -> None:
     # Intentionally empty: The user requested no demo mode and no placeholder data.
     pass
 
-def upsert_user(user_id: str, name: str, email: str | None = None, role: str = "student", target_role: str | None = None, skills_json: str | None = None, achievements_json: str | None = None) -> None:
+def upsert_user(
+    user_id: str,
+    name: str,
+    email: str | None = None,
+    role: str = "student",
+    target_role: str | None = None,
+    skills_json: str | None = None,
+    achievements_json: str | None = None,
+    extra_fields: dict[str, Any] | None = None,
+) -> None:
     db = get_db()
     timestamp = _now()
     
@@ -59,6 +70,11 @@ def upsert_user(user_id: str, name: str, email: str | None = None, role: str = "
         update_data["skills_json"] = skills_json
     if achievements_json:
         update_data["achievements_json"] = achievements_json
+
+    if extra_fields:
+        for key, value in extra_fields.items():
+            if value is not None:
+                update_data[key] = value
         
     db.users.update_one(
         {"id": user_id},
@@ -68,6 +84,27 @@ def upsert_user(user_id: str, name: str, email: str | None = None, role: str = "
         },
         upsert=True
     )
+
+
+def find_user_by_email(email: str) -> dict[str, Any] | None:
+    if not email:
+        return None
+    return fetch_one_mongo("users", {"email": email.strip().lower()})
+
+
+def find_user_by_id(user_id: str) -> dict[str, Any] | None:
+    if not user_id:
+        return None
+    return fetch_one_mongo("users", {"id": user_id})
+
+
+def update_user(user_id: str, values: dict[str, Any]) -> None:
+    db = get_db()
+    values = {key: value for key, value in values.items() if value is not None}
+    if not values:
+        return
+    values.setdefault("updated_at", _now())
+    db.users.update_one({"id": user_id}, {"$set": values}, upsert=False)
 
 def save_record(table: str, values: dict[str, Any]) -> None:
     db = get_db()

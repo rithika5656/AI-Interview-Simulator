@@ -1,4 +1,8 @@
 (() => {
+    function getAuthToken() {
+        return sessionStorage.getItem('hirevisionAuthTokenSession') || localStorage.getItem('hirevisionAuthToken');
+    }
+
     // Rely exclusively on injected configuration for production setup
     const apiBaseUrl = window.HireVisionConfig?.apiBaseUrl
         || window.__HIREVISION_API_BASE__
@@ -14,9 +18,16 @@
 
     async function request(path, options = {}) {
         const url = `${apiBaseUrl}${path}`;
+        const token = getAuthToken();
+        const mergedHeaders = {
+            ...(options.headers || {}),
+        };
+        if (token && !mergedHeaders.Authorization) {
+            mergedHeaders.Authorization = `Bearer ${token}`;
+        }
         const response = await fetch(url, {
             method: options.method || 'GET',
-            headers: options.headers,
+            headers: mergedHeaders,
             body: options.body,
         });
 
@@ -41,7 +52,11 @@
 
     async function post(path, body, options = {}) {
         const isFormData = body instanceof FormData;
-        const headers = isFormData ? options.headers : { 'Content-Type': 'application/json', ...(options.headers || {}) };
+        const headers = isFormData ? { ...(options.headers || {}) } : { 'Content-Type': 'application/json', ...(options.headers || {}) };
+        const token = getAuthToken();
+        if (token && !headers.Authorization) {
+            headers.Authorization = `Bearer ${token}`;
+        }
         const payload = isFormData ? body : JSON.stringify(body || {});
         return request(path, { ...options, method: 'POST', body: payload, headers });
     }

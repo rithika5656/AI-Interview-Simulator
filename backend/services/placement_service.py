@@ -488,9 +488,6 @@ def build_career_coach(user_id: str) -> dict[str, Any]:
 def build_profile(user_id: str) -> dict[str, Any]:
     from database.mongo_store import fetch_one_mongo, fetch_all_mongo
     user = fetch_one_mongo("users", {"id": user_id})
-    if not user:
-
-        user = fetch_one_mongo("users", {"id": user_id})
 
     resume = latest_resume(user_id)
     interview_history = fetch_all_mongo("interviews", {"user_id": user_id}, sort_by=[("created_at", -1)])
@@ -517,11 +514,17 @@ def build_profile(user_id: str) -> dict[str, Any]:
     return {
         "user_id": user_id,
         "name": user.get("name") if user else "Student",
+        "full_name": user.get("full_name") if user else "Student",
         "email": user.get("email") if user else "",
+        "college": user.get("college") if user else "",
+        "department": user.get("department") if user else "",
+        "year": user.get("year") if user else "",
+        "phone": user.get("phone") if user else "",
         "role": user.get("role") if user else "student",
         "target_role": user.get("target_role") if user else "Software Engineer",
         "skills": skills,
         "achievements": achievements,
+        "created_at": user.get("created_at") if user else None,
         "resume": resume,
         "interview_history": interview_history,
         "coding_history": coding_history,

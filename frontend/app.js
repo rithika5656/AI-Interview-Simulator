@@ -213,6 +213,11 @@ function applyAuthenticatedUser(user) {
     const resumeName = $('#resumeName');
     if (interviewName) interviewName.value = user.full_name || user.name || '';
     if (resumeName) resumeName.value = user.full_name || user.name || '';
+    
+    // Trigger React Router to re-render and detect auth state change
+    if (window.triggerRouterUpdate) {
+        window.triggerRouterUpdate();
+    }
 }
 
 async function bootstrapAuth() {
@@ -221,17 +226,14 @@ async function bootstrapAuth() {
         state.isAuthenticated = false;
         state.authChecked = true;
         prepareShellForAuth();
+        if (window.triggerRouterUpdate) window.triggerRouterUpdate();
         return;
     }
 
     try {
         const response = await apiGet('/auth/me');
         applyAuthenticatedUser(response.user);
-        state.authChecked = true;
-        // DO NOT load dashboard shell here - let router.js handle it
-        // DO NOT call showAuthenticatedShell() - it causes scrolling bug
-        // Just verify token is valid and set auth state
-        // Router will handle navigation and dashboard loading
+        // applyAuthenticatedUser sets authChecked and triggers router update
         if (window.HireVisionRouteNavigate) {
             window.HireVisionRouteNavigate('/dashboard');
         }
@@ -243,6 +245,7 @@ async function bootstrapAuth() {
         state.authChecked = true;
         prepareShellForAuth();
         showToast('Session expired. Please sign in again.', 'warning');
+        if (window.triggerRouterUpdate) window.triggerRouterUpdate();
         if (window.HireVisionRouteNavigate) {
             window.HireVisionRouteNavigate('/login');
         }
@@ -1707,11 +1710,13 @@ async function logout() {
     state.authUser = null;
     state.isAuthenticated = false;
     state.userId = null;
+    state.authChecked = true;  // Mark as checked before redirecting
     updateActiveUserProfileUI();
     unmountDashboardShell();
     prepareShellForAuth();
     openAuthScreen('login');
     showToast('You have been logged out.', 'info');
+    if (window.triggerRouterUpdate) window.triggerRouterUpdate();
     if (window.HireVisionRouteNavigate) {
         window.HireVisionRouteNavigate('/login');
     }

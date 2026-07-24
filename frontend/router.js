@@ -108,7 +108,11 @@
 
     function RouteBridge() {
         const navigate = useNavigate();
+        const [, forceUpdate] = React.useReducer(x => x + 1, 0);
         const prevAuthStateRef = React.useRef(null);
+
+        // Expose force update for when window.state changes
+        window.triggerRouterUpdate = forceUpdate;
 
         React.useEffect(() => {
             window.HireVisionRouteNavigate = (path) => navigate(path);
@@ -119,7 +123,7 @@
             };
         }, [navigate]);
 
-        // Monitor state changes on every render
+        // Monitor state changes
         const currentAuthState = window.state ? JSON.stringify({
             isAuthenticated: window.state.isAuthenticated,
             authChecked: window.state.authChecked

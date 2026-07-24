@@ -115,7 +115,11 @@
         window.triggerRouterUpdate = forceUpdate;
 
         React.useEffect(() => {
-            window.HireVisionRouteNavigate = (path) => navigate(path);
+            console.log('[ROUTER] Setting up window.HireVisionRouteNavigate');
+            window.HireVisionRouteNavigate = (path) => {
+                console.log('[ROUTER] navigate() called with path:', path);
+                navigate(path);
+            };
             return () => {
                 if (window.HireVisionRouteNavigate) {
                     delete window.HireVisionRouteNavigate;
@@ -130,14 +134,24 @@
         }) : null;
         
         React.useEffect(() => {
+            console.log('[ROUTER] Effect running. currentAuthState:', currentAuthState);
+            console.log('[ROUTER] prevAuthStateRef.current:', prevAuthStateRef.current);
+            
             if (prevAuthStateRef.current === currentAuthState) {
+                console.log('[ROUTER] Auth state unchanged, returning');
                 return;
             }
             prevAuthStateRef.current = currentAuthState;
 
-            if (window.state && !window.state.authChecked) return;
+            if (window.state && !window.state.authChecked) {
+                console.log('[ROUTER] Auth not checked yet, waiting');
+                return;
+            }
+            
             if (!window.state || !window.state.isAuthenticated) {
+                console.log('[ROUTER] User not authenticated');
                 if (window.location.pathname !== '/login' && window.location.pathname !== '/register' && window.location.pathname !== '/forgot-password') {
+                    console.log('[ROUTER] Redirecting to /login from', window.location.pathname);
                     navigate('/login', { replace: true });
                 }
                 // Show auth screen when not authenticated
@@ -148,8 +162,10 @@
                 return;
             }
 
+            console.log('[ROUTER] User is authenticated, current path:', window.location.pathname);
             const currentPath = window.location.pathname;
             if (currentPath === '/' || currentPath === '/login' || currentPath === '/register' || currentPath === '/forgot-password') {
+                console.log('[ROUTER] On auth page, navigating to /dashboard');
                 navigate('/dashboard', { replace: true });
             }
             // Show app shell when authenticated

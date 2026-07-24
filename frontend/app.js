@@ -198,7 +198,11 @@ async function mountDashboardShell() {
 }
 
 function applyAuthenticatedUser(user) {
-    if (!user) return;
+    console.log('[AUTH] applyAuthenticatedUser() called with user:', user);
+    if (!user) {
+        console.warn('[AUTH] No user provided to applyAuthenticatedUser');
+        return;
+    }
     state.authUser = user;
     state.isAuthenticated = true;
     state.authChecked = true;  // CRITICAL: Mark auth check as complete
@@ -214,30 +218,44 @@ function applyAuthenticatedUser(user) {
     if (interviewName) interviewName.value = user.full_name || user.name || '';
     if (resumeName) resumeName.value = user.full_name || user.name || '';
     
+    console.log('[AUTH] Triggering router update...');
     // Trigger React Router to re-render and detect auth state change
     if (window.triggerRouterUpdate) {
+        console.log('[AUTH] Calling window.triggerRouterUpdate()');
         window.triggerRouterUpdate();
+    } else {
+        console.error('[AUTH] ERROR: window.triggerRouterUpdate not available!');
     }
 }
 
 async function bootstrapAuth() {
     const token = getStoredAuthToken();
+    console.log('[AUTH] bootstrapAuth() - Token from storage:', token ? 'YES' : 'NO');
+    
     if (!token) {
+        console.log('[AUTH] No token found, marking as not authenticated');
         state.isAuthenticated = false;
         state.authChecked = true;
         prepareShellForAuth();
-        if (window.triggerRouterUpdate) window.triggerRouterUpdate();
+        if (window.triggerRouterUpdate) {
+            console.log('[AUTH] Triggering router update (no token)');
+            window.triggerRouterUpdate();
+        }
         return;
     }
 
     try {
+        console.log('[AUTH] Token found, validating with /auth/me');
         const response = await apiGet('/auth/me');
+        console.log('[AUTH] /auth/me response:', response);
         applyAuthenticatedUser(response.user);
         // applyAuthenticatedUser sets authChecked and triggers router update
         if (window.HireVisionRouteNavigate) {
+            console.log('[AUTH] Navigating to /dashboard from bootstrap');
             window.HireVisionRouteNavigate('/dashboard');
         }
     } catch (error) {
+        console.error('[AUTH] Error during bootstrap auth:', error);
         clearAuthSession();
         state.authUser = null;
         state.isAuthenticated = false;
@@ -245,8 +263,12 @@ async function bootstrapAuth() {
         state.authChecked = true;
         prepareShellForAuth();
         showToast('Session expired. Please sign in again.', 'warning');
-        if (window.triggerRouterUpdate) window.triggerRouterUpdate();
+        if (window.triggerRouterUpdate) {
+            console.log('[AUTH] Triggering router update (error)');
+            window.triggerRouterUpdate();
+        }
         if (window.HireVisionRouteNavigate) {
+            console.log('[AUTH] Navigating to /login (error)');
             window.HireVisionRouteNavigate('/login');
         }
     }
@@ -1617,17 +1639,43 @@ async function handleLogin(event) {
     const password = $('#loginPassword')?.value || '';
     const rememberMe = Boolean($('#loginRemember')?.checked);
 
+    console.log('[AUTH] Login attempt:', { email, rememberMe });
+    console.log('[AUTH] API_URL:', API_URL);
+    console.log('[AUTH] Calling apiPost to /auth/login');
+
     try {
         const response = await apiPost('/auth/login', { email, password, remember_me: rememberMe });
+        console.log('[AUTH] Login response received:', response);
+        
+        if (!response.token) {
+            throw new Error('No token in response');
+        }
+        
+        console.log('[AUTH] Storing token...');
         storeAuthToken(response.token, rememberMe || response.remember_me);
+        
+        console.log('[AUTH] Applying authenticated user...');
         applyAuthenticatedUser(response.user);
-        // DO NOT call showAuthenticatedShell() here - let router.js handle it
-        // Just navigate to dashboard, the ProtectedRoute will load the shell
+        
+        console.log('[AUTH] State after login:', {
+            isAuthenticated: window.state.isAuthenticated,
+            authChecked: window.state.authChecked,
+            userId: window.state.userId
+        });
+        
         showToast('Welcome back to HireVision.', 'success');
+        
+        console.log('[AUTH] window.HireVisionRouteNavigate:', typeof window.HireVisionRouteNavigate);
+        console.log('[AUTH] window.triggerRouterUpdate:', typeof window.triggerRouterUpdate);
+        
         if (window.HireVisionRouteNavigate) {
+            console.log('[AUTH] Calling navigate("/dashboard")');
             window.HireVisionRouteNavigate('/dashboard');
+        } else {
+            console.error('[AUTH] ERROR: window.HireVisionRouteNavigate is not available!');
         }
     } catch (error) {
+        console.error('[AUTH] Login error:', error);
         showToast(`Login failed: ${error.message}`, 'error');
     }
 }

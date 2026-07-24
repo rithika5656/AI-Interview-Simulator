@@ -1,0 +1,424 @@
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand-block">
+            <div class="brand-mark">HV</div>
+            <div>
+                <h1>HireVision</h1>
+                <p>Placement prep system</p>
+            </div>
+        </div>
+
+        <div id="userProfileCard" class="user-profile-card">
+            <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
+            <div class="user-details">
+                <strong id="activeUserName">Demo Student</strong>
+                <span id="activeUserRole">student</span>
+            </div>
+            <button id="switchUserBtn" class="btn btn-icon" title="Sign In / Switch User"><i class="fa-solid fa-user-pen"></i></button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button data-view="dashboardView" class="nav-item active"><i class="fa-solid fa-house"></i> Dashboard</button>
+            <button data-view="resumeView" class="nav-item"><i class="fa-solid fa-file-pdf"></i> Resume Analyzer</button>
+            <button data-view="aptitudeView" class="nav-item"><i class="fa-solid fa-brain"></i> Aptitude</button>
+            <button data-view="logicalView" class="nav-item"><i class="fa-solid fa-puzzle-piece"></i> Logical Reasoning</button>
+            <button data-view="verbalView" class="nav-item"><i class="fa-solid fa-language"></i> Verbal Ability</button>
+            <button data-view="technicalMcqView" class="nav-item"><i class="fa-solid fa-microchip"></i> Technical MCQ</button>
+            <button data-view="codingView" class="nav-item"><i class="fa-solid fa-code"></i> Coding Assessment</button>
+            <button data-view="gdView" class="nav-item"><i class="fa-solid fa-users"></i> Group Discussion</button>
+            <button data-view="legacyInterviewView" class="nav-item"><i class="fa-solid fa-user-tie"></i> HR Interview</button>
+            <button data-view="technicalInterviewView" class="nav-item"><i class="fa-solid fa-laptop-code"></i> Technical Interview</button>
+            <button data-view="companyView" class="nav-item"><i class="fa-solid fa-building"></i> Company Wise</button>
+            <button data-view="analyticsView" class="nav-item"><i class="fa-solid fa-chart-line"></i> Analytics</button>
+            <button data-view="coachView" class="nav-item"><i class="fa-solid fa-chalkboard-user"></i> AI Career Coach</button>
+            <button data-view="profileView" class="nav-item"><i class="fa-solid fa-user"></i> Profile</button>
+        </nav>
+    </aside>
+
+    <main class="main-panel">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">AI-Powered Placement Preparation and Assessment System</p>
+                <h2>Prepare. Practice. Perform.</h2>
+            </div>
+            <div class="topbar-actions">
+                <div id="backendStatus" class="backend-status status-connecting">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking Backend...</span>
+                </div>
+                <button id="themeToggle" class="btn btn-secondary" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                <button id="startLegacyInterviewBtn" class="btn btn-primary"><i class="fa-solid fa-video"></i> Start HR Interview</button>
+            </div>
+        </header>
+
+        <div id="systemAlert" class="system-alert" hidden></div>
+
+        <section id="dashboardView" class="view active">
+            <div class="grid grid-2">
+                <section class="hero-card">
+                    <h3>Placement Readiness Dashboard</h3>
+                    <div id="dashboardMetrics" class="metric-grid"></div>
+                </section>
+                <section class="hero-card chart-stack">
+                    <canvas id="readinessChart"></canvas>
+                    <canvas id="accuracyChart"></canvas>
+                </section>
+            </div>
+
+            <div class="grid grid-3">
+                <section class="panel-card">
+                    <h3>Daily Goals</h3>
+                    <ul id="dailyGoals" class="bullet-list"></ul>
+                </section>
+                <section class="panel-card">
+                    <h3>Recent Activities</h3>
+                    <div id="recentActivities" class="stack-list"></div>
+                </section>
+                <section class="panel-card">
+                    <h3>Upcoming Mock Tests</h3>
+                    <div id="upcomingTests" class="stack-list"></div>
+                </section>
+            </div>
+
+            <section class="panel-card">
+                <h3>AI Coach Snapshot</h3>
+                <div id="dashboardCoach" class="coach-grid"></div>
+            </section>
+        </section>
+
+        <section id="resumeView" class="view">
+            <div class="grid grid-2">
+                <section class="panel-card">
+                    <h3>Resume Analyzer</h3>
+                    <form id="resumeForm" class="stack-form">
+                        <input type="text" id="resumeName" placeholder="Student name" value="Demo Student">
+                        <input type="file" id="resumeFile" accept=".pdf,.docx,.txt">
+                        <textarea id="resumeText" rows="10" placeholder="Paste resume text here if you do not want to upload a file."></textarea>
+                        <button type="submit" class="btn btn-primary">Analyze Resume</button>
+                    </form>
+                </section>
+                <section class="panel-card" id="resumeResult">
+                    <h3>ATS Analysis</h3>
+                    <p class="muted">Upload a resume to extract skills, projects, education, certifications, ATS score, missing keywords, and suggestions.</p>
+                </section>
+            </div>
+        </section>
+
+        <section id="aptitudeView" class="view module-view">
+            <section class="panel-card">
+                <div class="module-header">
+                    <div>
+                        <h3>Aptitude Module</h3>
+                        <p>Timed random questions with AI explanations.</p>
+                    </div>
+                    <div class="module-controls">
+                        <select id="aptitudeTopic"></select>
+                        <select id="aptitudeDifficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <button data-generate-module="aptitude" class="btn btn-secondary">Generate</button>
+                        <button data-submit-module="aptitude" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <div id="aptitudeQuestions" class="question-stack"></div>
+                <div id="aptitudeResult" class="result-slot"></div>
+            </section>
+        </section>
+
+        <section id="logicalView" class="view module-view">
+            <section class="panel-card">
+                <div class="module-header">
+                    <div><h3>Logical Reasoning</h3><p>Randomized questions with explanation after submission.</p></div>
+                    <div class="module-controls">
+                        <select id="logicalTopic"></select>
+                        <select id="logicalDifficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <button data-generate-module="logical" class="btn btn-secondary">Generate</button>
+                        <button data-submit-module="logical" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <div id="logicalQuestions" class="question-stack"></div>
+                <div id="logicalResult" class="result-slot"></div>
+            </section>
+        </section>
+
+        <section id="verbalView" class="view module-view">
+            <section class="panel-card">
+                <div class="module-header">
+                    <div><h3>Verbal Ability</h3><p>Synonyms, antonyms, comprehension, and grammar practice.</p></div>
+                    <div class="module-controls">
+                        <select id="verbalTopic"></select>
+                        <select id="verbalDifficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <button data-generate-module="verbal" class="btn btn-secondary">Generate</button>
+                        <button data-submit-module="verbal" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <div id="verbalQuestions" class="question-stack"></div>
+                <div id="verbalResult" class="result-slot"></div>
+            </section>
+        </section>
+
+        <section id="technicalMcqView" class="view module-view">
+            <section class="panel-card">
+                <div class="module-header">
+                    <div><h3>Technical MCQ</h3><p>Java, Python, C++, DBMS, OOPS, SQL, React, AI/ML and more.</p></div>
+                    <div class="module-controls">
+                        <select id="technicalTopic"></select>
+                        <select id="technicalDifficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <button data-generate-module="technical" class="btn btn-secondary">Generate</button>
+                        <button data-submit-module="technical" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <div id="technicalQuestions" class="question-stack"></div>
+                <div id="technicalResult" class="result-slot"></div>
+            </section>
+        </section>
+
+        <section id="codingView" class="view">
+            <div class="grid grid-2">
+                <section class="panel-card">
+                    <h3>Coding Assessment</h3>
+                    <div class="module-controls">
+                        <select id="codingLanguage">
+                            <option value="Java">Java</option>
+                            <option value="Python" selected>Python</option>
+                            <option value="C++">C++</option>
+                            <option value="JavaScript">JavaScript</option>
+                        </select>
+                        <select id="codingDifficulty" style="max-width: 120px;">
+                            <option value="Easy" selected>Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                        <button id="codingProblemBtn" class="btn btn-secondary" style="width: auto; flex-shrink: 0;"><i class="fa-solid fa-wand-magic-sparkles"></i> Get Problem</button>
+                    </div>
+                    <div id="codingProblemDetails" style="margin-top: 15px; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px; border: 1px solid var(--line);">
+                        <h4 id="codingProblemTitle" style="margin: 0 0 8px 0; color: var(--text-bright);">Select a difficulty and click 'Get Problem' to begin.</h4>
+                        <p id="codingProblemDesc" class="muted" style="margin: 0; font-size: 0.95rem; line-height: 1.5;"></p>
+                        <div id="codingProblemExamples" style="margin-top: 12px; font-size: 0.9rem; line-height: 1.4;"></div>
+                        <div id="codingProblemConstraints" style="margin-top: 12px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;"></div>
+                    </div>
+                    <div id="codingEditorContainer" style="height: 380px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 15px 0;"></div>
+                    <div class="control-row">
+                        <button id="codingRunBtn" class="btn btn-secondary"><i class="fa-solid fa-play"></i> Run Code</button>
+                        <button id="codingReviewBtn" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Code & Review</button>
+                    </div>
+                </section>
+                <section class="panel-card" id="codingResult">
+                    <h3>Hidden Test Cases and Review</h3>
+                    <p class="muted">Review hidden tests, runtime, complexity analysis, and AI feedback here.</p>
+                </section>
+            </div>
+        </section>
+
+        <section id="gdView" class="view">
+            <div class="grid grid-2">
+                <section class="panel-card">
+                    <h3>Group Discussion Simulator</h3>
+                    <div class="module-controls" style="margin-bottom: 12px; display: flex; gap: 10px; width: 100%;">
+                        <select id="gdTopic" style="flex-grow: 1; min-width: 0;">
+                            <option>AI in education</option>
+                            <option>Sustainability in technology</option>
+                            <option>Remote work and productivity</option>
+                            <option>Startups vs product companies</option>
+                        </select>
+                        <button id="gdGenerateTopicBtn" class="btn btn-secondary" style="width: auto; flex-shrink: 0;"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Topic</button>
+                    </div>
+                    
+                    <div class="interview-shell">
+                        <video id="gdVideoElement" autoplay muted playsinline></video>
+                        <div class="control-row">
+                            <span id="gdRecordingIndicator" class="record-indicator" style="display:none"></span>
+                            <button id="gdRecordBtn" class="btn btn-secondary">Start Recording</button>
+                            <button id="gdStopBtn" class="btn btn-secondary" disabled>Stop Recording</button>
+                        </div>
+                    </div>
+
+                    <textarea id="gdTranscript" rows="8" placeholder="Speak or type your GD response here..." style="margin-top: 15px; width: 100%;"></textarea>
+                    <button id="gdSimulateBtn" class="btn btn-primary" style="margin-top: 15px; width: 100%;">Evaluate GD</button>
+                </section>
+                <section class="panel-card" id="gdResult">
+                    <h3>GD Feedback</h3>
+                    <p class="muted">AI will score communication, confidence, vocabulary, grammar, relevance, and fluency.</p>
+                </section>
+            </div>
+        </section>
+
+        <section id="legacyInterviewView" class="view">
+            <div class="grid grid-2">
+                <section class="panel-card">
+                    <h3>HR Interview Module</h3>
+                    <div class="stack-form">
+                        <input id="interviewName" type="text" placeholder="Your name">
+                        <select id="jobRole">
+                            <option>Software Engineer</option>
+                            <option>Data Scientist</option>
+                            <option>Product Manager</option>
+                            <option>Machine Learning Engineer</option>
+                            <option>DevOps Engineer</option>
+                            <option>UX Designer</option>
+                            <option>Quality Assurance</option>
+                            <option>Business Analyst</option>
+                        </select>
+                    </div>
+                    <div class="interview-shell">
+                        <video id="videoElement" autoplay muted playsinline></video>
+                        <div class="control-row">
+                            <span id="recordingIndicator" class="record-indicator" style="display:none"></span>
+                            <button id="recordBtn" class="btn btn-secondary" disabled>Start Recording</button>
+                            <button id="stopBtn" class="btn btn-secondary" disabled>Stop Recording</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="panel-card">
+                    <h3>Live Question Flow</h3>
+                    <div class="question-display">
+                        <p>Question <span id="questionNumber">1</span> of 5</p>
+                        <h4 id="questionText">Start the interview to see the first question.</h4>
+                    </div>
+                    <div class="analysis-box">
+                        <h4>Live Transcription</h4>
+                        <p id="transcriptionText" class="muted"></p>
+                    </div>
+                    <div class="analysis-box">
+                        <h4>Real-time Analysis</h4>
+                        <div class="analysis-row"><span>Confidence</span><strong id="confidenceScore">--</strong></div>
+                        <div class="analysis-row"><span>Filler Words</span><strong id="fillerCount">0</strong></div>
+                        <div class="analysis-row"><span>Sentiment</span><strong id="sentimentType">--</strong></div>
+                    </div>
+                    <button id="submitBtn" class="btn btn-primary" disabled>Submit Response</button>
+                </section>
+            </div>
+        </section>
+
+        <section id="legacyResultsView" class="view">
+            <section class="panel-card">
+                <h3>Interview Feedback Report</h3>
+                <div class="grid grid-3">
+                    <div class="score-tile"><span>Overall</span><strong id="overallScore">--</strong></div>
+                    <div class="score-tile"><span>Communication</span><strong id="communicationScore">--</strong></div>
+                    <div class="score-tile"><span>Technical</span><strong id="technicalScore">--</strong></div>
+                </div>
+                <div class="grid grid-2">
+                    <div class="panel-subcard"><h4>Strengths</h4><ul id="strengthsList"></ul></div>
+                    <div class="panel-subcard"><h4>Areas for Improvement</h4><ul id="improvementsList"></ul></div>
+                </div>
+                <div class="panel-subcard"><h4>Recommendations</h4><ul id="recommendationsList"></ul></div>
+                <div class="panel-subcard"><h4>Response Details</h4><div id="responseDetails"></div></div>
+                <div class="control-row">
+                    <button id="newInterviewBtn" class="btn btn-secondary">Start New Interview</button>
+                    <button id="downloadReportBtn" class="btn btn-primary">Download Report</button>
+                </div>
+            </section>
+        </section>
+
+        <section id="technicalInterviewView" class="view module-view">
+            <div class="grid grid-2">
+                <section class="panel-card">
+                    <h3>Technical Interview Module</h3>
+                    <div class="module-controls">
+                        <input id="technicalInterviewTechnology" type="text" value="Python" placeholder="Technology">
+                        <input id="technicalInterviewJobDescription" type="text" placeholder="Job description context">
+                    </div>
+                    <textarea id="technicalInterviewSkills" rows="8" placeholder="Comma-separated resume skills">Python, SQL, React</textarea>
+                    <button id="technicalInterviewGenerate" class="btn btn-primary">Generate Adaptive Question</button>
+                </section>
+                <section class="panel-card" id="technicalInterviewResult">
+                    <h3>Adaptive Question Terminal</h3>
+                    <div id="techQuestionBox" style="display:none">
+                        <div class="question-display">
+                            <h4 id="techQuestionText"></h4>
+                            <p class="muted" style="margin-top: 10px;"><em>Hint: <span id="techQuestionHint"></span></em></p>
+                        </div>
+                        <div class="interview-shell" style="margin-top: 20px;">
+                            <video id="techVideoElement" autoplay muted playsinline></video>
+                            <div class="control-row">
+                                <span id="techRecordingIndicator" class="record-indicator" style="display:none"></span>
+                                <button id="techRecordBtn" class="btn btn-secondary">Start Recording</button>
+                                <button id="techStopBtn" class="btn btn-secondary" disabled>Stop Recording</button>
+                            </div>
+                        </div>
+                        <textarea id="techResponseText" rows="6" placeholder="Speak or type your answer here..." style="width:100%; margin-top: 15px;"></textarea>
+                        <button id="techSubmitBtn" class="btn btn-primary" style="margin-top: 15px; width: 100%;">Submit Technical Answer</button>
+                    </div>
+                    <div id="techResultDisplay">
+                        <p class="muted">Generate an adaptive question using the left panel, then record/type and submit your answer for real-time AI feedback.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section id="companyView" class="view">
+            <div class="grid grid-2">
+                <section class="panel-card">
+                    <h3>Company Wise Preparation</h3>
+                    <select id="companySelect"></select>
+                </section>
+                <section class="panel-card" id="companyTrackResult">
+                    <h3>Company Track</h3>
+                    <p class="muted">Each company includes aptitude, technical, coding, and interview prep.</p>
+                </section>
+            </div>
+        </section>
+
+        <section id="analyticsView" class="view">
+            <section class="panel-card">
+                <h3>Performance Analytics</h3>
+                <div id="analyticsResult"></div>
+            </section>
+        </section>
+
+        <section id="coachView" class="view">
+            <section class="panel-card">
+                <h3>AI Career Coach</h3>
+                <div id="coachResult"></div>
+            </section>
+        </section>
+
+        <section id="profileView" class="view">
+            <div class="grid grid-2">
+                <section class="panel-card">
+                    <h3>Student Profile & History</h3>
+                    <div id="profileResult"></div>
+                </section>
+                <section class="panel-card">
+                    <h3>Edit Student Profile</h3>
+                    <form id="profileEditForm" class="stack-form">
+                        <label>Full Name</label>
+                        <input type="text" id="profileName" required>
+                        <label>Email Address</label>
+                        <input type="email" id="profileEmail" required>
+                        <label>College</label>
+                        <input type="text" id="profileCollege" placeholder="e.g. National Institute of Technology" required>
+                        <label>Department</label>
+                        <input type="text" id="profileDepartment" placeholder="e.g. Computer Science" required>
+                        <label>Year</label>
+                        <input type="text" id="profileYear" placeholder="e.g. 3rd Year" required>
+                        <label>Phone</label>
+                        <input type="text" id="profilePhone" placeholder="e.g. +91 9876543210" required>
+                        <label>Target Job Role</label>
+                        <input type="text" id="profileTargetRole" placeholder="e.g. Software Engineer">
+                        <label>Key Skills (comma-separated)</label>
+                        <input type="text" id="profileSkills" placeholder="e.g. Python, React, SQL">
+                        <label>Achievements (comma-separated)</label>
+                        <input type="text" id="profileAchievements" placeholder="e.g. Hackathon Winner, AWS Certified">
+                        <button type="submit" class="btn btn-primary">Save Profile</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </main>
+</div>

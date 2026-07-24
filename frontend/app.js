@@ -28,6 +28,7 @@ const state = {
 
 window.state = state;
 let dashboardShellMounted = false;
+let dashboardShellLoadPromise = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     bindAuthEvents();
@@ -129,8 +130,8 @@ function prepareShellForAuth() {
     document.body.style.overflow = 'hidden';
 }
 
-function showAuthenticatedShell() {
-    mountDashboardShell();
+async function showAuthenticatedShell() {
+    await mountDashboardShell();
     const authScreen = $('#authScreen');
     const appShell = $('.app-shell');
     if (authScreen) authScreen.hidden = true;
@@ -145,29 +146,51 @@ function unmountDashboardShell() {
         appShell.remove();
     }
     dashboardShellMounted = false;
+    dashboardShellLoadPromise = null;
 }
 
-function mountDashboardShell() {
+async function mountDashboardShell() {
     if (dashboardShellMounted) return;
-    const template = document.getElementById('appShellTemplate');
-    if (!template || !template.content) return;
 
-    const fragment = template.content.cloneNode(true);
-    document.body.appendChild(fragment);
-    dashboardShellMounted = true;
+    if (!dashboardShellLoadPromise) {
+        dashboardShellLoadPromise = fetch('dashboard-shell.html')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load dashboard shell (${response.status})`);
+                }
+                return response.text();
+            })
+            .then((markup) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(markup, 'text/html');
+                const shell = doc.querySelector('.app-shell');
+                if (!shell) {
+                    throw new Error('Dashboard shell markup missing');
+                }
+                document.body.appendChild(shell);
+                dashboardShellMounted = true;
 
-    bindNavigation();
-    bindThemeToggle();
-    bindModuleForms();
-    bindLegacyInterview();
-    bindTechnicalInterview();
-    bindProfileEdit();
-    hydrateSelectors();
-    updateActiveUserProfileUI();
+                bindNavigation();
+                bindThemeToggle();
+                bindModuleForms();
+                bindLegacyInterview();
+                bindTechnicalInterview();
+                bindProfileEdit();
+                hydrateSelectors();
+                updateActiveUserProfileUI();
 
-    if (typeof initMonacoEditor === 'function') {
-        setTimeout(initMonacoEditor, 200);
+                if (typeof initMonacoEditor === 'function') {
+                    setTimeout(initMonacoEditor, 200);
+                }
+            })
+            .catch((error) => {
+                dashboardShellLoadPromise = null;
+                throw error;
+            });
     }
+
+    await dashboardShellLoadPromise;
+
 }
 
 function applyAuthenticatedUser(user) {
@@ -200,8 +223,7 @@ async function bootstrapAuth() {
         const response = await apiGet('/auth/me');
         applyAuthenticatedUser(response.user);
         state.authChecked = true;
-        mountDashboardShell();
-        showAuthenticatedShell();
+        await showAuthenticatedShell();
         showView('dashboardView');
         if (backendHealthy && !panelsLoaded) {
             panelsLoaded = true;
@@ -1594,7 +1616,7 @@ async function handleLogin(event) {
         const response = await apiPost('/auth/login', { email, password, remember_me: rememberMe });
         storeAuthToken(response.token, rememberMe || response.remember_me);
         applyAuthenticatedUser(response.user);
-        showAuthenticatedShell();
+        await showAuthenticatedShell();
         if (backendHealthy) {
             loadAllPanels();
         }
@@ -1625,7 +1647,7 @@ async function handleRegister(event) {
         const response = await apiPost('/auth/register', payload);
         storeAuthToken(response.token, response.remember_me);
         applyAuthenticatedUser(response.user);
-        showAuthenticatedShell();
+        await showAuthenticatedShell();
         if (backendHealthy) {
             loadAllPanels();
         }

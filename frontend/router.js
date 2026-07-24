@@ -46,6 +46,9 @@
 
     function ProtectedRoute({ viewId }) {
         React.useEffect(() => {
+            if (!window.state || !window.state.authChecked || !window.state.isAuthenticated) {
+                return;
+            }
             if (typeof window.showAuthenticatedShell === 'function') window.showAuthenticatedShell();
             if (typeof window.showView === 'function') window.showView(viewId);
         }, [viewId]);

@@ -168,7 +168,8 @@ async function mountDashboardShell() {
     if (dashboardShellMounted) return;
 
     if (!dashboardShellLoadPromise) {
-        dashboardShellLoadPromise = fetch('dashboard-shell.html')
+        const shellUrl = `${window.location.origin}/dashboard-shell.html`;
+        dashboardShellLoadPromise = fetch(shellUrl)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Failed to load dashboard shell (${response.status})`);

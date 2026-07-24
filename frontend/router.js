@@ -265,6 +265,14 @@
         root.render(
             React.createElement(BrowserRouter, null, React.createElement(RouteBridge))
         );
+        // Signal that router has mounted and is ready to receive navigation
+        try {
+            window.routerReady = true;
+            window.dispatchEvent(new Event('router-ready'));
+            console.log('[ROUTER] router-ready dispatched');
+        } catch (e) {
+            console.warn('[ROUTER] Failed to dispatch router-ready', e);
+        }
     }
 
     if (document.readyState === 'loading') {

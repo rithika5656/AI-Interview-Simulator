@@ -33,7 +33,7 @@ let dashboardShellLoadPromise = null;
 document.addEventListener('DOMContentLoaded', () => {
     const routerRoot = document.getElementById('routerRoot');
     if (routerRoot) routerRoot.hidden = false;
-    
+
     bindAuthEvents();
     restoreTheme();
     prepareShellForAuth();
@@ -41,7 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
     showOfflinePlaceholders();
     // Check backend health - panels load only after successful connection
     checkBackendHealth();
-    bootstrapAuth();
+
+    // Wait for router to be ready before bootstrapping auth
+    const startAuth = () => {
+        window.removeEventListener('router-ready', startAuth);
+        try { bootstrapAuth(); } catch (e) { console.error('[AUTH] bootstrapAuth error', e); }
+    };
+    if (window.routerReady) {
+        // Router already ready
+        startAuth();
+    } else {
+        window.addEventListener('router-ready', startAuth);
+    }
 });
 
 function $(selector, root = document) {
@@ -244,14 +255,6 @@ async function bootstrapAuth() {
         // applyAuthenticatedUser sets authChecked and triggers router update
         console.log('[AUTH] Dispatching navigate-to /dashboard from bootstrap');
         window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
-        try {
-            history.replaceState(null, '', '/dashboard');
-            console.log('[AUTH] Fallback: set location to /dashboard');
-        } catch (e) { }
-        try {
-            history.replaceState(null, '', '/dashboard');
-            console.log('[AUTH] Fallback: set location to /dashboard');
-        } catch (e) { }
     } catch (error) {
         console.error('[AUTH] Error during bootstrap auth:', error);
         clearAuthSession();
@@ -1661,10 +1664,6 @@ async function handleLogin(event) {
         
         console.log('[AUTH] Dispatching navigate-to /dashboard');
         window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
-        try {
-            history.replaceState(null, '', '/dashboard');
-            console.log('[AUTH] Fallback: set location to /dashboard');
-        } catch (e) { }
     } catch (error) {
         console.error('[AUTH] Login error:', error);
         showToast(`Login failed: ${error.message}`, 'error');

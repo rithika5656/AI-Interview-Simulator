@@ -1,13 +1,10 @@
 (function () {
-    function startWhenReady() {
-        if (!window.React || !window.ReactDOM || !window.ReactRouterDOM) {
-            console.warn('React not ready yet, retrying router initialization...');
-            setTimeout(startWhenReady, 200);
-            return;
-        }
+    if (!window.React || !window.ReactDOM || !window.ReactRouterDOM) {
+        console.error('[ROUTER] React runtime is not available; router initialization aborted.');
+        return;
+    }
 
-        const { BrowserRouter, Routes, Route, Navigate, useNavigate } = window.ReactRouterDOM;
-
+    const { BrowserRouter, Routes, Route, Navigate, useNavigate } = window.ReactRouterDOM;
     const protectedViewMap = {
         '/dashboard': 'dashboardView',
         '/resume': 'resumeView',
@@ -24,96 +21,91 @@
         '/company-wise': 'companyView',
     };
 
-    function authRouteMode(pathname) {
-        if (pathname === '/register') return 'register';
-        if (pathname === '/forgot-password') return 'forgot';
-        return 'login';
-    }
-
     function AuthRoute({ mode }) {
+        const navigate = useNavigate();
+
         React.useEffect(() => {
-            if (window.state && window.state.isAuthenticated) {
-                window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
+            if (window.state?.isAuthenticated) {
+                navigate('/dashboard', { replace: true });
                 return;
             }
-            // Ensure auth screen is shown and app shell is hidden
+
             const authScreen = document.getElementById('authScreen');
             const appShell = document.querySelector('.app-shell');
             if (authScreen) authScreen.hidden = false;
             if (appShell) appShell.style.display = 'none';
-            
-            if (typeof window.openAuthScreen === 'function') window.openAuthScreen(mode);
-        }, [mode]);
 
-        if (window.state && window.state.authChecked && window.state.isAuthenticated) {
+            if (typeof window.openAuthScreen === 'function') {
+                window.openAuthScreen(mode);
+            }
+        }, [mode, navigate]);
+
+        if (window.state?.authChecked && window.state.isAuthenticated) {
             return React.createElement(Navigate, { to: '/dashboard', replace: true });
         }
 
-        return React.createElement('div', { style: { display: 'none' } });
+        return null;
     }
 
     function ProtectedRoute({ viewId }) {
+        const navigate = useNavigate();
+
         React.useEffect(() => {
-            if (!window.state || !window.state.authChecked || !window.state.isAuthenticated) {
+            if (!window.state?.authChecked) {
                 return;
             }
 
-            // First access to protected route - load dashboard shell if not already loaded
-            const appShell = document.querySelector('.app-shell');
-            if (!appShell) {
-                // Dashboard shell not loaded yet - load it now
-                if (typeof window.mountDashboardShell === 'function') {
-                    window.mountDashboardShell().then(() => {
-                        const authScreen = document.getElementById('authScreen');
-                        const newAppShell = document.querySelector('.app-shell');
-                        if (authScreen) authScreen.hidden = true;
-                        if (newAppShell) newAppShell.style.display = 'grid';
-                        
-                        // Now show the view
-                        if (typeof window.showView === 'function') {
-                            window.showView(viewId);
-                        }
-                        
-                        // Load panels if backend is healthy
-                        if (window.backendHealthy && !window.panelsLoaded) {
-                            window.panelsLoaded = true;
-                            if (typeof window.loadAllPanels === 'function') {
-                                window.loadAllPanels();
-                            }
-                        }
-                    }).catch(err => {
-                        console.error('Failed to load dashboard shell:', err);
-                    });
-                }
-            } else {
-                // Dashboard shell already loaded - just show it and update view
+            if (!window.state.isAuthenticated) {
+                navigate('/login', { replace: true });
+                return;
+            }
+
+            const loadShell = async () => {
                 const authScreen = document.getElementById('authScreen');
+                const appShell = document.querySelector('.app-shell');
                 if (authScreen) authScreen.hidden = true;
-                appShell.style.display = 'grid';
-                
+
+                if (!appShell && typeof window.mountDashboardShell === 'function') {
+                    await window.mountDashboardShell();
+                }
+
+                const mountedShell = document.querySelector('.app-shell');
+                if (mountedShell) {
+                    mountedShell.style.display = 'grid';
+                }
+
                 if (typeof window.showView === 'function') {
                     window.showView(viewId);
                 }
-            }
-        }, [viewId]);
 
-        if (window.state && !window.state.authChecked) {
-            return React.createElement('div', { style: { display: 'none' } });
+                if (window.backendHealthy && !window.panelsLoaded) {
+                    window.panelsLoaded = true;
+                    if (typeof window.loadAllPanels === 'function') {
+                        window.loadAllPanels();
+                    }
+                }
+            };
+
+            loadShell().catch((error) => {
+                console.error('[ROUTER] Failed to load protected view:', error);
+            });
+        }, [navigate, viewId]);
+
+        if (!window.state?.authChecked) {
+            return null;
         }
 
-        if (!window.state || !window.state.isAuthenticated) {
+        if (!window.state.isAuthenticated) {
             return React.createElement(Navigate, { to: '/login', replace: true });
         }
 
-        return React.createElement('div', { style: { display: 'none' } });
+        return null;
     }
 
     function RouteBridge() {
         const navigate = useNavigate();
-        const [, forceUpdate] = React.useReducer(x => x + 1, 0);
-        const prevAuthStateRef = React.useRef(null);
+        const [, forceUpdate] = React.useReducer((value) => value + 1, 0);
 
-        // Re-render when auth state changes via dispatched event
         React.useEffect(() => {
             const handler = () => forceUpdate();
             window.addEventListener('auth-changed', handler);
@@ -121,71 +113,48 @@
         }, []);
 
         React.useEffect(() => {
-            console.log('[ROUTER] Setting up navigate listener');
-            const navHandler = (e) => {
-                const path = e?.detail?.path;
+            const routeHandler = (event) => {
+                const path = event?.detail?.path;
                 if (path) {
-                    console.log('[ROUTER] navigate event received:', path);
-                    if (path === '/dashboard') console.log('Navigating to dashboard');
-                    navigate(path);
+                    navigate(path, { replace: Boolean(event.detail?.replace) });
                 }
             };
-            window.addEventListener('navigate-to', navHandler);
-            return () => window.removeEventListener('navigate-to', navHandler);
+
+            window.addEventListener('hirevision-route-request', routeHandler);
+            return () => window.removeEventListener('hirevision-route-request', routeHandler);
         }, [navigate]);
 
-        // Monitor state changes
-        const currentAuthState = window.state ? JSON.stringify({
-            isAuthenticated: window.state.isAuthenticated,
-            authChecked: window.state.authChecked
-        }) : null;
-        
         React.useEffect(() => {
-            console.log('[ROUTER] Effect running. currentAuthState:', currentAuthState);
-            console.log('[ROUTER] prevAuthStateRef.current:', prevAuthStateRef.current);
-            
-            if (prevAuthStateRef.current === currentAuthState) {
-                console.log('[ROUTER] Auth state unchanged, returning');
+            if (!window.state?.authChecked) {
                 return;
             }
-            prevAuthStateRef.current = currentAuthState;
 
-            if (window.state && !window.state.authChecked) {
-                console.log('[ROUTER] Auth not checked yet, waiting');
-                return;
-            }
-            
-            if (!window.state || !window.state.isAuthenticated) {
-                console.log('[ROUTER] User not authenticated');
-                if (window.location.pathname !== '/login' && window.location.pathname !== '/register' && window.location.pathname !== '/forgot-password') {
-                    console.log('[ROUTER] Redirecting to /login from', window.location.pathname);
+            const authScreen = document.getElementById('authScreen');
+            const appShell = document.querySelector('.app-shell');
+            const isAuthRoute = ['/login', '/register', '/forgot-password'].includes(window.location.pathname);
+
+            if (!window.state.isAuthenticated) {
+                if (!isAuthRoute) {
                     navigate('/login', { replace: true });
                 }
-                // Show auth screen when not authenticated
-                const authScreen = document.getElementById('authScreen');
-                const appShell = document.querySelector('.app-shell');
                 if (authScreen) authScreen.hidden = false;
                 if (appShell) appShell.style.display = 'none';
                 return;
             }
 
-            console.log('[ROUTER] User is authenticated, current path:', window.location.pathname);
-            const currentPath = window.location.pathname;
-            if (currentPath === '/' || currentPath === '/login' || currentPath === '/register' || currentPath === '/forgot-password') {
-                console.log('[ROUTER] On auth page, navigating to /dashboard');
+            if (window.location.pathname === '/' || isAuthRoute) {
                 navigate('/dashboard', { replace: true });
+                return;
             }
-            // Show app shell when authenticated
-            const authScreen = document.getElementById('authScreen');
-            const appShell = document.querySelector('.app-shell');
+
             if (authScreen) authScreen.hidden = true;
             if (appShell) appShell.style.display = 'grid';
-        }, [currentAuthState, navigate]);
+        }, [navigate, window.state?.authChecked, window.state?.isAuthenticated]);
 
         return React.createElement(Routes, null,
             React.createElement(Route, {
                 path: '/',
-                element: React.createElement(Navigate, { to: window.state && window.state.isAuthenticated ? '/dashboard' : '/login', replace: true }),
+                element: React.createElement(Navigate, { to: window.state?.isAuthenticated ? '/dashboard' : '/login', replace: true }),
             }),
             React.createElement(Route, {
                 path: '/login',
@@ -253,35 +222,45 @@
             }),
             React.createElement(Route, {
                 path: '*',
-                element: React.createElement(Navigate, { to: window.state && window.state.isAuthenticated ? '/dashboard' : '/login', replace: true }),
+                element: React.createElement(Navigate, { to: window.state?.isAuthenticated ? '/dashboard' : '/login', replace: true }),
             })
         );
     }
 
     function mountRouter() {
-        const rootEl = document.getElementById('routerRoot');
-        if (!rootEl) return;
-        const root = ReactDOM.createRoot(rootEl);
-        root.render(
-            React.createElement(BrowserRouter, null, React.createElement(RouteBridge))
-        );
-        // Signal that router has mounted and is ready to receive navigation
-        try {
-            window.routerReady = true;
-            window.dispatchEvent(new Event('router-ready'));
-            console.log('[ROUTER] router-ready dispatched');
-        } catch (e) {
-            console.warn('[ROUTER] Failed to dispatch router-ready', e);
+        if (window.__hirevisionRouterMounted) {
+            return;
         }
+
+        const rootEl = document.getElementById('routerRoot');
+        if (!rootEl) {
+            return;
+        }
+
+        const root = window.ReactDOM.createRoot(rootEl);
+        root.render(
+            React.createElement(window.ReactRouterDOM.BrowserRouter, null,
+                React.createElement(RouteBridge)
+            )
+        );
+
+        window.__hirevisionRouterMounted = true;
+        window.routerReady = true;
+        window.dispatchEvent(new Event('router-ready'));
     }
 
+    window.HireVisionRouterNavigate = function (path, options = {}) {
+        window.dispatchEvent(new CustomEvent('hirevision-route-request', {
+            detail: {
+                path,
+                replace: Boolean(options.replace),
+            },
+        }));
+    };
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', mountRouter);
+        document.addEventListener('DOMContentLoaded', mountRouter, { once: true });
     } else {
         mountRouter();
     }
-}
-
-// Kick off router init and keep retrying until React/Router are available
-startWhenReady();
 })();

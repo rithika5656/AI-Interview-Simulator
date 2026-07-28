@@ -30,6 +30,21 @@ window.state = state;
 let dashboardShellMounted = false;
 let dashboardShellLoadPromise = null;
 
+let authBootstrapStarted = false;
+
+function startAuthBootstrap() {
+    if (authBootstrapStarted) {
+        return;
+    }
+
+    authBootstrapStarted = true;
+    try {
+        bootstrapAuth();
+    } catch (error) {
+        console.error('[AUTH] bootstrapAuth error', error);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const routerRoot = document.getElementById('routerRoot');
     if (routerRoot) routerRoot.hidden = false;
@@ -37,21 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     bindAuthEvents();
     restoreTheme();
     prepareShellForAuth();
-    // Show "not connected" placeholders immediately
     showOfflinePlaceholders();
-    // Check backend health - panels load only after successful connection
     checkBackendHealth();
 
-    // Wait for router to be ready before bootstrapping auth
-    const startAuth = () => {
-        window.removeEventListener('router-ready', startAuth);
-        try { bootstrapAuth(); } catch (e) { console.error('[AUTH] bootstrapAuth error', e); }
-    };
     if (window.routerReady) {
-        // Router already ready
-        startAuth();
+        startAuthBootstrap();
     } else {
-        window.addEventListener('router-ready', startAuth);
+        window.addEventListener('router-ready', startAuthBootstrap, { once: true });
     }
 });
 
@@ -168,7 +175,7 @@ async function mountDashboardShell() {
     if (dashboardShellMounted) return;
 
     if (!dashboardShellLoadPromise) {
-        const shellUrl = `${window.location.origin}/dashboard-shell.html`;
+        const shellUrl = new URL('./dashboard-shell.html', window.location.href);
         dashboardShellLoadPromise = fetch(shellUrl)
             .then((response) => {
                 if (!response.ok) {
@@ -183,7 +190,12 @@ async function mountDashboardShell() {
                 if (!shell) {
                     throw new Error('Dashboard shell markup missing');
                 }
-                document.body.appendChild(shell);
+
+                const existingShell = document.querySelector('.app-shell');
+                if (!existingShell) {
+                    document.body.appendChild(shell);
+                }
+
                 dashboardShellMounted = true;
 
                 bindNavigation();
@@ -206,7 +218,6 @@ async function mountDashboardShell() {
     }
 
     await dashboardShellLoadPromise;
-
 }
 
 function applyAuthenticatedUser(user) {
@@ -245,6 +256,7 @@ async function bootstrapAuth() {
         prepareShellForAuth();
         console.log('[AUTH] Dispatching auth-changed (no token)');
         window.dispatchEvent(new Event('auth-changed'));
+        window.HireVisionRouterNavigate('/login');
         return;
     }
 
@@ -254,8 +266,7 @@ async function bootstrapAuth() {
         console.log('[AUTH] /auth/me response:', response);
         applyAuthenticatedUser(response.user);
         // applyAuthenticatedUser sets authChecked and triggers router update
-        console.log('[AUTH] Dispatching navigate-to /dashboard from bootstrap');
-        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
+        window.HireVisionRouterNavigate('/dashboard');
     } catch (error) {
         console.error('[AUTH] Error during bootstrap auth:', error);
         clearAuthSession();
@@ -267,8 +278,7 @@ async function bootstrapAuth() {
         showToast('Session expired. Please sign in again.', 'warning');
         console.log('[AUTH] Dispatching auth-changed (error)');
         window.dispatchEvent(new Event('auth-changed'));
-        console.log('[AUTH] Dispatching navigate-to /login (error)');
-        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/login' } }));
+        window.HireVisionRouterNavigate('/login');
     }
 }
 
@@ -290,7 +300,7 @@ function bindNavigation() {
         button.addEventListener('click', () => {
             const route = viewRouteMap[button.dataset.view];
             if (route && state.isAuthenticated) {
-                window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: route } }));
+                window.HireVisionRouterNavigate(route);
                 return;
             }
             showView(button.dataset.view);
@@ -1474,48 +1484,53 @@ function stopHrSpeech() {
 }
 
 // Monaco Editor Integration
-function initMonacoEditor() {
-    if (typeof require === 'undefined') return;
-    require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs' } });
-    require(['vs/editor/editor.main'], function () {
-        const container = document.getElementById('codingEditorContainer');
-        if (!container) return;
-        state.editor = monaco.editor.create(container, {
-            value: 'def two_sum(nums, target):\n    return []',
-            language: 'python',
-            theme: 'vs-dark',
-            automaticLayout: true,
-            fontSize: 14,
-            minimap: { enabled: false }
-        });
-        
-        // Listen to language selector changes
-        const codingLangSelect = $('#codingLanguage');
-        if (codingLangSelect) {
-            codingLangSelect.addEventListener('change', (e) => {
-                if (!state.editor) return;
-                const lang = e.target.value;
-                const model = state.editor.getModel();
-                let code = '';
-                if (state.currentCodingProblem && state.currentCodingProblem.starter_code && state.currentCodingProblem.starter_code[lang]) {
-                    code = state.currentCodingProblem.starter_code[lang];
-                } else {
-                    if (lang === 'Python') {
-                        code = 'def two_sum(nums, target):\n    return []';
-                    } else if (lang === 'Java') {
-                        code = 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        return new int[0];\n    }\n}';
-                    } else if (lang === 'C++') {
-                        code = 'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        return {};\n    }\n};';
-                    } else if (lang === 'JavaScript') {
-                        code = 'function twoSum(nums, target) {\n    return [];\n}';
-                    }
-                }
-                state.editor.setValue(code);
-                const monacoLang = lang === 'C++' ? 'cpp' : lang.toLowerCase();
-                monaco.editor.setModelLanguage(model, monacoLang);
-            });
-        }
+function createMonacoEditor() {
+    const container = document.getElementById('codingEditorContainer');
+    if (!container || !window.monaco) return;
+
+    state.editor = window.monaco.editor.create(container, {
+        value: 'def two_sum(nums, target):\n    return []',
+        language: 'python',
+        theme: 'vs-dark',
+        automaticLayout: true,
+        fontSize: 14,
+        minimap: { enabled: false }
     });
+
+    const codingLangSelect = $('#codingLanguage');
+    if (codingLangSelect) {
+        codingLangSelect.addEventListener('change', (e) => {
+            if (!state.editor) return;
+            const lang = e.target.value;
+            const model = state.editor.getModel();
+            let code = '';
+            if (state.currentCodingProblem && state.currentCodingProblem.starter_code && state.currentCodingProblem.starter_code[lang]) {
+                code = state.currentCodingProblem.starter_code[lang];
+            } else {
+                if (lang === 'Python') {
+                    code = 'def two_sum(nums, target):\n    return []';
+                } else if (lang === 'Java') {
+                    code = 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        return new int[0];\n    }\n}';
+                } else if (lang === 'C++') {
+                    code = 'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        return {};\n    }\n};';
+                } else if (lang === 'JavaScript') {
+                    code = 'function twoSum(nums, target) {\n    return [];\n}';
+                }
+            }
+            state.editor.setValue(code);
+            const monacoLang = lang === 'C++' ? 'cpp' : lang.toLowerCase();
+            window.monaco.editor.setModelLanguage(model, monacoLang);
+        });
+    }
+}
+
+function initMonacoEditor() {
+    if (window.monaco) {
+        createMonacoEditor();
+        return;
+    }
+
+    console.info('[MONACO] Monaco is not loaded; editor initialization skipped.');
 }
 
 async function runCoding() {
@@ -1663,8 +1678,7 @@ async function handleLogin(event) {
         
         showToast('Welcome back to HireVision.', 'success');
         
-        console.log('[AUTH] Dispatching navigate-to /dashboard');
-        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
+        window.HireVisionRouterNavigate('/dashboard');
     } catch (error) {
         console.error('[AUTH] Login error:', error);
         showToast(`Login failed: ${error.message}`, 'error');
@@ -1692,7 +1706,7 @@ async function handleRegister(event) {
         // DO NOT call showAuthenticatedShell() here - let router.js handle it
         // Just navigate to dashboard, the ProtectedRoute will load the shell
         showToast('Account created successfully.', 'success');
-        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
+        window.HireVisionRouterNavigate('/dashboard');
     } catch (error) {
         showToast(`Registration failed: ${error.message}`, 'error');
     }
@@ -1709,7 +1723,7 @@ async function handleForgotPassword(event) {
             resetToken.value = response.reset_token;
         }
         openAuthScreen('reset');
-        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/forgot-password' } }));
+        window.HireVisionRouterNavigate('/forgot-password');
         showToast('Reset token generated. Use it to set a new password.', 'success');
     } catch (error) {
         showToast(`Password reset request failed: ${error.message}`, 'error');
@@ -1726,7 +1740,7 @@ async function handleResetPassword(event) {
         await apiPost('/auth/reset-password', { email, reset_token: resetToken, password });
         showToast('Password updated. Please sign in.', 'success');
         openAuthScreen('login');
-        window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/login' } }));
+        window.HireVisionRouterNavigate('/login');
     } catch (error) {
         showToast(`Password reset failed: ${error.message}`, 'error');
     }
@@ -1750,7 +1764,7 @@ async function logout() {
     openAuthScreen('login');
     showToast('You have been logged out.', 'info');
     window.dispatchEvent(new Event('auth-changed'));
-    window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/login' } }));
+    window.HireVisionRouterNavigate('/login');
 }
 
 // Edit Profile Form Submit

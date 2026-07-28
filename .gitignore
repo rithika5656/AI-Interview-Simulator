@@ -1,5 +1,7 @@
 .env
 .env.local
+.env.disabled
+backend/.env.disabled
 __pycache__/
 *.py[cod]
 *$py.class

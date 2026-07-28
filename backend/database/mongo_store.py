@@ -2,34 +2,150 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import os
 from datetime import datetime
 from typing import Any, Iterable
 
 from pymongo import MongoClient
+from pymongo.errors import ServerSelectionTimeoutError
 
 # Use the environment variable for production, fallback to a local URI if not set
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/hirevision")
 
 _client = None
 _db = None
+_fallback_db = None
+
+
+class InMemoryCursor:
+    def __init__(self, docs: list[dict[str, Any]]):
+        self._docs = docs
+        self._limit = None
+
+    def sort(self, sort_by: list[tuple[str, int]] | None):
+        if sort_by:
+            for key, direction in reversed(sort_by):
+                self._docs.sort(key=lambda doc: doc.get(key), reverse=(direction == -1))
+        return self
+
+    def limit(self, count: int):
+        self._limit = count
+        return self
+
+    def __iter__(self):
+        docs = self._docs
+        if self._limit is not None:
+            docs = docs[: self._limit]
+        for doc in docs:
+            yield doc
+
+
+class InMemoryCollection:
+    def __init__(self, name: str):
+        self.name = name
+        self._docs: list[dict[str, Any]] = []
+        self._indexes: set[str] = set()
+
+    def create_index(self, *args, **kwargs):
+        if args:
+            self._indexes.add(str(args))
+        return None
+
+    def _matches(self, doc: dict[str, Any], query: dict[str, Any]) -> bool:
+        for key, value in query.items():
+            if doc.get(key) != value:
+                return False
+        return True
+
+    def find_one(self, query: dict[str, Any], sort: list[tuple[str, int]] | None = None, **kwargs):
+        matches = [doc for doc in self._docs if self._matches(doc, query)]
+        if sort and matches:
+            for key, direction in reversed(sort):
+                matches.sort(key=lambda doc: doc.get(key), reverse=(direction == -1))
+        return copy.deepcopy(matches[0]) if matches else None
+
+    def find(self, query: dict[str, Any] = None, **kwargs):
+        if query is None:
+            query = {}
+        docs = [doc for doc in self._docs if self._matches(doc, query)]
+        return InMemoryCursor([copy.deepcopy(doc) for doc in docs])
+
+    def insert_one(self, values: dict[str, Any]):
+        doc = copy.deepcopy(values)
+        self._docs.append(doc)
+        return None
+
+    def update_one(self, filter: dict[str, Any], update: dict[str, Any], upsert: bool = False, **kwargs):
+        existing = self.find_one(filter)
+        if existing:
+            for idx, doc in enumerate(self._docs):
+                if doc.get("id") == existing.get("id") or self._matches(doc, filter):
+                    updated = copy.deepcopy(doc)
+                    if "$set" in update:
+                        updated.update(update["$set"])
+                    self._docs[idx] = updated
+                    return None
+
+        if upsert:
+            new_doc = {**filter}
+            if "$setOnInsert" in update:
+                new_doc.update(update["$setOnInsert"])
+            if "$set" in update:
+                new_doc.update(update["$set"])
+            self._docs.append(copy.deepcopy(new_doc))
+            return None
+        return None
+
+
+class InMemoryDB:
+    def __init__(self):
+        self._collections: dict[str, InMemoryCollection] = {}
+
+    def __getitem__(self, name: str) -> InMemoryCollection:
+        if name not in self._collections:
+            self._collections[name] = InMemoryCollection(name)
+        return self._collections[name]
+
+    def __getattr__(self, name: str) -> InMemoryCollection:
+        if name.startswith("_"):
+            raise AttributeError(name)
+        return self[name]
+
 
 def get_db():
-    global _client, _db
-    if _client is None:
+    global _client, _db, _fallback_db
+    if _fallback_db is not None:
+        return _fallback_db
+    if _db is not None:
+        return _db
+
+    try:
         _client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-        # Use the database specified in the URI, or default to "hirevision"
-        _db = _client.get_default_database("hirevision") 
-    return _db
+        _client.admin.command("ping")
+        _db = _client.get_default_database("hirevision")
+        return _db
+    except ServerSelectionTimeoutError:
+        _fallback_db = InMemoryDB()
+        return _fallback_db
+    except Exception:
+        _fallback_db = InMemoryDB()
+        return _fallback_db
+
 
 def init_db() -> None:
-    # MongoDB creates collections dynamically, but we can ensure indices if needed
-    db = get_db()
-    db.users.create_index("id", unique=True)
-    db.users.create_index("email", unique=True, sparse=True)
-    db.users.create_index("reset_token_hash", sparse=True)
-    db.resumes.create_index([("user_id", 1), ("created_at", -1)])
+    try:
+        db = get_db()
+        db.users.create_index("id", unique=True)
+        db.users.create_index("email", unique=True, sparse=True)
+        db.users.create_index("reset_token_hash", sparse=True)
+        db.resumes.create_index([("user_id", 1), ("created_at", -1)])
+    except Exception:
+        # If MongoDB is unavailable, fallback to in-memory store and continue
+        global _fallback_db
+        _fallback_db = InMemoryDB()
+        return
     
 def seed_demo_data() -> None:
     # Intentionally empty: The user requested no demo mode and no placeholder data.

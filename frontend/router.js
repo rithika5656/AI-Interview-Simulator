@@ -3,6 +3,32 @@
         return;
     }
 
+    let routerStartupAttempts = 0;
+    const MAX_ROUTER_STARTUP_ATTEMPTS = 100;
+
+    function showRouterStartupError(message) {
+        if (window.__hirevisionRouterStartFailed) {
+            return;
+        }
+
+        window.__hirevisionRouterStartFailed = true;
+        let errorEl = document.getElementById('routerError');
+        if (!errorEl) {
+            errorEl = document.createElement('div');
+            errorEl.id = 'routerError';
+            errorEl.style.cssText = 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.95);color:#fff;z-index:99999;padding:24px;text-align:center;font-family:Inter, system-ui, sans-serif;';
+            document.body.appendChild(errorEl);
+        }
+
+        errorEl.innerHTML = `
+            <div style="max-width: 420px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(148, 163, 184, 0.35); border-radius: 16px; padding: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);">
+                <h2 style="margin: 0 0 12px; font-size: 1.25rem;">Application failed to start</h2>
+                <p style="margin: 0 0 16px; line-height: 1.5; color: #cbd5e1;">${message}</p>
+                <button type="button" onclick="window.location.reload()" style="background: #2563eb; color: #fff; border: 0; border-radius: 999px; padding: 10px 16px; cursor: pointer;">Refresh page</button>
+            </div>
+        `;
+    }
+
     function getRuntimeReady() {
         return Boolean(window.React && window.ReactDOM && window.ReactRouterDOM);
     }
@@ -13,7 +39,13 @@
         }
 
         if (!getRuntimeReady()) {
-            console.warn('[ROUTER] React runtime is not ready yet; waiting for the DOM to finish loading.');
+            routerStartupAttempts += 1;
+            if (routerStartupAttempts >= MAX_ROUTER_STARTUP_ATTEMPTS) {
+                showRouterStartupError('The application could not load its React runtime. Please refresh the page and try again.');
+                return;
+            }
+            console.warn(`[ROUTER] React runtime is not ready yet (attempt ${routerStartupAttempts}/${MAX_ROUTER_STARTUP_ATTEMPTS}).`);
+            setTimeout(mountRouter, 100);
             return;
         }
 
@@ -270,7 +302,7 @@
     };
 
     function initializeRouter() {
-        if (window.__hirevisionRouterInitialized) {
+        if (window.__hirevisionRouterInitialized || window.__hirevisionRouterStartFailed) {
             return;
         }
         mountRouter();

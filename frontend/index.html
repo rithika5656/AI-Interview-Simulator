@@ -126,9 +126,14 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/react-router-dom@6/dist/umd/react-router-dom.development.js"></script>
     <script>
-        if (window.React && window.ReactDOM && window.ReactRouterDOM) {
-            window.dispatchEvent(new Event('react-runtime-ready'));
+        function dispatchRuntimeReady() {
+            if (window.React && window.ReactDOM && window.ReactRouterDOM) {
+                window.dispatchEvent(new Event('react-runtime-ready'));
+            }
         }
+
+        window.addEventListener('load', dispatchRuntimeReady);
+        dispatchRuntimeReady();
     </script>
     <script src="router.js"></script>
     <script src="app.js"></script>

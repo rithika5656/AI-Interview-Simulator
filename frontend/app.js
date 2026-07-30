@@ -5,6 +5,7 @@ const socket = window.io ? io(SOCKET_URL, { secure: true, reconnection: true, tr
 
 const AUTH_STORAGE_KEY = 'hirevisionAuthToken';
 const AUTH_SESSION_KEY = 'hirevisionAuthTokenSession';
+const APP_BASE_URL = new URL('./', document.currentScript?.src || `${window.location.origin}/frontend/`);
 
 const state = {
     userId: null,
@@ -27,6 +28,11 @@ const state = {
 };
 
 window.state = state;
+window.HireVisionApp = {
+    state,
+    bootstrapAuth,
+    navigateTo: (path) => window.HireVisionRouterNavigate(path),
+};
 let dashboardShellMounted = false;
 let dashboardShellLoadPromise = null;
 
@@ -175,7 +181,7 @@ async function mountDashboardShell() {
     if (dashboardShellMounted) return;
 
     if (!dashboardShellLoadPromise) {
-        const shellUrl = new URL('./dashboard-shell.html', window.location.href);
+        const shellUrl = new URL('dashboard-shell.html', APP_BASE_URL);
         dashboardShellLoadPromise = fetch(shellUrl)
             .then((response) => {
                 if (!response.ok) {

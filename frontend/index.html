@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HireVision - AI Placement Preparation System</title>
+    <title>HireVision</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
@@ -14,10 +14,9 @@
 </head>
 <body class="theme-dark auth-locked">
     <div id="toastContainer" class="toast-container"></div>
-    <div id="routerRoot" hidden></div>
+    <div id="routerRoot"></div>
     <section id="authScreen" class="auth-screen" hidden>
         <div class="auth-container">
-            <!-- Left Side: Hero Section -->
             <div class="auth-hero">
                 <div class="hero-gradient"></div>
                 <div class="hero-content">
@@ -32,32 +31,8 @@
                         <h2>Crack Your Dream Placement</h2>
                         <p>Master every interview round with AI-powered preparation</p>
                     </div>
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <i class="fa-solid fa-file-arrow-up"></i>
-                            <span>Resume Analyzer</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa-solid fa-microchip"></i>
-                            <span>Technical MCQs</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa-solid fa-code"></i>
-                            <span>Coding Assessment</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa-solid fa-user-tie"></i>
-                            <span>AI Mock Interview</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <span>Placement Analytics</span>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-            <!-- Right Side: Login Card -->
             <div class="auth-card-wrapper">
                 <div class="auth-card">
                     <div class="auth-tabs">
@@ -65,7 +40,6 @@
                         <button id="showRegisterBtn" class="auth-tab" data-auth-tab="register" type="button">Register</button>
                         <button id="showForgotBtn" class="auth-tab" data-auth-tab="forgot" type="button">Forgot Password</button>
                     </div>
-
                     <div class="auth-panel active" data-auth-panel="login">
                         <h3>Welcome back</h3>
                         <form id="loginForm" class="stack-form">
@@ -79,7 +53,6 @@
                             <button id="showRegisterBtnInline" type="button" class="auth-link">Create a new account</button>
                         </div>
                     </div>
-
                     <div class="auth-panel" data-auth-panel="register">
                         <h3>Create your account</h3>
                         <form id="registerForm" class="stack-form auth-grid-form">
@@ -95,7 +68,6 @@
                             <button type="submit" class="btn btn-primary btn-wide">Register & Sign In</button>
                         </form>
                     </div>
-
                     <div class="auth-panel" data-auth-panel="forgot">
                         <h3>Reset your password</h3>
                         <form id="forgotPasswordForm" class="stack-form">
@@ -104,7 +76,6 @@
                         </form>
                         <button id="showResetBtn" type="button" class="auth-link">Already have a reset token?</button>
                     </div>
-
                     <div class="auth-panel" data-auth-panel="reset">
                         <h3>Set a new password</h3>
                         <form id="resetPasswordForm" class="stack-form">
@@ -119,12 +90,10 @@
             </div>
         </div>
     </section>
-
     <script src="config.js"></script>
     <script src="apiClient.js"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/react-router-dom@6/dist/umd/react-router-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="router.js"></script>
     <script src="app.js"></script>
 </body>

@@ -125,32 +125,6 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/react-router-dom@6/dist/umd/react-router-dom.production.min.js"></script>
-    <script>
-        function dispatchRuntimeReady() {
-            const runtime = {
-                React: Boolean(window.React),
-                ReactDOM: Boolean(window.ReactDOM),
-                ReactRouterDOM: Boolean(window.ReactRouterDOM)
-            };
-
-            console.log('[BOOT] React runtime state', runtime);
-
-            if (runtime.React && runtime.ReactDOM && runtime.ReactRouterDOM) {
-                console.log('[BOOT] React runtime loaded');
-                window.dispatchEvent(new Event('react-runtime-ready'));
-                return;
-            }
-
-            const missing = [];
-            if (!runtime.React) missing.push('React');
-            if (!runtime.ReactDOM) missing.push('ReactDOM');
-            if (!runtime.ReactRouterDOM) missing.push('ReactRouterDOM');
-            console.error('[BOOT] React runtime missing', missing.join(', '));
-        }
-
-        window.addEventListener('load', dispatchRuntimeReady);
-        dispatchRuntimeReady();
-    </script>
     <script src="router.js"></script>
     <script src="app.js"></script>
 </body>

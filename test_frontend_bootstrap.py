@@ -3,18 +3,29 @@ from pathlib import Path
 
 
 class FrontendBootstrapTest(unittest.TestCase):
-    def test_frontend_bootstrap_uses_reliable_react_runtime_urls(self) -> None:
+    def test_frontend_bootstrap_uses_clean_react_18_startup(self) -> None:
         html = Path("frontend/index.html").read_text(encoding="utf-8")
         router = Path("frontend/router.js").read_text(encoding="utf-8")
+        app = Path("frontend/app.js").read_text(encoding="utf-8")
 
-        self.assertIn("react.production.min.js", html)
-        self.assertIn("react-dom.production.min.js", html)
-        self.assertIn("react-router-dom.production.min.js", html)
-        self.assertIn("function dispatchRuntimeReady()", html)
-        self.assertIn("console.log('[BOOT] React runtime state'", html)
-        self.assertIn("console.error('[BOOT] React runtime missing'", html)
-        self.assertNotIn("setTimeout(mountRouter, 100);", router)
-        self.assertIn("console.error('[ROUTER] React runtime missing'", router)
+        self.assertIn('src="config.js"', html)
+        self.assertIn('src="apiClient.js"', html)
+        self.assertIn('react.production.min.js', html)
+        self.assertIn('react-dom.production.min.js', html)
+        self.assertIn('react-router-dom.production.min.js', html)
+        self.assertNotIn("dispatchRuntimeReady", html)
+        self.assertNotIn("react-runtime-ready", html)
+        self.assertNotIn("React not ready yet", html)
+
+        self.assertIn("const root = ReactDOM.createRoot", router)
+        self.assertIn("root.render(", router)
+        self.assertIn("window.routerReady = true;", router)
+        self.assertNotIn("startWhenReady", router)
+        self.assertNotIn("setTimeout(", router)
+        self.assertNotIn("React not ready yet", router)
+        self.assertNotIn("react-runtime-ready", router)
+
+        self.assertIn("window.addEventListener('router-ready', startAuthBootstrap, { once: true });", app)
 
 
 if __name__ == "__main__":

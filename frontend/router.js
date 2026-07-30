@@ -3,9 +3,6 @@
         return;
     }
 
-    let routerStartupAttempts = 0;
-    const MAX_ROUTER_STARTUP_ATTEMPTS = 100;
-
     function showRouterStartupError(message) {
         if (window.__hirevisionRouterStartFailed) {
             return;
@@ -33,19 +30,23 @@
         return Boolean(window.React && window.ReactDOM && window.ReactRouterDOM);
     }
 
+    function getMissingRuntimeDependencies() {
+        const missing = [];
+        if (!window.React) missing.push('React');
+        if (!window.ReactDOM) missing.push('ReactDOM');
+        if (!window.ReactRouterDOM) missing.push('ReactRouterDOM');
+        return missing;
+    }
+
     function mountRouter() {
         if (window.__hirevisionRouterMounted) {
             return;
         }
 
         if (!getRuntimeReady()) {
-            routerStartupAttempts += 1;
-            if (routerStartupAttempts >= MAX_ROUTER_STARTUP_ATTEMPTS) {
-                showRouterStartupError('The application could not load its React runtime. Please refresh the page and try again.');
-                return;
-            }
-            console.warn(`[ROUTER] React runtime is not ready yet (attempt ${routerStartupAttempts}/${MAX_ROUTER_STARTUP_ATTEMPTS}).`);
-            setTimeout(mountRouter, 100);
+            const missing = getMissingRuntimeDependencies();
+            console.error('[ROUTER] React runtime missing', missing.join(', '));
+            showRouterStartupError(`The application could not load its React runtime. Missing: ${missing.join(', ')}`);
             return;
         }
 

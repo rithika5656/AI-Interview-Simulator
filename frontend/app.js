@@ -253,7 +253,10 @@ async function bootstrapAuth() {
         const response = await apiGet('/auth/me');
         console.log('[AUTH] /auth/me response:', response);
         applyAuthenticatedUser(response.user);
-        // applyAuthenticatedUser sets authChecked and triggers router update
+        // Ensure the app shell is mounted before navigating to dashboard
+        if (typeof window.showAuthenticatedShell === 'function') {
+            await window.showAuthenticatedShell();
+        }
         console.log('[AUTH] Dispatching navigate-to /dashboard from bootstrap');
         window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
     } catch (error) {
@@ -1655,11 +1658,6 @@ async function handleLogin(event) {
         console.log('[AUTH] Applying authenticated user...');
         applyAuthenticatedUser(response.user);
         
-        if (typeof showAuthenticatedShell === 'function') {
-            console.log('[AUTH] Mounting authenticated dashboard shell...');
-            await showAuthenticatedShell();
-        }
-        
         console.log('[AUTH] State after login:', {
             isAuthenticated: window.state.isAuthenticated,
             authChecked: window.state.authChecked,
@@ -1667,6 +1665,10 @@ async function handleLogin(event) {
         });
         
         showToast('Welcome back to HireVision.', 'success');
+        
+        if (typeof window.showAuthenticatedShell === 'function') {
+            await window.showAuthenticatedShell();
+        }
         
         console.log('[AUTH] Dispatching navigate-to /dashboard');
         window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
@@ -1694,8 +1696,9 @@ async function handleRegister(event) {
         const response = await apiPost('/auth/register', payload);
         storeAuthToken(response.token, response.remember_me);
         applyAuthenticatedUser(response.user);
-        if (typeof showAuthenticatedShell === 'function') {
-            await showAuthenticatedShell();
+        // Ensure shell is visible before routing
+        if (typeof window.showAuthenticatedShell === 'function') {
+            await window.showAuthenticatedShell();
         }
         showToast('Account created successfully.', 'success');
         window.dispatchEvent(new CustomEvent('navigate-to', { detail: { path: '/dashboard' } }));
